@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-family);
+  color: var(--font-color);
+}
+
+html, body{
+  overflow: hidden;
+}
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.main {
+  border: 0;
+  background-color: var(--background-dark);
+  height: 100%;
+  width: 100%;
+}
+
+textarea,input{
+  background-color: var(--primary-mid);
+  padding: 3px;
+  border-radius: 10px;
+  color: var(--font-color);
+  overflow-y: scroll;
+  resize: none;
+}

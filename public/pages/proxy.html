@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/js/common.js"></script>
+    <script src="/js/particles.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/styles/loader.css">
+    <link rel="stylesheet" href="/styles/template.css">
+    <link rel="stylesheet" href="/styles/proxy.css">
+    <!-- Ultr@v!0l3t -->
+    <meta name="googlebot" content="index, follow, snippet" />
+    <link rel="shortcut icon" content="favicon.ico" />
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/js/uv/register-sw.js" defer></script>
+    <script src="/js/uv/search.js" defer></script>
+    <script src="/js/uv/index.js" defer></script>
+    <!-- Ultr@v!0l3t -->
+  </head>
+<script src="/baremux/index.js"></script>
+<script src="/libcurl/index.js"></script>
+<script src="/epoxy/index.js"></script>
+<script>
+let _connection = new BareMux.BareMuxConnection("/baremux/worker.js")
+async function setConnection(arg){
+    let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+    
+    switch (arg){
+        case 1:
+            await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+            localStorage.setItem('proxy-transport','Epoxy')
+            break;
+        case 2:
+            await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
+            localStorage.setItem('proxy-transport','Libcurl')
+            break;
+    }
+}
+
+if (!localStorage.getItem('proxy-transport')){
+  setConnection(2)
+} else{
+  console.log("Setting transport to " + localStorage.getItem('proxy-transport'))
+  if (localStorage.getItem('proxy-transport') === "Epoxy"){
+    setConnection(1)
+  }
+  if (localStorage.getItem('proxy-transport') === "Libcurl"){
+    setConnection(2)
+  }
+}
+
+async function goTo(url){
+	try {
+		await registerSW();
+	} catch (err) {
+		error.textContent = "Failed to register service worker.";
+		errorCode.textContent = err.toString();
+		throw err;
+	}
+
+  let frame = document.getElementById("uv-frame");
+	frame.style.display = "block";
+	let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+
+	frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+}
+</script>
+  <body>
+    <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: 1000;" id="particles-js"></div>
+    <script src="/js/load-particles.js"></script>
+    <script src="/js/particles.min.js"></script>
+    <iframe id="uv-frame" style="display: none; background-color: white; position: absolute; margin: 0; border: 0; padding: 0; width: 100vw; height: 100vh; z-index: 10000;"></iframe>
+    <div class="content">
+      <div class="main">
+        <div style="z-index: 9999; display: flex;flex-direction: column; height: 100%; width: 100%; justify-content: center; align-items: center;">
+          <h1 style="font-size: 48px; text-shadow: 0px 0px 25px white; padding:20px;">
+            P<y>r</y><x>o</x><y>x</y><span>y</span>
+          </h1>
+          <div style="height: 10px;"></div>
+          <form 
+              style="width: 100vw; display: flex; justify-content: center; align-items: center;"
+              id="uv-form"
+              class="flex-center"
+            >
+            <input
+              id="uv-search-engine"
+              value="https://www.google.com/search?q=%s"
+              type="hidden"
+            />
+            <input
+              style="text-align: center; margin: 15px;"
+              autocomplete="off"
+              id="uv-address" 
+              type="text" 
+              placeholder="Search with Ultraviolet"
+            />
+          </form>
+          <div style="height: 10px;"></div>
+          <div class="desc left-margin">
+            <p id="uv-error"></p>
+            <pre id="uv-error-code"></pre>
+          </div>
+          <div style="overflow: visible;">
+            <img onclick="goTo('https://duckduckgo.com')" src="/files/thumbs/duckduckgo.png">
+            <img onclick="goTo('https://now.gg')" src="/files/thumbs/nowgg.png">
+            <img onclick="goTo('https://tiktok.com')" src="/files/thumbs/tiktok.png">
+            <img onclick="goTo('https://spotify.com')" src="/files/thumbs/spotify.png">
+          </div>
+          <div style="overflow: visible;">
+            <img onclick="goTo('https://github.com')" src="/files/thumbs/github.png">
+            <img onclick="goTo('https://play.geforcenow.com/mall')" src="/files/thumbs/geforcenow.png">
+            <img onclick="goTo('https://discord.com')" src="/files/thumbs/discord.png">
+            <img onclick="goTo('https://soundcloud.com')" src="/files/thumbs/soundcloud.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

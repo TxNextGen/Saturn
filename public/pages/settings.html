@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/index.css" />
+  <link rel="stylesheet" href="/styles/loader.css" />
+  <link rel="stylesheet" href="/styles/template.css" />
+  <script src="/js/common.js"></script>
+  <script src="/js/particles.min.js"></script>
+  <script src="/js/settings.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .content, .main {
+      height: 100%;
+    }
+
+    #settingsIframe {
+      flex-grow: 1;
+      margin: 25px;
+      border-radius: 25px;
+      background: linear-gradient(-135deg, var(--primary-dark), var(--primary-dark));
+    }
+
+    #sidebar {
+      width: 250px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--accent-color);
+      justify-content: space-between;
+    }
+
+    #button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border-radius: 50px;
+      font-weight: bold;
+      box-shadow: 0px 0px 15px var(--primary-mid);
+      background: var(--primary-dark);
+      transition: 0.3s;
+    }
+
+    [active="true"] {
+      background: var(--primary-mid);
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js" style="position: absolute; height:100vh; width: 100vw; z-index: 1000;"></div>
+  <script src="/js/load-particles.js"></script>
+
+  <div class="content">
+    <div class="main">
+      <div style="height: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
+        <iframe id="settingsIframe"></iframe>
+
+        <div id="sidebar">
+          <h1 style="font-size: 40px; border-bottom: 2px solid var(--accent-color); border-radius: 3px; padding: 5px;">
+            Settings
+          </h1>
+
+          <div id="button-group">
+            <button active="false" id="appearance">Appearance</button>
+            <button active="false" id="proxy">Proxy</button>
+            <button active="false" id="optimization">Optimization</button>
+            <button active="false" id="cloaking">Cloaking</button>
+            <button active="false" id="advanced">Advanced</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/js/common.js"></script>
+    <script src="/js/particles.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/styles/loader.css">
+    <link rel="stylesheet" href="/styles/template.css">
+    <!-- Ultr@v!0l3t -->
+    <meta name="googlebot" content="index, follow, snippet" />
+    <link rel="shortcut icon" content="favicon.ico" />
+    <script src="/baremux/index.js" defer></script>
+    <script src="/epoxy/index.js" defer></script>
+    <script src="/libcurl/index.js" defer></script>
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/js/uv/register-sw.js" defer></script>
+    <script src="/js/uv/search.js" defer></script>
+    <!-- Ultr@v!0l3t -->
+  </head>
+<body>
+  <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: 1000;" id="particles-js"></div>
+  <script src="/js/load-particles.js"></script>
+  <script src="/js/particles.min.js"></script>
+  <div class="content">
+    <div class="main">
+      <div id="preload" style="z-index: 9999; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="height: 30px;"></div>
+        <div class="container" style="margin-bottom: 25px;">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <h3>
+          Loading...
+        </h3>
+      </div>
+      <div style="height: 100%; width: 100%; z-index: 329821398; border: 0; overflow: hidden;" id="frameHolder">
+
+      </div>
+  </div>
+</body>
+<script>
+const qs = window.top.location.search;
+const urlParams = new URLSearchParams(qs);
+
+let src = urlParams.get('src');
+let type = urlParams.get('type');
+let title = urlParams.get('title');
+
+
+
+document.getElementById('preload').remove();
+
+
+
+async function registerServiceWorker(url){
+  let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
+
+  try {
+    await registerSW();
+  } catch (err) {
+    console.error(err)
+  }
+
+  let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+  if (!localStorage.getItem('proxy-transport')){
+    await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
+  } else{
+    console.log("Setting transport to " + localStorage.getItem('proxy-transport'))
+    if (localStorage.getItem('proxy-transport') === "Epoxy"){
+      await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+    }
+    if (localStorage.getItem('proxy-transport') === "Libcurl"){
+      await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
+    }
+  }
+}
+
+function createAndAppend(){
+
+  let topbar = document.createElement('div');
+  let rand = Math.random();
+  topbar.style = 'padding: 7.5px; padding-bottom: 0; display: flex; flex-direction: row;';
+
+  topbar.innerHTML = `
+  <div style="width: 5px;"></div>
+  <h2>${title}</h2>
+  <div style="width: 5px;"></div>
+  <h4>[${type}]</h4>
+  <div style="margin-left: auto;">
+    <img onclick="window.open(loadGame(),'_blank')" src="/images/popout.png" style="height: 20px; width: 20px; border-radius: 15px; transition: 0.3s; padding: 5px;">
+    <img onclick="document.getElementById('objFrame').requestFullscreen()" src="/images/fullscreen.png" style="height: 20px; width: 20px; border-radius: 15px; transition: 0.3s; padding: 5px;"> 
+  </div>
+  `
+
+  let o = document.createElement('iframe');
+  o.setAttribute('id','objFrame')
+  o.setAttribute('class','objFrame')
+  o.setAttribute('allow','keyboard *')
+  o.setAttribute('src',loadGame())
+
+  document.getElementById('frameHolder').appendChild(topbar);
+  document.getElementById('frameHolder').appendChild(o);
+}
+
+const xorEncode = {
+    encode(str) {
+        if (!str) return str;
+        return encodeURIComponent(
+            str
+                .toString()
+                .split('')
+                .map((char, ind) =>
+                    ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char
+                 )
+                .join('')
+        );
+    }
+};
+
+
+
+function loadGame(){
+  let returnValue
+  if (type == 'html'){
+    returnValue = `/files/games${src}`
+  } else if (type == 'flash'){
+    returnValue = `/files/embeds/ruffle.html?src=${src}`
+  } else if (type == 'proxy'){
+    returnValue = `/@/` + xorEncode.encode(src)
+  } else if (type == 'method'){
+    returnValue = `/files/methods${src}`
+  }else{
+    returnValue = `/files/embeds/emujs/index.html?game=${src}&?core=${type}`
+  }
+  return returnValue;
+}
+
+
+
+function onPageLoad() {
+  createAndAppend();
+  if (type == 'proxy'){registerServiceWorker();}
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', onPageLoad);
+} else {
+  onPageLoad();
+}
+
+
+</script>
+</html>

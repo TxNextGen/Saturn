@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<script src="/js/common.js"></script>
+<link rel="stylesheet" href="/index.css" />
+<link rel="stylesheet" href="/styles/loader.css">
+<link rel="stylesheet" href="/styles/template.css">
+<style>
+html{
+  overflow-y: scroll;
+  padding: 10px;
+}
+button{
+  background: var(--primary-mid);
+  margin: 10px;
+  padding: 15px;
+  padding-inline: 15px;
+  width: calc(100% - 20px);
+}
+input{
+  padding: 15px;
+  transition: 0.5s;
+  margin: 5px;
+  background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
+  border-radius: 50px;
+  font-weight: bold;
+  width: 80px;
+  box-shadow: 0px 0px 15px var(--primary-mid);
+  background: var(--primary-mid);
+  margin: 10px;
+  padding: 15px;
+  padding-inline: 15px;
+  width: calc(100% - 50px);
+}
+</style>
+<h1>
+    Cloaking
+</h1>
+<p>Tools for changing the title and favicon of SaturnProxy.</p>
+<br>
+<h2>
+    Premade
+</h2>
+<p>
+    Premade title + favicon combos for SaturnProxy.
+</p>
+<br>
+<button onclick="
+localStorage.removeItem('custom-title');
+localStorage.removeItem('custom-favicon');
+window.top.location.reload();"
+>Clear</button>
+<button onclick="
+localStorage.setItem('custom-title','Google');
+localStorage.setItem('custom-favicon','https://google.com/favicon.ico');
+window.top.location.reload();"
+>Google</button>
+<button onclick="
+localStorage.setItem('custom-title','Home - Google Drive');
+localStorage.setItem('custom-favicon','https://drive.google.com/favicon.ico');
+window.top.location.reload();"
+>Drive</button>
+<button onclick="
+localStorage.setItem('custom-title','Google Docs');
+localStorage.setItem('custom-favicon','https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico');
+window.top.location.reload();"
+>Docs</button>
+<button onclick="
+localStorage.setItem('custom-title','Home');
+localStorage.setItem('custom-favicon','https://www.gstatic.com/classroom/ic_product_classroom_144.png');
+window.top.location.reload();"
+>Classroom</button>
+<br>
+<h2>
+  Custom
+</h2>
+<p>
+  Set custom favicon + title combos.
+</p>
+<br>
+<h2>
+  Title
+</h2>
+<input id="custom-title" placeholder="JupitersNetworks | Settings">
+<button onclick="localStorage.setItem('custom-title',document.getElementById('custom-title').value); window.top.location.reload();">Apply custom title</button>
+<h2>
+  Favicon
+</h2>
+<input id="custom-favicon" placeholder="https://google.com/favicon.ico">
+<button onclick="localStorage.setItem('custom-favicon',document.getElementById('custom-favicon').value); window.top.location.reload();">Apply custom favicon</button>
+<br>
+

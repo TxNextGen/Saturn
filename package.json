@@ -1,0 +1,39 @@
+{
+	"name": "SaturnProxy",
+	"version": "1.0",
+	"type": "module",
+	"bin": {
+        "saturnproxy": "./index.js"
+    },
+	"description": "idk",
+	"packageManager": "pnpm@9.12.3",
+	"engines": {
+		"npm": ">=10.0.0",
+		"node": ">=20.0.0"
+	},
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon index.js"
+	},
+	"keywords": [
+		"proxy"
+	],
+	"author": "",
+	"license": "",
+	"dependencies": {
+		"@fastify/static": "^8.0.2",
+		"@mercuryworkshop/bare-mux": "^2.1.7",
+		"@mercuryworkshop/epoxy-transport": "^2.1.26",
+		"@mercuryworkshop/libcurl-transport": "^1.3.15",
+		"@titaniumnetwork-dev/ultraviolet": "^3.2.10",
+		"cors": "^2.8.5",
+		"express": "^4.21.2",
+		"fastify": "^5.0.0",
+		"http-proxy-middleware": "^3.0.3",
+		"wisp-server-node": "^1.1.7",
+		"ws": "^8.18.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.9"
+	}
+}
