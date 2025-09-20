@@ -1,0 +1,99 @@
+*{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  
+  .content{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .main{
+    width: 97.5vw;
+    height: 97.5vh;
+    border-radius: 25px;
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .objHolder {
+    transition: 0.3s;
+    box-shadow: 0px 0px 20px var(--accent-color);
+    border: 3px solid var(--accent-color);
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .objImg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .gradient {
+    background: -webkit-linear-gradient(45deg, var(--primary-light), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 0px 10px #552bad;; overflow: visible;
+  }
+  
+  #objs{
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    justify-content: center;
+  }
+
+  .objFrame{
+    z-index: 239832193312893218932189312893128923189; /* woa */
+    background-color: white;
+    width: 100%;
+    height: calc(100% - 41.5px);
+  }
+
+  .objHolder:hover{
+    box-shadow: 0px 0px 20px var(--primary-light);
+    width: 205px;
+    height: 205px;
+  }
+
+  img:hover{
+    background-color: var(--accent-color);
+  }
+
+  select{
+    font-size: 16px;
+    background: var(--accent-color);
+    border-radius: 20px;
+    width: min-content;
+  }
+  button {
+    padding: 15px;
+    transition: 0.5s;
+    margin: 5px;
+    background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
+    border-radius: 50px;
+    font-weight: bold;
+    width: 80px;
+    box-shadow: 0px 0px 15px var(--primary-mid);
+  }
+  button:hover{
+    box-shadow: 0px 0px 20px var(--primary-light);
+  }

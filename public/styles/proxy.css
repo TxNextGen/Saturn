@@ -1,0 +1,44 @@
+html {
+    overflow: hidden;
+    background-color: var(--background-dark);
+}
+  
+* {
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    border: 0;
+    font-family: var(--font-family);
+    color: var(--font-color);
+}
+  
+#uv-address {
+    background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
+    box-shadow: 0px 0px 15px var(--primary-mid);
+    height: 50px;
+    width: 50%;
+    padding-left: 10px;
+    border-radius: 30px;
+    max-width: 500px;
+}
+  
+#uv-address::placeholder {
+    color: var(--font-color);
+}
+  
+img {
+    padding: 15px;
+    transition: 0.5s;
+    margin: 5px;
+    background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
+    border-radius: 50px;
+    font-weight: bold;
+    height: 100px;
+    width: 100px;
+    box-shadow: 0px 0px 15px var(--primary-mid);
+}
+  
+img:hover {
+    box-shadow: 0px 0px 20px var(--primary-light);
+}
+  

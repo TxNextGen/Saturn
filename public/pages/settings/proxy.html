@@ -51,10 +51,6 @@ async function setConnection(arg){
             await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport','Epoxy')
             break;
-        case 2:
-            await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-            localStorage.setItem('proxy-transport','Libcurl')
-            break;
     }
 
     transportDisplay()
