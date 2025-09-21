@@ -130,7 +130,7 @@ function loadMetaTags() {
 
   const ogImage = document.createElement('meta');
   ogImage.setAttribute('property', 'og:image');
-  ogImage.setAttribute('content', window.location.origin + "/images/saturn1.png");
+  ogImage.setAttribute('content', window.location.origin + "../images/saturn1.png");
   document.head.appendChild(ogImage);
 
   const ogUrl = document.createElement('meta');
@@ -166,7 +166,7 @@ function loadMetaTags() {
 
   const twitterImage = document.createElement('meta');
   twitterImage.setAttribute('name', 'twitter:image');
-  twitterImage.setAttribute('content', window.location.origin + "images/saturn1.png");
+  twitterImage.setAttribute('content', window.location.origin + "../images/saturn1.png");
   document.head.appendChild(twitterImage);
   const themeColor = document.createElement('meta');
   themeColor.setAttribute('name', 'theme-color');
