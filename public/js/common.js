@@ -1,6 +1,5 @@
 document.head.appendChild(Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-FG22JV74V5' })).onload = () => { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-FG22JV74V5'); };
 
-
 if (!localStorage.getItem('particles-enabled')){
   localStorage.setItem('particles-enabled',true);
 }
@@ -9,24 +8,32 @@ function loadCloak(){
   if (localStorage.getItem('custom-title')){
     document.querySelectorAll('title').forEach((title)=>{title.remove()});
     
-    
     let customTitle = document.createElement('title');
     customTitle.textContent = localStorage.getItem('custom-title');
-
     document.head.appendChild(customTitle);
+    
+    // Update OG title for better embeds
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', localStorage.getItem('custom-title'));
+    }
   }
 
   if (localStorage.getItem('custom-favicon')){
+    // Remove existing favicons
+    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach(link => link.remove());
+    
     let customFavicon = document.createElement('link');
     customFavicon.rel = 'icon';
     customFavicon.href = localStorage.getItem('custom-favicon');
-      
     document.head.appendChild(customFavicon);
   } else{
+    // Remove existing favicons first
+    document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach(link => link.remove());
+    
     let customFavicon = document.createElement('link');
     customFavicon.rel = 'icon';
     customFavicon.href = '../images/saturn1.png'
-      
     document.head.appendChild(customFavicon);
   }
 }
@@ -34,7 +41,6 @@ function loadCloak(){
 function loadTheme(){
   let theme = document.createElement('style');
 
-  
   if (!localStorage.getItem('theme')){
     theme.innerHTML = `
     :root {
@@ -78,19 +84,23 @@ function loadPlugins(){
 }
 
 function loadMetaTags() {
+  if (document.querySelector('meta[name="title"]')) {
+    return; 
+  }
+
   const metaTitle = document.createElement('meta');
   metaTitle.setAttribute('name', 'title');
-  metaTitle.setAttribute('content', 'Universal Unblocker v3');
+  metaTitle.setAttribute('content', 'Saturn Proxy - Universal Unblocker v3');
   document.head.appendChild(metaTitle);
 
   const metaDescription = document.createElement('meta');
   metaDescription.setAttribute('name', 'description');
-  metaDescription.setAttribute('content', 'The best place to play unblocked games!');
+  metaDescription.setAttribute('content', 'The best place to play unblocked games! Access your favorite games and websites with Saturn Proxy.');
   document.head.appendChild(metaDescription);
 
   const metaKeywords = document.createElement('meta');
   metaKeywords.setAttribute('name', 'keywords');
-  metaKeywords.setAttribute('content', 'unblocked,games,minecraft,roblox,fortnite,unblocked-games,unblocked games,unbl0ck3d,unbl0cked,interstellar,doge unblocker,titanium network,proxy,pr0xy,game');
+  metaKeywords.setAttribute('content', 'unblocked,games,minecraft,roblox,fortnite,unblocked-games,unblocked games,unbl0ck3d,unbl0cked,interstellar,doge unblocker,titanium network,proxy,pr0xy,game,saturn proxy');
   document.head.appendChild(metaKeywords);
 
   const metaRobots = document.createElement('meta');
@@ -107,20 +117,61 @@ function loadMetaTags() {
   metaLanguage.setAttribute('content', 'English');
   document.head.appendChild(metaLanguage);
 
+
   const ogTitle = document.createElement('meta');
   ogTitle.setAttribute('property', 'og:title');
-  ogTitle.setAttribute('content', 'Universal Unblocker v3');
+  ogTitle.setAttribute('content', 'Saturn Proxy');
   document.head.appendChild(ogTitle);
 
   const ogDescription = document.createElement('meta');
   ogDescription.setAttribute('property', 'og:description');
-  ogDescription.setAttribute('content', 'The best place to play unblocked games!');
+  ogDescription.setAttribute('content', 'The best place to Access The Internet Freely And Access your favorite games with Saturn Proxy.');
   document.head.appendChild(ogDescription);
 
   const ogImage = document.createElement('meta');
   ogImage.setAttribute('property', 'og:image');
-  ogImage.setAttribute('content', window.location.origin + "/logo.png");
+  ogImage.setAttribute('content', window.location.origin + "/images/saturn1.png");
   document.head.appendChild(ogImage);
+
+  const ogUrl = document.createElement('meta');
+  ogUrl.setAttribute('property', 'og:url');
+  ogUrl.setAttribute('content', window.location.href);
+  document.head.appendChild(ogUrl);
+
+  const ogType = document.createElement('meta');
+  ogType.setAttribute('property', 'og:type');
+  ogType.setAttribute('content', 'website');
+  document.head.appendChild(ogType);
+
+  const ogSiteName = document.createElement('meta');
+  ogSiteName.setAttribute('property', 'og:site_name');
+  ogSiteName.setAttribute('content', 'Saturn Proxy');
+  document.head.appendChild(ogSiteName);
+
+
+  const twitterCard = document.createElement('meta');
+  twitterCard.setAttribute('name', 'twitter:card');
+  twitterCard.setAttribute('content', 'summary_large_image');
+  document.head.appendChild(twitterCard);
+
+  const twitterTitle = document.createElement('meta');
+  twitterTitle.setAttribute('name', 'twitter:title');
+  twitterTitle.setAttribute('content', 'Saturn Proxy');
+  document.head.appendChild(twitterTitle);
+
+  const twitterDescription = document.createElement('meta');
+  twitterDescription.setAttribute('name', 'twitter:description');
+  twitterDescription.setAttribute('content', 'The best place to Access The Internet Freely And Access your favorite games with Saturn Proxy.');
+  document.head.appendChild(twitterDescription);
+
+  const twitterImage = document.createElement('meta');
+  twitterImage.setAttribute('name', 'twitter:image');
+  twitterImage.setAttribute('content', window.location.origin + "images/saturn1.png");
+  document.head.appendChild(twitterImage);
+  const themeColor = document.createElement('meta');
+  themeColor.setAttribute('name', 'theme-color');
+  themeColor.setAttribute('content', '#8246BE');
+  document.head.appendChild(themeColor);
 }
 
 async function loadSideBar(){
@@ -134,7 +185,6 @@ async function loadSideBar(){
 
           sidebar.innerHTML = text;
 
-          
           switch(window.location.pathname){
             case "/": case "/index.html": case "":
               document.getElementById('home').style.backgroundColor = "var(--accent-color)";
