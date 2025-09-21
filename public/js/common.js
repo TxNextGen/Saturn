@@ -25,7 +25,7 @@ function loadCloak(){
   } else{
     let customFavicon = document.createElement('link');
     customFavicon.rel = 'icon';
-    customFavicon.href = 'logo.ico'
+    customFavicon.href = '../images/saturn1.png'
       
     document.head.appendChild(customFavicon);
   }
