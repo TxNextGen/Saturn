@@ -130,7 +130,7 @@ function loadMetaTags() {
 
   const ogImage = document.createElement('meta');
   ogImage.setAttribute('property', 'og:image');
-  ogImage.setAttribute('content', window.location.origin + "../images/saturn1.png");
+  ogImage.setAttribute('content', window.location.origin + "public/images/saturn1.png");
   document.head.appendChild(ogImage);
 
   const ogUrl = document.createElement('meta');
