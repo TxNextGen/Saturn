@@ -86,6 +86,11 @@ function createElements() {
         border-radius: 15px;
         max-width: 500px;
         margin: 15px;
+        transition: box-shadow 0.3s ease;
+    }
+    .searchBar:focus {
+        box-shadow: 0px 0px 22px var(--primary-mid);
+        outline: none;
     }
     </style>
     <div style="width:100%;display:flex;justify-content:center;align-items:center;flex-direction:column;">
@@ -143,11 +148,19 @@ function createElements() {
                 _lastvalidsearch = searchText
 
                 results.failed.forEach((e)=>{
-                    document.getElementById(e).style.display = 'none'
+                    let elem = document.getElementById(e);
+                    elem.style.display = 'none';
+                    elem.style.transform = 'scale(1)'; // Reset any hover transform
                 })
                 
                 results.success.forEach((e)=>{
-                    document.getElementById(e).style.display = 'block'
+                    let elem = document.getElementById(e);
+                    elem.style.display = 'flex';
+                    elem.style.alignItems = 'flex-end';
+                    elem.style.position = 'relative';
+                    elem.style.transform = 'scale(1)'; // Reset any hover transform
+                    // Force reflow to clear any stuck hover states
+                    elem.offsetHeight;
                 })
 
             }
