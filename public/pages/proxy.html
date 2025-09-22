@@ -19,6 +19,21 @@
     <script src="/js/uv/index.js" defer></script>
     <!-- Ultr@v!0l3t -->
   </head>
+  <style>
+    
+  .footer {   
+   position: fixed;   
+   left: 0;   
+   bottom: 0;   
+   width: 100%;   
+   color: white;   
+   text-align: left;   
+   z-index: 100000000;
+   padding-left: 20px;
+}
+
+
+  </style>
 <script src="/baremux/index.js"></script>
 <script src="/libcurl/index.js"></script>
 <script src="/epoxy/index.js"></script>
@@ -32,23 +47,25 @@ async function setConnection(arg){
             await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport','Epoxy')
             break;
-        case 2:
+          case 2:
             await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport','Libcurl')
-            break;
+            break;    
     }
 }
 
 if (!localStorage.getItem('proxy-transport')){
-  setConnection(2)
+  setConnection(1)
 } else{
   console.log("Setting transport to " + localStorage.getItem('proxy-transport'))
   if (localStorage.getItem('proxy-transport') === "Epoxy"){
     setConnection(1)
-  }
+    }
   if (localStorage.getItem('proxy-transport') === "Libcurl"){
     setConnection(2)
+
   }
+  
 }
 
 async function goTo(url){
@@ -76,7 +93,7 @@ async function goTo(url){
       <div class="main">
         <div style="z-index: 9999; display: flex;flex-direction: column; height: 100%; width: 100%; justify-content: center; align-items: center;">
           <h1 style="font-size: 48px; text-shadow: 0px 0px 25px white; padding:20px;">
-            P<y>r</y><x>o</x><y>x</y><span>y</span>
+            Search
           </h1>
           <div style="height: 10px;"></div>
           <form 
@@ -86,7 +103,7 @@ async function goTo(url){
             >
             <input
               id="uv-search-engine"
-              value="https://www.google.com/search?q=%s"
+              value="https://duckduckgo.com/search?q=%s"
               type="hidden"
             />
             <input
@@ -94,7 +111,7 @@ async function goTo(url){
               autocomplete="off"
               id="uv-address" 
               type="text" 
-              placeholder="Search with Ultraviolet"
+              placeholder="Search or Enter a Url"
             />
           </form>
           <div style="height: 10px;"></div>
@@ -117,5 +134,11 @@ async function goTo(url){
         </div>
       </div>
     </div>
+    
+        <div class="footer">   
+   <p style="margin: 10px;">Credits to <a href="https://github.com/titaniumnetwork-dev"><u>Titanium Network</u></a></p>   
+</div>
+      
+       
   </body>
 </html>

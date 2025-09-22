@@ -5,9 +5,11 @@
     <script src="/js/particles.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saturn Proxy - Credits</title>
+    <title>Saturn Proxy | Credits</title>
   </head>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
     html{
       overflow-x: hidden;
       background-color: var(--background-dark);
@@ -18,7 +20,7 @@
       opacity: 1;
       padding: 0;
       border: 0;
-      font-family: var(--font-family);
+      font-family: 'Poppins', sans-serif;
       color: var(--font-color);
       box-sizing: border-box;
     }
@@ -45,6 +47,7 @@
       font-size: 48px;
       font-weight: 700;
       margin-bottom: 10px;
+      font-family: 'Poppins', sans-serif;
     }
 
     h2 {
@@ -52,6 +55,7 @@
       font-size: 28px;
       font-weight: 600;
       margin: 20px 0 15px 0;
+      font-family: 'Poppins', sans-serif;
     }
 
     .gradient {
@@ -118,6 +122,7 @@
       font-weight: bold;
       font-size: 18px;
       color: var(--primary-light);
+      font-family: 'Poppins', sans-serif;
     }
 
     .credit-role {
@@ -125,38 +130,7 @@
       opacity: 0.8;
       font-style: italic;
       margin-top: 2px;
-    }
-
-    .credit-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .discord-link {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      background: #5865F2;
-      border-radius: 20px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(88, 101, 242, 0.3);
-    }
-
-    .discord-link:hover {
-      background: #4752C4;
-      box-shadow: 0 0 20px rgba(88, 101, 242, 0.5);
-      transform: translateY(-2px);
-    }
-
-    .discord-icon {
-      width: 16px;
-      height: 16px;
-      margin-right: 5px;
-      fill: currentColor;
+      font-family: 'Poppins', sans-serif;
     }
 
     .special-thanks {
@@ -166,11 +140,12 @@
       background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
       border-radius: 20px;
       box-shadow: 0px 0px 25px var(--primary-mid);
+      font-family: 'Poppins', sans-serif;
     }
 
     button {
       padding: 15px 25px;
-      transition: 0.5s;
+      transition: all 0.3s ease;
       margin: 20px 10px;
       background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
       border-radius: 50px;
@@ -178,11 +153,17 @@
       min-width: 100px;
       box-shadow: 0px 0px 15px var(--primary-mid);
       cursor: pointer;
+      transform: scale(1);
     }
 
     button:hover{
       box-shadow: 0px 0px 20px var(--primary-light);
-      transform: translateY(-2px);
+      transform: scale(1.1) translateY(-2px);
+    }
+
+    button:active {
+      transform: scale(1.05) translateY(-1px);
+      transition: all 0.1s ease;
     }
 
     .back-button {
@@ -212,13 +193,28 @@
       h2 { font-size: 24px; }
       .credits-container { margin: 10px; padding: 20px; }
       .credit-item { flex-direction: column; align-items: flex-start; }
+      
+      button {
+        margin: 10px 5px;
+        padding: 12px 20px;
+        min-width: 80px;
+      }
+      
+      button:hover {
+        transform: scale(1.05) translateY(-1px);
+      }
     }
+
+    
+    ::-webkit-scrollbar {
+    display: none;
+}
   </style>
   <body>
     <div style="animation-delay: 0.5s; position: fixed; height:100vh; width: 100vw; z-index: -6544530;" id="particles-js"></div>
     <script src="/js/load-particles.js"></script>
     
-    <button class="back-button" onclick="window.top.location = '/'" style="animation-delay: 0.2s">← Home</button>
+   
     
     <div class="content" style="z-index: 1000;">
       <h1 style="animation-delay: 0.3s">Credits <span style="animation-delay: 0.4s" class="gradient">& Acknowledgments</span></h1>
@@ -244,7 +240,14 @@
               <div class="credit-role">Sydney</div>
             </div>
           </div>
+          <div class="credit-item">
+            <div>
+              <div class="credit-name">Frontend Developer</div>
+              <div class="credit-role">👑 MK</div>
+            </div>
+          </div>
         </div>
+        
 
         <div class="credit-section" style="animation-delay: 1.0s">
           <h2 class="gradient">Special Contributors</h2>
@@ -256,14 +259,6 @@
                 <div class="credit-role">Provided The Proxy</div>
               </div>
             </div>
-            <div class="credit-actions">
-              <a href="https://discord.gg/daydreamz" class="discord-link" target="_blank">
-                <svg class="discord-icon" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.197.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
-                </svg>
-                Discord
-              </a>
-            </div>
           </div>
           <div class="credit-item">
             <div class="credit-info">
@@ -271,14 +266,6 @@
                 <div class="credit-name">Day Dreamx</div>
                 <div class="credit-role">Provided the games</div>
               </div>
-            </div>
-            <div class="credit-actions">
-              <a href="#" class="discord-link" target="_blank">
-                <svg class="discord-icon" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.197.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.30z"/>
-                </svg>
-                Discord
-              </a>
             </div>
           </div>
           <div class="credit-item">
@@ -288,39 +275,10 @@
                 <div class="credit-role">The Base Of The Website</div>
               </div>
             </div>
-            <div class="credit-actions">
-              <a href="https://discord.gg/k4XheyRaRx" class="discord-link" target="_blank">
-                <svg class="discord-icon" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.197.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.30z"/>
-                </svg>
-                Discord
-              </a>
-            </div>
           </div>
         </div>
 
-        <div class="credit-section" style="animation-delay: 1.2s">
-          <h2 class="gradient">Open Source Libraries</h2>
-          <div class="credit-item">
-            <div>
-              <div class="credit-name">Particles.js</div>
-              <div class="credit-role">Background particle effects</div>
-            </div>
-          </div>
-          <div class="credit-item">
-            <div>
-              <div class="credit-name">Express.js</div>
-              <div class="credit-role">Web application framework</div>
-            </div>
-          </div>
-          <div class="credit-item">
-            <div>
-              <div class="credit-name">Node.js</div>
-              <div class="credit-role">Server runtime environment</div>
-            </div>
-          </div>
-        </div>
-
+       
 
         <div class="special-thanks" style="animation-delay: 1.6s">
           <h2>Special Thanks</h2>
@@ -329,9 +287,13 @@
       </div>
 
       <div style="animation-delay: 1.8s; margin: 20px 0;">
-        <button onclick="window.top.location = '/g.html'">Games</button>
+       <button onclick="window.top.location = '/g.html'">Games</button>
         <button onclick="window.top.location = '/a.html'">Apps</button>
+        <button onclick="window.top.location = '/m.html'">Methods</button>
+        <button onclick="window.top.location = '/p.html'">Search</button>
         <button onclick="window.top.location = '/s.html'">Settings</button>
+         <button onclick="window.top.location = '/c.html'">Credits</button>
+
       </div>
     </div>
 

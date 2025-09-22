@@ -7,30 +7,50 @@
 html{
   overflow-y: scroll;
   padding: 10px;
-}
+ }
+
 button{
   background: var(--primary-mid);
   margin: 10px;
   padding: 15px;
   padding-inline: 15px;
-  width: calc(100% - 20px);
+  width: calc(100% - 20px); 
+  border-radius: 15px;
 }
+
 input{
   padding: 15px;
   transition: 0.5s;
-  margin: 5px;
-  background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
-  border-radius: 50px;
+  margin: 5px; 
+  background: var(--primary-mid);
+  box-shadow: 0px 0px 10px var(--primary-mid);
+  border-radius: 15px;
   font-weight: bold;
   width: 80px;
-  box-shadow: 0px 0px 15px var(--primary-mid);
-  background: var(--primary-mid);
   margin: 10px;
   padding: 15px;
   padding-inline: 15px;
-  width: calc(100% - 50px);
+  width: calc(100% - 50px); 
+  transition: box-shadow 0.3s ease;
+  color: white;
+}
+
+input::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+input:hover {
+  box-shadow: 0px 0px 15px var(--primary-mid);
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0px 0px 20px var(--primary-mid);
+  outline: none;
 }
 </style>
+
 <h1>
     Cloaking
 </h1>
@@ -79,7 +99,7 @@ window.top.location.reload();"
 <h2>
   Title
 </h2>
-<input id="custom-title" placeholder="JupitersNetworks | Settings">
+<input id="custom-title" placeholder="SaturnProxy | Settings">
 <button onclick="localStorage.setItem('custom-title',document.getElementById('custom-title').value); window.top.location.reload();">Apply custom title</button>
 <h2>
   Favicon
@@ -87,4 +107,3 @@ window.top.location.reload();"
 <input id="custom-favicon" placeholder="https://google.com/favicon.ico">
 <button onclick="localStorage.setItem('custom-favicon',document.getElementById('custom-favicon').value); window.top.location.reload();">Apply custom favicon</button>
 <br>
-
