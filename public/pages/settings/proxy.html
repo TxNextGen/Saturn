@@ -16,12 +16,14 @@ button{
   width: calc(100% - 20px);
 }
 </style>
+
 <h1>
     Proxy
 </h1>
 <p>[Advanced] Tools for configuring the proxy</p>
 <p>(You can use Epoxy only)</p>
 <br>
+
 <h2>
     Set the transport
 </h2>
@@ -29,30 +31,55 @@ button{
     Set the transport the proxy uses. The current transport is <span style="font-weight: 600;" id="proxtrans">[unset]</span>.
 </p>
 <br>
+
 <button onclick="setConnection(1)">Epoxy</button>
+
 <script src="/baremux/index.js"></script>
 <script src="/epoxy/index.js"></script>
 <script>
 let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
 
 function transportDisplay(){
-    if (localStorage.getItem('proxy-transport')){
-        document.getElementById('proxtrans').textContent = localStorage.getItem('proxy-transport')
+    const transport = getTransport();
+    document.getElementById('proxtrans').textContent = transport;
+}
+
+function getTransport(){
+    // Always return Epoxy as default, even if localStorage is empty
+    const stored = localStorage.getItem('proxy-transport');
+    return stored || 'Epoxy';
+}
+
+function ensureEpoxyDefault(){
+    // Always set Epoxy if not already set or if set to something else
+    const currentTransport = localStorage.getItem('proxy-transport');
+    if (!currentTransport || currentTransport !== 'Epoxy') {
+        localStorage.setItem('proxy-transport', 'Epoxy');
+        // Automatically set the connection to Epoxy
+        setConnection(1);
     }
 }
 
-transportDisplay()
-
 async function setConnection(arg){
     let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
-    
+         
     switch (arg){
         case 1:
             await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport','Epoxy')
             break;
     }
-
+     
     transportDisplay()
 }
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    ensureEpoxyDefault();
+    transportDisplay();
+});
+
+// Also run immediately in case DOMContentLoaded already fired
+ensureEpoxyDefault();
+transportDisplay();
 </script>
