@@ -83,7 +83,7 @@ function createElements() {
         height: 50px;
         width: 50%;
         padding-left: 10px;
-        border-radius: 30px;
+        border-radius: 15px;
         max-width: 500px;
         margin: 15px;
     }
