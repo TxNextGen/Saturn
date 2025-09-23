@@ -1,48 +1,235 @@
 .container {
-	--uib-size: 60px;
-	--uib-color: white;
-	--uib-speed: 1s;
-	--uib-dot-size: calc(var(--uib-size) * 0.18);
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-	height: calc(var(--uib-size) * 0.5);
-	width: var(--uib-size);
+    --uib-size: 60px;
+    --uib-color: #64ffda;
+    --uib-color-secondary: #00bcd4;
+    --uib-speed: 1.2s;
+    --uib-dot-size: calc(var(--uib-size) * 0.18);
+    --shadow-color: rgba(100, 255, 218, 0.4);
+    --glow-color: rgba(100, 255, 218, 0.6);
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: calc(var(--uib-size) * 0.5);
+    width: var(--uib-size);
+    position: relative;
+    padding: 0 2px;
+}
+.container::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 10px);
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--shadow-color) 20%, 
+        var(--glow-color) 50%, 
+        var(--shadow-color) 80%, 
+        transparent 100%);
+    border-radius: 50px;
+    opacity: 0.6;
+    animation: groundGlow var(--uib-speed) ease-in-out infinite;
 }
 
 .dot {
-	flex-shrink: 0;
-	width: calc(var(--uib-size) * 0.17);
-	height: calc(var(--uib-size) * 0.17);
-	border-radius: 50%;
-	background-color: var(--uib-color);
-	transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    width: calc(var(--uib-size) * 0.17);
+    height: calc(var(--uib-size) * 0.17);
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--uib-color) 0%, var(--uib-color-secondary) 100%);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 2px 8px var(--shadow-color),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
+
+.dot::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+
+.dot::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 35%;
+    height: 35%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    opacity: 0.8;
+    animation: shimmer var(--uib-speed) ease-in-out infinite;
+}
+
+
 .dot:nth-child(1) {
-	animation: jump var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.45) infinite;
+    animation: 
+        jump var(--uib-speed) cubic-bezier(0.68, -0.55, 0.265, 1.55) calc(var(--uib-speed) * -0.45) infinite,
+        colorShift var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.45) infinite;
 }
 
 .dot:nth-child(2) {
-	animation: jump var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.3) infinite;
+    animation: 
+        jump var(--uib-speed) cubic-bezier(0.68, -0.55, 0.265, 1.55) calc(var(--uib-speed) * -0.3) infinite,
+        colorShift var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.3) infinite;
 }
 
 .dot:nth-child(3) {
-	animation: jump var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.15) infinite;
+    animation: 
+        jump var(--uib-speed) cubic-bezier(0.68, -0.55, 0.265, 1.55) calc(var(--uib-speed) * -0.15) infinite,
+        colorShift var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.15) infinite;
 }
 
 .dot:nth-child(4) {
-	animation: jump var(--uib-speed) ease-in-out infinite;
+    animation: 
+        jump var(--uib-speed) cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite,
+        colorShift var(--uib-speed) ease-in-out infinite;
 }
 
+
 @keyframes jump {
+    0% {
+        transform: translateY(0px) scale(1) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-50%) scale(1.1) rotate(90deg);
+    }
+    50% {
+        transform: translateY(-220%) scale(0.9) rotate(180deg);
+        box-shadow: 
+            0 15px 25px var(--shadow-color),
+            0 0 20px var(--glow-color),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    75% {
+        transform: translateY(-50%) scale(1.1) rotate(270deg);
+    }
+    100% {
+        transform: translateY(0px) scale(1) rotate(360deg);
+    }
+}
 
-	0%,
-	100% {
-		transform: translateY(0px);
-	}
 
-	50% {
-		transform: translateY(-200%);
-	}
+@keyframes colorShift {
+    0%, 100% {
+        background: linear-gradient(135deg, var(--uib-color) 0%, var(--uib-color-secondary) 100%);
+    }
+    50% {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
+    }
+}
+
+
+@keyframes shimmer {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translate(0%, 0%) scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: translate(20%, -20%) scale(0.7);
+    }
+}
+
+
+@keyframes groundGlow {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateX(-50%) scaleX(0.8);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scaleX(1.2);
+    }
+}
+
+
+.container:hover .dot::before {
+    opacity: 1;
+}
+
+.container:hover .dot {
+    animation-duration: calc(var(--uib-speed) * 0.7);
+}
+
+
+.container.dark {
+    --uib-color: #bb86fc;
+    --uib-color-secondary: #6200ea;
+    --shadow-color: rgba(187, 134, 252, 0.4);
+    --glow-color: rgba(187, 134, 252, 0.6);
+}
+
+
+.container.small {
+    --uib-size: 40px;
+    --uib-speed: 1s;
+}
+
+.container.large {
+    --uib-size: 80px;
+    --uib-speed: 1.4s;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .dot {
+        animation: gentleJump var(--uib-speed) ease-in-out infinite !important;
+    }
+    
+    .dot::after {
+        animation: none !important;
+    }
+    
+    .container::before {
+        animation: none !important;
+        opacity: 0.3;
+    }
+}
+
+@keyframes gentleJump {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-10px) scale(1.05);
+        opacity: 1;
+    }
+}
+
+
+.dot, .dot::before, .dot::after, .container::before {
+    will-change: transform, opacity;
+}
+
+
+.container.breathing .dot {
+    animation: 
+        jump var(--uib-speed) cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite,
+        breathe calc(var(--uib-speed) * 3) ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.3);
+    }
 }
