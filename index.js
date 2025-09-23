@@ -52,6 +52,7 @@ app.get("/uv/uv.config.js", (req, res) => {
 });
 
 app.use("/uv/", express.static(uvPath));
+app.use("/libcurl/", express.static(libcurlPath));
 app.use("/epoxy/", express.static(epoxyPath));
 app.use("/baremux/", express.static(baremuxPath));
 

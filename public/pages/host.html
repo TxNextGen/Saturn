@@ -89,8 +89,6 @@ function createAndAppend(){
   topbar.innerHTML = `
   <div style="width: 5px;"></div>
   <h2>${title}</h2>
-  <div style="width: 5px;"></div>
-  <h4>[${type}]</h4>
   <div style="margin-left: auto;">
     <img onclick="window.open(loadGame(),'_blank')" src="/images/popout.png" style="height: 20px; width: 20px; border-radius: 15px; transition: 0.3s; padding: 5px;">
     <img onclick="document.getElementById('objFrame').requestFullscreen()" src="/images/fullscreen.png" style="height: 20px; width: 20px; border-radius: 15px; transition: 0.3s; padding: 5px;"> 
@@ -155,4 +153,7 @@ if (document.readyState === 'loading') {
 
 
 </script>
+
+
+
 </html>

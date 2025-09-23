@@ -52,20 +52,212 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
-button {
-  padding: 15px;
-  transition: 0.5s;
-  margin: 5px;
-  background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
-  border-radius: 50px;
-  font-weight: bold;
-  width: 80px;
-  box-shadow: 0px 0px 15px var(--primary-mid);
+:root {
+  --text-color: #e0e0e0;
+  --button-background-color: #8400ff;
+  --button-gradient-color: linear-gradient(-135deg, #673ab7, #8400ff);
+  --link-hover-color: #ffffff;
+  --dshadow1: rgba(0, 0, 0, 0.4);
+  --dshadow2: rgba(255, 255, 255, 0.1);
 }
 
-button:hover {
-  box-shadow: 0px 0px 20px var(--primary-light);
-  width: 120px;
+
+.main-button {
+	position: relative;
+	padding: 15px 25px;
+	border-radius: 50px;
+	border: none;
+	color: var(--text-color);
+	cursor: pointer;
+	background: var(--button-background-color);
+	background: var(--button-gradient-color);
+	transition: all 0.5s ease;
+	box-shadow:
+		14px 7px 30px -5px var(--dshadow1),
+		-15px -2px 30px -5px var(--dshadow2);
+	width: 180px;
+	min-width: 180px;
+	font-family: 'Poppins', var(--font-family);
+}
+
+.main-button:active {
+	transform: scale(0.95) !important;
+	transition: all 0.2s ease;
+}
+
+.main-button:before,
+.main-button:after {
+	position: absolute;
+	content: '';
+	width: 150%;
+	left: 50%;
+	height: 100%;
+	transform: translateX(-50%);
+	z-index: -1000;
+	background-repeat: no-repeat;
+}
+
+.main-button:hover {
+	width: 220px;
+}
+
+.main-button:hover:before {
+	top: -70%;
+	background-image: radial-gradient(
+			circle,
+			var(--link-hover-color) 20%,
+			transparent 20%
+		),
+		radial-gradient(
+			circle,
+			transparent 20%,
+			var(--link-hover-color) 20%,
+			transparent 30%
+		),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(
+			circle,
+			transparent 10%,
+			var(--link-hover-color) 15%,
+			transparent 20%
+		),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%);
+	background-size:
+		10% 10%,
+		20% 20%,
+		15% 15%,
+		20% 20%,
+		18% 18%,
+		10% 10%,
+		15% 15%,
+		10% 10%,
+		18% 18%;
+	background-position: 50% 120%;
+	animation: greentopBubbles 0.6s ease;
+}
+
+.main-button:hover::after {
+	bottom: -70%;
+	background-image: radial-gradient(
+			circle,
+			var(--link-hover-color) 20%,
+			transparent 20%
+		),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(
+			circle,
+			transparent 10%,
+			var(--link-hover-color) 15%,
+			transparent 20%
+		),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
+		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%);
+	background-size:
+		15% 15%,
+		20% 20%,
+		18% 18%,
+		20% 20%,
+		15% 15%,
+		20% 20%,
+		18% 18%;
+	background-position: 50% 0%;
+	animation: greenbottomBubbles 0.6s ease;
+}
+
+@keyframes greentopBubbles {
+	0% {
+		background-position:
+			5% 90%,
+			10% 90%,
+			10% 90%,
+			15% 90%,
+			25% 90%,
+			25% 90%,
+			40% 90%,
+			55% 90%,
+			70% 90%;
+	}
+
+	50% {
+		background-position:
+			0% 80%,
+			0% 20%,
+			10% 40%,
+			20% 0%,
+			30% 30%,
+			22% 50%,
+			50% 50%,
+			65% 20%,
+			90% 30%;
+	}
+
+	100% {
+		background-position:
+			0% 70%,
+			0% 10%,
+			10% 30%,
+			20% -10%,
+			30% 20%,
+			22% 40%,
+			50% 40%,
+			65% 10%,
+			90% 20%;
+		background-size:
+			0% 0%,
+			0% 0%,
+			0% 0%,
+			0% 0%,
+			0% 0%,
+			0% 0%;
+	}
+}
+
+@keyframes greenbottomBubbles {
+	0% {
+		background-position:
+			10% -10%,
+			30% 10%,
+			55% -10%,
+			70% -10%,
+			85% -10%,
+			70% -10%,
+			70% 0%;
+	}
+
+	50% {
+		background-position:
+			0% 80%,
+			20% 80%,
+			45% 60%,
+			60% 100%,
+			75% 70%,
+			95% 60%,
+			105% 0%;
+	}
+
+	100% {
+		background-position:
+			0% 90%,
+			20% 90%,
+			45% 70%,
+			60% 110%,
+			75% 80%,
+			95% 70%,
+			110% 10%;
+		background-size:
+			0% 0%,
+			0% 0%,
+			0% 0%,
+			0% 0%,
+			0% 0%,
+			0% 0%;
+	}
 }
 
 .static-text {
@@ -91,78 +283,96 @@ button:hover {
 }
 
 .discord-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10000;
-  background: linear-gradient(135deg, #5865f2, #7289da);
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 10000 !important;
+  background: linear-gradient(135deg, #5865f2, #7289da) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 60px !important;
+  height: 60px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: all 0.3s ease !important;
+  transform: none !important;
 }
 
 .discord-toggle:hover {
-  background: linear-gradient(135deg, #5865f2, #7289da);
-  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
-  transform: none;
-  width: 60px;
-  height: 60px;
+  background: linear-gradient(135deg, #4752c4, #5865f2) !important;
+  box-shadow: 0 6px 25px rgba(88, 101, 242, 0.6) !important;
+  transform: scale(1.05) !important;
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.discord-toggle:active {
+  transform: scale(0.95) !important;
+  transition: all 0.1s ease !important;
 }
 
 .discord-toggle.active {
-  display: none;
+  display: none !important;
 }
 
 .discord-widget.hidden {
   display: none;
 }
 
+
 .discord-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  color: white;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10001;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  cursor: pointer !important;
+  color: white !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10001 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: all 0.2s ease !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 .discord-close:hover {
-  background: rgba(0, 0, 0, 0.5);
-  transform: none;
-  opacity: 1;
+  background: rgba(0, 0, 0, 0.9) !important;
+  transform: scale(1.1) !important;
+  opacity: 1 !important;
+  width: 24px !important;
+  height: 24px !important;
+  box-shadow: none !important;
+}
+
+.discord-close:active {
+  transform: scale(0.9) !important;
 }
 
 .cursor {
   display: inline-block;
   animation: blink 1s infinite;
 }
-  from {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
 
 
-  
   </style>
   <body>
     <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: -6544530;" id="particles-js"></div>
@@ -170,57 +380,44 @@ button:hover {
     <div class="content" style="z-index: 1000;">
       <h1 id="typing-title" style="animation-delay: 0.3s;">
       </h1>
-      <p class="static-text" style="animation-delay: 2s;">Enjoy Your Stay in Saturn Proxy</p>
+      <p class="static-text" style="animation-delay: 2s;">Enjoy Your Searching The Web Freely</p>
       <div style="animation-delay: 1.5s; margin: 0px;">
-        <button onclick="window.top.location = '/g.html'">Games</button>
-        <button onclick="window.top.location = '/a.html'">Apps</button>
-        <button onclick="window.top.location = '/m.html'">Methods</button>
-        <button onclick="window.top.location = '/p.html'">Search</button>
-        <button onclick="window.top.location = '/s.html'">Settings</button>
-         <button onclick="window.top.location = '/c.html'">Credits</button>
+        <button class="main-button" onclick="window.top.location = '/p.html'">Start Exploring</button>
+      </div>
     </div>
- <p style="margin-top: 30px;">
-        Created by <a target="_blank" href="https://github.com/jobidev">Jobidev</a> at <a target="_blank" href="https://discord.com/invite/nX6sWSa9HE">UniUB</a>
-    </p>
 
-  
     <button class="discord-toggle" id="discordToggle" onclick="toggleDiscordWidget()">
       <svg width="24" height="24" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
       </svg>
     </button>
 
-    
     <div class="discord-widget hidden" id="discordWidget">
       <button class="discord-close" onclick="closeDiscordWidget()">×</button>
-   <iframe src="https://discord.com/widget?id=1418758435893153924&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      <iframe src="https://discord.com/widget?id=1418758435893153924&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </div>
    
 <script>
-// Title typing effect
 function startTitleTypingEffect() {
     const text = "Welcome to Saturn Proxy";
     const typingElement = document.getElementById('typing-title');
     let i = 0;
     
-    // Clear the element first
     typingElement.innerHTML = '';
     
     function typeWriter() {
         if (i < text.length) {
             typingElement.innerHTML = text.substring(0, i + 1) + '<span class="cursor">|</span>';
             i++;
-            setTimeout(typeWriter, 80); // Adjust typing speed here (milliseconds)
+            setTimeout(typeWriter, 80); 
         } else {
-            // Add gradient span after typing is complete and remove cursor
             typingElement.innerHTML = text + ' <span class="gradient"></span>';
         }
     }
     
-    // Start typing after a delay
     setTimeout(typeWriter, 500);
 }
 
-// Discord Widget Functions
 function toggleDiscordWidget() {
     const widget = document.getElementById('discordWidget');
     const toggle = document.getElementById('discordToggle');
@@ -238,7 +435,6 @@ function closeDiscordWidget() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Start title typing effect when page loads
     startTitleTypingEffect();
     
     const konamiCode = [
