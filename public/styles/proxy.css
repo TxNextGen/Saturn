@@ -54,6 +54,7 @@ img:hover {
     transform: scale(1.1); 
 }
 
+
     .footer {   
      position: fixed;   
      left: 0;   
@@ -149,3 +150,4 @@ img:hover {
         height: 30px;
         margin: 0 10px;
     }
+
