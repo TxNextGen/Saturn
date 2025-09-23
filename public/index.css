@@ -1,57 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-color: #e8eaed;
-  --background-dark: #0f0f23;
-  --background-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  --primary-light: #64ffda;
-  --primary-mid: #00bcd4;
-  --primary-dark: #006064;
-  --primary-glow: rgba(100, 255, 218, 0.3);
-  --shadow-soft: rgba(0, 0, 0, 0.3);
-  --shadow-intense: rgba(0, 0, 0, 0.5);
-  --border-radius-sm: 10px;
-  --border-radius-md: 15px;
-  --border-radius-lg: 20px;
-  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 * {
   margin: 0;
   padding: 0;
   border: 0;
-  box-sizing: border-box;
-  font-family: var(--font-family);
+  font-family: 'Poppins', var(--font-family);
   color: var(--font-color);
 }
 
-html, body {
+html, body{
   overflow: hidden;
-  background: var(--background-gradient);
-  min-height: 100vh;
-  position: relative;
-}
-
-html::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 188, 212, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(187, 134, 252, 0.05) 0%, transparent 50%);
-  animation: backgroundPulse 8s ease-in-out infinite alternate;
-  z-index: -1;
-  pointer-events: none;
-}
-
-@keyframes backgroundPulse {
-  0% { opacity: 0.5; transform: scale(1); }
-  100% { opacity: 0.8; transform: scale(1.05); }
 }
 
 .content {
@@ -59,197 +17,24 @@ html::before {
   height: 100vh;
   display: flex;
   flex-direction: row;
-  position: relative;
 }
 
 .main {
   border: 0;
-  background: linear-gradient(135deg, 
-    rgba(15, 15, 35, 0.95) 0%, 
-    rgba(26, 26, 46, 0.9) 50%, 
-    rgba(22, 33, 62, 0.95) 100%);
-  backdrop-filter: blur(20px);
+  background-color: var(--background-dark);
   height: 100%;
   width: 100%;
-  position: relative;
-  overflow: hidden;
 }
 
-.main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-textarea, input {
-  background: linear-gradient(135deg, 
-    rgba(0, 188, 212, 0.15) 0%, 
-    rgba(100, 255, 218, 0.1) 50%, 
-    rgba(0, 96, 100, 0.15) 100%);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(100, 255, 218, 0.2);
-  padding: 12px 16px;
-  border-radius: var(--border-radius-md);
+textarea,input{
+  background-color: var(--primary-mid);
+  padding: 3px;
+  border-radius: 10px;
   color: var(--font-color);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
+  overflow-y: scroll;
   resize: none;
-  transition: all 0.4s var(--transition-smooth);
-  box-shadow: 
-    0 4px 20px var(--shadow-soft),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  position: relative;
-  z-index: 2;
-}
-
-textarea {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-mid) transparent;
-}
-
-textarea::-webkit-scrollbar {
-  width: 6px;
-  display: block;
-}
-
-textarea::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-
-textarea::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--primary-mid), var(--primary-light));
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
-textarea::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--primary-light), var(--primary-mid));
-}
-
-textarea:focus, input:focus {
-  outline: none;
-  border-color: var(--primary-light);
-  box-shadow: 
-    0 8px 32px rgba(100, 255, 218, 0.3),
-    0 0 0 1px var(--primary-light),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  background: linear-gradient(135deg, 
-    rgba(100, 255, 218, 0.2) 0%, 
-    rgba(0, 188, 212, 0.15) 50%, 
-    rgba(0, 96, 100, 0.2) 100%);
-  transform: translateY(-2px);
-}
-
-textarea::placeholder, input::placeholder {
-  color: rgba(232, 234, 237, 0.6);
-  font-weight: 300;
-  transition: color 0.3s ease;
-}
-
-textarea:focus::placeholder, input:focus::placeholder {
-  color: rgba(232, 234, 237, 0.8);
-}
-
-input {
-  height: 42px;
-}
-
-textarea {
-  min-height: 80px;
-}
-
-input[type="text"], input[type="email"], input[type="password"], input[type="url"] {
-  position: relative;
-  overflow: hidden;
-}
-
-input[type="text"]::before, input[type="email"]::before, 
-input[type="password"]::before, input[type="url"]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent);
-  transition: left 0.6s;
-}
-
-input[type="text"]:focus::before, input[type="email"]:focus::before,
-input[type="password"]:focus::before, input[type="url"]:focus::before {
-  left: 100%;
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: transparent;
-}
-
-@media (max-width: 768px) {
-  textarea, input {
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-  
-  input {
-    height: 38px;
-  }
-  
-  textarea {
-    min-height: 70px;
-  }
-}
-
-@media (max-width: 480px) {
-  textarea, input {
-    padding: 8px 12px;
-    font-size: 12px;
-    border-radius: var(--border-radius-sm);
-  }
-  
-  input {
-    height: 36px;
-  }
-  
-  textarea {
-    min-height: 60px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  
-  html::before {
-    animation: none;
-  }
-}
-
-@media (prefers-contrast: high) {
-  :root {
-    --font-color: #ffffff;
-    --primary-light: #00ffff;
-    --primary-mid: #0080ff;
-  }
-  
-  textarea, input {
-    border: 2px solid var(--primary-light);
-  }
+    display: none;
 }
