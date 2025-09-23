@@ -8,7 +8,6 @@ html{
   overflow-y: scroll;
   padding: 10px;
  }
-
 button{
   background: var(--primary-mid);
   margin: 10px;
@@ -17,7 +16,6 @@ button{
   width: calc(100% - 20px); 
   border-radius: 15px;
 }
-
 input{
   padding: 15px;
   transition: 0.5s;
@@ -34,23 +32,19 @@ input{
   transition: box-shadow 0.3s ease;
   color: white;
 }
-
 input::placeholder {
   color: white;
   opacity: 0.8;
 }
-
 input:hover {
   box-shadow: 0px 0px 15px var(--primary-mid);
   outline: none;
 }
-
 input:focus {
   box-shadow: 0px 0px 20px var(--primary-mid);
   outline: none;
 }
 </style>
-
 <h1>
     Cloaking
 </h1>
@@ -107,3 +101,24 @@ window.top.location.reload();"
 <input id="custom-favicon" placeholder="https://google.com/favicon.ico">
 <button onclick="localStorage.setItem('custom-favicon',document.getElementById('custom-favicon').value); window.top.location.reload();">Apply custom favicon</button>
 <br>
+<h2>
+  about:blank Cloaking
+</h2>
+<p>
+  Opens SaturnProxy in a new about:blank tab for maximum stealth.
+</p>
+<br>
+<button onclick="openAboutBlank()">Open in about:blank</button>
+
+<script>
+function openAboutBlank() {
+    var win = window.open();
+    var url = window.location.origin;
+    var iframe = win.document.createElement('iframe');
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "none";
+    iframe.src = url;
+    win.document.body.appendChild(iframe);
+}
+</script>
