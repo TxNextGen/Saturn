@@ -285,7 +285,7 @@
           }
         });
 
-        // Навигационные кнопки
+        
         const on = (sel, event, fn) => {
           const el = document.querySelector(sel);
           if (el) el.addEventListener(event, fn);
@@ -318,19 +318,17 @@
             frame.style.display = 'none';
             frame.src = 'about:blank';
           }
-          // Force redirect of the top-level window
+          
           setTimeout(() => {
             window.top.location.replace('/');
           }, 100);
         });
 
-        on('.settingsButton', 'click', () => {
-          // Hide the iframe first
+        on('.settingsButton', 'click', () => {          
           if (frame) {
             frame.style.display = 'none';
             frame.src = 'about:blank';
           }
-          // Force redirect to settings page
           setTimeout(() => {
             window.top.location.replace('/s.html#Proxy');
           }, 100);
