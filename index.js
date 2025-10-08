@@ -12,7 +12,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const port = parseInt(process.env.PORT || "8080", 10);
+const port = parseInt(process.env.PORT || "443", 10);
 const info = {
     "version": "1.0",
 };

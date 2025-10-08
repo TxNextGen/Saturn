@@ -1,206 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="/js/common.js"></script>
+    <script src="/js/particles.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="../js/common.js"></script>
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/styles/loader.css">
+    <link rel="stylesheet" href="/styles/template.css">
+    <script src="/js/settings.js"></script>
 
-    <link rel="stylesheet" href="../index.css" />
-    <link rel="stylesheet" href="../styles/loader.css">
-    <link rel="stylesheet" href="../styles/template.css">
-    <script src="../js/settings.js"></script>
-    <script src="../js/particles.min.js"></script>
-
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-      * {
-        font-family: 'Poppins', sans-serif;
-      }
-
-      button {
-        width: calc(100% - 20px);
-        position: relative;
-        overflow: hidden;
-        padding: 18px 24px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        margin: 8px 10px;
-        border-radius: 16px;
-        font-weight: 600;
-        font-size: 15px;
-        letter-spacing: 0.5px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        background: linear-gradient(135deg, var(--primary-dark) 0%, rgba(var(--primary-dark-rgb, 45, 55, 72), 0.8) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 12px;
-        animation: slideIn 0.6s ease-out;
-      }
-
-      button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s;
-      }
-
-      button:hover::before {
-        left: 100%;
-      }
-
-      button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        border-color: rgba(255, 255, 255, 0.2);
-      }
-
-      button:active {
-        transform: scale(0.95);
-        transition: all 0.1s;
-      }
-
-      [active="true"] {
-        background: linear-gradient(135deg, var(--primary-mid) 0%, var(--primary-light) 100%);
-        box-shadow: 0 12px 30px rgba(var(--primary-mid-rgb, 74, 85, 104), 0.4);
-        border-color: var(--primary-light);
-        transform: scale(1.02);
-      }
-
-      [active="true"]::after {
-        content: '';
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--accent-color, #00ff88);
-        box-shadow: 0 0 15px var(--accent-color, #00ff88);
-      }
-
-      button .icon {
-        width: 20px;
-        height: 20px;
-        opacity: 0.8;
-        transition: opacity 0.3s;
-      }
-
-      button:hover .icon {
-        opacity: 1;
-      }
-
-      .sidebar {
-        width: 280px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
-        backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05);
-      }
-
-      .sidebar h1 {
-        font-size: 32px;
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--primary-light), var(--accent-color, #00ff88));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        padding: 15px 5px 20px 5px;
-        margin-bottom: 30px;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      }
-
-      .iframe-container {
-        flex-grow: 1;
-        margin: 25px;
-        border-radius: 20px;
-        background: linear-gradient(-135deg, var(--primary-dark), rgba(var(--primary-dark-rgb, 45, 55, 72), 0.9));
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-
-      .content {
-        background: radial-gradient(ellipse at top, rgba(var(--primary-mid-rgb, 74, 85, 104), 0.1) 0%, transparent 70%);
-      }
-
-      .button-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        padding: 10px 0;
-      }
-
-      @keyframes slideIn {
-        from { opacity: 0; transform: translateX(-20px); }
-        to   { opacity: 1; transform: translateX(0); }
-      }
-
-      .button-container button:nth-child(1) { animation-delay: 0.1s; }
-      .button-container button:nth-child(2) { animation-delay: 0.2s; }
-      .button-container button:nth-child(3) { animation-delay: 0.3s; }
-      .button-container button:nth-child(4) { animation-delay: 0.4s; }
-    </style>
   </head>
+<style>
+button{
+  width: calc(100% - 20px);
+  flex-grow: 1;
+  overflow: visible;
+  padding: 16px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 8px 10px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  background: var(--primary-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  position: relative;
+  cursor: pointer;
+}
 
-  <body>
-    <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: 1000;" id="particles-js"></div>
-    <script src="../js/load-particles.js"></script>
+button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 25px var(--primary-mid);
+  border-color: var(--accent-color);
 
-    <div class="content">
-      <div class="main">
-        <div style="z-index: 9999; height: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
-          <iframe id="settingsIframe" class="iframe-container"></iframe>
+}
 
-          <div class="sidebar">
-            <h1>Settings</h1>
+button:active{
+  transform: translateY(0px);
+}
 
-            <div class="button-container">
-              <button active="false" id="appearance">
-                <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z"/>
-                </svg>
-                Appearance
-              </button>
+[active="true"]{
+  background: linear-gradient(135deg, var(--primary-mid), var(--accent-color));
+  box-shadow: 0px 6px 25px var(--primary-mid);
+  border-color: var(--accent-color);
+}
 
-              <button active="false" id="proxy">
-                <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-                Proxy
-              </button>
+[active="true"]::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-mid));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+}
 
-              <button active="false" id="optimization">
-                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
-                </svg>
-                Optimization
-              </button>
-
-              <button active="false" id="cloaking">
-                <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
-                </svg>
-                Cloaking
-              </button>
-            </div>
+button svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+}
+</style>
+<body>
+  <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: 1000;" id="particles-js"></div>
+  <script src="/js/load-particles.js"></script>
+  <script src="/js/particles.min.js"></script>
+  <div class="content">
+    <div class="main">
+      <div style="z-index: 9999; height: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
+        <iframe id="settingsIframe" style="
+          flex-grow: 1;
+          margin: 25px;
+          border-radius: 25px;
+          background: linear-gradient(-135deg, var(--primary-dark), var(--primary-dark));
+          ">
+        </iframe>
+        <div style="
+            width: 280px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--accent-color);
+            ">
+          <h1 style="
+            font-size: 40px;
+            border-bottom: 2px solid var(--accent-color);
+            border-radius: 3px;
+            padding: 5px;
+            margin-bottom: 10px;
+            ">
+            Settings
+          </h1>
+          <div style="
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            overflow: visible;
+          ">
+            <div style="height: 15px;"></div>
+            <button active="false" id="appearance">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              <span>Appearance</span>
+            </button>
+            <button active="false" id="proxy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Proxy</span>
+            </button>
+            <button active="false" id="optimization">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Optimization</span>
+            </button>
+            <button active="false" id="cloaking">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+              <span>Cloaking</span>
+            </button>
+            <button active="false" id="themes">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+              <span>Themes</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+</body>
 </html>
