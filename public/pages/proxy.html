@@ -102,19 +102,19 @@
           </div>
         </li>
         <hr style="min-width: 1px" />
-        <div class="search-header" style="flex-grow: 1; margin-left: 8px; margin-right: 8px">
+        <div class="search-header" style="flex-grow: 1; margin-left: 8px; margin-right: 8px; position: relative; display: flex; align-items: center;">
           <input
             placeholder="Enter search or web address"
             class="search-header__input"
             id="proxy"
             type="text"
-            style="flex-grow: 1"
+            style="flex-grow: 1; padding-right: 40px;"
             form="topbar-form"
           />
           <div class="webSecurityIcon" title=""></div>
           <div 
             aria-label="search"
-            style="user-select: none; cursor: pointer; position: absolute; margin-left: 31em; margin-bottom: -8px;"
+            style="user-select: none; cursor: pointer; position: absolute; right: 8px; display: flex; align-items: center; justify-content: center; padding: 4px;"
             class="search-header__icon-container"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-header__icon">
@@ -238,7 +238,7 @@
 
       window.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('proxy');
-        const btn = document.querySelector('.search-header__icon-container'); // Fixed selector
+        const btn = document.querySelector('.search-header__icon-container');
         const frame = document.getElementById('uv-frame');
         const searchEngineInput = document.getElementById('uv-search-engine');
         const uvAddress = document.getElementById('uv-address');
