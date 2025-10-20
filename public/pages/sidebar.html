@@ -1,132 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidebar</title>
 <style>
-.sidebar {
-  border-right: 1px solid var(--accent-color);
-  width: var(--sidebar-size);
-  height: 100vh;
-  background-color: var(--background-light);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+
+:root {
+  --sidebar-width: 75px;
+  --bg-dark: #0a0a0f;
+  --bg-card: #1a1a24;
+  --accent-primary: #9333ea;
+  --accent-secondary: #ec4899;
+  --text-primary: #ffffff;
+  --text-muted: #a1a1aa;
+  --hover-bg: rgba(147, 51, 234, 0.1);
+  --border-color: rgba(147, 51, 234, 0.2);
 }
 
-.sidebar-cell {
-  transition: 0.2s;
-  border-radius: 10px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-dark);
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  width: 65px;
+  height: 65px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px;
-  width: calc(var(--sidebar-size) - 10px);
-  height: calc(var(--sidebar-size) - 10px);
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.sidebar-cell:hover {
-  background-color: var(--accent-color);
-}
-
-.sidebar-cell .small {
-  height: 60%;
-  width: 60%;
+.logo-container img {
+  width: 65px;
+  height: 65px;
   object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(147, 51, 234, 0.5));
+  transition: all 0.3s ease;
 }
 
-.sidebar-cell .expand {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
+.logo-container:hover img {
+  filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.8));
+  transform: rotate(180deg);
 }
 
-.dashed {
-  width: 70%;
-  border: 0.01px solid var(--accent-color);
-  font-size: 0;
+.nav-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  margin: 15px 0;
 }
 
-.svgimage, .svgimage *{
-  fill: var(--sidebar-icon-color,white); 
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
+.nav-item {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  background: transparent;
+}
+
+.nav-item img {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0) invert(1);
+}
+
+.nav-item:hover {
+  background: var(--hover-bg);
+}
+
+.nav-item:hover img {
+  transform: scale(1.4);
+  filter: brightness(0) saturate(100%) invert(28%) sepia(89%) saturate(6245%) hue-rotate(268deg) brightness(93%) contrast(92%) drop-shadow(0 0 8px rgba(147, 51, 234, 0.6));
+}
+
+.tooltip {
+  position: absolute;
+  left: calc(100% + 15px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--accent-primary);
+}
+
+.nav-item:hover .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.bottom-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
 
 </style>
+</head>
+<body>
 
+<nav class="sidebar">
 
-<div class="sidebar">
-   <div class="sidebar-cell">
-    <img class="expand" src="../images/saturn2.png" alt="Logo" />
-</div>      
+  <a href="/" class="logo-container">
+    <img src="../images/sat2.png" alt="Logo" />
+  </a>
 
+  <div class="nav-divider"></div>
 
-
-  <div class="dashed"></div>
-
-  <a href="/">
-    <div title="Home" class="sidebar-cell" id="home">
+  <div class="nav-group">
+    <a href="/" class="nav-item">
       <img class="small" src="../images/oldicons/home.svg" alt="Home" />
+      <span class="tooltip">Home</span>
+    </a>
 
-    </div>
-  </a>
-
-  <a href="/g.html">
-    <div title="Games" class="sidebar-cell" id="games">
-
+    <a href="/g.html" class="nav-item">
       <img class="small" src="../images/oldicons/games.svg" alt="Games" />
+      <span class="tooltip">Games</span>
+    </a>
 
-
-    </div>
-  </a>
-
-  <a href="/a.html">
-    <div title="Apps" class="sidebar-cell" id="apps">
-
+    <a href="/a.html" class="nav-item">
       <img class="small" src="../images/oldicons/apps.svg" alt="Apps" />
-
-
-    </div>
-  </a>
-
-  <a href="/p.html">
-    <div title="Search" class="sidebar-cell" id="search">
-
-      <img class="small" src="../images/oldicons/search.svg" alt="Search" />
-
-
-    </div>
-  </a>
-
-  <a href="/c.html">
-    <div title="Credits" class="sidebar-cell" id="credits">
-
-      <img class="small" src="../images/oldicons/credits.svg" alt="Credits" />
-
-    </div>
-  </a>
-
-  <div style="height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
-
-    <a target="_blank" href="/pages/github.html">
-      <div title="Github" class="sidebar-cell">
-
-        <img class="small" src="../images/oldicons/github.svg" alt="GitHub" />
-
-
-      </div>
+      <span class="tooltip">Apps</span>
     </a>
 
-    <a target="_blank" href="/pages/discord.html">
-      <div title="Discord" class="sidebar-cell">
-
-        <img class="small" src="../images/oldicons/discord.svg" alt="Discord" />
-
-
-      </div>
-    </a>
-
-    <div class="dashed"></div>
-
-    <a href="/s.html">
-      <div title="Settings" class="sidebar-cell" id="settings">
-        <img class="small" src="images/oldicons/settings.svg" alt="Settings" />
-      </div>
+    <a href="/t.html" class="nav-item">
+      <img class="small" src="../images/oldicons/ai.svg" alt="AI" />
+      <span class="tooltip">AI</span>
     </a>
   </div>
-</div>
+
+  <div class="nav-divider"></div>
+
+  <div class="nav-group">
+    <a href="/c.html" class="nav-item">
+      <img class="small" src="../images/oldicons/credits.svg" alt="Credits" />
+      <span class="tooltip">Credits</span>
+    </a>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="bottom-group">
+    <a href="/pages/github.html" target="_blank" class="nav-item">
+      <img class="small" src="../images/oldicons/github.svg" alt="GitHub" />
+      <span class="tooltip">GitHub</span>
+    </a>
+
+    <a href="/pages/discord.html" target="_blank" class="nav-item">
+      <img class="small" src="../images/oldicons/discord.svg" alt="Discord" />
+      <span class="tooltip">Discord</span>
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <a href="/s.html" class="nav-item">
+      <img class="small" src="../images/oldicons/settings.svg" alt="Settings" />
+      <span class="tooltip">Settings</span>
+    </a>
+  </div>
+</nav>
+
+</body>
+</html>

@@ -1,461 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="/js/common.js"></script>
-    <script src="/js/particles.min.js"></script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturn Proxy</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="/uv/uv.bundle.js" defer></script>
+    <script src="/uv/uv.config.js" defer></script>
+    <script src="/js/uv/register-sw.js" defer></script>
+    <script src="/js/uv/search.js" defer></script>
+    <script src="/js/uv/index.js" defer></script>
+    <link rel="stylesheet" href="../styles/search.css">
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div class="grain-overlay"></div>
+    
+    <div class="container" id="home-container">
+        <div class="hero-section">
+            <h1>
+                <span class="title-gradient">Saturn Proxy</span>
+            </h1>
+            
+            <p class="subtitle">
+              Enjoy Searching The Web Without No Setbacks
+            </p>
 
-html {
-  overflow: hidden;
-  background-color: var(--background-dark);
-}
+            <form id="uv-form" onsubmit="return false;">
+                <input
+                    id="uv-search-engine"
+                    value="https://duckduckgo.com/search?q=%s"
+                    type="hidden"
+                />
+                <input
+                    autocomplete="off"
+                    id="uv-address" 
+                    type="text" 
+                    placeholder="Search or Enter a Url"
+                />
+            </form>
 
-* {
-  margin: 0;
-  opacity: 1;
-  padding: 0;
-  border: 0;
-  font-family: 'Poppins', var(--font-family);
-  color: var(--font-color);
-}
+            <div class="desc">
+                <p id="uv-error"></p>
+                <pre id="uv-error-code"></pre>
+            </div>
 
-.content {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.content * {
-  animation-fill-mode: forwards;
-  opacity: 1;
-  animation-name: fadein;
-  animation-duration: 0.8s;
-}
-
-h1 {
-  text-shadow: 0px 0px 25px white;
-  font-size: 48px;
-  font-weight: 700;
-}
-
-.gradient {
-  text-shadow: 0px 0px 20px var(--accent-color);
-  background: -webkit-linear-gradient(45deg, var(--primary-light), var(--primary-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-:root {
-  --text-color: #e0e0e0;
-  --button-background-color: #8400ff;
-  --button-gradient-color: linear-gradient(-135deg, #673ab7, #8400ff);
-  --link-hover-color: #ffffff;
-  --dshadow1: rgba(0, 0, 0, 0.4);
-  --dshadow2: rgba(255, 255, 255, 0.1);
-}
-
-
-.main-button {
-	position: relative;
-	padding: 15px 25px;
-	border-radius: 50px;
-	border: none;
-	color: var(--text-color);
-	cursor: pointer;
-	background: var(--button-background-color);
-	background: var(--button-gradient-color);
-	transition: all 0.5s ease;
-	box-shadow:
-		14px 7px 30px -5px var(--dshadow1),
-		-15px -2px 30px -5px var(--dshadow2);
-	width: 180px;
-	min-width: 180px;
-	font-family: 'Poppins', var(--font-family);
-}
-
-.main-button:active {
-	transform: scale(0.95) !important;
-	transition: all 0.2s ease;
-}
-
-.main-button:before,
-.main-button:after {
-	position: absolute;
-	content: '';
-	width: 150%;
-	left: 50%;
-	height: 100%;
-	transform: translateX(-50%);
-	z-index: -1000;
-	background-repeat: no-repeat;
-}
-
-.main-button:hover {
-	width: 220px;
-}
-
-.main-button:hover:before {
-	top: -70%;
-	background-image: radial-gradient(
-			circle,
-			var(--link-hover-color) 20%,
-			transparent 20%
-		),
-		radial-gradient(
-			circle,
-			transparent 20%,
-			var(--link-hover-color) 20%,
-			transparent 30%
-		),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(
-			circle,
-			transparent 10%,
-			var(--link-hover-color) 15%,
-			transparent 20%
-		),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%);
-	background-size:
-		10% 10%,
-		20% 20%,
-		15% 15%,
-		20% 20%,
-		18% 18%,
-		10% 10%,
-		15% 15%,
-		10% 10%,
-		18% 18%;
-	background-position: 50% 120%;
-	animation: greentopBubbles 0.6s ease;
-}
-
-.main-button:hover::after {
-	bottom: -70%;
-	background-image: radial-gradient(
-			circle,
-			var(--link-hover-color) 20%,
-			transparent 20%
-		),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(
-			circle,
-			transparent 10%,
-			var(--link-hover-color) 15%,
-			transparent 20%
-		),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%),
-		radial-gradient(circle, var(--link-hover-color) 20%, transparent 20%);
-	background-size:
-		15% 15%,
-		20% 20%,
-		18% 18%,
-		20% 20%,
-		15% 15%,
-		20% 20%,
-		18% 18%;
-	background-position: 50% 0%;
-	animation: greenbottomBubbles 0.6s ease;
-}
-
-@keyframes greentopBubbles {
-	0% {
-		background-position:
-			5% 90%,
-			10% 90%,
-			10% 90%,
-			15% 90%,
-			25% 90%,
-			25% 90%,
-			40% 90%,
-			55% 90%,
-			70% 90%;
-	}
-
-	50% {
-		background-position:
-			0% 80%,
-			0% 20%,
-			10% 40%,
-			20% 0%,
-			30% 30%,
-			22% 50%,
-			50% 50%,
-			65% 20%,
-			90% 30%;
-	}
-
-	100% {
-		background-position:
-			0% 70%,
-			0% 10%,
-			10% 30%,
-			20% -10%,
-			30% 20%,
-			22% 40%,
-			50% 40%,
-			65% 10%,
-			90% 20%;
-		background-size:
-			0% 0%,
-			0% 0%,
-			0% 0%,
-			0% 0%,
-			0% 0%,
-			0% 0%;
-	}
-}
-
-@keyframes greenbottomBubbles {
-	0% {
-		background-position:
-			10% -10%,
-			30% 10%,
-			55% -10%,
-			70% -10%,
-			85% -10%,
-			70% -10%,
-			70% 0%;
-	}
-
-	50% {
-		background-position:
-			0% 80%,
-			20% 80%,
-			45% 60%,
-			60% 100%,
-			75% 70%,
-			95% 60%,
-			105% 0%;
-	}
-
-	100% {
-		background-position:
-			0% 90%,
-			20% 90%,
-			45% 70%,
-			60% 110%,
-			75% 80%,
-			95% 70%,
-			110% 10%;
-		background-size:
-			0% 0%,
-			0% 0%,
-			0% 0%,
-			0% 0%,
-			0% 0%,
-			0% 0%;
-	}
-}
-
-.static-text {
-  margin: 15px;
-  min-height: 24px;
-}
-
-.discord-widget {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.discord-widget iframe {
-  border: none;
-  border-radius: 12px;
-}
-
-.discord-toggle {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 10000 !important;
-  background: linear-gradient(135deg, #5865f2, #7289da) !important;
-  border: none !important;
-  border-radius: 50% !important;
-  width: 60px !important;
-  height: 60px !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 24px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: all 0.3s ease !important;
-  transform: none !important;
-}
-
-.discord-toggle:hover {
-  background: linear-gradient(135deg, #4752c4, #5865f2) !important;
-  box-shadow: 0 6px 25px rgba(88, 101, 242, 0.6) !important;
-  transform: scale(1.05) !important;
-  width: 60px !important;
-  height: 60px !important;
-}
-
-.discord-toggle:active {
-  transform: scale(0.95) !important;
-  transition: all 0.1s ease !important;
-}
-
-.discord-toggle.active {
-  display: none !important;
-}
-
-.discord-widget.hidden {
-  display: none;
-}
-
-
-.discord-close {
-  position: absolute !important;
-  top: 8px !important;
-  right: 8px !important;
-  background: rgba(0, 0, 0, 0.7) !important;
-  border: none !important;
-  border-radius: 50% !important;
-  width: 24px !important;
-  height: 24px !important;
-  cursor: pointer !important;
-  color: white !important;
-  font-size: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  z-index: 10001 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: all 0.2s ease !important;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.discord-close:hover {
-  background: rgba(0, 0, 0, 0.9) !important;
-  transform: scale(1.1) !important;
-  opacity: 1 !important;
-  width: 24px !important;
-  height: 24px !important;
-  box-shadow: none !important;
-}
-
-.discord-close:active {
-  transform: scale(0.9) !important;
-}
-
-.cursor {
-  display: inline-block;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-
-  </style>
-  <body>
-    <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: -6544530;" id="particles-js"></div>
-    <script src="/js/load-particles.js"></script>
-    <div class="content" style="z-index: 1000;">
-      <h1 id="typing-title" style="animation-delay: 0.3s;">
-      </h1>
-      <p class="static-text" style="animation-delay: 2s;">Enjoy Your Stay in Saturn proxy</p>
-      <div style="animation-delay: 1.5s; margin: 0px;">
-      </div>
+           
+            </div>
+        </div>
     </div>
 
-    <button class="discord-toggle" id="discordToggle" onclick="toggleDiscordWidget()">
-      <svg width="24" height="24" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
-      </svg>
-    </button>
+    <div class="proxy-container" id="proxy-container">
+        <div class="top-bar">
+            <div class="nav-controls">
+                <div class="nav-btn back-btn" title="Back">
+                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                </div>
+                <div class="nav-btn forward-btn" title="Forward">
+                    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+                <div class="nav-btn refresh-btn" title="Refresh">
+                    <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                </div>
+            </div>
 
-    <div class="discord-widget hidden" id="discordWidget">
-      <button class="discord-close" onclick="closeDiscordWidget()">×</button>
-      <iframe src="https://discord.com/widget?id=1418758435893153924&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            <div class="url-bar-container">
+                <input type="text" class="url-bar" id="proxy-url-bar" placeholder="Search or Enter a Url">
+            </div>
+
+            <div class="right-controls">
+                <div class="nav-btn home-btn-proxy" title="Home">
+                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </div>
+                <div class="nav-btn eruda-btn" title="Dev Tools">
+                    <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                </div>
+                <div class="nav-btn settings-btn" title="Settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17H5"/><path d="M19 7h-9"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-bar" id="tab-bar">
+            <div class="tabs-container" id="tabs-container"></div>
+            <button class="new-tab-btn" id="new-tab-btn" title="New Tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="iframe-wrapper" id="iframe-wrapper"></div>
     </div>
-   
-<script>
-function startTitleTypingEffect() {
-    const text = "Saturn Proxy";
-    const typingElement = document.getElementById('typing-title');
-    let i = 0;
-    
-    typingElement.innerHTML = '';
-    
-    function typeWriter() {
-        if (i < text.length) {
-            typingElement.innerHTML = text.substring(0, i + 1) + '<span class="cursor">|</span>';
-            i++;
-            setTimeout(typeWriter, 80); 
-        } else {
-            typingElement.innerHTML = text + ' <span class="gradient"></span>';
-        }
-    }
-    
-    setTimeout(typeWriter, 500);
-}
 
-function toggleDiscordWidget() {
-    const widget = document.getElementById('discordWidget');
-    const toggle = document.getElementById('discordToggle');
-    
-    widget.classList.remove('hidden');
-    toggle.classList.add('active');
-}
+    <script src="../js/canvas.js"></script>
 
-function closeDiscordWidget() {
-    const widget = document.getElementById('discordWidget');
-    const toggle = document.getElementById('discordToggle');
-    
-    widget.classList.add('hidden');
-    toggle.classList.remove('active');
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    startTitleTypingEffect();
-    
-    const konamiCode = [
-        "ArrowUp", "ArrowUp",
-        "ArrowDown", "ArrowDown",
-        "ArrowLeft", "ArrowRight",
-        "ArrowLeft", "ArrowRight",
-        "b", "a", "Enter"
-    ];
-    let inputSequence = [];
-         
-    document.addEventListener("keydown", (event) => {
-        inputSequence.push(event.key);
-        if (inputSequence.length > konamiCode.length) {
-            inputSequence.shift();
-        }
-                 
-        if (JSON.stringify(inputSequence) === JSON.stringify(konamiCode)) {
-            window.location.href = "/uihuih";
-        }
-    }); 
-});
-</script>
-</body>
-</html>
+    <script src="/baremux/index.js"></script>
+    <script src="/libcurl/index.js"></script>
+    <script src="/epoxy/index.js"></script>
+      <script src="../js/tab.js"></script>
+      

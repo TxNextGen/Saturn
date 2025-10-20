@@ -90,7 +90,7 @@ function loadMetaTags() {
 
   const metaTitle = document.createElement('meta');
   metaTitle.setAttribute('name', 'title');
-  metaTitle.setAttribute('content', 'Saturn Proxy - Universal Unblocker v3');
+  metaTitle.setAttribute('content', 'Saturn Proxy');
   document.head.appendChild(metaTitle);
 
   const metaDescription = document.createElement('meta');
@@ -117,7 +117,7 @@ function loadMetaTags() {
   metaLanguage.setAttribute('content', 'English');
   document.head.appendChild(metaLanguage);
 
-  // Open Graph
+
   const ogTitle = document.createElement('meta');
   ogTitle.setAttribute('property', 'og:title');
   ogTitle.setAttribute('content', 'Saturn Proxy');
@@ -130,7 +130,6 @@ function loadMetaTags() {
 
   const ogImage = document.createElement('meta');
   ogImage.setAttribute('property', 'og:image');
-  // Build absolute URL relative to current page so it works under subpaths
   ogImage.setAttribute('content', new URL('images/saturn1.png', location.href).href);
   document.head.appendChild(ogImage);
 
@@ -149,28 +148,6 @@ function loadMetaTags() {
   ogSiteName.setAttribute('content', 'Saturn Proxy');
   document.head.appendChild(ogSiteName);
 
-  // Twitter
-  const twitterCard = document.createElement('meta');
-  twitterCard.setAttribute('name', 'twitter:card');
-  twitterCard.setAttribute('content', 'summary_large_image');
-  document.head.appendChild(twitterCard);
-
-  const twitterTitle = document.createElement('meta');
-  twitterTitle.setAttribute('name', 'twitter:title');
-  twitterTitle.setAttribute('content', 'Saturn Proxy');
-  document.head.appendChild(twitterTitle);
-
-  const twitterDescription = document.createElement('meta');
-  twitterDescription.setAttribute('name', 'twitter:description');
-  twitterDescription.setAttribute('content', 'The best place to Access The Internet Freely And Access your favorite games with Saturn Proxy.');
-  document.head.appendChild(twitterDescription);
-
-  const twitterImage = document.createElement('meta');
-  twitterImage.setAttribute('name', 'twitter:image');
-  // Same fix as OG image
-  twitterImage.setAttribute('content', new URL('images/saturn1.png', location.href).href);
-  document.head.appendChild(twitterImage);
-
   const themeColor = document.createElement('meta');
   themeColor.setAttribute('name', 'theme-color');
   themeColor.setAttribute('content', '#8246BE');
@@ -178,11 +155,10 @@ function loadMetaTags() {
 }
 
 async function loadSideBar(){
-  // Do not inject sidebar on pages/ themselves
+
   if (!window.location.pathname.includes('pages')){
     try {
-      // Use relative path so it works on subpaths (e.g., /Saturn/ on GitHub Pages).
-      // Add cache busting and disable cache to avoid stale sidebar.
+  
       const resp = await fetch('pages/sidebar.html?v=4', { cache: 'no-store' });
       const text = await resp.text();
 
@@ -215,7 +191,7 @@ async function loadSideBar(){
           break;
       }
 
-      // Safely update logo src if element exists (and only on top-level pages as per original logic)
+
       if (!window.location.pathname.slice(1).includes('/')) {
         const logoEl = document.getElementById('logo');
         if (logoEl) {
@@ -224,7 +200,7 @@ async function loadSideBar(){
             if (custom.includes('https://')) {
               logoEl.src = custom;
             } else {
-              // Use relative path to support subpath deployments
+          
               logoEl.src = `images/logo/${custom}.png`;
             }
           } else {

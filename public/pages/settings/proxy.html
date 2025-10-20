@@ -1,64 +1,108 @@
 <!DOCTYPE html>
-<script src="/js/common.js"></script>
-<link rel="stylesheet" href="/index.css" />
-<link rel="stylesheet" href="/styles/loader.css">
-<link rel="stylesheet" href="/styles/template.css">
-<style>
-html{
-  overflow-y: scroll;
-  padding: 10px;
-}
-button{
-  background: var(--primary-mid);
-  margin: 10px;
-  padding: 15px;
-  padding-inline: 15px;
-  width: calc(100% - 20px);
-}
-</style>
-<h1>
-    Proxy
-</h1>
-<p>[Advanced] Tools for configuring the proxy</p>
-<p>(This defaults to using Libcurl)</p>
-<br>
-<h2>
-    Set the transport
-</h2>
-<p>
-    Set the transport the proxy uses. The current transport is <span style="font-weight: 600;" id="proxtrans">[unset]</span>.
-</p>
-<br>
-<button onclick="setConnection(1)">Epoxy</button>
-<button onclick="setConnection(2)">Libcurl</button>
-<script src="/baremux/index.js"></script>
-<script src="/libcurl/index.js"></script>
-<script src="/epoxy/index.js"></script>
-<script>
-let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
+<html lang="en">
+<head>
+    <script src="/js/common.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/styles/loader.css">
+    <link rel="stylesheet" href="/styles/template.css">
+    <style>
+        html {
+            overflow-y: scroll;
+            padding: 10px;
+        }
 
-function transportDisplay(){
-    if (localStorage.getItem('proxy-transport')){
-        document.getElementById('proxtrans').textContent = localStorage.getItem('proxy-transport')
-    }
-}
+        body {
+            background: transparent;
+            color: white;
+        }
 
-transportDisplay()
+        button {
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            margin: 10px 0;
+            padding: 15px;
+            width: 100%;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-async function setConnection(arg){
-    let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+            border-color: #9333ea;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        #proxtrans {
+            font-weight: 600;
+            color: #ec4899;
+        }
+    </style>
+</head>
+<body>
+    <h1>Proxy</h1>
+    <p>[Advanced] Tools for configuring the proxy</p>
+    <p>(This defaults to using Libcurl)</p>
+
+    <h2>Set the Transport</h2>
+    <p>Set the transport the proxy uses. The current transport is <span id="proxtrans">[unset]</span>.</p>
     
-    switch (arg){
-        case 1:
-            await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
-            localStorage.setItem('proxy-transport','Epoxy')
-            break;
-        case 2:
-            await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-            localStorage.setItem('proxy-transport','Libcurl')
-            break;
-    }
+    <button onclick="setConnection(1)">Epoxy</button>
+    <button onclick="setConnection(2)">Libcurl</button>
 
-    transportDisplay()
-}
-</script>
+    <script src="/baremux/index.js"></script>
+    <script src="/libcurl/index.js"></script>
+    <script src="/epoxy/index.js"></script>
+    <script>
+        let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
+
+        function transportDisplay() {
+            if (localStorage.getItem('proxy-transport')) {
+                document.getElementById('proxtrans').textContent = localStorage.getItem('proxy-transport')
+            }
+        }
+
+        transportDisplay()
+
+        async function setConnection(arg) {
+            let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+            
+            switch (arg) {
+                case 1:
+                    await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+                    localStorage.setItem('proxy-transport', 'Epoxy')
+                    break;
+                case 2:
+                    await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
+                    localStorage.setItem('proxy-transport', 'Libcurl')
+                    break;
+            }
+
+            transportDisplay()
+        }
+    </script>
+</body>
+</html>

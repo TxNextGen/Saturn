@@ -5,10 +5,10 @@
     <script src="/js/particles.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="/index.css" />
     <link rel="stylesheet" href="/styles/loader.css">
     <link rel="stylesheet" href="/styles/template.css">
-    <!-- Ultr@v!0l3t -->
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" content="favicon.ico" />
     <script src="/baremux/index.js" defer></script>
@@ -18,30 +18,39 @@
     <script src="/uv/uv.config.js" defer></script>
     <script src="/js/uv/register-sw.js" defer></script>
     <script src="/js/uv/search.js" defer></script>
-    <!-- Ultr@v!0l3t -->
   </head>
 <body>
-  <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: 1000;" id="particles-js"></div>
-  <script src="/js/load-particles.js"></script>
-  <script src="/js/particles.min.js"></script>
+   <div id="canvas-container"></div>
+    <div class="grain-overlay"></div>
+
+  <div id="particles-js"></div>
+  
   <div class="content">
     <div class="main">
-      <div id="preload" style="z-index: 9999; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;">
-        <div style="height: 30px;"></div>
-        <div class="container" style="margin-bottom: 25px;">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+      <div id="preload">
+        <div class="spinner-container">
+          <div class="spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+          </div>
+          <div class="loading-text-wrapper">
+            <span class="loading-letter">L</span>
+            <span class="loading-letter">O</span>
+            <span class="loading-letter">A</span>
+            <span class="loading-letter">D</span>
+            <span class="loading-letter">I</span>
+            <span class="loading-letter">N</span>
+            <span class="loading-letter">G</span>
+          </div>
         </div>
-        <h3>
-          Loading...
-        </h3>
       </div>
-      <div style="height: 100%; width: 100%; z-index: 329821398; border: 0; overflow: hidden;" id="frameHolder">
-
-      </div>
+      
+      <div id="frameHolder"></div>
+    </div>
   </div>
+
+  <script src="../js/canvas.js"></script>
 </body>
 <script>
 const qs = window.top.location.search;
@@ -51,11 +60,7 @@ let src = urlParams.get('src');
 let type = urlParams.get('type');
 let title = urlParams.get('title');
 
-
-
 document.getElementById('preload').remove();
-
-
 
 async function registerServiceWorker(url){
   let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
@@ -81,28 +86,45 @@ async function registerServiceWorker(url){
 }
 
 function createAndAppend(){
-
-  let topbar = document.createElement('div');
-  let rand = Math.random();
-  topbar.style = 'padding: 7.5px; padding-bottom: 0; display: flex; flex-direction: row;';
-
-  topbar.innerHTML = `
-  <div style="width: 5px;"></div>
-  <h2>${title}</h2>
-  <div style="margin-left: auto;">
-    <img onclick="window.open(loadGame(),'_blank')" src="/images/popout.png" style="height: 20px; width: 20px; border-radius: 15px; transition: 0.3s; padding: 5px;">
-    <img onclick="document.getElementById('objFrame').requestFullscreen()" src="/images/fullscreen.png" style="height: 20px; width: 20px; border-radius: 15px; transition: 0.3s; padding: 5px;"> 
-  </div>
-  `
+  let container = document.createElement('div');
+  container.className = 'iframe-container';
 
   let o = document.createElement('iframe');
-  o.setAttribute('id','objFrame')
-  o.setAttribute('class','objFrame')
-  o.setAttribute('allow','keyboard *')
-  o.setAttribute('src',loadGame())
+  o.setAttribute('id','objFrame');
+  o.setAttribute('class','objFrame');
+  o.setAttribute('allow','keyboard *');
+  o.setAttribute('src',loadGame());
 
-  document.getElementById('frameHolder').appendChild(topbar);
-  document.getElementById('frameHolder').appendChild(o);
+  let bottomBar = document.createElement('div');
+  bottomBar.className = 'bottom-bar';
+
+  let titleEl = document.createElement('div');
+  titleEl.className = 'bottom-title';
+  titleEl.textContent = title;
+
+  let buttonGroup = document.createElement('div');
+  buttonGroup.className = 'button-group';
+
+let popoutBtn = document.createElement('button');
+popoutBtn.className = 'frame-action-btn';
+popoutBtn.innerHTML = '<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+popoutBtn.onclick = function() { window.open(loadGame(),'_blank'); };
+
+let fullscreenBtn = document.createElement('button');
+fullscreenBtn.className = 'frame-action-btn';
+fullscreenBtn.innerHTML = '<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>';
+fullscreenBtn.onclick = function() { document.getElementById('objFrame').requestFullscreen(); };
+
+  buttonGroup.appendChild(popoutBtn);
+  buttonGroup.appendChild(fullscreenBtn);
+
+  bottomBar.appendChild(titleEl);
+  bottomBar.appendChild(buttonGroup);
+
+  container.appendChild(o);
+  container.appendChild(bottomBar);
+
+  document.getElementById('frameHolder').appendChild(container);
 }
 
 const xorEncode = {
@@ -120,8 +142,6 @@ const xorEncode = {
     }
 };
 
-
-
 function loadGame(){
   let returnValue
   if (type == 'html'){
@@ -138,8 +158,6 @@ function loadGame(){
   return returnValue;
 }
 
-
-
 function onPageLoad() {
   createAndAppend();
   if (type == 'proxy'){registerServiceWorker();}
@@ -150,10 +168,5 @@ if (document.readyState === 'loading') {
 } else {
   onPageLoad();
 }
-
-
 </script>
-
-
-
 </html>

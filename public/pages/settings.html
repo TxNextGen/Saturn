@@ -1,140 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="/js/common.js"></script>
-    <script src="/js/particles.min.js"></script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/index.css" />
-    <link rel="stylesheet" href="/styles/loader.css">
-    <link rel="stylesheet" href="/styles/template.css">
-    <script src="/js/settings.js"></script>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturn Proxy | Settings</title>
+    <style>
+        :root {
+            --sidebar-width: 75px;
+            --bg-dark: #0a0a0f;
+            --bg-card: #1a1a24;
+            --accent-primary: #9333ea;
+            --accent-secondary: #ec4899;
+            --text-primary: #ffffff;
+            --text-muted: #a1a1aa;
+            --hover-bg: rgba(147, 51, 234, 0.1);
+            --border-color: rgba(147, 51, 234, 0.2);
+        }
 
-  </head>
-<style>
-button{
-  width: calc(100% - 20px);
-  flex-grow: 1;
-  overflow: visible;
-  padding: 16px 20px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 8px 10px;
-  border-radius: 16px;
-  font-weight: 600;
-  font-size: 15px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-  background: var(--primary-dark);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  position: relative;
-  cursor: pointer;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-button:hover{
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 25px var(--primary-mid);
-  border-color: var(--accent-color);
+   
+        body::-webkit-scrollbar,
+        .content::-webkit-scrollbar,
+        .settings-container::-webkit-scrollbar,
+        #settings-frame::-webkit-scrollbar {
+            display: none;
+        }
 
-}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
 
-button:active{
-  transform: translateY(0px);
-}
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
-[active="true"]{
-  background: linear-gradient(135deg, var(--primary-mid), var(--accent-color));
-  box-shadow: 0px 6px 25px var(--primary-mid);
-  border-color: var(--accent-color);
-}
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
 
-[active="true"]::before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 16px;
-  padding: 2px;
-  background: linear-gradient(135deg, var(--accent-color), var(--primary-mid));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.5;
-}
+        .content {
+            position: relative;
+            z-index: 2;
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            min-height: 100vh;
+        }
 
-button svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 2.5;
-  flex-shrink: 0;
-}
-</style>
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .gradient {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .tab-btn {
+            padding: 15px 35px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tab-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        .tab-btn:hover::before {
+            opacity: 0.1;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-color: transparent;
+            box-shadow: 0 10px 40px rgba(147, 51, 234, 0.4);
+        }
+
+        /* Remove tab-content styles as content is on separate pages */
+
+        /* Settings Container */
+        .settings-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #settings-frame {
+            width: 100%;
+            min-height: 600px;
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* Setting Card */
+        .setting-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .setting-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .setting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .setting-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .setting-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: #374151;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            left: 4px;
+            top: 4px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(30px);
+        }
+
+        /* Select Dropdown */
+        .select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--text-muted);
+        }
+
+        .select-wrapper select:hover,
+        .select-wrapper select:focus {
+            border-color: var(--accent-primary);
+            background: rgba(147, 51, 234, 0.1);
+            outline: none;
+        }
+
+        /* Input Field */
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:hover,
+        .input-field:focus {
+            border-color: var(--accent-primary);
+            background: rgba(147, 51, 234, 0.1);
+            outline: none;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 15px 30px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-color: transparent;
+            color: white;
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .action-btn.secondary:hover {
+            background: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        /* Version Info */
+        .version-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            z-index: 100;
+        }
+
+       
+    </style>
+</head>
 <body>
-  <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: 1000;" id="particles-js"></div>
-  <script src="/js/load-particles.js"></script>
-  <script src="/js/particles.min.js"></script>
-  <div class="content">
-    <div class="main">
-      <div style="z-index: 9999; height: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
-        <iframe id="settingsIframe" style="
-          flex-grow: 1;
-          margin: 25px;
-          border-radius: 25px;
-          background: linear-gradient(-135deg, var(--primary-dark), var(--primary-dark));
-          ">
-        </iframe>
-        <div style="
-            width: 280px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid var(--accent-color);
-            ">
-          <h1 style="
-            font-size: 40px;
-            border-bottom: 2px solid var(--accent-color);
-            border-radius: 3px;
-            padding: 5px;
-            margin-bottom: 10px;
-            ">
-            Settings
-          </h1>
-          <div style="
-            flex: 0.8;
-            display: flex;
-            flex-direction: column;
-            overflow: visible;
-          ">
-            <div style="height: 15px;"></div>
-            <button active="false" id="appearance">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
-              <span>Appearance</span>
-            </button>
-            <button active="false" id="proxy">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Proxy</span>
-            </button>
-            <button active="false" id="optimization">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              <span>Optimization</span>
-            </button>
-            <button active="false" id="cloaking">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
-              <span>Cloaking</span>
-            </button>
-            <button active="false" id="themes">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-              <span>Themes</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div id="canvas-container"></div>
+    <div class="grain-overlay"></div>
 
+    <div class="content">
+        <h1>Settings <span class="gradient"></h1>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-page="about"><span>About</span></button>
+            <button class="tab-btn" data-page="Themes"><span>Themes</span></button>
+            <button class="tab-btn" data-page="cloaking"><span>Cloaking</span></button>
+            <button class="tab-btn" data-page="proxy"><span>Proxy</span></button>
+        </div>
+
+        <!-- Settings Container -->
+        <div class="settings-container">
+            <iframe id="settings-frame" src="/pages/settings/about.html" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div class="version-info">Saturn Proxy</div>
+
+    <script>
+        // Tab Switching with iframe
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const settingsFrame = document.getElementById('settings-frame');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const page = btn.getAttribute('data-page');
+                
+                // Remove active class from all buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Load the corresponding page in iframe from /pages/settings/ directory
+                settingsFrame.src = `/pages/settings/${page}.html`;
+            });
+        });
+    </script>
+
+
+   <script src="../js/canvas.js"></script>
 </body>
 </html>

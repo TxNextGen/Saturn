@@ -10,13 +10,12 @@ html {
     opacity: 1;
     padding: 0;
     border: 0;
-     font-family: 'Poppins', var(--font-family);
+    font-family: 'Poppins', var(--font-family);
     color: var(--font-color);
 }
   
 #uv-address {
     background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
-    box-shadow: 0px 0px 10px var(--primary-mid);
     height: 50px;
     width: 50%;
     padding-left: 10px;
@@ -46,7 +45,6 @@ img {
     font-weight: bold;
     height: 100px;
     width: 100px;
-    box-shadow: 0px 0px 15px var(--primary-mid);
 }
 
 img:hover {
@@ -55,99 +53,107 @@ img:hover {
 }
 
 
-    .footer {   
-     position: fixed;   
-     left: 0;   
-     bottom: 0;   
-     width: 100%;   
-     color: white;   
-     text-align: left;   
-     z-index: 100000000;
-     padding-left: 20px;
-    }
+.footer {   
+ position: fixed;   
+ left: 0;   
+ bottom: 0;   
+ width: 100%;   
+ color: white;   
+ text-align: left;   
+ z-index: 100000000;
+ padding-left: 20px;
+}
 
-    .utilityBar {
-        position: relative;
-    }
+.utilityBar {
+    position: relative;
+}
 
-    .utility {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        background-color: var(--background-light);
-        height: 50px;
-        padding: 0 15px;
-    }
+.utility {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-light);
+    height: 50px;
+    padding: 0 15px;
+}
 
-    .utility li {
-        margin-right: 10px;
-    }
+.utility li {
+    margin-right: 10px;
+}
 
-    .utilityIcon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
+.utilityIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
 
-    .utilityIcon:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
+.utilityIcon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-    .utilityIcon svg {
-        width: 20px;
-        height: 20px;
-        fill: #fff;
-    }
+.utilityIcon svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
 
-    .search-header {
-        display: flex;
-        align-items: center;
-        background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
-        border-radius: 20px;
-        padding: 8px 15px;
-        position: relative;
-    }
+/* Rotating effect only for refresh button */
+.refreshButton svg {
+    transition: transform 0.5s ease;
+}
 
-    .search-header__input {
-        background: transparent;
-        border: none;
-        outline: none;
-        color: #fff;
-        font-size: 14px;
-        width: 100%;
-        padding-right: 30px;
-    }
+.refreshButton:hover svg {
+    transform: rotate(360deg);
+}
 
-    .search-header__input::placeholder {
-        color: #ffffff;
-    }
+.search-header {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(-135deg, var(--primary-mid), var(--primary-dark));
+    border-radius: 15px;
+    padding: 8px 15px;
+    position: relative;
+}
 
-    .search-header__button {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        position: absolute;
-        right: 10px;
-    }
+.search-header__input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    width: 100%;
+    padding-right: 30px;
+}
 
-    .webSecurityIcon {
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-    }
+.search-header__input::placeholder {
+    color: #ffffff;
+}
 
-    hr {
-        border: none;
-        border-left: 1px solid #444;
-        height: 30px;
-        margin: 0 10px;
-    }
+.search-header__button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+}
 
+.webSecurityIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+hr {
+    border: none;
+    border-left: 1px solid #444;
+    height: 30px;
+    margin: 0 10px;
+}
