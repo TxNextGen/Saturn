@@ -261,7 +261,7 @@
         align-items: center;
     }
 
-    /* Tab Bar */
+/* Tab Bar */
     .tab-bar {
         display: flex;
         align-items: center;
@@ -275,16 +275,15 @@
     .tabs-container {
         display: flex;
         gap: 5px;
-        flex: 1;
         overflow-x: auto;
         overflow-y: hidden;
         scrollbar-width: none;
+        flex-shrink: 1;
     }
 
     .tabs-container::-webkit-scrollbar {
         display: none;
     }
-
     .tab {
         display: flex;
         align-items: center;

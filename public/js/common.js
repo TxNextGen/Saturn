@@ -34,7 +34,7 @@ function loadCloak(){
   favicon.rel = 'icon';
   favicon.href = localStorage.getItem('custom-favicon')
     ? localStorage.getItem('custom-favicon')
-    : new URL('images/saturn1.png', location.href).href;
+  : new URL('images/sater1.png', location.href).href;
   document.head.appendChild(favicon);
 }
 
