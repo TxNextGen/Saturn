@@ -138,8 +138,6 @@
             box-shadow: 0 10px 40px rgba(147, 51, 234, 0.4);
         }
 
-        /* Remove tab-content styles as content is on separate pages */
-
         /* Settings Container */
         .settings-container {
             max-width: 1200px;
@@ -342,7 +340,16 @@
             z-index: 100;
         }
 
-       
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -350,12 +357,12 @@
     <div class="grain-overlay"></div>
 
     <div class="content">
-        <h1>Settings <span class="gradient"></h1>
+        <h1>Settings <span class="gradient"></span></h1>
 
         <!-- Tab Navigation -->
         <div class="tab-navigation">
             <button class="tab-btn active" data-page="about"><span>About</span></button>
-            <button class="tab-btn" data-page="Themes"><span>themes</span></button>
+            <button class="tab-btn" data-page="themes"><span>Themes</span></button>
             <button class="tab-btn" data-page="cloaking"><span>Cloaking</span></button>
             <button class="tab-btn" data-page="proxy"><span>Proxy</span></button>
         </div>
@@ -389,7 +396,6 @@
         });
     </script>
 
-
-   <script src="../js/canvas.js"></script>
+    <script src="../js/canvas.js"></script>
 </body>
 </html>
