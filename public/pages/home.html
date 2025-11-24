@@ -44,13 +44,22 @@
                 <p id="uv-error"></p>
                 <pre id="uv-error-code"></pre>
             </div>
-
-           
-            </div>
         </div>
     </div>
 
     <div class="proxy-container" id="proxy-container">
+        <!-- Tabs at the top -->
+        <div class="tab-bar" id="tab-bar">
+            <div class="tabs-container" id="tabs-container"></div>
+            <button class="new-tab-btn" id="new-tab-btn" title="New Tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Navigation bar below tabs -->
         <div class="top-bar">
             <div class="nav-controls">
                 <div class="nav-btn back-btn" title="Back">
@@ -81,23 +90,14 @@
             </div>
         </div>
 
-        <div class="tab-bar" id="tab-bar">
-            <div class="tabs-container" id="tabs-container"></div>
-            <button class="new-tab-btn" id="new-tab-btn" title="New Tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-            </button>
-        </div>
-
         <div class="iframe-wrapper" id="iframe-wrapper"></div>
     </div>
 
     <script src="../js/canvas.js"></script>
-
+        <script src="../js/settings.js"></script>
     <script src="/baremux/index.js"></script>
     <script src="/libcurl/index.js"></script>
     <script src="/epoxy/index.js"></script>
-      <script src="../js/tab.js"></script>
-      
+    <script src="../js/tab.js"></script>
+</body>
+</html>

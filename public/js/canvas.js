@@ -1,105 +1,154 @@
+let scene, camera, renderer, planetGroup, stars;
 
-        let scene, camera, renderer, particles;
+function init() {
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.set(0, 15, 80);
+    camera.lookAt(0, 0, 0);
 
-        function init() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 50;
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    const container = document.getElementById('canvas-container');
+    if (container) {
+        container.appendChild(renderer.domElement);
+    }
 
-            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
+    // Create starfield
+    const starGeo = new THREE.BufferGeometry();
+    const starCount = 3000;
+    const starPos = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
 
-          
-            const geometry = new THREE.BufferGeometry();
-            const particleCount = 1000;
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
+    for (let i = 0; i < starCount * 3; i += 3) {
+        const radius = 500 + Math.random() * 500;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
+        
+        starPos[i] = radius * Math.sin(phi) * Math.cos(theta);
+        starPos[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+        starPos[i + 2] = radius * Math.cos(phi);
 
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                positions[i] = (Math.random() - 0.5) * 200;
-                positions[i + 1] = (Math.random() - 0.5) * 200;
-                positions[i + 2] = (Math.random() - 0.5) * 200;
-
-              
-                const colorChoice = Math.random();
-                if (colorChoice < 0.5) {
-                    colors[i] = 0.58;     
-                    colors[i + 1] = 0.2;  
-                    colors[i + 2] = 0.92; 
-                } else {
-                    colors[i] = 0.93;     
-                    colors[i + 1] = 0.28; 
-                    colors[i + 2] = 0.6;  
-                }
-            }
-
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: 2,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.6,
-                blending: THREE.AdditiveBlending
-            });
-
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            animate();
+        const col = Math.random();
+        if (col < 0.3) {
+            starColors[i] = 0.58; starColors[i + 1] = 0.2; starColors[i + 2] = 0.92;
+        } else if (col < 0.6) {
+            starColors[i] = 0.93; starColors[i + 1] = 0.28; starColors[i + 2] = 0.6;
+        } else {
+            starColors[i] = 1; starColors[i + 1] = 1; starColors[i + 2] = 1;
         }
+    }
 
-        function animate() {
-            requestAnimationFrame(animate);
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
 
-            particles.rotation.x += 0.0002;
-            particles.rotation.y += 0.0003;
+    const starMat = new THREE.PointsMaterial({
+        size: 1.5,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8
+    });
 
-            const positions = particles.geometry.attributes.position.array;
-            for (let i = 1; i < positions.length; i += 3) {
-                positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.01;
-            }
-            particles.geometry.attributes.position.needsUpdate = true;
+    stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
 
-            renderer.render(scene, camera);
-        }
+    // Create planet group
+    planetGroup = new THREE.Group();
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+    // Saturn planet
+    const planetGeo = new THREE.SphereGeometry(15, 64, 64);
+    const planetMat = new THREE.MeshBasicMaterial({
+        color: 0x9333ea,
+        transparent: true,
+        opacity: 0.9
+    });
+    const planet = new THREE.Mesh(planetGeo, planetMat);
+    planetGroup.add(planet);
+
+    // Create multiple ring layers
+    for (let i = 0; i < 5; i++) {
+        const innerRad = 20 + i * 3;
+        const outerRad = 23 + i * 3;
+        const ringGeo = new THREE.RingGeometry(innerRad, outerRad, 128);
+        
+        const color = i % 2 === 0 ? 0xec4899 : 0xa855f7;
+        const ringMat = new THREE.MeshBasicMaterial({
+            color: color,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.4 - i * 0.05
         });
+        
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2.2;
+        planetGroup.add(ring);
+    }
 
-     
-        const konamiCode = [
-            "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
-            "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
-            "b", "a", "Enter"
-        ];
-        let inputSequence = [];
+    planetGroup.position.set(-50, -25, -60);
+    scene.add(planetGroup);
 
-        document.addEventListener("keydown", (event) => {
-            inputSequence.push(event.key);
-            if (inputSequence.length > konamiCode.length) {
-                inputSequence.shift();
-            }
-            if (JSON.stringify(inputSequence) === JSON.stringify(konamiCode)) {
-                window.location.href = "/uihuih";
-            }
-        });
+    animate();
+}
 
-  
-        document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-            
-            if (particles) {
-                particles.rotation.x = moveY * 0.05;
-                particles.rotation.y = moveX * 0.05;
-            }
-        });
+function animate() {
+    requestAnimationFrame(animate);
 
-        init();
+    const time = Date.now() * 0.0003;
+    
+    if (planetGroup) {
+        // Orbit the planet around the scene
+        planetGroup.position.x = Math.cos(time) * 60 - 20;
+        planetGroup.position.y = Math.sin(time * 0.7) * 30 - 10;
+        planetGroup.position.z = Math.sin(time) * 50 - 40;
+        
+        planetGroup.rotation.y += 0.001;
+    }
+    
+    if (stars) {
+        stars.rotation.y += 0.0001;
+        stars.rotation.x += 0.00005;
+    }
+
+    if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+    }
+}
+
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth / 2) * 0.00005;
+    mouseY = (e.clientY - window.innerHeight / 2) * 0.00005;
+    
+    if (camera) {
+        camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
+        camera.position.y += (mouseY * -10 - camera.position.y) * 0.05;
+        camera.lookAt(0, 0, 0);
+    }
+});
+
+window.addEventListener('resize', () => {
+    if (camera && renderer) {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+});
+
+const konamiCode = [
+    "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+    "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
+    "b", "a", "Enter"
+];
+let inputSequence = [];
+
+document.addEventListener("keydown", (event) => {
+    inputSequence.push(event.key);
+    if (inputSequence.length > konamiCode.length) {
+        inputSequence.shift();
+    }
+    if (JSON.stringify(inputSequence) === JSON.stringify(konamiCode)) {
+        window.location.href = "/uihuih";
+    }
+});
+
+init();
