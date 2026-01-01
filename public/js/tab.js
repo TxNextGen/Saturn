@@ -19,7 +19,7 @@ if (!localStorage.getItem('proxy-transport')){
     if (localStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
 }
 
-// Tab Management
+
 let tabs = [];
 let activeTabId = null;
 let tabIdCounter = 0;
@@ -61,7 +61,7 @@ function createTab(url = null) {
             renderTabs();
             updateUrlBar();
         } catch (e) {
-            // Cross-origin
+           
         }
     });
     
@@ -271,7 +271,7 @@ window.addEventListener('DOMContentLoaded', () => {
         createTab();
     });
 
-    // Navigation controls
+    
     document.querySelector('.back-btn').addEventListener('click', () => {
         const iframe = getActiveIframe();
         if (iframe) {
