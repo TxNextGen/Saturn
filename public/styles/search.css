@@ -346,13 +346,10 @@ h1 {
     width: 18px;
     height: 18px;
     fill: #fff;
-}
-
-.refresh-btn svg {
     transition: transform 0.5s ease;
 }
 
-.refresh-btn:active svg {
+.refresh-btn:hover svg {
     transform: rotate(360deg);
 }
 

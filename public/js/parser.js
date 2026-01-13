@@ -77,7 +77,7 @@ function createElements() {
         align-items: center;
         flex-direction: column;
         margin-bottom: 3rem;
-        padding: 0;
+        padding: 0 2rem;
     }
 
     .searchBar {
@@ -86,14 +86,18 @@ function createElements() {
         border: 1px solid rgba(147, 51, 234, 0.3);
         box-shadow: 0 8px 32px rgba(147, 51, 234, 0.15);
         height: 60px;
-        width: 60%;
-        max-width: 100%;
+        width: 700px;
+        min-width: 700px;
+        max-width: 700px;
         padding: 0 24px;
         border-radius: 15px;
         font-size: 16px;
         color: #ffffff;
         font-family: 'Inter', sans-serif;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-sizing: border-box;
     }
 
     .searchBar::placeholder {
@@ -105,6 +109,9 @@ function createElements() {
         border-color: rgba(147, 51, 234, 0.6);
         box-shadow: 0 12px 40px rgba(147, 51, 234, 0.25);
         background: rgba(26, 26, 36, 0.95);
+        width: 700px;
+        min-width: 700px;
+        max-width: 700px;
     }
 
     #validsearch {
@@ -112,6 +119,7 @@ function createElements() {
         color: #a1a1aa;
         font-size: 14px;
         font-weight: 400;
+        text-align: center;
     }
 
     #validsearch span {
@@ -124,7 +132,7 @@ function createElements() {
         flex-wrap: wrap;
         gap: 2rem;
         width: 100%;
-        padding: 0 0rem;
+        padding: 0 2rem;
         justify-content: center;
     }
 
@@ -136,14 +144,16 @@ function createElements() {
     border-radius: 15px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1), 
+                box-shadow 0.5s cubic-bezier(0.34, 1.45, 0.64, 1),
+                border-color 0.3s ease;
     width: 160px;
     height: 160px;
     flex-shrink: 0;
     display: flex;
     align-items: flex-end;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    margin-top:60px;
+    margin-top: 60px;
 }
 
 .objHolder::before {
@@ -153,21 +163,24 @@ function createElements() {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(236, 72, 153, 0.1));
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(236, 72, 153, 0.15));
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
     z-index: 1;
 }
 
 .objHolder:hover {
-    transform: scale(1.15);
-    border-color: rgba(147, 51, 234, 0.5);
-    box-shadow: 0 20px 60px rgba(147, 51, 234, 0.3), 0 0 0 1px rgba(147, 51, 234, 0.2);
+    transform: translateY(-25px);
+    border-color: rgba(147, 51, 234, 0.6);
+    box-shadow: 0 35px 80px rgba(147, 51, 234, 0.45), 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(147, 51, 234, 0.4);
 }
 
 .objHolder:hover::before {
     opacity: 1;
 }
+
     .objImg {
         position: absolute;
         top: 0;
@@ -175,6 +188,11 @@ function createElements() {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1);
+    }
+
+    .objHolder:hover .objImg {
+        transform: scale(1.08);
     }
 
     .titleHolder {
@@ -214,10 +232,24 @@ function createElements() {
 
         .searchContainer {
             margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .searchBar {
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .searchBar:focus {
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
         }
 
         .gameCardsGrid {
             gap: 2rem;
+            padding: 0 1rem;
         }
 
         .objHolder {
