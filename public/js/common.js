@@ -1,14 +1,4 @@
-document.head.appendChild(
-  Object.assign(document.createElement('script'), {
-    async: true,
-    src: 'https://www.googletagmanager.com/gtag/js?id=G-FG22JV74V5'
-  })
-).onload = () => {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-FG22JV74V5');
-};
+
 
 if (!localStorage.getItem('particles-enabled')){
   localStorage.setItem('particles-enabled', true);
