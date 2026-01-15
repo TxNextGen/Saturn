@@ -179,9 +179,8 @@
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: #ec4899;
+            border-color: #a855f7;
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
         }
 
         input::placeholder, textarea::placeholder {
@@ -198,22 +197,8 @@
         }
 
         .highlight {
-            color: #ec4899;
+            color: #a855f7;
             font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 60px 20px 20px 80px;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-
-            .button-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -224,15 +209,13 @@
     <div class="content">
         <h1>Settings</h1>
 
-        <!-- Tab Navigation -->
         <div class="tab-navigation">
-            <button class="tab-btn active" onclick="switchTab('themes')">Themes</button>
-            <button class="tab-btn" onclick="switchTab('cloaking')">Cloaking</button>
-            <button class="tab-btn" onclick="switchTab('proxy')">Proxy</button>
-            <button class="tab-btn" onclick="switchTab('appearance')">Appearance</button>
+            <button class="tab-btn" onclick="switchTab('themes', this)">Themes</button>
+            <button class="tab-btn" onclick="switchTab('cloaking', this)">Cloaking</button>
+            <button class="tab-btn" onclick="switchTab('proxy', this)">Proxy</button>
+            <button class="tab-btn" onclick="switchTab('appearance', this)">Appearance</button>
         </div>
 
-        <!-- Themes Section -->
         <div id="themes" class="settings-section active">
             <div class="setting-card">
                 <h2>Premade Themes</h2>
@@ -260,7 +243,6 @@
             </div>
         </div>
 
-        <!-- Cloaking Section -->
         <div id="cloaking" class="settings-section">
             <div class="setting-card">
                 <h2>Premade Cloaks</h2>
@@ -295,7 +277,6 @@
             </div>
         </div>
 
-        <!-- Proxy Section -->
         <div id="proxy" class="settings-section">
             <div class="setting-card">
                 <h2>Proxy Transport</h2>
@@ -305,17 +286,32 @@
                     <button onclick="setConnection(2)">Libcurl Transport</button>
                 </div>
             </div>
+
+            <div class="setting-card">
+                <h2>Search Engine</h2>
+                <p>Choose your preferred search engine for the proxy. Current engine: <span class="highlight" id="search-engine-display">[Loading...]</span></p>
+                <div class="button-grid">
+                    <button onclick="setSearchEngine('duckduckgo')">DuckDuckGo</button>
+                    <button onclick="setSearchEngine('google')">Google</button>
+                    <button onclick="setSearchEngine('brave')">Brave</button>
+                    <button onclick="setSearchEngine('bing')">Bing</button>
+                </div>
+            </div>
+
+            <div class="setting-card">
+                <h2>Tab System</h2>
+                <p>Enable or disable the multi tab browsing feature. When disabled, the proxy will use a iframe interface. Status: <span class="highlight" id="tab-system-status">[Loading...]</span></p>
+                <div class="button-grid">
+                    <button onclick="enableTabSystem()">Enable Tab System</button>
+                    <button onclick="disableTabSystem()">Disable Tab System</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Appearance Section -->
         <div id="appearance" class="settings-section">
             <div class="setting-card">
-                <h2>Loading Screen</h2>
-                <p>Choose whether to show a loading screen when Saturn Proxy starts</p>
-                <div class="button-grid">
-                    <button onclick="setLoadingScreen('true')">Enable Loading Screen</button>
-                    <button onclick="setLoadingScreen('false')">Disable Loading Screen</button>
-                </div>
+                <h2>Appearance Settings</h2>
+                <p>More appearance options coming soon!</p>
             </div>
         </div>
     </div>

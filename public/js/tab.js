@@ -4,26 +4,93 @@ async function setConnection(arg){
     switch (arg){
         case 1:
             await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
-            localStorage.setItem('proxy-transport','Epoxy');
+            sessionStorage.setItem('proxy-transport','Epoxy');
             break;
         case 2:
             await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-            localStorage.setItem('proxy-transport','Libcurl');
+            sessionStorage.setItem('proxy-transport','Libcurl');
             break;
     }
 }
-if (!localStorage.getItem('proxy-transport')){
+if (!sessionStorage.getItem('proxy-transport')){
     setConnection(1);
 } else {
-    if (localStorage.getItem('proxy-transport') === "Epoxy") setConnection(1);
-    if (localStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
+    if (sessionStorage.getItem('proxy-transport') === "Epoxy") setConnection(1);
+    if (sessionStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
 }
 
+// Initialize default search engine if not set
+if (!sessionStorage.getItem('search-engine')) {
+    sessionStorage.setItem('search-engine', 'DuckDuckGo');
+    sessionStorage.setItem('search-engine-url', 'https://duckduckgo.com/?q=%s');
+}
+
+// Initialize tab system default
+if (!sessionStorage.getItem('tab-system-enabled')) {
+    sessionStorage.setItem('tab-system-enabled', 'true');
+}
 
 let tabs = [];
 let activeTabId = null;
 let tabIdCounter = 0;
 let erudaLoaded = false;
+
+function isTabSystemEnabled() {
+    return sessionStorage.getItem('tab-system-enabled') !== 'false';
+}
+
+function updateProxyUIVisibility() {
+    const tabSystemEnabled = isTabSystemEnabled();
+    const proxyContainer = document.getElementById('proxy-container');
+    
+    if (!proxyContainer) return;
+    
+    // Get all UI elements
+    const tabBar = document.getElementById('tab-bar');
+    const topBar = document.querySelector('.top-bar');
+    const newTabBtn = document.getElementById('new-tab-btn');
+    const iframeWrapper = document.getElementById('iframe-wrapper');
+    
+    if (tabSystemEnabled) {
+        // Show all UI elements
+        if (tabBar) tabBar.style.display = 'flex';
+        if (topBar) topBar.style.display = 'flex';
+        if (newTabBtn) newTabBtn.style.display = 'block';
+        
+        // Reset proxy container
+        proxyContainer.style.paddingTop = '';
+        proxyContainer.style.marginTop = '';
+        
+        // Reset iframe wrapper to normal
+        if (iframeWrapper) {
+            iframeWrapper.style.position = '';
+            iframeWrapper.style.top = '';
+            iframeWrapper.style.left = '';
+            iframeWrapper.style.width = '';
+            iframeWrapper.style.height = '';
+            iframeWrapper.style.zIndex = '';
+        }
+    } else {
+        // Hide all UI elements
+        if (tabBar) tabBar.style.display = 'none';
+        if (topBar) topBar.style.display = 'none';
+        if (newTabBtn) newTabBtn.style.display = 'none';
+        
+        // Remove padding/margin from proxy container to eliminate black bar
+        proxyContainer.style.paddingTop = '0';
+        proxyContainer.style.marginTop = '0';
+        
+        // Expand iframe to fill entire content area (top to bottom, respecting sidebar)
+        if (iframeWrapper) {
+            iframeWrapper.style.position = 'fixed';
+            iframeWrapper.style.top = '0';
+            iframeWrapper.style.left = '60px';
+            iframeWrapper.style.width = 'calc(100vw - 60px)';
+            iframeWrapper.style.height = '100vh';
+            iframeWrapper.style.zIndex = '1000';
+        }
+    }
+}
 
 function createTab(url = null) {
     const tabId = `tab-${tabIdCounter++}`;
@@ -50,7 +117,10 @@ function createTab(url = null) {
     };
     
     tabs.push(tab);
-    renderTabs();
+    
+    if (isTabSystemEnabled()) {
+        renderTabs();
+    }
     switchToTab(tabId);
     
     iframe.addEventListener('load', () => {
@@ -58,7 +128,9 @@ function createTab(url = null) {
             const title = iframe.contentDocument?.title || new URL(url || '').hostname || 'New Tab';
             tab.title = title;
             tab.url = url;
-            renderTabs();
+            if (isTabSystemEnabled()) {
+                renderTabs();
+            }
             updateUrlBar();
         } catch (e) {
            
@@ -82,7 +154,9 @@ function closeTab(tabId) {
         switchToTab(tabs[Math.max(0, index - 1)].id);
     }
     
-    renderTabs();
+    if (isTabSystemEnabled()) {
+        renderTabs();
+    }
 }
 
 function switchToTab(tabId) {
@@ -94,7 +168,9 @@ function switchToTab(tabId) {
             tab.container.classList.remove('active');
         }
     });
-    renderTabs();
+    if (isTabSystemEnabled()) {
+        renderTabs();
+    }
     updateUrlBar();
 }
 
@@ -108,6 +184,16 @@ function updateUrlBar() {
 
 function renderTabs() {
     const container = document.getElementById('tabs-container');
+    if (!container) return;
+    
+    // Hide/show tabs container based on setting
+    if (!isTabSystemEnabled()) {
+        container.style.display = 'none';
+        return;
+    } else {
+        container.style.display = 'flex';
+    }
+    
     container.innerHTML = '';
     
     tabs.forEach(tab => {
@@ -153,6 +239,9 @@ function showHome() {
 function hideHome() {
     document.getElementById('home-container').classList.add('hidden');
     document.getElementById('proxy-container').classList.add('active');
+    
+    // Update UI visibility when proxy becomes active
+    updateProxyUIVisibility();
 }
 
 function getActiveIframe() {
@@ -197,7 +286,17 @@ async function goTo(url) {
     }
     
     hideHome();
-    createTab(url);
+    
+    // If tab system is disabled, reuse the first tab
+    if (!isTabSystemEnabled() && tabs.length > 0) {
+        const activeTab = tabs[0];
+        activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+        activeTab.url = url;
+        activeTab.title = 'Loading...';
+        switchToTab(activeTab.id);
+    } else {
+        createTab(url);
+    }
 }
 
 function quickGo(url) {
@@ -210,8 +309,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const newTabBtn = document.getElementById('new-tab-btn');
     const proxyUrlBar = document.getElementById('proxy-url-bar');
 
-    const getEngine = () =>
-        (searchEngineInput && searchEngineInput.value) || 'https://duckduckgo.com/search?q=%s';
+    // Update UI visibility on load
+    updateProxyUIVisibility();
+
+    const getEngine = () => {
+        return sessionStorage.getItem('search-engine-url') || 'https://duckduckgo.com/?q=%s';
+    };
 
     const hasProtocol = (q) => /^https?:\/\//i.test(q);
 
@@ -245,71 +348,95 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    uvAddress.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSearch(uvAddress);
-        }
-    });
+    if (uvAddress) {
+        uvAddress.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleSearch(uvAddress);
+            }
+        });
+    }
 
-    proxyUrlBar.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const url = buildUrl(proxyUrlBar.value);
-            if (url && activeTabId) {
-                const activeTab = tabs.find(t => t.id === activeTabId);
-                if (activeTab) {
-                    activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
-                    activeTab.url = url;
+    if (proxyUrlBar) {
+        proxyUrlBar.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const url = buildUrl(proxyUrlBar.value);
+                if (url && activeTabId) {
+                    const activeTab = tabs.find(t => t.id === activeTabId);
+                    if (activeTab) {
+                        activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+                        activeTab.url = url;
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 
-    newTabBtn.addEventListener('click', () => {
-        hideHome();
-        createTab();
-    });
+    if (newTabBtn) {
+        newTabBtn.addEventListener('click', () => {
+            if (!isTabSystemEnabled()) return;
+            hideHome();
+            createTab();
+        });
+    }
 
-    
-    document.querySelector('.back-btn').addEventListener('click', () => {
-        const iframe = getActiveIframe();
-        if (iframe) {
-            try {
-                iframe.contentWindow.history.back();
-            } catch (e) {}
-        }
-    });
-
-    document.querySelector('.forward-btn').addEventListener('click', () => {
-        const iframe = getActiveIframe();
-        if (iframe) {
-            try {
-                iframe.contentWindow.history.forward();
-            } catch (e) {}
-        }
-    });
-
-    document.querySelector('.refresh-btn').addEventListener('click', () => {
-        const iframe = getActiveIframe();
-        if (iframe) {
-            try {
-                iframe.contentWindow.location.reload();
-            } catch (e) {
-                iframe.src = iframe.src;
+    const backBtn = document.querySelector('.back-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            const iframe = getActiveIframe();
+            if (iframe) {
+                try {
+                    iframe.contentWindow.history.back();
+                } catch (e) {}
             }
-        }
-    });
+        });
+    }
 
-    document.querySelector('.home-btn-proxy').addEventListener('click', () => {
-        showHome();
-    });
+    const forwardBtn = document.querySelector('.forward-btn');
+    if (forwardBtn) {
+        forwardBtn.addEventListener('click', () => {
+            const iframe = getActiveIframe();
+            if (iframe) {
+                try {
+                    iframe.contentWindow.history.forward();
+                } catch (e) {}
+            }
+        });
+    }
 
-    document.querySelector('.eruda-btn').addEventListener('click', () => {
-        injectDevTools();
-    });
+    const refreshBtn = document.querySelector('.refresh-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            const iframe = getActiveIframe();
+            if (iframe) {
+                try {
+                    iframe.contentWindow.location.reload();
+                } catch (e) {
+                    iframe.src = iframe.src;
+                }
+            }
+        });
+    }
 
-    document.querySelector('.settings-btn').addEventListener('click', () => {
-        window.location.href = '/s.html#Proxy';
-    });
+    const homeBtn = document.querySelector('.home-btn-proxy');
+    if (homeBtn) {
+        homeBtn.addEventListener('click', () => {
+            showHome();
+        });
+    }
+
+    const erudaBtn = document.querySelector('.eruda-btn');
+    if (erudaBtn) {
+        erudaBtn.addEventListener('click', () => {
+            injectDevTools();
+        });
+    }
+
+    const settingsBtn = document.querySelector('.settings-btn');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => {
+            window.location.href = '/s.html#Proxy';
+        });
+    }
 });

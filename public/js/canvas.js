@@ -14,7 +14,6 @@ function init() {
         container.appendChild(renderer.domElement);
     }
 
-    // Create starfield
     const starGeo = new THREE.BufferGeometry();
     const starCount = 3000;
     const starPos = new Float32Array(starCount * 3);
@@ -52,10 +51,10 @@ function init() {
     stars = new THREE.Points(starGeo, starMat);
     scene.add(stars);
 
-    // Create planet group
+   
     planetGroup = new THREE.Group();
 
-    // Saturn planet
+    
     const planetGeo = new THREE.SphereGeometry(15, 64, 64);
     const planetMat = new THREE.MeshBasicMaterial({
         color: 0x9333ea,
@@ -65,7 +64,7 @@ function init() {
     const planet = new THREE.Mesh(planetGeo, planetMat);
     planetGroup.add(planet);
 
-    // Create multiple ring layers
+ 
     for (let i = 0; i < 5; i++) {
         const innerRad = 20 + i * 3;
         const outerRad = 23 + i * 3;
@@ -96,7 +95,7 @@ function animate() {
     const time = Date.now() * 0.0003;
     
     if (planetGroup) {
-        // Orbit the planet around the scene
+   
         planetGroup.position.x = Math.cos(time) * 60 - 20;
         planetGroup.position.y = Math.sin(time * 0.7) * 30 - 10;
         planetGroup.position.z = Math.sin(time) * 50 - 40;

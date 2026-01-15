@@ -165,7 +165,7 @@ h1 {
     transform: scale(1.1);
 }
 
-/* Proxy Container */
+
 .proxy-container {
     position: fixed;
     top: 0;
@@ -182,7 +182,7 @@ h1 {
     display: flex;
 }
 
-/* Tab Bar - Now at the top */
+
 .tab-bar {
     display: flex;
     align-items: center;
@@ -279,7 +279,7 @@ h1 {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: linear-gradient(135deg, #8702d4);
+    background:#a855f7;
     border: none;
     display: flex;
     align-items: center;
@@ -368,8 +368,7 @@ h1 {
 
 .url-bar-container:focus-within {
     background: rgba(255, 255, 255, 0.08);
-    border-color: #ec4899;
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+    border-color: #a855f7;
 }
 
 .url-bar {
