@@ -13,7 +13,11 @@ function switchTab(tabName, btnElement) {
 
     if (btnElement) btnElement.classList.add('active');
 
-    sessionStorage.setItem('current-tab', tabName);
+
+    const currentTab = sessionStorage.getItem('current-tab');
+    if (currentTab !== tabName) {
+        sessionStorage.setItem('current-tab', tabName);
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +29,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const btn = Array.from(document.querySelectorAll('.tab-btn'))
         .find(b => b.getAttribute('onclick')?.includes(savedTab));
     if (btn) btn.classList.add('active');
+    
+    
+    applySavedCloak();
 });
 
 const premadeThemes = {
@@ -88,6 +95,19 @@ function applyTabCloak(title, favicon) {
             link.href = favicon + "?v=" + Date.now();
             doc.head.appendChild(link);
         }
+    }
+}
+
+
+function applySavedCloak() {
+    const savedTitle = sessionStorage.getItem('custom-title');
+    const savedFavicon = sessionStorage.getItem('custom-favicon');
+    
+    if (savedTitle || savedFavicon) {
+        applyTabCloak(
+            savedTitle || null,
+            savedFavicon || null
+        );
     }
 }
 
