@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Subway Surfers</title>
+    <base href="https://rawcdn.githack.com/dskjfoisjfsjio/Standalone-games/main/subway-surfers/">
+    <script type="text/javascript" src="4399.js"></script>
+    <link rel="icon" href="/new logo.png">
+
+      <script>
+       function progFunc(gameInstance,progress){
+        if(progress == 1){
+             var game = new Uint32Array(gameInstance.Module.wasmMemory.buffer);
+             console.log(game);
+
+        }
+       }
+
+      </script>
+    
+    <script>
+        window.config = {
+            loader: 'unity',
+            debug: false,
+            maxRatio: 16 / 9,
+            minRatio: 9 / 16,
+
+            title: 'Subway Surfers',
+            thumbnail: './4399.png',
+            numScreenshots: 4,
+
+            unityVersion: '2019.2.0f1',
+            unityWebglBuildUrl: 'build\/stpetersburg.json',
+
+            fileSize: 35,
+            cachedDecompressedFileSizes: {
+                'StPetersburg.asm.code.unityweb': 9057213,
+                'StPetersburg.asm.framework.unityweb': 89460,
+                'StPetersburg.asm.memory.unityweb': 1004462,
+                'StPetersburg.data.unityweb': 18352095,
+                'StPetersburg.wasm.code.unityweb': 7336893,
+                'StPetersburg.wasm.framework.unityweb': 93791,
+            },
+        };
+    </script>
+</head>
+
+<body>
+    <script src="loaders/v3/master-loader.js"></script>  
+</body>
+
+</body>
+
+</html>

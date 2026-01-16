@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play games for free at school or work on Alexr Games!">
+<link rel="icon" href="/new logo.png">
+
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <title>Frontline Defense</title>
+    
+    <style>
+        body {
+            margin: 0; /* Removes default margin */
+            padding: 0; /* Removes default padding */
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+    
+    <div id="ruffle-container" style="width: 100vw; height: 100vh;"></div>
+
+    <script>
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("ruffle-container");
+
+            // Set player size to container size
+            player.style.width = "100%";
+            player.style.height = "100%";
+
+            container.appendChild(player);
+
+            player.load("https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/Games/ruffle/SWF/frontlinedefense.swf");
+        });
+    </script>
+    
+</body>
+</html>

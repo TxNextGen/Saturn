@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="pragma" content="no-cache" />
+    <link rel="icon" href="/new logo.png">
+    <title>Candy Crush</title>
+    
+       <link rel="stylesheet" href="https://830581635-628405001538672842.preview.editmysite.com/uploads/b/139890129-709153476852373754/files/css/stylesheet.css" type="text/css" charset="utf-8" />>
+    
+    <script src="https://830581635-628405001538672842.preview.editmysite.com/uploads/b/139890129-709153476852373754/files/js/custom-phaser.min.js"></script>
+    
+    <script type="text/javascript">
+      function scorepost(href, inputs) {
+        var gform = document.createElement("form");
+        gform.method = "post";
+        gform.action = href;
+        gform.target = "_parent";
+        for (var k in inputs) {
+          var input = document.createElement("input");
+          input.setAttribute("name", k);
+          input.setAttribute("value", inputs[k]);
+          gform.appendChild(input);
+        }
+        document.body.appendChild(gform);
+        gform.submit();
+        document.body.removeChild(gform);
+      }
+    </script>
+    
+    <script src="https://830581635-628405001538672842.preview.editmysite.com/uploads/b/139890129-709153476852373754/files/js/game.min.js"></script>
+    
+    <style>
+      #focusHelper {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        display: none;
+        background-color: #000000;
+        opacity: 0;
+        top: 0px;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body onLoad="initGame()">
+    <div id="gameFontPreload">
+      <div style="font-family: ComicSansBold" class="fontPreload">.</div>
+    </div>
+    <div id="focusHelper"></div>
+    <script>
+      window.addEventListener("blur", function () {
+        document.getElementById("focusHelper").style["display"] = "block";
+      });
+      window.addEventListener("focus", function () {
+        document.getElementById("focusHelper").style["display"] = "none";
+      });
+    </script>
+  </body>
+</html>

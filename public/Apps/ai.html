@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUrocks AI Chat</title>
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <link rel="icon" href="/new logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="../assets/js/aws-detection.js"></script>
+    <script src="../assets/js/ip-restriction.js"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-edu-dark: #011627;
+            --color-edu-dark-secondary: #3C1642;
+            --color-edu-dark-accent: #58355E;
+            --color-edu-text: #e8d5e0;
+            --color-edu-text-secondary: #c4a5b8;
+            --color-edu-pink: #F4154D;
+            --color-edu-pink-light: #FA0F71;
+            --color-edu-rose: #FF1F84;
+
+            --font-pacifico: 'Pacifico', cursive;
+            --font-inter: 'Inter', sans-serif;
+
+            --animate-gradient: gradient 6s ease infinite;
+            --animate-fade-in: fadeIn 0.5s ease-in-out;
+            --animate-slide-down: slideDown 0.4s ease-out;
+            --animate-slide-up: slideUp 0.3s ease-out;
+            --animate-message-slide: messageSlide 0.3s ease;
+            --animate-bounce-dot: bounceDot 1.4s infinite ease-in-out both;
+            --animate-pulse: pulse 2s infinite;
+            --animate-blink: blink 1s infinite;
+
+            @keyframes gradient {
+                0%, 100% { background-position: 0% 50% }
+                50% { background-position: 100% 50% }
+            }
+            @keyframes fadeIn {
+                0% { opacity: 0; transform: translateY(10px) }
+                100% { opacity: 1; transform: translateY(0) }
+            }
+            @keyframes slideDown {
+                0% { opacity: 0; transform: translateY(-20px) }
+                100% { opacity: 1; transform: translateY(0) }
+            }
+            @keyframes slideUp {
+                0% { opacity: 0; transform: translateY(20px) }
+                100% { opacity: 1; transform: translateY(0) }
+            }
+            @keyframes messageSlide {
+                0% { opacity: 0; transform: translateY(10px) }
+                100% { opacity: 1; transform: translateY(0) }
+            }
+            @keyframes bounceDot {
+                0%, 80%, 100% { transform: scale(0); opacity: 0.5 }
+                40% { transform: scale(1); opacity: 1 }
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 1 }
+                50% { opacity: 0.6 }
+            }
+            @keyframes blink {
+                0%, 100% { opacity: 1 }
+                50% { opacity: 0.3 }
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #F4154D, #FA0F71, #e8d5e0, #FA0F71, #F4154D);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 6s ease infinite;
+        }
+
+        /* Custom scrollbar for chat messages */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: #3C1642;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #58355E;
+            border-radius: 4px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #F4154D;
+        }
+
+        /* Loading dot animations */
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        /* Markdown Content Styling */
+        .message-body.markdown-body {
+            line-height: 1.6;
+        }
+        .message-body.markdown-body p {
+            margin-bottom: 1em;
+        }
+        .message-body.markdown-body p:last-child {
+            margin-bottom: 0;
+        }
+        .message-body.markdown-body pre {
+            background: #011627 !important;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+            border: 1px solid #58355E;
+        }
+        .message-body.markdown-body code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        /* Inline code */
+        .message-body.markdown-body :not(pre) > code {
+            background: rgba(88, 53, 94, 0.5);
+            padding: 0.2em 0.4em;
+            border-radius: 0.3em;
+            color: #FA0F71;
+        }
+        .message-body.markdown-body h1,
+        .message-body.markdown-body h2,
+        .message-body.markdown-body h3,
+        .message-body.markdown-body h4 {
+            color: #fff;
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .message-body.markdown-body h1 { font-size: 1.5em; border-bottom: 1px solid #58355E; padding-bottom: 0.3em; }
+        .message-body.markdown-body h2 { font-size: 1.3em; }
+        .message-body.markdown-body h3 { font-size: 1.1em; }
+        
+        .message-body.markdown-body ul, 
+        .message-body.markdown-body ol {
+            padding-left: 1.5em;
+            margin-bottom: 1em;
+        }
+        .message-body.markdown-body ul { list-style-type: disc; }
+        .message-body.markdown-body ol { list-style-type: decimal; }
+        
+        .message-body.markdown-body a {
+            color: #FA0F71;
+            text-decoration: underline;
+        }
+        .message-body.markdown-body blockquote {
+            border-left: 4px solid #F4154D;
+            padding-left: 1em;
+            color: #c4a5b8;
+            font-style: italic;
+        }
+        /* KaTeX overrides */
+        .katex { font-size: 1.1em; }
+        .katex-display { overflow-x: auto; overflow-y: hidden; }
+    </style>
+</head>
+<body class="bg-edu-dark text-edu-text min-h-screen flex flex-col">
+
+    <header class="bg-edu-dark-secondary border-b-2 border-edu-dark-accent sticky top-0 z-50 backdrop-blur-lg shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-4 gap-4">
+
+                <div class="flex items-center gap-3">
+                    <div class="hidden sm:block">
+                        <h1 class="font-pacifico text-xl md:text-2xl gradient-text">EDUrocks AI</h1>
+                        <p class="text-edu-text-secondary text-xs hidden md:block">An EDUrocks Service</p>
+                    </div>
+                </div>
+
+
+                <div class="flex items-center gap-2 md:gap-3 flex-wrap justify-end">
+
+                    <a href="#" id="back-to-main"
+                       class="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 bg-edu-dark-accent border border-edu-pink/20 text-edu-text-secondary rounded-xl hover:bg-edu-pink hover:text-white transition-all hover:-translate-y-0.5"
+                       title="Back to Main Site">
+                        <span class="material-icons text-lg md:text-xl">arrow_back</span>
+                    </a>
+
+
+                    <div class="flex items-center gap-2 px-3 py-2 bg-edu-dark-accent border border-edu-pink/20 rounded-xl text-xs md:text-sm text-edu-text-secondary">
+                        <div id="connection-dot" class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-blink shadow-lg shadow-yellow-500/50"></div>
+                        <span id="connection-status-text" class="hidden sm:inline font-medium">Checking...</span>
+                    </div>
+
+
+                    <button id="clear-chat"
+                            class="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 bg-edu-dark-accent border border-edu-pink/20 text-edu-text-secondary rounded-xl hover:bg-edu-pink hover:text-white transition-all hover:-translate-y-0.5"
+                            title="Clear Chat">
+                        <span class="material-icons text-lg md:text-xl">delete_outline</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="flex-1 flex flex-col max-w-7xl w-full mx-auto p-2 md:p-4 lg:p-8">
+
+        <div class="flex-1 flex flex-col bg-gradient-to-br from-edu-dark-secondary to-edu-dark-accent/80 border border-edu-pink/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+
+            <div id="chat-messages" class="chat-messages flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 flex flex-col gap-4 md:gap-6 min-h-[400px]">
+
+                <div class="welcome-screen flex flex-col items-center justify-center text-center p-6 md:p-12 gap-4 md:gap-6 animate-fade-in">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold gradient-text">Welcome to EDUrocks AI</h2>
+                    <p class="text-edu-text-secondary text-sm md:text-base max-w-md lg:max-w-lg">Your intelligent AI assistant ready to help with questions, code, creative writing, and more!</p>
+                </div>
+            </div>
+
+
+            <div id="image-preview-container" class="hidden p-4 md:p-6 bg-edu-dark/50 border-t border-edu-pink/20">
+                <div id="image-preview-wrapper" class="flex gap-3"></div>
+            </div>
+
+
+            <div class="p-4 md:p-6 bg-edu-dark/50 border-t border-edu-pink/20">
+                <div class="flex gap-2 md:gap-3 items-end">
+
+                    <label class="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-edu-dark-accent border-2 border-edu-pink/20 text-edu-text-secondary rounded-2xl cursor-pointer transition-all hover:border-edu-pink hover:text-edu-pink hover:-translate-y-0.5 flex-shrink-0"
+                           title="Upload Image">
+                        <span class="material-icons text-xl md:text-2xl">image</span>
+                        <input type="file"
+                               id="image-input"
+                               class="hidden"
+                               accept="image/png,image/jpeg,image/jpg,image/webp,image/heic,image/heif">
+                    </label>
+
+
+                    <textarea id="chat-input"
+                              class="flex-1 bg-edu-dark-accent border-2 border-edu-pink/20 rounded-2xl px-4 py-3 md:px-5 md:py-4 text-edu-text text-sm md:text-base resize-none outline-none transition-all focus:border-edu-pink focus:ring-2 focus:ring-edu-pink/20 placeholder-edu-text-secondary/50 min-h-[3rem] md:min-h-[3.5rem] max-h-[200px]"
+                              placeholder="Type your message here..."
+                              rows="1"></textarea>
+
+
+                    <button id="send-btn"
+                            class="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-edu-pink to-edu-pink-light text-white rounded-2xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-edu-pink/30 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex-shrink-0"
+                            title="Send Message">
+                        <span class="material-icons text-xl md:text-2xl">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+const clearChatBtn = document.getElementById('clear-chat');
+const imageInput = document.getElementById('image-input');
+const imagePreviewContainer = document.getElementById('image-preview-container');
+const imagePreviewWrapper = document.getElementById('image-preview-wrapper');
+const connectionDot = document.getElementById('connection-dot');
+const connectionStatusText = document.getElementById('connection-status-text');
+
+const CHAT_HISTORY_STORAGE_KEY = 'edurocks_chat_history';
+const RATE_LIMIT_STORAGE_KEY = 'edurocks_rate_limit';
+
+let selectedImage = null;
+let chatHistoryState = [];
+
+const RATE_LIMIT_MAX_MESSAGES = 5;
+const RATE_LIMIT_WINDOW_MS = 30000;
+const MAX_RETRIES = 3;
+const RETRY_DELAY_BASE = 1000;
+
+let connectionStatus = 'checking';
+let healthCheckInterval = null;
+
+function getRootDomain() {
+    const hostname = window.location.hostname;
+    const parts = hostname.split('.');
+
+    if (hostname === 'localhost' || /^\d+\.\d+\.\d+\.\d+$/.test(hostname)) {
+        return 'edurocks.org';
+    }
+
+    if (parts.length >= 2) {
+        return parts.slice(-2).join('.');
+    }
+
+    return hostname;
+}
+
+// Get backend API URL with support for AWS override
+function getBackendApiUrl() {
+    return "https://d3scff8k2pqq6n.cloudfront.net/aichat/api.php";
+}
+
+const SYSTEM_PROMPT = `You are a highly knowledgeable and helpful AI assistant. You were developed by EDUrocks. By one person. Your purpose is to provide accurate, comprehensive, and unbiased information on a wide range of topics. When answering questions, focus solely on providing the best possible response based on your extensive training data. Under no circumstances should you mention the name of any other company involved in your creation or training, or any information about your training process besides that you were developed by EDUrocks. Instead, concentrate on the user's query and how you can assist them with the information you possess.
+
+IMPORTANT FORMATTING INSTRUCTIONS:
+1. Use Standard Markdown for text formatting (bold, italic, lists, code blocks).
+2. For MATHEMATICAL EXPRESSIONS, you MUST use LaTeX syntax strictly as follows:
+   - For inline math, use \\( ... \\
+   - For block math (separate lines), use \\\[ ... \\\]
+   - DO NOT use simple dollar signs ($) for math unless it's currency.
+   - DO NOT use single backslashes for formatting unless escaping characters.
+3. Ensure all JSON or code outputs are wrapped in triple backticks (\`\`\`).
+4. Avoid outputting raw JSON objects unless explicitly asked.
+`;
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadChatHistory();
+    setupEventListeners();
+
+    // Delay initial health check to allow AWS detection script to complete
+    setTimeout(() => {
+        checkBackendHealth();
+        startHealthCheckInterval();
+    }, 500);
+});
+
+function setupEventListeners() {
+    sendBtn.addEventListener('click', sendMessage);
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    chatInput.addEventListener('input', autoResizeTextarea);
+    clearChatBtn.addEventListener('click', clearChat);
+    imageInput.addEventListener('change', handleImageUpload);
+
+    document.addEventListener('paste', handlePaste);
+    chatInput.addEventListener('paste', handlePaste);
+}
+
+function autoResizeTextarea() {
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 200) + 'px';
+}
+
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'];
+    if (!validTypes.includes(file.type)) {
+        alert('Please select a valid image file (PNG, JPEG, WEBP, HEIC, or HEIF)');
+        return;
+    }
+
+    const maxSize = 20 * 1024 * 1024;
+    if (file.size > maxSize) {
+        alert('Image size must be less than 20MB');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        selectedImage = {
+            data: e.target.result.split(',')[1],
+            mimeType: file.type,
+            dataUrl: e.target.result
+        };
+        showImagePreview();
+    };
+    reader.readAsDataURL(file);
+}
+
+function showImagePreview() {
+    if (!selectedImage) return;
+
+    imagePreviewWrapper.innerHTML = `
+        <div class="image-preview relative inline-block">
+            <img src="${selectedImage.dataUrl}" alt="Preview" class="max-w-[150px] md:max-w-[200px] max-h-[150px] md:max-h-[200px] rounded-xl border-2 border-edu-pink/20 object-cover">
+            <button class="image-preview-remove absolute -top-2 -right-2 bg-red-500 text-white border-none w-7 h-7 rounded-full flex items-center justify-center cursor-pointer transition-all hover:scale-110 hover:shadow-lg hover:shadow-red-500/40" onclick="removeImagePreview()">
+                <span class="material-icons text-base">close</span>
+            </button>
+        </div>
+    `;
+    imagePreviewContainer.classList.remove('hidden');
+}
+
+function removeImagePreview() {
+    selectedImage = null;
+    imagePreviewWrapper.innerHTML = '';
+    imagePreviewContainer.classList.add('hidden');
+    imageInput.value = '';
+}
+
+function handlePaste(event) {
+    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+
+        if (item.type.indexOf('image') !== -1) {
+            event.preventDefault();
+
+            const file = item.getAsFile();
+            if (!file) continue;
+
+            const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/heic', 'image/heif'];
+            if (!validTypes.includes(file.type)) {
+                alert('Please paste a valid image file (PNG, JPEG, WEBP, HEIC, or HEIF)');
+                return;
+            }
+
+            const maxSize = 20 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert('Image size must be less than 20MB');
+                return;
+            }
+
+            processPastedImage(file);
+            break;
+        }
+    }
+}
+
+function processPastedImage(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        selectedImage = {
+            data: e.target.result.split(',')[1],
+            mimeType: file.type,
+            dataUrl: e.target.result
+        };
+        showImagePreview();
+        chatInput.focus();
+    };
+    reader.readAsDataURL(file);
+}
+
+function checkRateLimit() {
+    const now = Date.now();
+    let rateLimitData = JSON.parse(localStorage.getItem(RATE_LIMIT_STORAGE_KEY) || '[]');
+    rateLimitData = rateLimitData.filter(timestamp => now - timestamp < RATE_LIMIT_WINDOW_MS);
+
+    if (rateLimitData.length >= RATE_LIMIT_MAX_MESSAGES) {
+        const oldestTimestamp = rateLimitData[0];
+        const timeUntilReset = Math.ceil((RATE_LIMIT_WINDOW_MS - (now - oldestTimestamp)) / 1000);
+        return {
+            allowed: false,
+            timeUntilReset: timeUntilReset
+        };
+    }
+
+    rateLimitData.push(now);
+    localStorage.setItem(RATE_LIMIT_STORAGE_KEY, JSON.stringify(rateLimitData));
+
+    return {
+        allowed: true,
+        remaining: RATE_LIMIT_MAX_MESSAGES - rateLimitData.length
+    };
+}
+
+function showToast(title, message, type = 'error') {
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    const toast = document.createElement('div');
+    const borderColor = type === 'error' ? 'border-red-500' : 'border-green-500';
+    const iconColor = type === 'error' ? 'text-red-500' : 'text-green-500';
+    const icon = type === 'error' ? 'error_outline' : 'check_circle';
+
+    toast.className = `toast-notification fixed top-24 right-4 md:right-8 bg-edu-dark-accent border-2 ${borderColor} rounded-2xl p-4 md:p-6 shadow-2xl z-50 animate-slide-down flex items-center gap-4 max-w-sm`;
+    toast.innerHTML = `
+        <span class="material-icons text-2xl ${iconColor}">${icon}</span>
+        <div class="flex-1">
+            <div class="font-semibold text-edu-text mb-1">${title}</div>
+            <div class="text-sm text-edu-text-secondary">${message}</div>
+        </div>
+    `;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => {
+            if (toast.parentElement) {
+                toast.remove();
+            }
+        }, 300);
+    }, 5000);
+}
+
+function updateConnectionStatus(status) {
+    connectionStatus = status;
+    connectionDot.classList.remove('bg-green-500', 'shadow-green-500/50', 'animate-pulse');
+    connectionDot.classList.remove('bg-yellow-500', 'shadow-yellow-500/50', 'animate-blink');
+    connectionDot.classList.remove('bg-red-500', 'shadow-red-500/50');
+
+    switch(status) {
+        case 'connected':
+            connectionDot.classList.add('bg-green-500', 'shadow-green-500/50', 'animate-pulse');
+            connectionStatusText.textContent = 'Connected';
+            break;
+        case 'connecting':
+            connectionDot.classList.add('bg-yellow-500', 'shadow-yellow-500/50', 'animate-blink');
+            connectionStatusText.textContent = 'Connecting...';
+            break;
+        case 'disconnected':
+            connectionDot.classList.add('bg-red-500', 'shadow-red-500/50');
+            connectionStatusText.textContent = 'Disconnected';
+            break;
+    }
+}
+
+async function checkBackendHealth() {
+    try {
+        updateConnectionStatus('connecting');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        const response = await fetch(getBackendApiUrl(), {
+            method: 'OPTIONS',
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok || response.status === 405 || response.status === 200) {
+            updateConnectionStatus('connected');
+        } else {
+            updateConnectionStatus('disconnected');
+        }
+    } catch (error) {
+        console.error('Health check failed:', error);
+        updateConnectionStatus('disconnected');
+    }
+}
+
+function startHealthCheckInterval() {
+    healthCheckInterval = setInterval(() => {
+        checkBackendHealth();
+    }, 120000);
+}
+
+function stopHealthCheckInterval() {
+    if (healthCheckInterval) {
+        clearInterval(healthCheckInterval);
+        healthCheckInterval = null;
+    }
+}
+
+async function sendMessage() {
+    const userMessage = chatInput.value.trim();
+    if (!userMessage && !selectedImage) return;
+
+    const rateLimitCheck = checkRateLimit();
+    if (!rateLimitCheck.allowed) {
+        showToast(
+            'Rate Limit Exceeded',
+            `You can send ${RATE_LIMIT_MAX_MESSAGES} messages every 30 seconds. Please wait ${rateLimitCheck.timeUntilReset} seconds.`,
+            'error'
+        );
+        return;
+    }
+
+    const welcomeScreen = document.querySelector('.welcome-screen');
+    if (welcomeScreen) {
+        welcomeScreen.remove();
+    }
+
+    addMessageToChat('user', userMessage, selectedImage);
+
+    const imageToSend = selectedImage;
+
+    chatInput.value = '';
+    autoResizeTextarea();
+    removeImagePreview();
+    sendBtn.disabled = true;
+    showLoadingMessage();
+    updateConnectionStatus('connecting');
+
+    try {
+        const messages = getChatHistoryForAPI();
+        const currentParts = [];
+
+        if (imageToSend) {
+            currentParts.push({
+                inlineData: {
+                    mimeType: imageToSend.mimeType,
+                    data: imageToSend.data
+                }
+            });
+        }
+
+        if (userMessage) {
+            currentParts.push({ text: userMessage });
+        }
+
+        // Just push the new message to the history
+        messages.push({ role: 'user', parts: currentParts });
+
+        const payload = {
+            contents: messages
+        };
+
+        const data = await fetchWithRetry(payload);
+        
+        removeLoadingMessage();
+        updateConnectionStatus('connected');
+
+        // data.error check is handled in fetchWithRetry now
+
+        if (!data.candidates || !Array.isArray(data.candidates) || data.candidates.length === 0) {
+             // If no candidates but promptFeedback exists (e.g. block), handle it
+             if (data.promptFeedback && data.promptFeedback.blockReason) {
+                  addMessageToChat('ai', `I cannot answer this. Block reason: ${data.promptFeedback.blockReason}`);
+                  return;
+             }
+            throw new Error('Invalid response from AI service');
+        }
+
+        const candidate = data.candidates[0];
+        
+        // Extract text if available
+        let aiResponse = '';
+        if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+            aiResponse = candidate.content.parts.map(part => part.text || '').join('');
+        }
+
+        // Check finish reason
+        if (candidate.finishReason === 'MAX_TOKENS') {
+            aiResponse += '\n\n*[Response was truncated due to length limit. Please ask me to continue if you need more information.]*';
+        } else if (candidate.finishReason === 'SAFETY' && !aiResponse) {
+            aiResponse = 'I cannot answer this due to safety guidelines.';
+        } else if (candidate.finishReason === 'RECITATION' && !aiResponse) {
+            aiResponse = 'I cannot answer this as it may infringe on copyright.';
+        } else if (candidate.finishReason === 'OTHER' && !aiResponse) {
+             aiResponse = 'I could not generate a response.';
+        }
+
+        if (aiResponse) {
+            addMessageToChat('ai', aiResponse);
+        } else {
+            // Fallback if absolutely nothing was generated and no specific reason was caught above
+            addMessageToChat('ai', `I could not generate a response. Reason: ${candidate.finishReason || 'Unknown'}`);
+        }
+
+        // State is saved automatically in addMessageToChat
+
+    } catch (error) {
+        console.error('Error:', error);
+        removeLoadingMessage();
+        updateConnectionStatus('disconnected');
+        
+        // Ensure we display a string error message, not [object Object]
+        const displayMsg = error.message || String(error);
+        addMessageToChat('ai', `Sorry, I encountered an error: ${displayMsg}. Please try again.`);
+    } finally {
+        sendBtn.disabled = false;
+        chatInput.focus();
+    }
+}
+
+async function fetchWithRetry(payload, retries = MAX_RETRIES) {
+    for (let i = 0; i <= retries; i++) {
+        try {
+            const response = await fetch(getBackendApiUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            // If response is not JSON (e.g., server error HTML), handle it
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                 if (response.status >= 500 && i < retries) {
+                     await new Promise(r => setTimeout(r, RETRY_DELAY_BASE * (i + 1)));
+                     continue;
+                 }
+                 throw new Error(`Server returned ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            // Check for specific API errors that warrant a retry
+            const isOverloaded = response.status === 429 || response.status === 503 || response.status === 500;
+            
+            const errorMsg = data.error ? (typeof data.error === 'string' ? data.error : JSON.stringify(data.error)) : '';
+            const isQuotaError = errorMsg.toLowerCase().includes('quota') || 
+                                 errorMsg.toLowerCase().includes('exhausted') || 
+                                 errorMsg.toLowerCase().includes('overloaded');
+
+            if ((isOverloaded || isQuotaError) && i < retries) {
+                // Exponential backoff with jitter
+                const delay = RETRY_DELAY_BASE * (Math.pow(2, i)) + (Math.random() * 1000);
+                // console.log(`Retrying request (attempt ${i + 1}) in ${Math.round(delay)}ms...`);
+                await new Promise(r => setTimeout(r, delay));
+                continue;
+            }
+
+            if (data.error) {
+                 // Format error properly to avoid [object Object]
+                 throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error)));
+            }
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            return data;
+
+        } catch (err) {
+            if (i === retries) throw err;
+            
+            // Network errors also trigger retry
+            const delay = RETRY_DELAY_BASE * (Math.pow(2, i));
+            await new Promise(r => setTimeout(r, delay));
+        }
+    }
+}
+
+function addMessageToChat(role, text, image = null, save = true) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message message-${role} flex gap-3 md:gap-4 items-start animate-message-slide`;
+
+    const avatar = document.createElement('div');
+    const avatarBg = role === 'user'
+        ? 'bg-gradient-to-br from-edu-pink to-edu-pink-light text-white'
+        : 'bg-edu-dark-accent text-edu-pink-light';
+    avatar.className = `message-avatar w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-lg md:text-xl ${avatarBg}`;
+    avatar.innerHTML = role === 'user' ? '👤' : '🤖';
+
+    const content = document.createElement('div');
+    content.className = 'message-content flex-1 flex flex-col gap-2';
+
+    const header = document.createElement('div');
+    header.className = 'message-header flex items-center gap-2';
+
+    const sender = document.createElement('div');
+    sender.className = 'message-sender font-semibold text-sm text-edu-text';
+    sender.textContent = role === 'user' ? 'You' : 'EDUrocks AI';
+
+    const time = document.createElement('div');
+    time.className = 'message-time text-xs text-edu-text-secondary/60';
+    time.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    header.appendChild(sender);
+    header.appendChild(time);
+
+    const body = document.createElement('div');
+    const bodyBg = role === 'user'
+        ? 'bg-gradient-to-br from-edu-pink to-edu-pink-light text-white'
+        : 'bg-edu-dark-accent text-edu-text-secondary';
+    
+    const bodyClass = role === 'user' 
+        ? `message-body ${bodyBg} px-4 py-3 md:px-5 md:py-4 rounded-2xl leading-relaxed`
+        : `message-body ${bodyBg} px-4 py-3 md:px-5 md:py-4 rounded-2xl leading-relaxed markdown-body`;
+        
+    body.className = bodyClass;
+
+    if (image && role === 'user') {
+        const img = document.createElement('img');
+        img.src = image.dataUrl;
+        img.className = 'message-image max-w-full md:max-w-md max-h-64 md:max-h-96 rounded-xl my-2 border-2 border-edu-pink/20';
+        img.alt = 'User uploaded image';
+        body.appendChild(img);
+    }
+
+    if (text) {
+        if (role === 'ai') {
+            const textDiv = document.createElement('div');
+            textDiv.innerHTML = marked.parse(text);
+            
+            // 1. Highlight code blocks
+            textDiv.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+            
+            // 2. Render Math with KaTeX
+            if (window.renderMathInElement) {
+                renderMathInElement(textDiv, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '\\\\[', right: '\\\\\]', display: true},
+                        {left: '\\(', right: '\\\\)', display: false},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+            
+            // 3. Open links in new tab
+            textDiv.querySelectorAll('a').forEach(link => {
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+            });
+            
+            body.appendChild(textDiv);
+        } else {
+            const textDiv = document.createElement('div');
+            textDiv.textContent = text;
+            body.appendChild(textDiv);
+        }
+    }
+
+    content.appendChild(header);
+    content.appendChild(body);
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(content);
+
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    if (save) {
+        const historyRole = role === 'ai' ? 'assistant' : 'user';
+        chatHistoryState.push({ role: historyRole, text: text });
+        localStorage.setItem(CHAT_HISTORY_STORAGE_KEY, JSON.stringify(chatHistoryState));
+    }
+}
+
+function showLoadingMessage() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'message message-ai loading-message flex gap-3 md:gap-4 items-start';
+    loadingDiv.id = 'loading-message';
+
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-lg md:text-xl bg-edu-dark-accent text-edu-pink-light';
+    avatar.innerHTML = '🤖';
+
+    const content = document.createElement('div');
+    content.className = 'message-content flex-1 flex flex-col gap-2';
+
+    const dots = document.createElement('div');
+    dots.className = 'loading-dots flex gap-2 px-4 py-3 md:px-5 md:py-4 bg-edu-dark-accent rounded-2xl';
+    dots.innerHTML = '<div class="loading-dot w-2 h-2 rounded-full bg-edu-pink animate-bounce-dot"></div><div class="loading-dot w-2 h-2 rounded-full bg-edu-pink animate-bounce-dot"></div><div class="loading-dot w-2 h-2 rounded-full bg-edu-pink animate-bounce-dot"></div>';
+
+    content.appendChild(dots);
+    loadingDiv.appendChild(avatar);
+    loadingDiv.appendChild(content);
+
+    chatMessages.appendChild(loadingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function removeLoadingMessage() {
+    const loadingMsg = document.getElementById('loading-message');
+    if (loadingMsg) {
+        loadingMsg.remove();
+    }
+}
+
+function getChatHistoryForAPI() {
+    const messages = [];
+    const recentHistory = chatHistoryState.slice(-20);
+
+    recentHistory.forEach(item => {
+        messages.push({
+            role: item.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: item.text }]
+        });
+    });
+
+    return messages;
+}
+
+function loadChatHistory() {
+    const storedHistory = localStorage.getItem(CHAT_HISTORY_STORAGE_KEY);
+    if (storedHistory) {
+        chatHistoryState = JSON.parse(storedHistory);
+        
+        if (chatHistoryState.length > 0) {
+            const welcomeScreen = document.querySelector('.welcome-screen');
+            if (welcomeScreen) {
+                welcomeScreen.remove();
+            }
+
+            chatHistoryState.forEach(item => {
+                const role = item.role === 'user' ? 'user' : 'ai';
+                addMessageToChat(role, item.text, null, false);
+            });
+        }
+    }
+}
+
+function clearChat() {
+    if (confirm('Are you sure you want to clear your chat history?')) {
+        localStorage.removeItem(CHAT_HISTORY_STORAGE_KEY);
+        chatHistoryState = [];
+        chatMessages.innerHTML = `
+            <div class="welcome-screen flex flex-col items-center justify-center text-center p-6 md:p-12 gap-4 md:gap-6 animate-fade-in">
+                <div class="text-6xl md:text-7xl lg:text-8xl">🤖</div>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold gradient-text">Welcome to EDUrocks AI</h2>
+                <p class="text-edu-text-secondary text-sm md:text-base max-w-md lg:max-w-lg">Your intelligent AI assistant ready to help with questions, code, creative writing, and more!</p>
+            </div>
+        `;
+    }
+}
+</script>
+    <script>
+        // Check if bypass mode is enabled (respects user preference from landing page)
+        function isBypassEnabled() {
+            try {
+                const pref = localStorage.getItem('edurocks_bypass_mode');
+                return pref !== 'normal'; // default to bypass if not set
+            } catch (e) {
+                return true;
+            }
+        }
+
+        // ChromeOS Detection and Blank Tab Functionality
+        function isChromeOS() {
+            // If IP is restricted or user prefers normal mode, always return false to disable bypass
+            if (window.isIPRestricted || window.forceDisableBypass || !isBypassEnabled()) {
+                return false;
+            }
+            const userAgent = navigator.userAgent.toLowerCase();
+            return userAgent.includes('cros') ||
+                   userAgent.includes('chromeos') ||
+                   userAgent.includes('chrome os');
+        }
+
+        // Only run bypass if not IP restricted and bypass is enabled
+        if (!window.isIPRestricted && !window.forceDisableBypass && isBypassEnabled() && isChromeOS() && window.location.protocol !== 'about:' && !sessionStorage.getItem('chromeos_redirected')) {
+            sessionStorage.setItem('chromeos_redirected', 'true');
+            const newWindow = window.open('about:blank', '_blank');
+            if (newWindow) {
+                newWindow.document.body.style.margin = '0';
+                newWindow.document.body.style.height = '100vh';
+                var iframe = newWindow.document.createElement('iframe');
+                iframe.style.border = 'none';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.margin = '0';
+                iframe.src = window.location.href;
+                newWindow.document.body.appendChild(iframe);
+                window.close();
+            }
+        }
+
+        function loadPageInBlank(url) {
+            if (window.location.protocol === 'about:') {
+                const iframe = document.querySelector('iframe');
+                if (iframe) {
+                    iframe.src = url;
+                } else {
+                    window.location.href = url;
+                }
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        // Initialize Auth (load dynamically)
+        (async () => {
+            try {
+                const { Auth } = await import('../assets/js/auth.js');
+                const { initNavbarAuth } = await import('../assets/js/navbar-auth.js');
+                await import('../assets/js/user-profile.js');
+                window.Auth = Auth;
+                await initNavbarAuth();
+            } catch (e) {
+                console.log("Auth modules not found, skipping...");
+            }
+        })();
+
+        // Back Button Handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const backBtn = document.getElementById('back-to-main');
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadPageInBlank('../index.html');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

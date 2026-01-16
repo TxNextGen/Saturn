@@ -144,7 +144,10 @@ const xorEncode = {
 
 function loadGame(){
   let returnValue
-  if (type == 'html'){
+  if (type == 'iframe'){
+
+    returnValue = src
+  } else if (type == 'html'){
     returnValue = `/files/games${src}`
   } else if (type == 'flash'){
     returnValue = `/files/embeds/ruffle.html?src=${src}`
@@ -152,7 +155,7 @@ function loadGame(){
     returnValue = `/@/` + xorEncode.encode(src)
   } else if (type == 'method'){
     returnValue = `/files/methods${src}`
-  }else{
+  } else {
     returnValue = `/files/embeds/emujs/index.html?game=${src}&?core=${type}`
   }
   return returnValue;

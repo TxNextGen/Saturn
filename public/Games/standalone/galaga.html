@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Galaga HTML5 Emulator</title>
+    <meta charset="utf-8" />
+    <base href="https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/Galaga/">
+    <script async src="galaga.js"></script>
+    <link rel="icon" href="/new logo.png">
+    <script>
+        var galaga;
+        var canvas;
+        var context;
+        var imageData;
+        var audio = {};
+
+        var BUFFER_COUNT = 8;
+        var BUFFER_SIZE = 1024;
+        var _writePos = 0;
+        var _lastWritten;
+        var _lastPlayed;
+        var _totExecutionTime = 0;
+        var _totEmulatedTime = 0;
+        var _started = false;
+
+        var Module = {
+            wasmBinaryFile: 'galaga.wasm',
+            setStatus: function(text) {
+                if (text === "" && !_started) {
+                    _started = true;
+                    start();
+                }
+            }       
+        };
+
+        function start() {
+            canvas = document.getElementById("myGLCanvas");
+            context = canvas.getContext("2d");
+            context.scale(2.0, 2.0);
+            imageData = context.createImageData(224, 288);
+
+            document.addEventListener("keydown", onKeyDown);
+            document.addEventListener("keyup", onKeyUp);
+
+            galaga = new Module.GalagaMachine();
+
+            initAudio();
+
+            repeatOften();
+        }
+
+        function initAudio() {
+            audio.freq = 48000;
+            audio.channels = 1;
+            audio.samples = BUFFER_COUNT * BUFFER_SIZE;
+            audio.buffer = new Int16Array(audio.samples);
+
+            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!window.AudioContext) {
+                console.error('Web Audio API is not available!');
+                return;
+            }
+            audio.context = new window.AudioContext();
+
+            audio.scriptNode = audio.context.createScriptProcessor(BUFFER_SIZE, 1, 1);
+            audio.scriptNode.connect(audio.context.destination);
+
+            _lastPlayed = _lastWritten = (BUFFER_COUNT - 1);
+
+            audio.scriptNode.onaudioprocess = function (audioEvent) {
+                try {
+                    var channelData = audioEvent.outputBuffer.getChannelData(0);
+                    _lastPlayed = (_lastPlayed + 1) % BUFFER_COUNT;
+
+                    var j = _lastPlayed * BUFFER_SIZE;
+                    for (var i = 0; i < BUFFER_SIZE; i++, j++) {
+                        channelData[i] = audio.buffer[j] / 0x8000;
+                        audio.buffer[j] = 0;
+                    }
+                } catch (e) {
+                    console.error('Web Audio API error playing back audio:', e);
+                }
+            };
+        }
+
+        function resumeAudioContext() {
+            if (audio.context && audio.context.state === 'suspended') {
+                audio.context.resume().then(() => {
+                    console.log('AudioContext resumed successfully');
+                }).catch((e) => {
+                    console.error('Error resuming AudioContext:', e);
+                });
+            }
+        }
+
+        document.addEventListener('click', resumeAudioContext, { once: true });
+        document.addEventListener('keydown', resumeAudioContext, { once: true });
+
+        var prevTimestamp;
+        function repeatOften(timestamp) {
+            var interval = prevTimestamp ? timestamp - prevTimestamp : 20.0;
+            prevTimestamp = timestamp;
+            step(interval);
+            requestAnimationFrame(repeatOften);
+        }
+
+        function step(interval) {
+            if (interval > 67) {
+                interval = 67;
+            }
+
+            var tStart = performance.now();
+
+            galaga.Run(interval, function (video, audioBuffer) {
+                var tEnd = performance.now();
+                _totExecutionTime += (tEnd - tStart);
+                _totEmulatedTime += interval;
+
+                imageData.data.set(video);
+                context.putImageData(imageData, 0, 0, 0, 0, 224, 288);
+                context.drawImage(canvas, 0, 0);
+
+                if (audio.context.sampleRate === 44100) {
+                    var max = BUFFER_SIZE * _lastPlayed;
+                    var q = 147.0 / 160.0;
+                    var s = 0;
+                    var i = 0;
+                    var j = _writePos;
+                    var len = BUFFER_SIZE * BUFFER_COUNT;
+
+                    while (i < audioBuffer.length) {
+                        if ((i % 960) === 0) {
+                            s = 0;
+                        }
+                        s += q;
+                        j = (_writePos + Math.floor(s)) % len;
+                        if (j === max) {
+                            break;
+                        }
+                        audio.buffer[j] = audioBuffer[i];
+                        i++;
+                    }
+                    _writePos = j;
+                } else {
+                    var max = BUFFER_SIZE * _lastPlayed;
+                    var i = 0;
+                    var j = _writePos;
+                    var len = BUFFER_SIZE * BUFFER_COUNT;
+
+                    while (i < audioBuffer.length) {
+                        if (j === max) {
+                            break;
+                        }
+                        audio.buffer[j] = audioBuffer[i];
+                        i++;
+                        j = (j + 1) % len;
+                    }
+                    _writePos = j;
+                }
+            });
+        }
+
+        function onKeyDown(event) {
+            var key = event.keyCode || event.which;
+            switch (key) {
+                case 48: galaga.set_InsertCoin(true); break;
+                case 49: galaga.set_Start1Player(true); break;
+                case 50: galaga.set_Start2Player(true); break;
+                case 37: galaga.set_MoveLeft(true); break;
+                case 39: galaga.set_MoveRight(true); break;
+                case 17: galaga.set_Button1(true); break;
+            }
+        }
+
+        function onKeyUp(event) {
+            var key = event.keyCode || event.which;
+            switch (key) {
+                case 48: galaga.set_InsertCoin(false); break;
+                case 49: galaga.set_Start1Player(false); break;
+                case 50: galaga.set_Start2Player(false); break;
+                case 37: galaga.set_MoveLeft(false); break;
+                case 39: galaga.set_MoveRight(false); break;
+                case 17: galaga.set_Button1(false); break;
+            }
+        }
+    </script>
+</head>
+<body style="background:black;">
+    <table>
+        <tr>
+            <td>
+                <canvas id="myGLCanvas" width="448" height="576"></canvas>
+            </td>
+            <td style="padding:12px 0px 0px 120px;" valign="top">
+                <span style="text-align:center; color:dimgrey; font-family:'Segoe UI'; font-size:10pt">
+                    <span style="font-size:11pt; color:cadetblue;"><strong>Galaga</strong></span>
+                    <br /><br />
+                    Arcade machine HTML5 emulator based on the Emscripten C++ => JS compiler.
+                    <br />CREATOR: https://paoloseverini.wordpress.com/ <br />
+                    <br> GAME MAY LOOK WEIRD BUT GIVE IT A SECOND TO BOOT </br>
+                    <strong>Instructions:</strong>
+                    <br />
+                    Press <strong>1</strong> to start a one-player game.
+                    <br />
+                    Press <strong>2</strong> to start a two-player game.
+                    <br /><br />
+                    <strong>Controls:</strong>
+                    <br />
+                    <strong>Left</strong> / <strong>Right</strong> arrow keys to move.
+                    <br />
+                    <strong>Ctrl</strong> key to shoot.
+                </span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

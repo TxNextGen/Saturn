@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Color Tunnel</title>
+    <base href="https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/tunnel%20rush/">
+    <link rel="stylesheet" href="style.css">
+    <script src="unityloader.js"></script>
+    <script src="unityprogress.js"></script>
+    <link rel="icon" type="image/png" href="/new logo.png">
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "build.json", {onProgress: UnityProgress,Module:{onRuntimeInitialized: function() {UnityProgress(gameInstance, "complete")}}});
+    </script>
+  </head>
+  <body bgcolor="black">
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 100%; height: 95%; margin: auto;"></div>
+	  <div class="footer">
+	            <div class="webgl-logo"></div>
+	            <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+	        </div>
+    </div>
+  </body>
+</html>

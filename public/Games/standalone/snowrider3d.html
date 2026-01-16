@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <base href="https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/dskjfoisjfsjio.github.io@main/Games/standalone/snowrider3d-main/">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Snow Rider 3D</title>
+		<link rel="stylesheet" href="themes.css" />
+		<script src="UnityProgress.js"></script>
+		<link rel="icon" href="/new logo.png">
+
+		<script src="UnityLoader.js"></script>
+		<script>
+			var gameInstance = UnityLoader.instantiate("gameContainer", "SnowRider3D-gd-1.json", {
+				onProgress: UnityProgress,
+				Module: {
+					onRuntimeInitialized: function () {
+						UnityProgress(gameInstance, "complete");
+					},
+				},
+			});
+		</script>
+	</head>
+	<body>
+		<div class="webgl-content"><div id="gameContainer" style="width: 100%; height: 100%; margin: auto"></div></div>
+    </body>
+</html>

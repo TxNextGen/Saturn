@@ -1,0 +1,3352 @@
+[
+  {
+    "title": "10 Minutes Till Dawn",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/10%20minutes.jpg",
+    "description": "10 Minutes Till Dawn is an action bullet-hell roguelite game.",
+    "path": "Games/standalone/10minutestilldawn.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "1v1 LOL",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/1v1lol.jpg",
+    "description": "Fight to survive in this epic multiplayer Battle Royale",
+    "path": "Games/standalone/1v1lol.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "2048",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/2048.png",
+    "description": "Join the tiles and reach 2048!",
+    "path": "Games/standalone/2048.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "2048 Cupcakes",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/2048%20cupcakes.avif",
+    "description": "Join the cupcakes and reach the cupcake that represents 2048!",
+    "path": "Games/standalone/2048cupcakes.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+
+  {
+    "title": "60 Second Burger Run",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/60 second burger run.jpg",
+    "description": "60 Second Burger Run is a fast-paced arcade game where you must prepare and serve burgers to customers within a time limit.",
+    "path": "Games/ruffle/burgerrun.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "A Dance of Fire and Ice",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/fireandice/a-dance-of-fire-and-ice/a-dance-of-fire-and-ice-icon-1.jpg",
+    "description": "A Dance of Fire and Ice is a challenging, one-button rhythm game where players guide two orbiting planets down a winding path by tapping the screen or pressing a key in sync with the music",
+    "path": "Games/standalone/fireandice.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Achievement Unlocked",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/achievement%20unlocked%202.jpg",
+    "description": "Achievement Unlocked is a quirky and addictive platformer game where you earn achievements for completing various tasks and challenges.",
+    "path": "Games/ruffle/achievementunlocked.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Achievement Unlocked 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/achievement%20unlocked%202.jpg",
+    "description": "The sequel to Achievement Unlocked!",
+    "path": "Games/ruffle/achievementunlocked2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Achievement Unlocked 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/achievement%20unlocked%203.jpg",
+    "description": "The third installment in the Achievement Unlocked series!",
+    "path": "Games/ruffle/achievementunlocked3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Adventure Capitalist",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/adventure.png",
+    "description": "Adventure Capitalist is an idle clicker game where you invest in various businesses to earn money and grow your empire.",
+    "path": "Games/standalone/adventure.html",
+    "category": "Idle",
+    "iframe": true
+  },
+  {
+    "title": "Adventure Time Jumping Finn",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/jumpingfinn.jpg",
+    "description": "Join the Adventure Time crew in a new mission in the Jumping Finn game!",
+    "path": "Games/ruffle/jumpingfinn.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Age of Defense",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/age%20of%20defense.jpg",
+    "description": "Age of Defense is a tower defense game where you must defend your base from waves of enemies.",
+    "path": "Games/ruffle/ageofdefense.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Age of War",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/age%20of%20war.jpg",
+    "description": "The classic Age of War game.",
+    "path": "Games/ruffle/ageofwar.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Age of War 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/age%20of%20war%202.jpg",
+    "description": "The sequel to the classic Age of War game.",
+    "path": "Games/ruffle/ageofwar2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+
+
+  {
+    "title": "Alien Hominid",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/alien.png",
+    "description": "Alien Hominid is a platformer game where you play as an alien trying to navigate through various levels and obstacles.",
+    "path": "Games/ruffle/alien.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Among Us (Web Version)",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/among%20us.webp",
+    "description": "Fanmade version of the popular mobile game Among Us.",
+    "path": "Games/standalone/amongus.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Angry Birds",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/angrybirds.webp",
+    "description": "Play the classic Angry Birds game now!",
+    "path": "Games/standalone/Angry Birds.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Angry Birds Halloween",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/angry%20birds%20halloween.jpg",
+    "description": "Get into the spooky spirit with Angry Birds Halloween!",
+    "path": "Games/ruffle/angrybirdshalloween.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Angry Birds Showdown",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/angry%20birds%20showdown.webp",
+    "description": "Play Angry Birds Showdown, an exciting twist on the classic Angry Birds game!",
+    "path": "Games/standalone/angrybirdsshowdown.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Angry Birds Space",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/angrybirdsspace.webp",
+    "description": "The classic bird-slinging action, now with zero-gravity mechanics in outer space!",
+    "path": "Games/ruffle/angrybirdsspace.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Apple Shooter",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/apple%20shooter.jpg",
+    "description": "Shoot the apple right on top of your friends head but be careful not to hurt your friend.",
+    "path": "Games/ruffle/appleshooter.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Archery World Tour",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/world%20tour.jpg",
+    "description": "Focus... relax... release. Aim your shot carefully and use the wind to hit the bullseye in Archery World Tour.",
+    "path": "Games/standalone/worldtour.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Axis Football League",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/axis%20football.webp",
+    "description": "Axis Football League is a classic football game where you can create your own team and compete against other teams.",
+    "path": "Games/ruffle/axisfootballleague.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "B-Cubed",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/b-cubed.webp",
+    "description": "Rotate the block to pass through every tile and reach the finish square in this tricky puzzle game.",
+    "path": "Games/ruffle/bcubed.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Bad Ice Cream",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/bad ice cream.jpg",
+    "description": "Bad Ice Cream is a fun and addictive arcade game where you control an ice cream character and navigate through various levels while avoiding enemies and collecting fruit.",
+    "path": "Games/standalone/badicecream.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bad Ice Cream 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/bad ice cream 2.png",
+    "description": "The sequel to Bad Ice Cream!",
+    "path": "Games/standalone/badicecream2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bad Ice Cream 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/bad ice cream 3.png",
+    "description": "The third installment in the Bad Ice Cream series!",
+    "path": "Games/standalone/badicecream3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bad Piggies",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bad%20piggies.jpg",
+    "description": "OiNk! Build makeshift contraptions from a huge collection of parts and make it to the goal without blowing your vehicle to pieces!",
+    "path": "Games/ruffle/badpiggies.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bad Time Simulator",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bad%20time.jpg",
+    "description": "Fight sans in this difficult simulator!",
+    "path": "Games/standalone/badtime.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Baldis Basics",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/baldi.jpg",
+    "description": "Baldi's Basics is a puzzle horror game which satirizes 1990s educational games.",
+    "path": "Games/standalone/baldi.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Banjo-Kazooie",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/banjo.webp",
+    "description": "The ultimate 3D platforming adventure! Join Banjo and Kazooie to stop the witch Gruntilda.",
+    "path": "Games/emulated/N64/banjo.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Basket Random",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/basket%20random.jpg",
+    "description": "Basket Random is a 2-player retro pixel game with ragdoll physics.",
+    "path": "Games/standalone/basketrandom.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Bejeweled Twist",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bejewled%20twist.jpg",
+    "description": "Pin and match explosive gems for shockwaves of fun.",
+    "path": "Games/ruffle/bejeweledtwist.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Bendy & The Ink Machine",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/bendy%20and%20the%20ink%20machine.jpg",
+    "description": "The classic Bendy is a first person horror game where you uncover the dark secrets about the abandoned factory.",
+    "path": "Games/standalone/bendy.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Big Tower Tiny Square",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/big%20tower.png",
+    "description": "Big Tower Tiny Square is all about fantastic timing and big jumps.",
+    "path": "Games/standalone/bigtower.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Big Tower Tiny Square 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/big%20tower%202.jpg",
+    "description": "The sequel to Big Tower Tiny Square!",
+    "path": "Games/standalone/bigtower2.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Bitlife",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bitlife.webp",
+    "description": "Start a virtual life and make your own decisions!",
+    "path": "Games/standalone/bitlife.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Block Blast",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/block%20blast.jpg",
+    "description": "Block Blast is a Tetris-like puzzle game, challenging to eliminate as many blocks as possible in a limited space to get a higher score.",
+    "path": "Games/standalone/blockblast.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Block the Pig",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/block the pig.png",
+    "description": "Block the Pig is a fun and addictive puzzle game where you must block the pig from escaping the pen by placing blocks strategically.",
+    "path": "Games/standalone/blockthepig.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Blockpost",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/blockpost.jpg",
+    "description": "Play this classic 3D shooter now!",
+    "path": "Games/standalone/BlockPost.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bloons",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bloons.jpg",
+    "description": "Bloons is a fun arcade game in which you need to pop as many bloons as possible.",
+    "path": "Games/ruffle/bloons.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Player Pack 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/playerpack.jpg",
+    "description": "More challenging levels of bloon-popping action! Use your darts wisely.",
+    "path": "Games/ruffle/bloonsplayerpack2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Player Pack 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/playerpack3.webp",
+    "description": "The third installment of the fan-made player packs with creative and difficult levels.",
+    "path": "Games/ruffle/bloonsplayerpack3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Super Monkey",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bloons%20super%20monkey.jpg",
+    "description": "Bloons Super Monkey is an arcade Bloons game and the first game in the Bloons Super Monkey series.",
+    "path": "/Games/ruffle/bloonssupermonkey.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Tower Defense",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/btd.jpg",
+    "description": "Pop those balloons with strategic towers!",
+    "path": "Games/ruffle/btd.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Tower Defense 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/btd2.jpg",
+    "description": "The sequel to BTD!",
+    "path": "Games/ruffle/btd2.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Tower Defense 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/btd%203.jpg",
+    "description": "The sequel to BTD 2!",
+    "path": "Games/ruffle/btd3.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Tower Defense 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/btd%204.jpg",
+    "description": "Bloons Tower Defense 4 is a classic tower defense game initially released in Flash.",
+    "path": "/Games/ruffle/btd4.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Tower Defense 4 Expansion",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/btd%204%20expansion.webp",
+    "description": "The expansion to Bloons Tower Defense 4!",
+    "path": "Games/ruffle/btd4expansion.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Tower Defense 5",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/btd5.jpg",
+    "description": "Five-star tower defense with unrivaled depth and replayability.",
+    "path": "Games/ruffle/btd5.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Bloxorz",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bloxorz.jpg",
+    "description": "Bloxorz is a classic web-based puzzle game.",
+    "path": "Games/ruffle/bloxorz.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Bob the Robber",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/bob%20the%20robber.jpg",
+    "description": "Bob the Robber is a fun and addictive stealth game where you play as a thief trying to steal valuable items without getting caught.",
+    "path": "Games/ruffle/bobtherobber.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bowling Flash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bowling%20flash.avif",
+    "description": "Bowling Flash is a simplistic yet a simple flash game that you can enjoy.",
+    "path": "Games/ruffle/bowling.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bowmasters",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bowmasters.jpg",
+    "description": "Play Bowmasters, online for free in your browser.",
+    "path": "Games/standalone/bowmasters.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Boxing Random",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/boxing%20random.png",
+    "description": "Boxing Random is a 2-player retro pixel boxing game with ragdoll physics.",
+    "path": "Games/standalone/boxingrandom.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Breaking the Bank",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/breaking%20the%20bank.jpg",
+    "description": "Breaking the Bank is a stickman puzzle game made by Puffballs United",
+    "path": "Games/ruffle/breakingthebank.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Bubble Shooter",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/bubbleshooter.jpg",
+    "description": "Bubble Shooter is a classic puzzle game where you shoot bubbles to create matches of three or more of the same color.",
+    "path": "Games/ruffle/bubbleshooter.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Buildnow GG",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/buildnowgg.webp",
+    "description": "BuildNow GG is an exciting online multiplayer building and shooting game.",
+    "path": "Games/standalone/BuildNow.gg.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Burrito Bison",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/burrito%20bison.jpg",
+    "description": "Launch yourself into the air and crush gummy bears to escape Candy Land!",
+    "path": "Games/ruffle/burritobisonoriginal.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Burrito Bison Revenge",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/burritobisonrevenge.jpg",
+    "description": "Burrito Bison Revenge is a fun and addictive game where you play as a luchador who must defeat gummy bears and other enemies to save his beloved burrito.",
+    "path": "Games/ruffle/burritobisonrevenge.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Candy Crush",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/candy%20crush.jpg",
+    "description": "Play the classic strategy game now!",
+    "path": "Games/standalone/candycrush.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Cars Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/3dcarsimulator.avif",
+    "description": "Cars Simulator is an open-world driving game where you can explore and customize your vehicles",
+    "path": "Games/standalone/carssimulator.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Case Clicker",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/case%20clicker.webp",
+    "description": "Case Clicker is a fun and addictive game where you open cases and collect items.",
+    "category": "Idle",
+    "path": "Games/standalone/caseclicker.html",
+    "iframe": true
+  },
+  {
+    "title": "Cell Machine",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/cell machine.jpg",
+    "description": "Arrange cells. Build machines. Destroy enemies.",
+    "path": "Games/standalone/cellmachine.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Chess",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/chess.jpg",
+    "description": "Play a game of chess against the computer or a friend.",
+    "path": "Games/standalone/chess.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Choppy Orc",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/choppy%20orc.jpg",
+    "description": "Choppy Orc is a simple game about an orc that uses his axe to solve all his problems.",
+    "path": "Games/standalone/choppyorc.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "CircleO",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/circleo.webp",
+    "description": "CircleO is an addictive arcade game where you control a circle and navigate through various obstacles and challenges.",
+    "path": "Games/standalone/circleo.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Cluster Rush",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/cluster%20rush.jpg",
+    "description": "Cluster Rush is an addictive arcade game where you navigate through various obstacles and challenges.",
+    "path": "Games/standalone/clusterrush.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Color Switch",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/color%20switch.jpg",
+    "description": "Color Switch is a fun and addictive arcade game where you must navigate a ball through various obstacles by matching colors.",
+    "path": "Games/standalone/colorswitch.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Color Tunnel",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/colortunnel.jpg",
+    "description": "Color Tunnel is a fast-paced 3D arcade game.",
+    "path": "Games/standalone/colortunnel.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Connect 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/connect%204.jpg",
+    "description": "Play the board game Connect 4 now!",
+    "path": "Games/WAflash/connect4.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Cookie Clicker",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/cookieclicker.jpg",
+    "description": "Cookie Clicker is a game about making an absurd amount of cookies.",
+    "path": "Games/standalone/cookieclicker.html",
+    "category": "Idle",
+    "iframe": true
+  },
+  {
+    "title": "Crazy Cattle 3D",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/crazycattle.jpg",
+    "description": "Play Crazy Cattle 3D now!",
+    "path": "Games/standalone/crazycattle3d/index.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Crimson Room",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Crimson_Room.webp",
+    "description": "Crimson Room is a classic point-and-click escape game where players must solve puzzles and find hidden objects to escape from a locked room.",
+    "path": "Games/ruffle/crimsonroom.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Crossy Road",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/crossy%20road.jpg",
+    "description": "Play the classic Crossy Road game!",
+    "path": "Games/standalone/crossyroad.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Cubefield",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/cube%20field.jpg",
+    "description": "Cubefield is a fast-paced endless running game that tests your ability to dodge obstacles.",
+    "path": "Games/ruffle/cubefield.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Curveball",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/curveball.png",
+    "description": "Curveball is an engaging and visually distinctive online game",
+    "path": "Games/ruffle/curveball.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Cyber Cars Punk Racing",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/cybercarspunkracing.jpg",
+    "description": "Cyber Cars Punk Racing is a futuristic racing game where you can customize your vehicles and compete in high-speed races through neon-lit cityscapes.",
+    "path": "Games/standalone/cyberpunkracing.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Dadish",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/dadish.jpg",
+    "description": "Dadish is a platform game where you're a radish father who's in charge of finding his kids",
+    "path": "Games/standalone/dadish-main/index.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Dadish 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/dadish2.webp",
+    "description": "The sequel to Dadish!",
+    "path": "Games/standalone/dadish2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Dadish 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/dadish%203.png",
+    "description": "Dadish is back for his most personal adventure yet! Help him find his kids in this challenging 2D platformer.",
+    "path": "Games/standalone/dadish3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Dead Zed 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/deadzed2.jpg",
+    "description": "Dead Zed 2 is a fun and addictive zombie shooting game.",
+    "path": "Games/ruffle/deadzed2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Deal or No Deal",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/deal%20or%20no%20deal.jpg",
+    "description": "What's Your Number? Try your luck in finding the $1,000,000 briefcase in this game!",
+    "path": "Games/WAflash/dealornodeal.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Death Run 3D",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/deathrun3d.jfif",
+    "description": "Fast-paced endless runner!",
+    "path": "Games/standalone/deathrun3d.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Diner Dash Hometown Hero",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/diner%20dash.jpg",
+    "description": "On a visit to her hometown, Flo and her Grandma Florence take a stroll down memory lane.",
+    "path": "Games/ruffle/dinerdash.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Doge Miner",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/doge miner.webp",
+    "description": "Doge Miner is an idle clicker game where you mine for Dogecoin and upgrade your mining equipment to earn more coins.",
+    "path": "Games/standalone/dogeminer.html",
+    "category": "Idle",
+    "iframe": true
+  },
+  {
+    "title": "Donkey Kong Country",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/donkeykongcountry.jpg",
+    "description": "Join Donkey Kong and Diddy Kong on a jungle adventure in this classic platformer.",
+    "path": "Games/emulated/SNES/donkeykongcountry.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Donkey Kong Country 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/donkeykongcountry2.jpg",
+    "description": "Join Diddy Kong and Dixie Kong on a new adventure to rescue Donkey Kong in this classic platformer sequel.",
+    "path": "Games/emulated/SNES/donkeykongcountry2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Donkey Kong Country 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/donkeykongcountry3.webp",
+    "description": "Join Dixie Kong and Kiddy Kong on a new adventure to rescue Donkey Kong and Diddy Kong!",
+    "path": "Games/emulated/SNES/donkeykongcountry3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Donkey Kong Returns",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/donkeykong.avif",
+    "description": "Donkey Kong Returns is a platform game where you play as Donkey Kong and navigate through challenging levels.",
+    "path": "Games/ruffle/donkeykong.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Douchebag Workout",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/douchebagworkout.png",
+    "description": "Douchebag Workout is a game where you play as a douchebag loser who must change his life. ",
+    "path": "Games/ruffle/douchebagworkout.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Douchebag Workout 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/douchebagworkout2.jpg",
+    "description": "The sequel to Douchebag Workout!",
+    "path": "Games/ruffle/douchebagworkout2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Dragon vs Blocks",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/dragonvsicybricks.jpg",
+    "description": "Dragon vs Blocks is an exciting arcade game where you control a dragon and break through blocks to score points and unlock new dragons.",
+    "path": "Games/standalone/dragonvsbricks.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Drift Boss",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/drift%20boss.png",
+    "description": "Drift Boss is an exciting racing game where you control a car and drift around corners to earn points and unlock new vehicles.",
+    "path": "Games/standalone/driftboss.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Drift Hunters",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/drift%20hunters.png",
+    "description": "Drift Hunters is a thrilling car drifting game where you can customize your vehicles and perform impressive drifts on various tracks.",
+    "path": "Games/standalone/drifthunters.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Drive Mad",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/drive%20mad.png",
+    "description": "Drive Mad is a car game where you drive on a track filled with obstacles.",
+    "path": "Games/standalone/drive-mad-main/drive-mad-main/index.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ducklife.jfif",
+    "description": "The first to a legendary game series Duck Life",
+    "path": "Games/ruffle/ducklife.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ducklife2.jfif",
+    "description": "The sequel to Duck Life",
+    "path": "Games/ruffle/ducklife2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ducklife3.jfif",
+    "description": "Duck Life but with a twist, evolution!",
+    "path": "Games/ruffle/ducklife3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ducklife4.jfif",
+    "description": "The finale to the Duck Life Story!",
+    "path": "Games/ruffle/ducklife4.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life Battle",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/duck%20life%20battle.webp",
+    "description": "The latest game in the Duck Life series!",
+    "path": "Games/standalone/ducklifebattle.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life Space",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/duck%20life%20space.jpg",
+    "description": "Train your duck in space!",
+    "path": "Games/standalone/ducklifespace.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Duck Life Treasure Hunt",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/duck%20life%20treasure%20hunt.jpg",
+    "description": "This time to explore the cave and find legendary treasure.",
+    "path": "Games/ruffle/treasurehunt.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Earn to Die",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/earn to die.jpg",
+    "description": "Earn to Die is an action-packed driving game where you must navigate through a zombie-infested world to reach safety.",
+    "path": "Games/standalone/earntodie.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Earthbound",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/earthbound.webp",
+    "description": "Embark on a unique RPG adventure in the quirky world of Earthbound.",
+    "path": "Games/emulated/SNES/earthbound.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Economical",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/economical.png",
+    "description": "Economical is a tricky but fun puzzle platformer.",
+    "path": "Games/standalone/economical.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Electric Man",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/electricman.webp",
+    "description": "Electric man is a classic fighting flash game",
+    "path": "Games/ruffle/electricman.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Electric Man 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/electricman2.jpg",
+    "description": "The sequel to Electric Man!",
+    "path": "Games/ruffle/electricman2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+
+  {
+    "title": "Escape Road",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/escape%20road.avif",
+    "description": "An adrenaline-pumping driving game. Evade the police for as long as possible!",
+    "path": "Games/standalone/escaperoad.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Escaping the Prison",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/escaping%20the%20prison.png",
+    "description": "Escaping The Prison is a fantastically fun stick figure game where you... Well, escape the prison",
+    "path": "Games/WAflash/escapingtheprison.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Factory Balls",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/factory%20balls.jpg",
+    "description": "In this puzzle game, your goal is to get the ball to match with the picture on the box.",
+    "path": "Games/ruffle/factoryballs.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Factory Balls 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/factory%20balls%202.jpg",
+    "description": "Factory Balls 2 is a puzzle game where your main task is to create balls that should match the ones being requested.",
+    "path": "Games/ruffle/factoryballs2.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Factory Balls 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/factory%20balls%203.jpg",
+    "description": "Factory Balls 3 challenges you to plan ahead and think sequentially.",
+    "path": "Games/ruffle/factoryballs3.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Factory Balls 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/factory%20balls%204.jpg",
+    "description": "Factory Balls 4 is the last installment in the Factory Balls series.",
+    "path": "Games/ruffle/factoryballs4.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Fancy Pants Adventure",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fancypants.png",
+    "description": "Players guide Fancy Pants Man through open levels",
+    "path": "Games/ruffle/fancypants.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Fancy Pants Adventure 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fancy%20pants%202.png",
+    "description": "The Fancy Pants Adventures: World 2 is an epic adventure platformer created by Brad Borne.",
+    "path": "Games/WAflash/fancypants2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Fancy Pants Adventure 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fancy%20pants%203.png",
+    "description": "You will embark on an epic adventure to help the king.",
+    "path": "Games/ruffle/fancypants3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Fireboy and Watergirl",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fireboy.jpg",
+    "description": "Team up to solve puzzles!",
+    "path": "Games/ruffle/foresttemple.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights At Freddy's",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fnaf.jpg",
+    "description": "Play the classic horror game now!",
+    "path": "Games/standalone/fnaf.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights At Freddy's 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fnaf2.jpg",
+    "description": "The sequel to Five Nights At Freddys!",
+    "path": "Games/standalone/fnaf2.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights At Freddy's 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fnaf3.jpg",
+    "description": "The third installment in the Five Nights At Freddy's series!",
+    "path": "Games/standalone/fnaf3.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights At Freddy's 4",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/fnaf-4/thumb.png",
+    "description": "The fourth installment in the Five Nights At Freddy's series!",
+    "path": "Games/standalone/fnaf4.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights At Freddy's 4 Hallowen Edition",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/fnaf4halloween.jpg",
+    "description": "The Halloween Edition of Five Nights At Freddy's 4!",
+    "path": "Games/standalone/fnaf4halloween.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "FL Tron",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fl%20tron.avif",
+    "description": "FL Tron is a classic arcade game where you control a light cycle and try to trap your opponent.",
+    "path": "Games/ruffle/fltron.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Flappy Bird",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/flappybird.png",
+    "description": "Play the classic Flappy Bird mobile game right here on your computer!",
+    "path": "Games/standalone/flappybird.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Flappy Dunk",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/flappy%20dunk.webp",
+    "description": "Flappy Dunk is a fun and addictive arcade game where you control a basketball and try to score points by passing through hoops.",
+    "path": "Games/standalone/Flappy Dunk.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Fleeing the Complex",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fleeing%20the%20complex.jpg",
+    "description": "You are trapped inside a small prison cell, and you have to escape not just your cell, but the whole prison! If you fail, death is awaiting you...",
+    "path": "Games/ruffle/fleeingthecomplex.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "FNAF: Ultimate Custom Night",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/ultimatecustomnight.webp",
+    "description": "Ultimate Custom Night is a horror game where you are able to customize how the night plays out.",
+    "path": "Games/standalone/ultimatecustomnight.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Freegear",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/freegear.jpg",
+    "description": "Test your agility and reaction in high-speed racing competitions.",
+    "path": "Games/WAflash/freegear.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Friday Night Funkin",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/friday.webp",
+    "description": "Friday Night Funkin is a rhythm-based game where players must hit the right notes in time with the music to win battles against various characters.",
+    "path": "Games/standalone/fridaynightfunkin.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Frogger",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/frogger.jpg",
+    "description": "Frogger is a classic arcade game where you guide a frog across a busy road and a river full of hazards.",
+    "path": "Games/ruffle/frogger.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Frontline Defense",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/frontline.avif",
+    "description": "Frontline Defense is a tower defense game where you must defend your base from waves of enemies.",
+    "path": "Games/ruffle/frontlinedefense.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Fruit Ninja",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/fruit%20ninja.jpg",
+    "description": "Slice as much fruit as you can and avoid slicing the bombs in this classic mobile game!",
+    "path": "Games/standalone/fruitninja.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Galaga",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/galaga.jpg",
+    "description": "Play the classic Galaga game now!",
+    "path": "Games/standalone/galaga.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Galaga Flash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/galagaf.jpg",
+    "description": "The Robotube Games version of Galaga",
+    "path": "Games/ruffle/galagaflash.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Geometry Dash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/geometrydash.jpg",
+    "description": "Replication of the classic game Geometry Dash",
+    "path": "Games/standalone/gdlite.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Geometry Dash Remastered",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/geometry%20dash%20remastered.jpg",
+    "description": "A remastered version of the classic mobile game Geometry Dash",
+    "path": "Games/standalone/gdremastered.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Gladihoppers",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/gladihoppers.jpg",
+    "description": "Gladihoppers is an action game where you fight in different arenas as a gladiator!",
+    "path": "Games/standalone/gladihoppers.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Google Feud",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/googlefeud.png",
+    "description": "Google Feud is a challenging quiz game that's easy to play, but difficult to master.",
+    "path": "Games/standalone/googlefeud.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Granny",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/granny.jpg",
+    "description": "Granny is a horror game where you need to escape from a creepy house and on top of that, a crazy grandma.",
+    "path": "Games/standalone/granny.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Granny: Chapter 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/granny%202.jpg",
+    "description": "The sequel to Granny where its even more difficult than before. You must evade both granny and grandpa and escape the house.",
+    "path": "Games/standalone/Granny 2.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Gravitee",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/gravitee.webp",
+    "description": "Gravitee is an arcade game where you control a spaceship and navigate through various obstacles and challenges in space.",
+    "path": "Games/ruffle/gravitee.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Gravitee 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/gravitee 2.jpg",
+    "description": "The sequel to Gravitee!",
+    "path": "Games/ruffle/gravitee2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Grindcraft",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/grindcraft.jpg",
+    "description": "Grindcraft is a fun and addictive crafting game where you gather resources, craft items, and build your own world.",
+    "path": "Games/standalone/grindcraft.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Grow Cube",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/grow.avif",
+    "description": "Grow Cube is a puzzle game where you need to grow the cube by clicking on the right objects in the right order.",
+    "path": "Games/ruffle/growcube.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Grow Island",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/growisland.jpg",
+    "description": "Grow Island is a puzzle game where you need to grow the island by clicking on the right objects in the right order.",
+    "path": "Games/ruffle/growisland.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Grow Valley",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/grow.jpg",
+    "description": "Grow Valley is a puzzle game where you need to grow the valley by clicking on the right objects in the right order.",
+    "path": "Games/ruffle/growvalley.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Happy Wheels",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/happy%20wheelsa.jpg",
+    "description": "Happy Wheels is a side-scrolling ragdoll physics-based platform browser game developed and published by Fancy Force.",
+    "path": "Games/standalone/happywheels.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Helix Jump",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/helix%20jump.jpg",
+    "description": "Helix Jump is a 3d arcade game",
+    "path": "Games/standalone/helixjump.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Highway Racer 3D",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/highway%20racer%203d.jpg",
+    "description": "Highway Racer 3D is a fast-paced, endless arcade driving game where you navigate busy highways and dodge traffic.",
+    "path": "Games/standalone/highwayracer3D.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Hobo",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/hobo.webp",
+    "description": "The classic brawler game. Help Hobo survive the streets!",
+    "path": "Games/ruffle/hobo.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Hole IO",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Hole-Io.avif",
+    "description": "Play the classic Hole IO game now/1",
+    "path": "Games/standalone/holeio.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Idle Breakout",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/idle%20breakout.png",
+    "description": "Build the ultimate brick-busting machine to destroy billions of bricks.",
+    "path": "Games/standalone/idlebreakout.html",
+    "category": "Idle",
+    "iframe": true
+  },
+  {
+    "title": "Inflitrating the Airship",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/infiltrating%20the%20airship.jpg",
+    "description": "Can you choose wisely and help the stickman in this game to accomplish his goals?",
+    "path": "Games/ruffle/airship.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Injustice Gods Among Us",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Injustice.webp",
+    "description": "Injustice: Gods Among Us is a fighting game featuring characters from DC Comics.",
+    "path": "Games/ruffle/injustice.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Isoball",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/isoball.gif",
+    "description": "Isoball is a puzzle game where you need to build a path for the ball to reach the goal.",
+    "path": "Games/ruffle/isoball.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Jetpack Joyride",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/jetpack.jpg",
+    "description": "Jetpack Joyride is an endless runner game developed by Halfbrick Studios",
+    "path": "Games/standalone/jetpack.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Johnny Upgrade",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/johnny%20upgrade.jpg",
+    "description": "Johnny Upgrade is a cartoon super hero with no skills at all! Collect coins in order to afford the upgrades you need.",
+    "path": "Games/ruffle/johnnyupgrade.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Kaboomz",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/kaboomz.jpg",
+    "description": "Kaboomz is a fun and addictive puzzle game where you must pop bubbles by matching colors and creating chain reactions.",
+    "path": "Games/ruffle/kaboomz.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "League Bowling",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/league%20bowling.jpg",
+    "description": "League Bowling is a classic flash game where your goal is to win.",
+    "path": "Games/ruffle/leaguebowling.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Learn to Fly",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/learn%20to%20fly.jpg",
+    "description": "This game introduces the protagonist, a penguin that learns how to fly with the use of a glider and a rocket.",
+    "path": "Games/ruffle/learntofly.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Learn to Fly 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/learn%20to%20fly%202.jpg",
+    "description": "Learn to Fly 2 is a launcher game where you play as a penguin attempting to fly using a ramp and various gadgets.",
+    "path": "/Games/ruffle/learntofly2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Learn to Fly 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/learn%20to%20fly%203.jpg",
+    "description": "In Learn to Fly 3, you build, customize and upgrade a spaceship.",
+    "path": "Games/ruffle/learntofly3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Learn to Fly Idle",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/learntoflyidle.jpg",
+    "description": "Learn to Fly Idle is an idle game, as the title suggests. It requires you to go out and destroy Obstacles with a cannon.",
+    "path": "Games/WAflash/learntoflyidle.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Lemonade Stand",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/lemonadestand.jpg",
+    "description": "Lemonade Stand is a classic business simulation game where you manage your own lemonade stand.",
+    "path": "Games/ruffle/lemonade.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Madness Accelerant",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Madnessaccelerant.webp",
+    "description": "Madness Accelerant is a fast-paced action game set in the Madness universe.",
+    "path": "Games/ruffle/madnessa.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Madness Project Nexus",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/madness.jpg",
+    "description": "Defeat Project Nexus and the Nexus Training Program",
+    "path": "Games/ruffle/madness.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Magic Tiles 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/magic%20titles%203.jpg",
+    "description": "Experience the thrill of playing piano like a pro with Magic Tiles 3",
+    "path": "Games/standalone/magictiles3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Mahjong Gardens",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/mahjong-gardens.png",
+    "description": "Mahjong Gardens is a classic tile-matching game where you must clear the board by matching pairs of tiles.",
+    "path": "Games/ruffle/mahjonggardens.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Mahjong Titans",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/mahjong-titans.webp",
+    "description": "Mahjong Titans is a classic tile-matching game where you must clear the board by matching pairs of tiles.",
+    "path": "Games/ruffle/mahjongtitans.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Mahjong Tower",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/mahjong-tower.webp",
+    "description": "Mahjong Tower is a classic tile-matching game where you must clear the board by matching pairs of tiles.",
+    "path": "Games/ruffle/MahjongTower.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Mario & Luigi: Superstar Saga",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/superstarsaga.jpg",
+    "description": "Embark on a hilarious RPG adventure through the Beanbean Kingdom with Mario and Luigi!",
+    "path": "Games/emulated/GBA/superstarsaga.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Mario Combat",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/mariocombat.webp",
+    "description": "Mario Combat is a fast-paced action game where you control Mario and battle against various enemies.",
+    "path": "Games/ruffle/mariocombat.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Mario Kart 64",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/kart64.jpg",
+    "description": "Race against the other racers and prove yourseld victorious in this classic game.",
+    "path": "Games/emulated/N64/mariokart64.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Mario Kart Super Circuit",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mariokartsupercircuit.jpg",
+    "description": "The classic GBA racing experience. Race through 40 classic tracks and compete to win it all!",
+    "path": "Games/emulated/GBA/mariokartsupercircuit.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Max Dirt Bike",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/maxdirtbike.webp",
+    "description": "Max Dirt Bike is a fast-paced racing game where you control a dirt bike and navigate through various tracks.",
+    "path": "Games/ruffle/maxdirtbike.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Minecraft Tower Defense",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/minecrafttower.jpg",
+    "description": "Set your path, pick your weapons, and DEFEND.",
+    "path": "Games/ruffle/minecrafttowerdefense.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Minecraft Tower Defense 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/minecraft%20tower%20defense%202.webp",
+    "description": "The sequel to Minecraft Tower Defense where your goal is to DEFEND.",
+    "path": "Games/ruffle/minecrafttowerdefense2.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Monkey Mart",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/monkey%20mart.jpg",
+    "description": "Monkey Mart is a casual, simulation game where players manage and grow their own virtual supermarket.",
+    "path": "Games/standalone/monkeymart.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Mother 1 + 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mother.jpg",
+    "description": "Experience the beginning of the iconic series in this classic RPG including the sequel!",
+    "path": "Games/emulated/GBA/mother.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Mother 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mother%203.jpg",
+    "description": "Experience the emotional final chapter of the Mother trilogy.",
+    "path": "Games/emulated/GBA/mother3.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Motherload",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/motherload.jpg",
+    "description": "Motherload is a classic mining game ",
+    "path": "Games/ruffle/motherload.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Moto-X3M Pool Party",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/moto%20x3m%20pool%20party.jpg",
+    "description": "Summer Version of Moto-X3M",
+    "path": "Games/standalone/motox3mpoolparty.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Moto-X3M Spooky Land",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/motospooky.png",
+    "description": "Halloween Version of Moto-X3M",
+    "path": "Games/standalone/motox3mspookyland.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Murder",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/murder.webp",
+    "description": "You wish to assassinate the king and take his place to rule over the kingdom.",
+    "path": "Games/ruffle/murder.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "My Friend Pedro",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/my%20friend%20pedro.jpg",
+    "description": "Your friend Pedro is a banana who is very supportive of your plan to shoot bad guys while flying around the air.",
+    "path": "Games/ruffle/myfriendpedro.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "N-gon",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ngon.png",
+    "description": "N-gon is a challenging and addictive arcade game where you control a shape and navigate through a series of obstacles.",
+    "path": "Games/standalone/ngon.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Neon Rider",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/neon%20rider.png",
+    "description": "Navigate your sci-fi bike through a series of hand-crafted levels.",
+    "path": "Games/ruffle/neonrider.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Nyan Cat Lost in Space",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/nyancat.jpg",
+    "description": "Guide Nyan Cat through the galaxy in his never-ending quest for YUMMIES!",
+    "path": "Games/ruffle/nyancatlostinspace.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Om Nom Bounce",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/om%20nom%20bounce.jpg",
+    "description": "Help Om Nom bounce through the levels to collect candy!",
+    "path": "Games/standalone/omnombounce.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Pacman",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pacman.png",
+    "description": "Play the classic arcade game Pacman right here on your computer!",
+    "path": "Games/ruffle/pacman.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Pacman Original",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/pacman.webp",
+    "description": "The original pacman game!",
+    "path": "Games/standalone/pacmanoriginal.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Pacman World",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/pacmanworld.jpg",
+    "description": "Pacman World is a fun and challenging Pacman game.",
+    "path": "Games/emulated/GBA/pacmanworld.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Pacxon",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pacxon.jpg",
+    "description": "Survive as many rounds as possible in this pac man inspired game!",
+    "path": "Games/ruffle/pacxon.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Pacxon Deluxe",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pacxondeluxe.jpg",
+    "description": "The sequel to Pacxon!",
+    "path": "Games/ruffle/pacxondeluxe.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Pandemic 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pandemic%202.jpg",
+    "description": "In this game your goal is to infect everyone in the world!",
+    "path": "Games/ruffle/pandemic2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Papa Louie: When Pizza Attacks!",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/papa%20louie.jpeg",
+    "description": "Papa Louie: When Pizza Attacks! is a fun and addictive platformer game where you play as Papa Louie and rescue your customers from evil pizzas.",
+    "path": "Games/ruffle/whenpizzaattacks.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Papas Bakeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20bake.jpg",
+    "description": "Papa\u2019s back with a brand new pie shop - Papa\u2019s Bakeria!",
+    "path": "Games/ruffle/papasbake.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Burgeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20burgeria.jpg",
+    "description": "Papa has left you in charge of his prized burger-building establishment.",
+    "path": "Games/ruffle/papasburgeria.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Cheeseria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20cheese.webp",
+    "description": "Papa\u2019s Cheeseria is a restaurant game where you build grilled cheese sandwiches for customers.",
+    "path": "Games/ruffle/papascheese.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Cupcakeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papascupcake.jpg",
+    "description": "Papa's Cupcakeria is a casual restaurant game in which you make cupcakes for customers.",
+    "path": "Games/ruffle/papascupcake.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Donuteria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20donut.jpg",
+    "description": "Papa\u2019s Donuteria is a casual restaurant game in which you build delicious donuts for customers.",
+    "path": "Games/ruffle/papasdonut.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Freezeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20freezeria.jpg",
+    "description": "Build your customer's favorite ice cream sundae to spec, and they'll be happy with the product.",
+    "path": "Games/standalone/papasfreezeria.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Hotdoggeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20hotdog.jpg",
+    "description": "In Papa's Hot Doggeria you'll need to grill up juicy Hot Dogs.",
+    "path": "Games/WAflash/papashotdog.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Pancakeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20pancake.jpg",
+    "description": "It is up to you to run every single aspect of the restaurant. Take orders, pour the batter, flip the pancakes, and serve the flapjacks hot and ready to hungry customers.",
+    "path": "Games/WAflash/papaspancake.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Pastaria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20pasta.jpg",
+    "description": "Papa's Pastaria is a casual restaurant game where you take charge of an Italian restaurant and serve delectable pasta dishes.",
+    "path": "Games/ruffle/papaspasta.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Pizzeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20pizza.jpg",
+    "description": "You are playing as Roy, Papa Louie's nephew. It is up to you, Roy, to take control of the pizzeria.",
+    "path": "Games/ruffle/papaspizza.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Scooperia",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20scooperia.jpg",
+    "description": "The last addition to the papas series. Grab your ice cream scooper and get ready to serve up some tasty frozen treats in Papas Scooperia.",
+    "path": "Games/WAflash/papascoop.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Sushiria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sushi.jpg",
+    "description": "Papas Sushiria is a casual restaurant game in which you create sushi for customers.",
+    "path": "Games/ruffle/papas sushi.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Taco Mia",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20taco.jpg",
+    "description": "Build tasty tacos in Papa\u2019s Taco Mia!, a casual restaurant game in the Papa Louie series.",
+    "path": "Games/ruffle/papastaco.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Papas Wingeria",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/papas%20wing.jpg",
+    "description": "Welcome to Papa's Wingeria, Here you will have to keep your picky customers happy as they order tons of wings and things.",
+    "path": "Games/WAflash/papaswingeria.html",
+    "category": "Cooking",
+    "iframe": true
+  },
+  {
+    "title": "Paper IO 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/paperio2.jpg",
+    "description": "Enter a colorful and dynamic world where strategy, skill, and cunning are your greatest allies.",
+    "path": "Games/standalone/paperio2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Parking Fury",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/parking%20fury.png",
+    "description": "Test your driving and parking skills in this challenging top-down car game.",
+    "path": "Games/standalone/parkingfury.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Parking Fury 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/parking%20fury%202.jpg",
+    "description": "The sequel with even more difficult parking maneuvers and new vehicles.",
+    "path": "Games/standalone/parkingfury2.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Parking Fury 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/parking%20fury%203.webp",
+    "description": "Master the art of night-time parking in the third installment of the series.",
+    "path": "Games/standalone/parkingfury3.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Plants Vs Zombies",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/plantsvszombies.jpg",
+    "description": "Play the demo of this classic game now!",
+    "path": "Games/ruffle/plantsvszombies.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Pokemon Emerald Version",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/emerald.avif",
+    "description": "Play the classic Pokemon Emerald Version game now!",
+    "path": "Games/emulated/GBA/emeraldversion.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Pokemon Fire Red Version",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/firered.jpg",
+    "description": "Play the classic Pokemon Fire Red Version game now!",
+    "path": "Games/emulated/GBA/fireredversion.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Pokemon Leaf Green Version",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/leafgreen.jpg",
+    "description": "Play the classic Pokemon Leaf Green Version game now!",
+    "path": "Games/emulated/GBA/leafgreenversion.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Pokemon Ruby Version",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ruby.jpg",
+    "description": "Play the classic Pokemon Ruby Version game now!",
+    "path": "Games/emulated/GBA/rubyversion.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Pokemon Sapphire Version",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/sapphire.webp",
+    "description": "Play the classic Pokemon Sapphire Version game now!",
+    "path": "Games/emulated/GBA/sapphireversion.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "Polytrack",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/polytrack.jpg",
+    "description": "PolyTrack is a low-poly racing game with loops, jumps and high speeds.",
+    "path": "Games/standalone/polytrack.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Poppit",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/poppit.jpg",
+    "description": "Poppit is an awesome puzzle game in which you must match three or more of the same color balloon together and pop them.",
+    "path": "Games/ruffle/poppit.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Portal the Flash Version",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/portal%20the%20flash%20version.jpg",
+    "description": "In this game, you use your special physics gun to create inter-dimensional portals in-between walls and objects.",
+    "path": "Games/ruffle/portaltheflashversion.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Potty Racers",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pottyracers.jfif",
+    "description": "Your goal is to ride your potty down various hills and hurl yourself up ramps",
+    "path": "Games/ruffle/pottyracers.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Potty Racers 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pottyracers2.jfif",
+    "description": "You play as a man who has a desire to fly by a porta potty",
+    "path": "Games/ruffle/pottyracers2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Potty Racers 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/potty%20racers.jfif",
+    "description": "Potty Racers 3 is the third installment in the Potty Racers series",
+    "path": "Games/WAflash/pottyracers3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Pou",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/pou.webp",
+    "description": "Pou is a digital pet game featuring various fun mini-games.",
+    "path": "Games/standalone/pou.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "QWOP",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/qwop.webp",
+    "description": "QWOP is a classic running game where you control an athlete using the Q, W, O, and P keys to move his legs.",
+    "path": "Games/ruffle/QWOP.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Raft Wars",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/raft%20wars.jpg",
+    "description": "Raft Wars is a level-based shooting game created by Martijn Kunst",
+    "path": "Games/ruffle/raftwars.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Raft Wars 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/raft%20wars%202.webp",
+    "description": "The sequel to Raft Wars where it includes more levels and more obstacles to overcome!",
+    "path": "Games/ruffle/raftwars2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Red Ball",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/red%20ball.jpg",
+    "description": "The original Red Ball game created back in 2008.",
+    "path": "Games/ruffle/redball.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Red Ball 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/red%20ball%202.jpg",
+    "description": "Red Ball 2 is here, and he has lost his beloved crown.",
+    "path": "Games/ruffle/redball2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Red Ball 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/red%20ball%203.jpg",
+    "description": "Red Ball's girlfriend has been captured by his old nemesis.",
+    "path": "Games/ruffle/redball3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Red Ball 4",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/red%20ball%204.webp",
+    "description": "Roll, jump, and bounce through 75 exciting levels full of adventure. Make your way through tricky traps and defeat all monsters!",
+    "path": "Games/standalone/redball4.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Retro Bowl",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/retrobowl.jpg",
+    "description": "Retro Bowl is the perfect game for the armchair quarterback to finally prove a point.",
+    "path": "Games/standalone/retrobowl.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Retro Bowl College",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/retro-bowl-college/unnamed.png",
+    "description": "College edition of Retro Bowl",
+    "path": "Games/standalone/retrobowlcollege.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Riddle School",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddleschool1.jfif",
+    "description": "Riddle School is a fun game of mystery and puzzle solving",
+    "path": "Games/ruffle/riddleschool.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Riddle School 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddleschool2.jfif",
+    "description": "Help Phil to escape the school in this sequel of Riddle School!",
+    "path": "Games/ruffle/riddleschool2.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Riddle School 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddleschool3.jfif",
+    "description": "Escape the school in the third episode of the riddle school series",
+    "path": "Games/ruffle/riddleschool3.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Riddle School 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddleschool4.jfif",
+    "description": "Riddle School 4 is the 4th game in the Riddle School series.",
+    "path": "Games/ruffle/riddleschool4.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Riddle School 5",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddleschool5.jfif",
+    "description": "Take control of Phil once more in his epic quest to escape his captors",
+    "path": "Games/ruffle/riddleschool5.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Riddle Transfer",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddletransfer.jfif",
+    "description": "Riddle Transfer is another in a long line of fantastic, addicting point and click adventure games where the main goal is to escape!",
+    "path": "Games/ruffle/riddletransfer.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Riddle Transfer 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/riddletransfer2.jfif",
+    "description": "Riddle Transfer 2 is the long-awaited solution to the unresolved cliffhanger of 5 years ago...",
+    "path": "Games/ruffle/riddletransfer2.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Rocket Soccer Derby",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/rocket.webp",
+    "description": "Rocket Soccer Derby is an exciting car soccer game where you drive rocket-powered cars to score goals against your opponents.",
+    "path": "Games/standalone/rocketsoccer.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Rollercoaster Creator",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/roller%20coaster.png",
+    "description": "Rollercoaster Creator is a fun game where you need to build a rollercoaster track.",
+    "path": "Games/ruffle/rollercoaster.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+
+  {
+    "title": "Run",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/run%20original.jpg",
+    "description": "Run 1 is a popular game created by a Canadian programmer in 2008 and which has been a resounding success.",
+    "path": "Games/WAflash/run.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Run 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/run%202.jpg",
+    "description": "In Run 2, you play as a gray alien running through a series of different levels.",
+    "path": "Games/WAflash/run2.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Run 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/run%203.png",
+    "description": "Run 3 is a popular endless runner game set in space.",
+    "path": "Games/standalone/run3.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Shopping Cart Hero",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/shopping%20cart%20hero.jpg",
+    "description": "Shopping Cart Hero is an arcade game that lets you run, jump on your cart and perform combined tricks!",
+    "path": "Games/ruffle/shoppingcarthero.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Shopping Cart Hero 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/shopping%20cart%20hero%202.png",
+    "description": "Shopping Cart Hero 2 is an addictive online game that challenges players to launch a shopping cart down a ramp and perform stunts while in the air",
+    "path": "Games/WAflash/shoppingcarthero2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Slender the Eight Pages",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Slender_Logo.jpg",
+    "description": "Slender the Eight Pages is a horror game where you must collect eight pages while avoiding the terrifying Slender Man.",
+    "path": "Games/standalone/slender.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Slope",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/slope.jfif",
+    "description": "Test your reflexes in this 3D endless runner!",
+    "path": "Games/standalone/slope.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Slope 2 Player",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/slope%202%20player.jpg",
+    "description": "A different version of slope that supports 2 player mode.",
+    "path": "Games/standalone/slope2player.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Snow Rider 3D",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/snowrider3d.jpg",
+    "description": "Take on the ultimate skateboarding adventure with Snow Rider and conquer icy slopes.",
+    "path": "Games/standalone/snowrider3d.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Solitaire",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/solitare.webp",
+    "description": "Solitare is a classic card game where you must arrange the cards in a specific order.",
+    "path": "Games/standalone/solitaire.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Sonic 3 & Knuckles",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sonicandknuckles.jpeg",
+    "description": "Sonic 3 & Knuckles is a combination of Sonic the Hedgehog 3 and Sonic & Knuckles.",
+    "path": "Games/sonic-games/sonicthehedgehog3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic Advance",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/sonicadvance.jpg",
+    "description": "Sonic Advance is a platform game featuring Sonic the Hedgehog.",
+    "path": "Games/emulated/GBA/sonicadvance.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic Advance 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/sonicadvance2.png",
+    "description": "Sonic Advance 2 is the sequel to Sonic Advance, featuring new levels and characters.",
+    "path": "Games/emulated/GBA/sonicadvance2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic Advance 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/sonicadvance3.jpg",
+    "description": "Sonic Advance 3 is the final game in the Sonic Advance series.",
+    "path": "Games/emulated/GBA/sonicadvance3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic CD",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/sonic%20cd.webp",
+    "description": "The original Sonic CD as you remember. With hard levels, bosses, and easter eggs.",
+    "path": "Games/standalone/soniccd.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic Flash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sonic.jpg",
+    "description": "Play the Ultimate Flash Sonic game to join Sonic in a classic platformer adventure!",
+    "path": "Games/WAflash/sonicultimate.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic the Hedgehog",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sonicthehedgehog.png",
+    "description": "Sonic the Hedgehog is a classic platform game featuring the iconic blue hedgehog.",
+    "path": "Games/sonic-games/sonicthehedgehog.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Sonic the Hedgehog 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sonicthehedgehog2.png",
+    "description": "Sonic the Hedgehog 2 is the sequel to the original Sonic the Hedgehog game.",
+    "path": "Games/sonic-games/sonicthehedgehog2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Soundboard",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/soundboard.png",
+    "description": "A soundboard with various sound effects and music clips.",
+    "path": "Apps/soundboard.html",
+    "category": "Apps",
+    "iframe": true
+  },
+  {
+    "title": "Space is Key",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/space%20is%20key.png",
+    "description": "Get through each level of this REALLY HARD obstacle course.",
+    "path": "Games/ruffle/spaceiskey.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Space is Key 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/space%20is%20key%202.png",
+    "description": "The sequel to the challenging game Space is Key!",
+    "path": "Games/ruffle/spaceiskey2.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Space Waves",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/spacewave.webp",
+    "description": "Control the arrow to avoid obstacles, play through levels, and reach the finish!",
+    "path": "Games/standalone/spacewaves.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Sprinter",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sprinter.jpg",
+    "description": "Sprint with fury to the finish line in this classic Flash game from Gamedesign.jp.",
+    "path": "Games/ruffle/sprinter.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Stack",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/stack.jpg",
+    "description": "Your goal is to build the highest tower you can.",
+    "path": "Games/standalone/stack.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Station 141",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/station 141.png",
+    "description": "A short old-school FPS with fast gameplay and punchy weapons.",
+    "path": "Games/standalone/station141.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Stealing the Diamond",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/stealing%20the%20diamond.jpg",
+    "description": "Stealing The Diamond is another in a series of amazing stick figure adventure games.",
+    "path": "Games/ruffle/stealingthediamond.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Stick War",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Stick_War_1_Menu.webp",
+    "description": "Stick War is a popular strategy game where players control an army of stick figures to conquer territories and defeat enemies.",
+    "path": "Games/ruffle/stickwar.html",
+    "category": "Strategy",
+    "iframe": true
+  },
+  {
+    "title": "Stickman Golf",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/stickman%20golf.jpg",
+    "description": "Stickman Golf is a fun and addictive golf game where you control a stickman and try to get the ball into the hole in as few strokes as possible.",
+    "path": "Games/standalone/stickmangolf.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Stickman Hook",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/stickman-hook/unnamed.jpg",
+    "description": "Swing through levels and test your skills in this exciting game!",
+    "path": "Games/standalone/stickmanhook.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Strike Force Heros",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/Strike%20Force%20Heros.jpg",
+    "description": "The original version of the classic Strike Force Heros game.",
+    "path": "Games/ruffle/strikeforceheros.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Strike Force Heros 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/heros%202.jpg",
+    "description": "The sequel to Strike Force Heros.",
+    "path": "Games/ruffle/strikeforceheros2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Strikeforce Kitty",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/strike.webp",
+    "description": "Strikeforce Kitty is an action-packed game where you play as a heroic cat on a mission to save the world from evil forces.",
+    "path": "Games/ruffle/strikeforcekitty.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/subway%20surfers.jpg",
+    "description": "Play one of the best mobile games ever made right in your browser.",
+    "path": "Games/standalone/subwaysurfers.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers Havana",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/subway%20surfers%20havana.webp",
+    "description": "Explore the colorful and historic streets of Havana! Keep the run going through this beautiful Caribbean city.",
+    "path": "Games/standalone/subwaysurfershavana.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers Houston",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subway%20surfers%20houston.webp",
+    "description": "Dash through the space-themed subways of Houston in this world tour stop.",
+    "path": "Games/standalone/subwaysurfershouston.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers Miami",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/Miami2019Icon.webp",
+    "description": "Surf through the sun-soaked streets of Miami! Dodge palm trees and pink flamingos in this classic world tour stop.",
+    "path": "Games/standalone/subwaysurfersmiami.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers Winter Holiday",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subway%20surfers%20winter%20holiday.webp",
+    "description": "Celebrate the season by surfing through a snowy wonderland in this holiday special.",
+    "path": "Games/standalone/subwaysurferswinterholiday.html",
+    "category": "Runner",
+    "iframe": true
+  },
+
+  
+  {
+    "title": "Subway Surfers London",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subwaysurferslondon.webp",
+    "description": "Dash through the tracks of London in this world tour edition.",
+    "path": "Games/standalone/subwaysurferslondon.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers Mexico",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subwaysurfersmexico.webp",
+    "description": "Experience the vibrant streets of Mexico City in your endless run.",
+    "path": "Games/standalone/subwaysurfersmexico.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers Monaco",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subwaysurfersmonoco.jpg",
+    "description": "Run through the luxurious streets of Monaco in this classic runner.",
+    "path": "Games/standalone/subwaysurfersmonoco.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Subway Surfers New Orleans",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subwaysurfersneworleans.webp",
+    "description": "Dash through the spooky and festive tracks of New Orleans.",
+    "path": "Games/standalone/subwaysurfersneworleans.html",
+    "category": "Runner",
+    "iframe": true
+  },
+    
+  {
+    "title": "Subway Surfers Zurich",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/subwaysurferszurich.webp",
+    "description": "Explore the snowy and scenic tracks of Zurich in this world tour stop.",
+    "path": "Games/standalone/subwaysurferszurich.html",
+    "category": "Runner",
+    "iframe": true
+  },
+
+  {
+    "title": "Sugar Sugar",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sugar%20sugar.png",
+    "description": "Sugar, Sugar is very much a strategic puzzle game.",
+    "path": "Games/WAflash/sugarsugar.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Sugar Sugar 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/sugar%20sugar%202.png",
+    "description": "The sequel to Sugar Sugar",
+    "path": "Games/ruffle/sugarsugar2.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Super Liquid Soccer",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/liquid.jpg",
+    "description": "Experience endless fun with Super Liquid Soccer Game!",
+    "path": "Games/standalone/superliquidsoccer.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario 64",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/super mario 64.webp",
+    "description": "Join Mario on his quest to save Princess Peach in this classic 3D platformer.",
+    "path": "Games/emulated/N64/supermario64.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario Flash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/super%20mario%20flash.jpg",
+    "description": "Super Mario Flash is based on the Nintendo game Super Mario Bros.",
+    "path": "Games/ruffle/supermarioflash.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario Flash 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/supermarioflash2.png",
+    "description": "The sequel to Super Mario Flash",
+    "path": "Games/ruffle/supermarioflash2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario Flash 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/super%20mario%20flash%203.webp",
+    "description": "The finale to the Super Mario Flash series!",
+    "path": "Games/ruffle/supermarioflash3.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Super Smash Flash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/super%20smash%20flash.jpg",
+    "description": "Super Smash Flash is based on the awesome Super Mario Bros series.",
+    "path": "Games/ruffle/supersmashflash.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Superfighters",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/superfighters.jpg",
+    "description": "Superfighters is an action-packed martial arts fighting game.",
+    "path": "Games/ruffle/superfighters.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Superhot",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/superhot.jpg",
+    "description": "SUPERHOT is the first person shooter where time moves only when you move.",
+    "path": "Games/standalone/superhot/index.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tactical Assassin",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/tactical.jpg",
+    "description": "Tactical Assassin is a thrilling sniper game where you play as a skilled assassin, completing various missions with precision and strategy.",
+    "path": "Games/ruffle/tacticaloriginal.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tactical Assassin 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/tactical-assassin-2.jpg",
+    "description": "Take on the role of a highly trained sniper in Tactical Assassin 2, a captivating game that challenges your shooting skills and strategic thinking.",
+    "path": "Games/ruffle/tactical2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tactical Assassin 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/assassin%203.jpg",
+    "description": "Step into the shoes of a skilled assassin in Tactical Assassin 3, a thrilling sniper game where precision and strategy are key to completing your missions.",
+    "path": "Games/ruffle/tactical.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tanuki Sunset",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/tanuki%20sunset.png",
+    "description": "Tanuki Sunset Classic is a third-person longboard-skating game where players play as a raccoon skating downhill.",
+    "path": "Games/standalone/tanukisunset.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Temple Run 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/master/assets/game%20images/temple%20run%202.jpg",
+    "description": "Temple Run 2, developed by Imangi, is an infinite runner.",
+    "path": "Games/standalone/templerun2.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Territory War",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/territorywar.jpg",
+    "description": "Territory War is a fun and exciting turn-based strategy game.",
+    "path": "Games/ruffle/territorywar.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tetrix 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/tetrix%202.avif",
+    "description": "Play this flash like Tetris game now!",
+    "path": "Games/ruffle/tetrix2.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "The Blinding of Isaac",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/the%20blinding%20of%20issac.gif",
+    "description": "Play the Blinding of Isaac now! (May take awhile to load)",
+    "path": "Games/ruffle/blinding.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "The Fight for Glorton",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/thefightforglorton.jfif",
+    "description": "The Fight for Glorton is a very popular fighting game Lock Legion game.",
+    "path": "Games/ruffle/thefightforglorton.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "The Impossible Quiz",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/impossiblequiz.png",
+    "description": "The Impossible Quiz is a 2007 Flash game created by a DeviantArt user known as Splapp-me-do.",
+    "path": "Games/ruffle/impossiblequiz.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "The Impossible Quiz 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/impossiblequiz2.png",
+    "description": "The sequel to The Impossible Quiz!",
+    "path": "Games/ruffle/impossiblequiz2.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "The Legend Of Zelda Link To The Past",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/link%20to%20the%20past.avif",
+    "description": "The Legend of Zelda: A Link to the Past is a classic action-adventure game where Link journeys through the parallel worlds of Hyrule.",
+    "path": "Games/emulated/SNES/linktothepast.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "The Legend Of Zelda Majoras Mask",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/majorasmask.jpg",
+    "description": "The Legend of Zelda: Majora's Mask is a darker Zelda adventure where Link, after Ocarina of Time, gets trapped in the parallel world of Termina.",
+    "path": "Games/emulated/N64/majorasmask.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "The Legend Of Zelda Ocarina Of Time",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/ocarinaoftime.jpg",
+    "description": "The Legend of Zelda: Ocarina of Time is a landmark 3D action-adventure game where young Link journeys through Hyrule to stop the evil Ganondorf.",
+    "path": "Games/emulated/N64/ocarinaoftime.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "There Is No Game",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/there%20is%20no%20game.jpg",
+    "description": "There is no game. Or is there?",
+    "path": "Games/standalone/thereisnogame.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Thin Ice",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/thin%20ice.jpg",
+    "description": "Thin Ice is an arcade game where you play as a Puffle that is on fire to go through an ice maze.",
+    "path": "Games/ruffle/thinice.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Time Shooter",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/timeshooter.jpg",
+    "description": "Time Shooter is an action-packed shooting game.",
+    "path": "Games/standalone/timeshooter.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Time Shooter 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/time%20shooter%202.png",
+    "description": "The sequel to Time Shooter!",
+    "path": "Games/standalone/Time Shooter 2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tiny Fishing",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/tiny%20fishing.jpg",
+    "description": "The goal of the game is to catch fish and sell them for money.",
+    "path": "Games/standalone/tinyfishing.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tomb of the Mask",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/tombofthemask.png",
+    "description": "Tomb of the Mask is a fun game where you need to go through exciting mazes!",
+    "path": "Games/standalone/tombofthemask.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Trivia Crack",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/trivia-crack.jpg",
+    "description": "Trivia Crack is a fun and addictive trivia game where you can challenge your friends and test your knowledge in various categories.",
+    "path": "Games/standalone/triviacrack.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tube Jumpers",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/tube jumpers.png",
+    "description": "Tube Jumpers is an two player arcade game where you control a character jumping through tubes while avoiding obstacles and collecting points.",
+    "path": "Games/standalone/tubejumpers.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Ultrakill",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/ultrakill.avif",
+    "description": "ULTRAKILL is a fast-paced, ultraviolent, retro-inspired first-person shooter (FPS) where you play as a blood-fueled robot, V1, fighting through Hell after humanity's extinction.",
+    "path": "Games/standalone/ultrakill.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Under the Red Sky",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/redsky.jpg",
+    "description": "Under the Red Sky is a 3D parkour game!",
+    "path": "Games/standalone/undertheredsky.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Unfair Mario",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/unfairmario.jpg",
+    "description": "Unfair Mario is a challenging platformer game that will test your skills and patience.",
+    "path": "Games/ruffle/unfairmario.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Use Boxmen",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/useboxmen.jpg",
+    "description": "You must work with boxmen to solve various levels and challenge your brain in this complex puzzle game.",
+    "path": "Games/ruffle/useboxmen.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Vex",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex.jpg",
+    "description": "Vex is a jumping game in which you will face many difficult obstacles.",
+    "path": "Games/WAflash/vex.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%202.jpg",
+    "description": "The Vex 2 game is the first sequel to the popular Vex series.",
+    "path": "Games/ruffle/vex2.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%203.jpg",
+    "description": "Vex 3 is the third platform game in the Vex series.",
+    "path": "Games/standalone/vex3.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%204.jpg",
+    "description": "Vex 4 is a fast-paced, challenging platform adventure game.",
+    "path": "Games/standalone/vex4.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 5",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%205.jpg",
+    "description": "Vex 5 is the fifth installment in the Vex series!",
+    "path": "Games/standalone/vex5.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 6",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%206.jpg",
+    "description": "Vex 6 is the sixth game in the Vex runner series!",
+    "path": "Games/standalone/vex6.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 7",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%207.jpg",
+    "description": "Vex 7 is the seventh installment in the Vex series!",
+    "path": "Games/standalone/vex7.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex 8",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/vex%208.webp",
+    "description": "Vex 8 is the eighth installment in the Vex series!",
+    "path": "Games/standalone/vex8.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Whack Your Boss",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/whack%20your%20boss.jpg",
+    "description": "You've finally had enough of your atrocious job. Choose your bosses fatality.",
+    "path": "Games/ruffle/whackyourboss.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Whack Your Ex",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/whack%20your%20ex.jpg",
+    "description": "You're tired of your ex. You must choose her fate in this crazy game.",
+    "path": "Games/ruffle/whackyourex.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Wheely",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely.jpg",
+    "description": "The original adventure! Help Wheely, a small red car, fulfill his dream of joining a big race.",
+    "path": "Games/ruffle/wheely.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%202.jpg",
+    "description": "Love is in the air! Guide Wheely as he tracks down his love, Jolie, after they meet at a car show.",
+    "path": "Games/ruffle/wheely2.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%203.webp",
+    "description": "Wheely needs a gift for Jolie, but a gas shortage in the city leads him on a quest to catch a thief.",
+    "path": "Games/ruffle/wheely3.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 4: Time Travel",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%204.jpg",
+    "description": "A trip to the repair shop goes wrong, launching Wheely through different historical eras.",
+    "path": "Games/ruffle/wheely4.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 5: Armageddon",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%205.webp",
+    "description": "Meteorites are falling! Help Wheely save the planet while he tries to fix his broken lawnmower.",
+    "path": "Games/ruffle/wheely5.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 6: Fairytale",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%206.jpg",
+    "description": "Wheely gets pulled into a movie world! Navigate a kingdom of magic, knights, and dragons.",
+    "path": "Games/ruffle/wheely6.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 7: Detective",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%207.jpg",
+    "description": "Put on your detective hat! Wheely must solve clues and catch sneaky burglars across the city.",
+    "path": "Games/ruffle/wheely7.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wheely 8: Aliens",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wheely%208.jpg",
+    "description": "An extraterrestrial visit! Help Wheely repair a crashed UFO and interact with alien visitors.",
+    "path": "Games/ruffle/wheely8.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Wordle",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/wordle.webp",
+    "description": "A word guessing game where you have six attempts to guess a five-letter word.",
+    "path": "Games/standalone/wordle.html",
+    "category": "Puzzle",
+    "iframe": true
+  },
+  {
+    "title": "Worlds Hardest Game",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/worlds%20hardest%20game.jpg",
+    "description": "Use the arrow keys to move the red square to the end zone. Collect the yellow coins while avoiding the blue balls.",
+    "path": "Games/ruffle/whg.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Worlds Hardest Game 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/worlds%20hardest%20game%202.png",
+    "description": "The sequel to the infamous Worlds Hardest Game",
+    "path": "Games/ruffle/whg2.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Worlds Hardest Game 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/world-s-hardest-game-3.png",
+    "description": "The third game in the series of the Worlds Hardest Game",
+    "path": "Games/WAflash/worldshardestgame3.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Worlds Hardest Game 4",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/worldshardestgame4.jpg",
+    "description": "The last game in the series of Worlds Hardest Game",
+    "path": "Games/ruffle/whg4.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Yahoo Tennis",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/tennis.jpg",
+    "description": "Yahoo Tennis is a fun tennis game where you can play against the computer or a friend.",
+    "path": "Games/ruffle/yahootennis.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+
+  {
+    "title": "Super Tennis",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/super%20tennis.jpg",
+    "description": "Play the classic SNES Super Tennis Game Now!",
+    "path": "Games/emulated/SNES/supertennis.html",
+    "category": "Sports",
+    "iframe": true
+  },
+
+  
+  {
+    "title": "Zombocalypse",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/zombocalypse.jpg",
+    "description": "Zombocalypse is a zombie game. It's you vs. a horde of hungry, hungry zombies.",
+    "path": "Games/ruffle/zombocalypse.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Zombocalypse 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/zombocalypse%202.webp",
+    "description": "Fight off endless waves of zombies with an arsenal of weapons in this action-packed survival game.",
+    "path": "Games/ruffle/zombocalypse2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+
+  {
+    "title": "Bob the Robber 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/bobtherobber2.jpg",
+    "description": "The world's favorite thief is back! Sneak through high-security buildings and stay out of sight in this stealthy adventure.",
+    "path": "Games/ruffle/bobtherobber2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Minecraft 1.8.8",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/Minecraft.webp",
+    "description": "Experience the classic world of Minecraft directly in your browser. Build, explore, and survive!",
+    "path": "Games/standalone/minecraft.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "OVO",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ovo.jpg",
+    "description": "A fast-paced platformer where you must jump, slide, and dive through challenging levels to reach the end.",
+    "path": "Games/standalone/ovo.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "OVO 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ovo%202.avif",
+    "description": "The sequel to the hit platformer with even more complex levels and obstacles to master.",
+    "path": "Games/standalone/ovo2.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "OVO 3 Dimensions",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ovodimensions.png",
+    "description": "Take your platforming skills into a new dimension with OVO 3.",
+    "path": "Games/standalone/ovodimensions.html",
+    "category": "Runner",
+    "iframe": true
+  },
+  {
+    "title": "Vex Challenges",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/vexchallenges.jpeg",
+    "description": "Race against the clock in this intense stickman parkour challenge.",
+    "path": "Games/standalone/vexchallenges.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Vex X3M",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/vexx3m.jpg",
+    "description": "A high-octane crossover between the Vex series and bike games. Speed through dangerous tracks!",
+    "path": "Games/standalone/vexx3m.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Vex X3M 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/vexx3m2.webp",
+    "description": "More bikes, more traps, and more speed! The sequel to the intense Vex X3M experience.",
+    "path": "Games/standalone/vexx3m2.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Soccer Random",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/soccerrandom.jpg",
+    "description": "Physics-based soccer mayhem where every goal is a surprise!",
+    "path": "Games/standalone/soccerrandom.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Volley Random",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/volley%20random.webp",
+    "description": "Wacky volleyball action with unpredictable physics.",
+    "path": "Games/standalone/volleyrandom.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Fifa 10",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/fifa10.png",
+    "description": "Classic football action from the NDS era.",
+    "path": "Games/emulated/NDS/fifa10.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Fifa 11",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/fifa%2011.jpg",
+    "description": "The refined handheld football experience with updated rosters.",
+    "path": "Games/emulated/NDS/fifa11.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Mario Kart DS",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mariokartds.jpg",
+    "description": "The legendary kart racer on your browser.",
+    "path": "Games/emulated/NDS/mariokartds.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Sonic Colors",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/soniccolors.jpg",
+    "description": "Harness the power of Wisps to speed through the Interstellar Amusement Park.",
+    "path": "Games/emulated/NDS/soniccolors.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+
+  {
+    "title": "Moto X3M",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/moto%20x3m.jpg",
+    "description": "The ultimate bike racing game!",
+    "path": "Games/standalone/motox3m.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Moto X3M 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/moto%20x3m%202.jpg",
+    "description": "Extreme motorcycle challenges.",
+    "path": "Games/standalone/motox3m2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Moto X3M 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/moto%20x3m%203.jpg",
+    "description": "The third installment of the legendary bike trial game.",
+    "path": "Games/standalone/motox3m3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Moto X3M Winter",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/moto%20x3m%20winter.jpg",
+    "description": "Snowy extreme bike adventure.",
+    "path": "Games/standalone/motox3mwinter.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "FNAF World",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/fnaf%20world.webp",
+    "description": "A colorful RPG spin-off.",
+    "path": "Games/standalone/fnafworld.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Neon Blaster",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/neon%20blaster.jpg",
+    "description": "Arcade shooter action.",
+    "path": "Games/standalone/neonblaster.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Only Up",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/only%20up.jpg",
+    "description": "Test your parkour skills.",
+    "path": "Games/standalone/onlyup.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+
+  {
+    "title": "Earn to Die 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/earn%20to%20die%202.webp",
+    "description": "Smash through zombies.",
+    "path": "Games/ruffle/earntodie2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  
+  {
+    "title": "Sonic Rush",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/sonic%20rush.png",
+    "description": "High-speed NDS action.",
+    "path": "Games/emulated/NDS/sonicrush.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+
+  {
+    "title": "8 Ball Pool",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/8ball.webp",
+    "description": "The world's number one pool game! Play with friends or legends.",
+    "path": "Games/standalone/8ballclassic.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "COD Zombies",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/cod%20zombies.jpg",
+    "description": "Survive endless waves of the undead in this intense shooter.",
+    "path": "Games/standalone/codzombiesportable.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights at Candy's",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/five%20nights%20at%20candys.webp",
+    "description": "Can you survive the night at the new and improved Candy's Burger & Fries?",
+    "path": "Games/standalone/fnac.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Five Nights at Candy's 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/five%20nights%20at%20candys%202.webp",
+    "description": "The horror continues with new animatronics and new ways to die.",
+    "path": "Games/standalone/fnac2.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Mortal Kombat",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mk.png",
+    "description": "The classic fighting game. Test your might and finish them!",
+    "path": "Games/standalone/mortalkombat.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Mortal Kombat 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mk%202.png",
+    "description": "Classic fighting action with even more brutal fatalities.",
+    "path": "Games/standalone/mortalkombat2.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+  {
+    "title": "Mortal Kombat 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/mk%203.webp",
+    "description": "The third tournament begins. Choose your fighter and prepare for battle.",
+    "path": "Games/standalone/mortalkombat3.html",
+    "category": "Fighting",
+    "iframe": true
+  },
+
+  {
+    "title": "Ragdoll Archers",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ragdoll%20archers.png",
+    "description": "Master physics-based archery in this addictive ragdoll game.",
+    "path": "Games/standalone/ragdollarchers.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Time Shooter 3",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/time%20shooter%203.jpg",
+    "description": "Time only moves when you move. Strategy meets FPS action.",
+    "path": "Games/standalone/timeshooter3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "A Koopa's Revenge",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/akoopasrevenge.jpg",
+    "description": "The tables are turned! Play as a Koopa on a quest to rescue your friends from Mario.",
+    "path": "Games/ruffle/akoopasrevenge.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "A Koopa's Revenge 2",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/akoopasrevenge2.webp",
+    "description": "The epic sequel with more power-ups, levels, and bosses to defeat.",
+    "path": "Games/ruffle/akoopasrevenge2.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Player Pack 4",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/playerpack4.jpg",
+    "description": "More challenging levels and puzzles in the classic dart-throwing series.",
+    "path": "Games/ruffle/bloonsplayerpack4.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Bloons Player Pack 5",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/playerpack5.jpg",
+    "description": "The ultimate test of your balloon-popping skills with new layouts.",
+    "path": "Games/ruffle/bloonsplayerpack5.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Flash Tennis",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/flashtennis.png",
+    "description": "Fast-paced tennis action. Master your serve and climb the rankings.",
+    "path": "Games/ruffle/flashtennis.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario 63",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/supermario63.webp",
+    "description": "A massive fan-made tribute to Mario's 3D adventures in a 2D world.",
+    "path": "Games/ruffle/supermario63.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "3Dash",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/3dash.jpg",
+    "description": "Experience the rhythm-based platforming of Geometry Dash in a 3D perspective.",
+    "path": "Games/standalone/3Dash.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Slime Rancher",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/slimerancher.jpg",
+    "description": "Explore a distant planet and collect adorable slimes for your ranch.",
+    "path": "Games/standalone/slimerancher.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Basket Bros",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/basketbros.png",
+    "description": "One-on-one basketball with crazy dunks and fast gameplay.",
+    "path": "Games/standalone/basketbros.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Blaze Drifter",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/blaze%20drifter.png",
+    "description": "High-octane drifting action. Push your car to the limit.",
+    "path": "Games/standalone/blazedrifter.html",
+    "category": "Racing",
+    "iframe": true
+  },
+  {
+    "title": "Blocky Demolition Derby",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/derby.jpg",
+    "description": "Crash and smash into your opponents in this blocky arena battle.",
+    "path": "Games/standalone/blockydemolitonderby.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+
+  {
+    "title": "Baseball Bros",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/baseball%20bros.avif",
+    "description": "Step up to the plate in this fast-paced, competitive baseball sim featuring smooth arcade mechanics and high-score challenges.",
+    "path": "Games/standalone/baseballbros.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Doom",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/doom.jpg",
+    "description": "Relive the legendary FPS that defined a genre. Fight through hordes of demons in a relentless battle for survival on Mars.",
+    "path": "Games/standalone/doom.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Fallout",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/fallout.jpg",
+    "description": "Navigate a desolate, post-nuclear wasteland where every choice matters. Master survival and tactical combat in a world gone mad.",
+    "path": "Games/standalone/fallout.html",
+    "category": "RPG",
+    "iframe": true
+  },
+  {
+    "title": "FNAF Pizzeria Simulator",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/pizzasimulator.webp",
+    "description": "Balance business management with bone-chilling horror as you design your own pizzeria while surviving the animatronic night shift.",
+    "path": "Games/standalone/fnafpizzeriasimulator.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Football Bros",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/football%20bros.jpg",
+    "description": "Experience big-head football action with easy-to-learn controls and explosive plays in this high-energy sports arcade game.",
+    "path": "Games/standalone/footballbros.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Mario Party",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/mario%20party.jpg",
+    "description": "The original N64 party starter. Compete in diverse minigames and race across interactive boards to become the Super Star.",
+    "path": "Games/emulated/N64/marioparty.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Mario Party 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/mario%20party%202.png",
+    "description": "The fan-favorite sequel featuring themed costumes, expanded items, and classic boards for the ultimate competitive board game experience.",
+    "path": "Games/emulated/N64/marioparty2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Scary Teacher 3D",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/scaryteacher3d.jpg",
+    "description": "Execute clever pranks and solve puzzles to outsmart the creepy Miss T in this stealth-based 3D adventure.",
+    "path": "Games/standalone/scaryteacher3d.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "FNAF Sister Location",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/sisterlocation.jpg",
+    "description": "Descend into the underground facility of Circus Baby's Pizza World for a narrative-driven horror experience unlike any other FNAF title.",
+    "path": "Games/standalone/sisterlocation.html",
+    "category": "Horror",
+    "iframe": true
+  },
+  {
+    "title": "Slope 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/slope3.webp",
+    "description": "Test your reflexes in this high-speed physics game. Navigate a neon ball through a treacherous, ever-changing 3D obstacle course.",
+    "path": "Games/standalone/slope3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario Bros",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/supermariobros.webp",
+    "description": "The quintessential platformer. Run, jump, and power up through the Mushroom Kingdom to rescue Princess Peach from Bowser.",
+    "path": "Games/emulated/NES/supermariobros.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario Bros 2",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/supermariobros2.png",
+    "description": "A unique departure for the series featuring four playable characters with distinct abilities and a world of sub-space secrets.",
+    "path": "Games/emulated/NES/supermariobros2.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Super Mario Bros 3",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/supermariobros3.jpg",
+    "description": "Widely regarded as one of the greatest games ever made. Explore massive worlds, fly with the Tanooki suit, and master new power-ups.",
+    "path": "Games/emulated/NES/supermariobros3.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+
+    {
+    "title": "Basketball Legends",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/basketballlegends.jpg",
+    "description": "Show off your skills on the court in this high-energy basketball game featuring legendary players and fast-paced arcade action.",
+    "path": "Games/standalone/basketballlegends.html",
+    "category": "Sports",
+    "iframe": true
+  },
+  {
+    "title": "Bridge Race",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/bridge%20race.png",
+    "description": "Collect blocks of your color and build bridges to outpace your opponents in this competitive racing challenge.",
+    "path": "Games/standalone/bridgerace.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Geometry Dash SubZero",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/subzero.webp",
+    "description": "Experience the chillingly fast expansion of the rhythm-based platformer series with new levels and frosty obstacles.",
+    "path": "Games/standalone/geometrydashsubzero.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Geometry Dash World",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/geometrydashworld.png",
+    "description": "Explore unique worlds and jump through rhythm-filled challenges in this fast-paced platforming adventure.",
+    "path": "Games/standalone/geometrydashworld.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+  {
+    "title": "Getting Over It",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/gettingoverit.jpg",
+    "description": "A punishing climbing game where you navigate a mountain with nothing but a hammer and a pot.",
+    "path": "Games/standalone/gettingoverit.html",
+    "category": "Challenging",
+    "iframe": true
+  },
+
+  {
+    "title": "Solar Smash",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/solarsmash.webp",
+    "description": "Wreak havoc on a galactic scale using a variety of weapons to destroy planets in this cosmic destruction simulator.",
+    "path": "Games/standalone/solarsmash.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Sonic Battle",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/sonicbattle.jpg",
+    "description": "Engage in fast-paced arena combat with Sonic and friends in this classic handheld fighting experience.",
+    "path": "Games/emulated/GBA/sonicbattle.html",
+    "category": "Adventure",
+    "iframe": true
+  },
+  {
+    "title": "Tall Man Run",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/tallmanrun.avif",
+    "description": "Grow taller and wider as you navigate obstacles to reach the finish line in this addictive runner.",
+    "path": "Games/standalone/tallmanrun.html",
+    "category": "Arcade",
+    "iframe": true
+  },
+  {
+    "title": "Tetris",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/Standalone-games/main/assets/tetris.jpg",
+    "description": "The timeless puzzle classic. Clear lines and manage the falling blocks to achieve the ultimate high score.",
+    "path": "Games/emulated/GBA/tetris.html",
+    "category": "Arcade",
+    "iframe": true
+  }
+
+]

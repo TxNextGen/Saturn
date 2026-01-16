@@ -1,35 +1,48 @@
-let _path
-let _objlist = []
-let _lastvalidsearch = ""
+let _path;
+let _objlist = [];
+let _lastvalidsearch = "";
+let json;
 
 function loadFile(path) {
-    _path = path
-
-    let s = document.createElement('script');
-    s.src = path;
-
-    s.onload = () => {
-        readJS();
-    };
-
-    s.onerror = (err) => {
-        console.error("Error loading script", err);
-    };
-
-    document.body.appendChild(s);
+    _path = path;
+    
+    fetch(path)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            json = data;
+            readJS();
+        })
+        .catch(err => {
+            console.error("Error loading JSON file", err);
+        });
 }
 
 function readJS() {
     if (json) {
-        window.addEventListener('keydown',(e)=>{if (e.key === "D"){ devInfo(json); }});
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "D") {
+                devInfo(json);
+            }
+        });
         createElements();
     } else {
         console.error("JSON data is not available");
     }
 }
 
-function openPage(type,src,title){
-    window.top.location = `/i.html?type=${type}&src=${src}&title=${title}`
+function openPage(type, src, title) {
+    if (type === 'iframe') {
+   
+        window.location.href = src;
+    } else {
+       
+        window.top.location = `/i.html?type=${type}&src=${src}&title=${title}`;
+    }
 }
 
 function noImgs(json) {
@@ -39,7 +52,7 @@ function noImgs(json) {
             titles.push(obj.title);
         }
     });
-    return {"titles":titles,"number":titles.length};
+    return { "titles": titles, "number": titles.length };
 }
 
 function purifyText(input) {
@@ -49,11 +62,8 @@ function purifyText(input) {
         .trim();
 }
 
-
-
 function createElements() {
     document.getElementById('preload').remove();
-
 
     let wrapperDiv = document.createElement('div');
     wrapperDiv.innerHTML = `
@@ -285,7 +295,7 @@ function createElements() {
     </style>
     <div class="mainWrapper">
         <div class="searchContainer">
-            <input id="searchBar" class="searchBar" placeholder="Search games..." type="text">
+            <input id="searchBar" class="searchBar" placeholder="Credits to Alexr Games" type="text">
             <h3 id="validsearch" hidden="true">
                 No results for '<span id="currentsearch"></span>', showing '<span id="lastvalidsearch"></span>'
             </h3>
@@ -299,97 +309,100 @@ function createElements() {
 
     const searchBar = document.getElementById('searchBar');
 
-    searchBar.addEventListener('keyup',(e)=>{
+    searchBar.addEventListener('keyup', (e) => {
         let key = e.key;
-        let searchText = purifyText(searchBar.value)
+        let searchText = purifyText(searchBar.value);
 
         let results = {
             failed: [],
             success: []
-        }
+        };
 
-        _objlist.forEach((entry)=>{
+        _objlist.forEach((entry) => {
             entry = String(entry).split(',');
 
-            let entryTitle = purifyText(entry[0])
-            let entryId = entry[1]
-            let entryTags = entry[2]
-            let entryDesc = entry[3]
+            let entryTitle = purifyText(entry[0]);
+            let entryId = entry[1];
+            let entryTags = entry[2];
+            let entryDesc = entry[3];
 
-            if ((entryTitle.includes(searchText))){
-                results.success.push(entryId)
-            } else{
-                results.failed.push(entryId)
+            if ((entryTitle.includes(searchText))) {
+                results.success.push(entryId);
+            } else {
+                results.failed.push(entryId);
             }
 
-            if (results.success.length === 0){
+            if (results.success.length === 0) {
                 document.getElementById('validsearch').hidden = false;
-                document.getElementById('currentsearch').textContent = searchText
-                document.getElementById('lastvalidsearch').textContent = _lastvalidsearch
-            } else{
+                document.getElementById('currentsearch').textContent = searchText;
+                document.getElementById('lastvalidsearch').textContent = _lastvalidsearch;
+            } else {
                 document.getElementById('validsearch').hidden = true;
-                _lastvalidsearch = searchText
+                _lastvalidsearch = searchText;
 
-                results.failed.forEach((e)=>{
+                results.failed.forEach((e) => {
                     let elem = document.getElementById(e);
                     elem.style.display = 'none';
-                })
-                
-                results.success.forEach((e)=>{
+                });
+
+                results.success.forEach((e) => {
                     let elem = document.getElementById(e);
                     elem.style.display = 'flex';
                     elem.style.alignItems = 'flex-end';
                     elem.style.position = 'relative';
                     void elem.offsetHeight;
-                })
+                });
             }
-        })
-    })
+        });
+    });
 
-    let id = 0
+    let id = 0;
 
     json.forEach((obj) => {
-        let title = String(obj.title).replace(`'`,``);
-        let tags = obj.tags;
-        let loadType = obj.type;
+       
+        let title = String(obj.title).replace(`'`, ``);
+        let tags = obj.category || ""; 
+        let loadType = obj.iframe ? "iframe" : "direct"; 
         let img = obj.img;
-        let description = obj.description || "No description"
-        let listed = obj.listed;
-        let source = String(obj.source).replace(`'`,``);
-
-        if (listed) {
-            let objHolder = document.createElement('div');
-            objHolder.setAttribute('id',id);
-            objHolder.setAttribute('class', 'objHolder');
-            objHolder.setAttribute('onclick',`openPage('${loadType}','${source}','${title}')`)
-
-            let imgElem = document.createElement('img');
-            imgElem.setAttribute('class','objImg')
-
-            if (img != undefined){
-                imgElem.src = '/files/thumbs/' + img;
-            } else{
-                imgElem.src = 'https://placehold.co/200x200';
-            }
-
-            imgElem.alt = title;
-
-            objHolder.appendChild(imgElem)
-
-            let titleHolder = document.createElement('div')
-            titleHolder.setAttribute('class', 'titleHolder');
-
-            let titleElem = document.createElement('h3');
-            titleElem.setAttribute('class', 'objTitle');
-            titleElem.textContent = title;
-
-            titleHolder.appendChild(titleElem);
-            objHolder.appendChild(titleHolder)
-            document.getElementById('gameCardsGrid').appendChild(objHolder)
-
-            _objlist.push(`${title},${id},${tags},${description}`)
-        
-            id++;
+        let description = obj.description || "No description";
+        let source = String(obj.path).replace(`'`, ``);
+      
+        if (source && !source.startsWith('/')) {
+            source = '/' + source;
         }
+
+    
+        let objHolder = document.createElement('div');
+        objHolder.setAttribute('id', id);
+        objHolder.setAttribute('class', 'objHolder');
+        objHolder.setAttribute('onclick', `openPage('${loadType}','${source}','${title}')`);
+
+        let imgElem = document.createElement('img');
+        imgElem.setAttribute('class', 'objImg');
+
+        if (img != undefined) {
+            imgElem.src = img; 
+        } else {
+            imgElem.src = 'https://placehold.co/200x200';
+        }
+
+        imgElem.alt = title;
+
+        objHolder.appendChild(imgElem);
+
+        let titleHolder = document.createElement('div');
+        titleHolder.setAttribute('class', 'titleHolder');
+
+        let titleElem = document.createElement('h3');
+        titleElem.setAttribute('class', 'objTitle');
+        titleElem.textContent = title;
+
+        titleHolder.appendChild(titleElem);
+        objHolder.appendChild(titleHolder);
+        document.getElementById('gameCardsGrid').appendChild(objHolder);
+
+        _objlist.push(`${title},${id},${tags},${description}`);
+
+        id++;
     });
 }

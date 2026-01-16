@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/wordle/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="description" content="Guess the word in 6 tries. Play daily, hourly and infinite modes." />
+    <meta name="theme-color" content="#6aaa64" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="img/logo_32x32.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/logo_32x32.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/logo_192x192.png" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="build/bundle.css" />
+    <!-- FB Meta Tags -->
+    <script>
+      // PWA Service worker
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+    <script defer src="build/bundle.js"></script>
+    <title>Wordle</title>
+  </head>
+
+  <body></body>
+</html>

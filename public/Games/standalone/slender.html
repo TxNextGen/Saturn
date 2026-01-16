@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Slender the Eight Pages</title>
+    <base href="https://raw.githack.com/dskjfoisjfsjio/Standalone-games/main/slender%20port/">
+    <link rel="icon" href="/new logo.png">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/slender port.json", {onProgress: UnityProgress});
+    </script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+      .webgl-content {
+        height: 100%;
+        width: 100%;
+      }
+      #gameContainer {
+        width: 100% !important; 
+        height: 100% !important; 
+        padding: 0;
+      }
+      .footer {
+        display: none; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer"></div>
+      </div>
+  </body>
+</html>

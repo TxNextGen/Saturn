@@ -1,0 +1,50 @@
+
+[
+ {
+    "title": "30 Dollar Website",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/moal.jpg",
+    "description": "A simple website that looks like it was made for 30 dollars (a soundboard).",
+    "path": "Apps/30dollarwebsite.html",
+    "category": "Apps",
+    "iframe": true
+  },
+
+
+  {
+    "title": "AI Chatbot",
+    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ai.jpg",
+    "description": "AI chatbot app which can answer any question to your needs. App made by EDUrocks",
+    "path": "Apps/ai.html",
+    "category": "Apps",
+    "iframe": true
+  },
+
+    {
+    "title": "Emulator JS",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/emulatorjs.png",
+    "description": "Emulator JS is a web-based emulator that allows you to play classic console games directly in your browser.",
+    "path": "Apps/emulatorjs.html",
+    "category": "Apps",
+    "iframe": true
+  },
+
+    {
+    "title": "Ruffle",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ruffle.jpg",
+    "description": "Ruffle is an open-source Flash Player emulator that allows you to play Flash content directly in your web browser without the need for the original Flash Player plugin.",
+    "path": "Apps/ruffle.html",
+    "category": "Apps",
+    "iframe": true
+  },
+  
+    {
+    "title": "Soundboard",
+    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/soundboard.png",
+    "description": "A soundboard with various sound effects and music clips.",
+    "path": "Apps/soundboard.html",
+    "category": "Apps",
+    "iframe": true
+  }
+
+
+]
