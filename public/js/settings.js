@@ -13,7 +13,7 @@ function switchTab(tabName, btnElement) {
 
     if (btnElement) btnElement.classList.add('active');
 
-    // Store tab without triggering reload
+   
     const currentTab = sessionStorage.getItem('current-tab');
     if (currentTab !== tabName) {
         sessionStorage.setItem('current-tab', tabName);
@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
         .find(b => b.getAttribute('onclick')?.includes(savedTab));
     if (btn) btn.classList.add('active');
     
-    // Apply saved cloak on page load
+  
     applySavedCloak();
 });
 
@@ -98,18 +98,18 @@ function applyTabCloak(title, favicon) {
     }
 }
 
-// MODIFIED: Check if cloak is enabled before applying
+
 function applySavedCloak() {
-    // Check if cloaking is disabled
+ 
     const cloakDisabled = sessionStorage.getItem('cloak-disabled') === 'true';
     
     if (cloakDisabled) {
-        // Cloaking is disabled, apply default
+     
         applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
         return;
     }
     
-    // Cloaking is enabled, check for saved values
+    
     const savedTitle = sessionStorage.getItem('custom-title');
     const savedFavicon = sessionStorage.getItem('custom-favicon');
     
@@ -119,7 +119,7 @@ function applySavedCloak() {
             savedFavicon || ORIGINAL_FAVICON
         );
     } else {
-        // No cloak set, use default
+        
         applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
     }
 }
@@ -127,13 +127,13 @@ function applySavedCloak() {
 function clearCloak() {
     sessionStorage.removeItem('custom-title');
     sessionStorage.removeItem('custom-favicon');
-    sessionStorage.setItem('cloak-disabled', 'true'); // Set flag that cloak is disabled
+    sessionStorage.setItem('cloak-disabled', 'true'); 
     sessionStorage.setItem('current-tab', 'cloaking');
     applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
 }
 
 function setCloak(title, favicon) {
-    sessionStorage.removeItem('cloak-disabled'); // Remove disabled flag
+    sessionStorage.removeItem('cloak-disabled'); 
     sessionStorage.setItem('custom-title', title);
     sessionStorage.setItem('custom-favicon', favicon);
     sessionStorage.setItem('current-tab', 'cloaking');
@@ -143,7 +143,7 @@ function setCloak(title, favicon) {
 function setCustomTitle() {
     const title = document.getElementById('custom-title').value;
     if (title) {
-        sessionStorage.removeItem('cloak-disabled'); // Remove disabled flag
+        sessionStorage.removeItem('cloak-disabled'); 
         sessionStorage.setItem('custom-title', title);
         applyTabCloak(title, null);
     }
@@ -152,7 +152,7 @@ function setCustomTitle() {
 function setCustomFavicon() {
     const favicon = document.getElementById('custom-favicon').value;
     if (favicon) {
-        sessionStorage.removeItem('cloak-disabled'); // Remove disabled flag
+        sessionStorage.removeItem('cloak-disabled'); 
         sessionStorage.setItem('custom-favicon', favicon);
         applyTabCloak(null, favicon);
     }
