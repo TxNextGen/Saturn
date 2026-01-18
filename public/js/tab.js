@@ -19,13 +19,13 @@ if (!sessionStorage.getItem('proxy-transport')){
     if (sessionStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
 }
 
-// Initialize default search engine if not set
+
 if (!sessionStorage.getItem('search-engine')) {
     sessionStorage.setItem('search-engine', 'DuckDuckGo');
     sessionStorage.setItem('search-engine-url', 'https://duckduckgo.com/?q=%s');
 }
 
-// Initialize tab system default
+
 if (!sessionStorage.getItem('tab-system-enabled')) {
     sessionStorage.setItem('tab-system-enabled', 'true');
 }
@@ -34,6 +34,7 @@ let tabs = [];
 let activeTabId = null;
 let tabIdCounter = 0;
 let erudaLoaded = false;
+let lastSearchedUrl = null; 
 
 function isTabSystemEnabled() {
     return sessionStorage.getItem('tab-system-enabled') !== 'false';
@@ -45,23 +46,23 @@ function updateProxyUIVisibility() {
     
     if (!proxyContainer) return;
     
-    // Get all UI elements
+
     const tabBar = document.getElementById('tab-bar');
     const topBar = document.querySelector('.top-bar');
     const newTabBtn = document.getElementById('new-tab-btn');
     const iframeWrapper = document.getElementById('iframe-wrapper');
     
     if (tabSystemEnabled) {
-        // Show all UI elements
+ 
         if (tabBar) tabBar.style.display = 'flex';
         if (topBar) topBar.style.display = 'flex';
         if (newTabBtn) newTabBtn.style.display = 'block';
         
-        // Reset proxy container
+        
         proxyContainer.style.paddingTop = '';
         proxyContainer.style.marginTop = '';
         
-        // Reset iframe wrapper to normal
+   
         if (iframeWrapper) {
             iframeWrapper.style.position = '';
             iframeWrapper.style.top = '';
@@ -71,16 +72,16 @@ function updateProxyUIVisibility() {
             iframeWrapper.style.zIndex = '';
         }
     } else {
-        // Hide all UI elements
+       
         if (tabBar) tabBar.style.display = 'none';
         if (topBar) topBar.style.display = 'none';
         if (newTabBtn) newTabBtn.style.display = 'none';
         
-        // Remove padding/margin from proxy container to eliminate black bar
+       
         proxyContainer.style.paddingTop = '0';
         proxyContainer.style.marginTop = '0';
         
-        // Expand iframe to fill entire content area (top to bottom, respecting sidebar)
+ 
         if (iframeWrapper) {
             iframeWrapper.style.position = 'fixed';
             iframeWrapper.style.top = '0';
@@ -101,6 +102,7 @@ function createTab(url = null) {
     
     const iframe = document.createElement('iframe');
     iframe.id = `frame-${tabId}`;
+    
     if (url) {
         iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
     }
@@ -110,8 +112,8 @@ function createTab(url = null) {
     
     const tab = {
         id: tabId,
-        url: url || 'New Tab',
-        title: 'New Tab',
+        url: url || '',
+        title: url ? 'Loading...' : 'New Tab',
         iframe: iframe,
         container: iframeContainer
     };
@@ -127,13 +129,30 @@ function createTab(url = null) {
         try {
             const title = iframe.contentDocument?.title || new URL(url || '').hostname || 'New Tab';
             tab.title = title;
-            tab.url = url;
+         
+            if (url) {
+                tab.url = url;
+            }
+            if (isTabSystemEnabled()) {
+                renderTabs();
+            }
+        
+            updateUrlBar();
+        } catch (e) {
+          
+            if (url) {
+                try {
+                    const hostname = new URL(url).hostname;
+                    tab.title = hostname;
+                } catch (err) {
+                    tab.title = 'Page';
+                }
+                tab.url = url;
+            }
             if (isTabSystemEnabled()) {
                 renderTabs();
             }
             updateUrlBar();
-        } catch (e) {
-           
         }
     });
     
@@ -178,7 +197,8 @@ function updateUrlBar() {
     const activeTab = tabs.find(t => t.id === activeTabId);
     const urlBar = document.getElementById('proxy-url-bar');
     if (activeTab && urlBar) {
-        urlBar.value = (activeTab.url === 'New Tab' || !activeTab.url) ? '' : activeTab.url;
+      
+        urlBar.value = activeTab.url || '';
     }
 }
 
@@ -186,7 +206,7 @@ function renderTabs() {
     const container = document.getElementById('tabs-container');
     if (!container) return;
     
-    // Hide/show tabs container based on setting
+  
     if (!isTabSystemEnabled()) {
         container.style.display = 'none';
         return;
@@ -205,7 +225,7 @@ function renderTabs() {
         
         const favicon = document.createElement('img');
         favicon.className = 'tab-favicon';
-        favicon.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23a855f7" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+        favicon.src = '/images/sat4.png';
         
         const title = document.createElement('span');
         title.className = 'tab-title';
@@ -240,7 +260,7 @@ function hideHome() {
     document.getElementById('home-container').classList.add('hidden');
     document.getElementById('proxy-container').classList.add('active');
     
-    // Update UI visibility when proxy becomes active
+    
     updateProxyUIVisibility();
 }
 
@@ -285,9 +305,12 @@ async function goTo(url) {
         return;
     }
     
+   
+    lastSearchedUrl = url;
+    
     hideHome();
     
-    // If tab system is disabled, reuse the first tab
+   
     if (!isTabSystemEnabled() && tabs.length > 0) {
         const activeTab = tabs[0];
         activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
@@ -309,7 +332,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const newTabBtn = document.getElementById('new-tab-btn');
     const proxyUrlBar = document.getElementById('proxy-url-bar');
 
-    // Update UI visibility on load
+
     updateProxyUIVisibility();
 
     const getEngine = () => {
@@ -364,9 +387,16 @@ window.addEventListener('DOMContentLoaded', () => {
                 const url = buildUrl(proxyUrlBar.value);
                 if (url && activeTabId) {
                     const activeTab = tabs.find(t => t.id === activeTabId);
-                    if (activeTab) {
+                    if (activeTab && activeTab.iframe) {
+                    
+                        lastSearchedUrl = url;
+                        
                         activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
                         activeTab.url = url;
+                        activeTab.title = 'Loading...';
+                        if (isTabSystemEnabled()) {
+                            renderTabs();
+                        }
                     }
                 }
             }
@@ -377,7 +407,12 @@ window.addEventListener('DOMContentLoaded', () => {
         newTabBtn.addEventListener('click', () => {
             if (!isTabSystemEnabled()) return;
             hideHome();
-            createTab();
+           
+            if (lastSearchedUrl) {
+                createTab(lastSearchedUrl);
+            } else {
+                createTab();
+            }
         });
     }
 
