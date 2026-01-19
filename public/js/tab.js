@@ -1,68 +1,108 @@
 let _connection = new BareMux.BareMuxConnection("/baremux/worker.js");
-async function setConnection(arg){
+
+
+function getProxyBackend() {
+    return localStorage.getItem('proxy-backend') || 'uv';
+}
+
+
+window.currentProxyBackend = getProxyBackend();
+console.log(`[tab.js] Initialized with ${window.currentProxyBackend.toUpperCase()} proxy backend`);
+
+
+function switchProxyBackend(backend) {
+    window.currentProxyBackend = backend;
+    localStorage.setItem('proxy-backend', backend);
+    console.log(`Switched to ${backend.toUpperCase()} proxy backend`);
+}
+
+function getEncodedUrl(url) {
+    if (!url) return "";
+
+  
+    if (!/^https?:\/\//i.test(url)) {
+        url = "https://" + url;
+    }
+
+ 
+    const backend = window.currentProxyBackend || 'uv';
+    console.log(`[getEncodedUrl] Using backend: ${backend} for URL: ${url}`);
+
+    if (backend === "scramjet") {
+        const encoded = "/scram/?url=" + encodeURIComponent(url);
+        console.log(`[getEncodedUrl] Scramjet encoded: ${encoded}`);
+        return encoded;
+    } else {
+      
+        if (typeof __uv$config === 'undefined') {
+            console.error('[getEncodedUrl] UV config not found, falling back to basic encoding');
+            return "/uv/service/" + encodeURIComponent(url);
+        }
+        const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
+        console.log(`[getEncodedUrl] UV encoded: ${encoded}`);
+        return encoded;
+    }
+}
+
+async function setConnection(arg) {
     const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
-    switch (arg){
+    switch (arg) {
         case 1:
             await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
-            sessionStorage.setItem('proxy-transport','Epoxy');
+            localStorage.setItem('proxy-transport', 'Epoxy');
             break;
         case 2:
             await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-            sessionStorage.setItem('proxy-transport','Libcurl');
+            localStorage.setItem('proxy-transport', 'Libcurl');
             break;
     }
 }
-if (!sessionStorage.getItem('proxy-transport')){
+
+
+if (!localStorage.getItem('proxy-transport')) {
     setConnection(1);
 } else {
-    if (sessionStorage.getItem('proxy-transport') === "Epoxy") setConnection(1);
-    if (sessionStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
+    if (localStorage.getItem('proxy-transport') === "Epoxy") setConnection(1);
+    if (localStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
 }
 
 
-if (!sessionStorage.getItem('search-engine')) {
-    sessionStorage.setItem('search-engine', 'DuckDuckGo');
-    sessionStorage.setItem('search-engine-url', 'https://duckduckgo.com/?q=%s');
+if (!localStorage.getItem('search-engine')) {
+    localStorage.setItem('search-engine', 'DuckDuckGo');
+    localStorage.setItem('search-engine-url', 'https://duckduckgo.com/?q=%s');
 }
 
 
-if (!sessionStorage.getItem('tab-system-enabled')) {
-    sessionStorage.setItem('tab-system-enabled', 'true');
+if (!localStorage.getItem('tab-system-enabled')) {
+    localStorage.setItem('tab-system-enabled', 'true');
 }
 
 let tabs = [];
 let activeTabId = null;
 let tabIdCounter = 0;
 let erudaLoaded = false;
-let lastSearchedUrl = null; 
+let lastSearchedUrl = null;
 
 function isTabSystemEnabled() {
-    return sessionStorage.getItem('tab-system-enabled') !== 'false';
+    return localStorage.getItem('tab-system-enabled') !== 'false';
 }
 
 function updateProxyUIVisibility() {
     const tabSystemEnabled = isTabSystemEnabled();
     const proxyContainer = document.getElementById('proxy-container');
-    
     if (!proxyContainer) return;
-    
 
     const tabBar = document.getElementById('tab-bar');
     const topBar = document.querySelector('.top-bar');
     const newTabBtn = document.getElementById('new-tab-btn');
     const iframeWrapper = document.getElementById('iframe-wrapper');
-    
+
     if (tabSystemEnabled) {
- 
         if (tabBar) tabBar.style.display = 'flex';
         if (topBar) topBar.style.display = 'flex';
         if (newTabBtn) newTabBtn.style.display = 'block';
-        
-        
         proxyContainer.style.paddingTop = '';
         proxyContainer.style.marginTop = '';
-        
-   
         if (iframeWrapper) {
             iframeWrapper.style.position = '';
             iframeWrapper.style.top = '';
@@ -72,16 +112,11 @@ function updateProxyUIVisibility() {
             iframeWrapper.style.zIndex = '';
         }
     } else {
-       
         if (tabBar) tabBar.style.display = 'none';
         if (topBar) topBar.style.display = 'none';
         if (newTabBtn) newTabBtn.style.display = 'none';
-        
-       
         proxyContainer.style.paddingTop = '0';
         proxyContainer.style.marginTop = '0';
-        
- 
         if (iframeWrapper) {
             iframeWrapper.style.position = 'fixed';
             iframeWrapper.style.top = '0';
@@ -95,21 +130,24 @@ function updateProxyUIVisibility() {
 
 function createTab(url = null) {
     const tabId = `tab-${tabIdCounter++}`;
-    
     const iframeContainer = document.createElement('div');
     iframeContainer.className = 'iframe-container';
     iframeContainer.id = `container-${tabId}`;
-    
+
     const iframe = document.createElement('iframe');
     iframe.id = `frame-${tabId}`;
-    
+
+
     if (url) {
-        iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+        window.currentProxyBackend = getProxyBackend();
+        const encodedUrl = getEncodedUrl(url);
+        console.log(`[createTab] Creating tab with URL: ${url}, Encoded: ${encodedUrl}`);
+        iframe.src = encodedUrl;
     }
-    
+
     iframeContainer.appendChild(iframe);
     document.getElementById('iframe-wrapper').appendChild(iframeContainer);
-    
+
     const tab = {
         id: tabId,
         url: url || '',
@@ -117,133 +155,99 @@ function createTab(url = null) {
         iframe: iframe,
         container: iframeContainer
     };
-    
+
     tabs.push(tab);
-    
-    if (isTabSystemEnabled()) {
-        renderTabs();
-    }
+
+    if (isTabSystemEnabled()) renderTabs();
     switchToTab(tabId);
-    
+
     iframe.addEventListener('load', () => {
         try {
             const title = iframe.contentDocument?.title || new URL(url || '').hostname || 'New Tab';
             tab.title = title;
-         
-            if (url) {
-                tab.url = url;
-            }
-            if (isTabSystemEnabled()) {
-                renderTabs();
-            }
-        
+            if (url) tab.url = url;
+            if (isTabSystemEnabled()) renderTabs();
             updateUrlBar();
         } catch (e) {
-          
             if (url) {
                 try {
                     const hostname = new URL(url).hostname;
                     tab.title = hostname;
-                } catch (err) {
+                } catch {
                     tab.title = 'Page';
                 }
                 tab.url = url;
             }
-            if (isTabSystemEnabled()) {
-                renderTabs();
-            }
+            if (isTabSystemEnabled()) renderTabs();
             updateUrlBar();
         }
     });
-    
+
     return tab;
 }
 
 function closeTab(tabId) {
     const index = tabs.findIndex(t => t.id === tabId);
     if (index === -1) return;
-    
     const tab = tabs[index];
     tab.container.remove();
     tabs.splice(index, 1);
-    
-    if (tabs.length === 0) {
-        showHome();
-    } else if (activeTabId === tabId) {
-        switchToTab(tabs[Math.max(0, index - 1)].id);
-    }
-    
-    if (isTabSystemEnabled()) {
-        renderTabs();
-    }
+
+    if (tabs.length === 0) showHome();
+    else if (activeTabId === tabId) switchToTab(tabs[Math.max(0, index - 1)].id);
+
+    if (isTabSystemEnabled()) renderTabs();
 }
 
 function switchToTab(tabId) {
     activeTabId = tabId;
     tabs.forEach(tab => {
-        if (tab.id === tabId) {
-            tab.container.classList.add('active');
-        } else {
-            tab.container.classList.remove('active');
-        }
+        if (tab.id === tabId) tab.container.classList.add('active');
+        else tab.container.classList.remove('active');
     });
-    if (isTabSystemEnabled()) {
-        renderTabs();
-    }
+    if (isTabSystemEnabled()) renderTabs();
     updateUrlBar();
 }
 
 function updateUrlBar() {
     const activeTab = tabs.find(t => t.id === activeTabId);
     const urlBar = document.getElementById('proxy-url-bar');
-    if (activeTab && urlBar) {
-      
-        urlBar.value = activeTab.url || '';
-    }
+    if (activeTab && urlBar) urlBar.value = activeTab.url || '';
 }
 
 function renderTabs() {
     const container = document.getElementById('tabs-container');
     if (!container) return;
-    
-  
     if (!isTabSystemEnabled()) {
         container.style.display = 'none';
         return;
-    } else {
-        container.style.display = 'flex';
     }
-    
+    container.style.display = 'flex';
     container.innerHTML = '';
-    
+
     tabs.forEach(tab => {
         const tabEl = document.createElement('div');
         tabEl.className = 'tab';
-        if (tab.id === activeTabId) {
-            tabEl.classList.add('active');
-        }
-        
+        if (tab.id === activeTabId) tabEl.classList.add('active');
+
         const favicon = document.createElement('img');
         favicon.className = 'tab-favicon';
         favicon.src = '/images/sat4.png';
-        
+
         const title = document.createElement('span');
         title.className = 'tab-title';
         title.textContent = tab.title;
-        
+
         const closeBtn = document.createElement('div');
         closeBtn.className = 'tab-close';
         closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-        
-        closeBtn.addEventListener('click', (e) => {
+        closeBtn.addEventListener('click', e => {
             e.stopPropagation();
             closeTab(tab.id);
         });
-        
-        tabEl.addEventListener('click', () => {
-            switchToTab(tab.id);
-        });
-        
+
+        tabEl.addEventListener('click', () => switchToTab(tab.id));
+
         tabEl.appendChild(favicon);
         tabEl.appendChild(title);
         tabEl.appendChild(closeBtn);
@@ -259,8 +263,6 @@ function showHome() {
 function hideHome() {
     document.getElementById('home-container').classList.add('hidden');
     document.getElementById('proxy-container').classList.add('active');
-    
-    
     updateProxyUIVisibility();
 }
 
@@ -271,31 +273,20 @@ function getActiveIframe() {
 
 function injectDevTools() {
     if (erudaLoaded) {
-        if (window.eruda._isInit) {
-            window.eruda.destroy();
-        } else {
-            window.eruda.init();
-        }
+        if (window.eruda._isInit) window.eruda.destroy();
+        else window.eruda.init();
         return;
     }
-
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/eruda/3.0.1/eruda.js';
-    script.onload = function() {
-        window.eruda.init();
-        erudaLoaded = true;
-    };
-    script.onerror = function() {
-        alert('Failed to load dev tools');
-    };
+    script.onload = () => { window.eruda.init(); erudaLoaded = true; };
+    script.onerror = () => alert('Failed to load dev tools');
     document.head.appendChild(script);
 }
 
 async function goTo(url) {
     try {
-        if (typeof registerSW === 'function') {
-            await registerSW();
-        }
+        if (typeof registerSW === 'function') await registerSW();
     } catch (err) {
         const error = document.getElementById('uv-error');
         const errorCode = document.getElementById('uv-error-code');
@@ -304,16 +295,16 @@ async function goTo(url) {
         console.error(err);
         return;
     }
-    
-   
+
     lastSearchedUrl = url;
-    
     hideHome();
-    
-   
+
+
+    window.currentProxyBackend = getProxyBackend();
+
     if (!isTabSystemEnabled() && tabs.length > 0) {
         const activeTab = tabs[0];
-        activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+        activeTab.iframe.src = getEncodedUrl(url);
         activeTab.url = url;
         activeTab.title = 'Loading...';
         switchToTab(activeTab.id);
@@ -322,156 +313,74 @@ async function goTo(url) {
     }
 }
 
-function quickGo(url) {
-    goTo(url);
-}
+function quickGo(url) { goTo(url); }
 
 window.addEventListener('DOMContentLoaded', () => {
     const uvAddress = document.getElementById('uv-address');
-    const searchEngineInput = document.getElementById('uv-search-engine');
-    const newTabBtn = document.getElementById('new-tab-btn');
     const proxyUrlBar = document.getElementById('proxy-url-bar');
-
+    const newTabBtn = document.getElementById('new-tab-btn');
 
     updateProxyUIVisibility();
 
-    const getEngine = () => {
-        return sessionStorage.getItem('search-engine-url') || 'https://duckduckgo.com/?q=%s';
-    };
-
-    const hasProtocol = (q) => /^https?:\/\//i.test(q);
-
-    const isProbablyUrl = (q) => {
+    const getEngine = () => localStorage.getItem('search-engine-url') || 'https://duckduckgo.com/?q=%s';
+    const hasProtocol = q => /^https?:\/\//i.test(q);
+    const isProbablyUrl = q => {
         if (hasProtocol(q)) return true;
         if ((q || '').includes(' ')) return false;
-        return (
-            /^[\w-]+(\.[\w-]+)+(:\d+)?(\/.*)?$/i.test(q) ||
-            /^localhost(:\d+)?(\/.*)?$/i.test(q)
-        );
+        return /^[\w-]+(\.[\w-]+)+(:\d+)?(\/.*)?$/i.test(q) || /^localhost(:\d+)?(\/.*)?$/i.test(q);
     };
-
-    const buildUrl = (q) => {
+    const buildUrl = q => {
         q = (q || '').trim();
         if (!q) return null;
         if (hasProtocol(q)) return q;
         if (isProbablyUrl(q)) return 'https://' + q;
-        const engine = getEngine();
-        return engine.replace('%s', encodeURIComponent(q));
+        return getEngine().replace('%s', encodeURIComponent(q));
     };
 
-    const handleSearch = async (input) => {
+    const handleSearch = async input => {
         const q = input.value;
         const url = buildUrl(q);
         if (!url) return;
-        try {
-            await goTo(url);
-            input.value = '';
-        } catch (e) {
-            console.error(e);
-        }
+        try { await goTo(url); input.value = ''; } catch (e) { console.error(e); }
     };
 
-    if (uvAddress) {
-        uvAddress.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleSearch(uvAddress);
-            }
-        });
-    }
-
-    if (proxyUrlBar) {
-        proxyUrlBar.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const url = buildUrl(proxyUrlBar.value);
-                if (url && activeTabId) {
-                    const activeTab = tabs.find(t => t.id === activeTabId);
-                    if (activeTab && activeTab.iframe) {
-                    
-                        lastSearchedUrl = url;
-                        
-                        activeTab.iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
-                        activeTab.url = url;
-                        activeTab.title = 'Loading...';
-                        if (isTabSystemEnabled()) {
-                            renderTabs();
-                        }
-                    }
+    if (uvAddress) uvAddress.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(uvAddress); } });
+    if (proxyUrlBar) proxyUrlBar.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const url = buildUrl(proxyUrlBar.value);
+            if (url && activeTabId) {
+                const activeTab = tabs.find(t => t.id === activeTabId);
+                if (activeTab && activeTab.iframe) {
+           
+                    window.currentProxyBackend = getProxyBackend();
+                    lastSearchedUrl = url;
+                    activeTab.iframe.src = getEncodedUrl(url);
+                    activeTab.url = url;
+                    activeTab.title = 'Loading...';
+                    if (isTabSystemEnabled()) renderTabs();
                 }
             }
-        });
-    }
+        }
+    });
 
-    if (newTabBtn) {
-        newTabBtn.addEventListener('click', () => {
-            if (!isTabSystemEnabled()) return;
-            hideHome();
-           
-            if (lastSearchedUrl) {
-                createTab(lastSearchedUrl);
-            } else {
-                createTab();
-            }
-        });
-    }
+    if (newTabBtn) newTabBtn.addEventListener('click', () => {
+        if (!isTabSystemEnabled()) return;
+        hideHome();
+        if (lastSearchedUrl) createTab(lastSearchedUrl);
+        else createTab();
+    });
 
     const backBtn = document.querySelector('.back-btn');
-    if (backBtn) {
-        backBtn.addEventListener('click', () => {
-            const iframe = getActiveIframe();
-            if (iframe) {
-                try {
-                    iframe.contentWindow.history.back();
-                } catch (e) {}
-            }
-        });
-    }
-
+    if (backBtn) backBtn.addEventListener('click', () => { const iframe = getActiveIframe(); if (iframe) { try { iframe.contentWindow.history.back(); } catch {} } });
     const forwardBtn = document.querySelector('.forward-btn');
-    if (forwardBtn) {
-        forwardBtn.addEventListener('click', () => {
-            const iframe = getActiveIframe();
-            if (iframe) {
-                try {
-                    iframe.contentWindow.history.forward();
-                } catch (e) {}
-            }
-        });
-    }
-
+    if (forwardBtn) forwardBtn.addEventListener('click', () => { const iframe = getActiveIframe(); if (iframe) { try { iframe.contentWindow.history.forward(); } catch {} } });
     const refreshBtn = document.querySelector('.refresh-btn');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', () => {
-            const iframe = getActiveIframe();
-            if (iframe) {
-                try {
-                    iframe.contentWindow.location.reload();
-                } catch (e) {
-                    iframe.src = iframe.src;
-                }
-            }
-        });
-    }
-
+    if (refreshBtn) refreshBtn.addEventListener('click', () => { const iframe = getActiveIframe(); if (iframe) { try { iframe.contentWindow.location.reload(); } catch { iframe.src = iframe.src; } } });
     const homeBtn = document.querySelector('.home-btn-proxy');
-    if (homeBtn) {
-        homeBtn.addEventListener('click', () => {
-            showHome();
-        });
-    }
-
+    if (homeBtn) homeBtn.addEventListener('click', showHome);
     const erudaBtn = document.querySelector('.eruda-btn');
-    if (erudaBtn) {
-        erudaBtn.addEventListener('click', () => {
-            injectDevTools();
-        });
-    }
-
+    if (erudaBtn) erudaBtn.addEventListener('click', injectDevTools);
     const settingsBtn = document.querySelector('.settings-btn');
-    if (settingsBtn) {
-        settingsBtn.addEventListener('click', () => {
-            window.location.href = '/s.html#Proxy';
-        });
-    }
+    if (settingsBtn) settingsBtn.addEventListener('click', () => { window.location.href = '/s.html#Proxy'; });
 });

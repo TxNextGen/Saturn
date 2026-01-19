@@ -98,17 +98,13 @@ function applyTabCloak(title, favicon) {
     }
 }
 
-
 function applySavedCloak() {
- 
     const cloakDisabled = sessionStorage.getItem('cloak-disabled') === 'true';
     
     if (cloakDisabled) {
-     
         applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
         return;
     }
-    
     
     const savedTitle = sessionStorage.getItem('custom-title');
     const savedFavicon = sessionStorage.getItem('custom-favicon');
@@ -119,7 +115,6 @@ function applySavedCloak() {
             savedFavicon || ORIGINAL_FAVICON
         );
     } else {
-        
         applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
     }
 }
@@ -176,11 +171,12 @@ function initProxy() {
         transportDisplay();
         searchEngineDisplay();
         tabSystemDisplay();
+        proxyBackendDisplay();
     }
 }
 
 function transportDisplay() {
-    const transport = sessionStorage.getItem('proxy-transport') || 'Libcurl';
+    const transport = sessionStorage.getItem('proxy-transport') || 'Epoxy';
     const transportEl = document.getElementById('proxtrans');
     if (transportEl) transportEl.textContent = transport;
 }
@@ -196,7 +192,16 @@ function tabSystemDisplay() {
     const statusEl = document.getElementById('tab-system-status');
     if (statusEl) {
         statusEl.textContent = tabSystemEnabled ? 'Enabled' : 'Disabled';
-        statusEl.style.color = tabSystemEnabled ? '#a855f7' : '#a855f7';
+        statusEl.style.color = '#a855f7';
+    }
+}
+
+function proxyBackendDisplay() {
+    const backend = sessionStorage.getItem('proxy-backend') || 'uv';
+    window.currentProxyBackend = backend;
+    const backendEl = document.getElementById('proxy-backend-status');
+    if (backendEl) {
+        backendEl.textContent = backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet';
     }
 }
 
@@ -252,6 +257,19 @@ function disableTabSystem() {
     sessionStorage.setItem('current-tab', 'proxy');
     tabSystemDisplay();
     alert('Tab system disabled! Changes will apply when you use the proxy.');
+}
+
+function setProxyBackend(backend) {
+    window.currentProxyBackend = backend;
+    sessionStorage.setItem('proxy-backend', backend);
+    
+    if (typeof switchProxyBackend === 'function') {
+        switchProxyBackend(backend);
+    }
+    
+    sessionStorage.setItem('current-tab', 'proxy');
+    proxyBackendDisplay();
+    alert(`Proxy backend changed to ${backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet'}! Create a new tab for changes to take effect.`);
 }
 
 window.addEventListener('load', () => setTimeout(initProxy, 500));

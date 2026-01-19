@@ -1,8 +1,10 @@
 "use strict";
 /**
  * Distributed with Ultraviolet and compatible with most configurations.
+ * Modified to support both UV and Scramjet backends.
  */
 const stockSW = "/uv/sw.js";
+const scramjetSW = "/js/scramjet/scramjet.worker.js";
 
 /**
  * List of hostnames that are allowed to run serviceworkers on http://
@@ -24,5 +26,15 @@ async function registerSW() {
     throw new Error("Your browser doesn't support service workers.");
   }
 
-  await navigator.serviceWorker.register(stockSW, { scope: '/@/' });
+  const proxyBackend = window.currentProxyBackend || 'uv';
+
+  if (proxyBackend === 'scramjet') {
+    await navigator.serviceWorker.register(scramjetSW, {
+      scope: "/scram/",
+    });
+  } else {
+    await navigator.serviceWorker.register(stockSW, {
+      scope: __uv$config.prefix,
+    });
+  }
 }

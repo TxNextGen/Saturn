@@ -277,36 +277,46 @@
             </div>
         </div>
 
-        <div id="proxy" class="settings-section">
-            <div class="setting-card">
-                <h2>Proxy Transport</h2>
-                <p>Configure the proxy transport layer. Current transport: <span class="highlight" id="proxtrans">[Loading...]</span></p>
-                <div class="button-grid">
-                    <button onclick="setConnection(1)">Epoxy Transport</button>
-                    <button onclick="setConnection(2)">Libcurl Transport</button>
-                </div>
-            </div>
-
-            <div class="setting-card">
-                <h2>Search Engine</h2>
-                <p>Choose your preferred search engine for the proxy. Current engine: <span class="highlight" id="search-engine-display">[Loading...]</span></p>
-                <div class="button-grid">
-                    <button onclick="setSearchEngine('duckduckgo')">DuckDuckGo</button>
-                    <button onclick="setSearchEngine('google')">Google</button>
-                    <button onclick="setSearchEngine('brave')">Brave</button>
-                    <button onclick="setSearchEngine('bing')">Bing</button>
-                </div>
-            </div>
-
-            <div class="setting-card">
-                <h2>Tab System</h2>
-                <p>Enable or disable the multi tab browsing feature. When disabled, the proxy will use a iframe interface. Status: <span class="highlight" id="tab-system-status">[Loading...]</span></p>
-                <div class="button-grid">
-                    <button onclick="enableTabSystem()">Enable Tab System</button>
-                    <button onclick="disableTabSystem()">Disable Tab System</button>
-                </div>
-            </div>
+       <div id="proxy" class="settings-section">
+    <div class="setting-card">
+        <h2>Proxy Transport</h2>
+        <p>Configure the proxy transport layer. Current transport: <span class="highlight" id="proxtrans">[Loading...]</span></p>
+        <div class="button-grid">
+            <button onclick="setConnection(1)">Epoxy Transport</button>
+            <button onclick="setConnection(2)">Libcurl Transport</button>
         </div>
+    </div>
+
+    <div class="setting-card">
+        <h2>Search Engine</h2>
+        <p>Choose your preferred search engine for the proxy. Current engine: <span class="highlight" id="search-engine-display">[Loading...]</span></p>
+        <div class="button-grid">
+            <button onclick="setSearchEngine('duckduckgo')">DuckDuckGo</button>
+            <button onclick="setSearchEngine('google')">Google</button>
+            <button onclick="setSearchEngine('brave')">Brave</button>
+            <button onclick="setSearchEngine('bing')">Bing</button>
+        </div>
+    </div>
+
+    <div class="setting-card">
+        <h2>Tab System</h2>
+        <p>Enable or disable the multi tab browsing feature. When disabled, the proxy will use a iframe interface. Status: <span class="highlight" id="tab-system-status">[Loading...]</span></p>
+        <div class="button-grid">
+            <button onclick="enableTabSystem()">Enable Tab System</button>
+            <button onclick="disableTabSystem()">Disable Tab System</button>
+        </div>
+    </div>
+
+    <!-- ADD THIS NEW CARD -->
+    <div class="setting-card">
+        <h2>Proxy Backend</h2>
+        <p>Switch between Ultraviolet and Scramjet proxy backends. Current backend: <span class="highlight" id="proxy-backend-status">[Loading...]</span></p>
+        <div class="button-grid">
+            <button onclick="setProxyBackend('uv')">Ultraviolet</button>
+            <button onclick="setProxyBackend('scramjet')">Scramjet</button>
+        </div>
+    </div>
+</div>
 
         <div id="appearance" class="settings-section">
             <div class="setting-card">

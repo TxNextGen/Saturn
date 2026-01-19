@@ -4,40 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saturn Proxy</title>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="/uv/uv.bundle.js" defer></script>
-    <script src="/uv/uv.config.js" defer></script>
-    <script src="/js/uv/register-sw.js" defer></script>
-    <script src="/js/uv/search.js" defer></script>
-    <script src="/js/uv/index.js" defer></script>
-    <link rel="stylesheet" href="../styles/search.css">
+
+
+    <script src="/uv/uv.bundle.js" type="module"></script>
+    <script src="/uv/uv.config.js" type="module"></script>
+
+   
+    <script type="module">
+        self.__scramjet$config = {
+            prefix: "/scram/",
+            codec: {
+                encode: url => url,
+                decode: url => url
+            },
+            config: "/js/scramjet/scramjet.config.js",
+            bundle: "/js/scramjet/scramjet.bundle.js",
+            worker: "/js/scramjet/scramjet.worker.js",
+            client: "/js/scramjet/scramjet.client.js",
+            codecs: "/js/scramjet/scramjet.codecs.js"
+        };
+    </script>
+
+ 
+    <script src="/js/scramjet/scramjet.bundle.js" type="module"></script>
+    <script src="/js/scramjet/scramjet.client.js" type="module"></script>
+
+   
+    <script src="/js/canvas.js" type="module"></script>
+    <script src="/js/settings.js" type="module"></script>
+    <script src="/baremux/index.js" type="module"></script>
+    <script src="/libcurl/index.js" type="module"></script>
+    <script src="/epoxy/index.js" type="module"></script>
+    <script src="/js/tab.js" type="module"></script>
+
+
+    <link rel="stylesheet" href="/styles/search.css">
 </head>
 <body>
     <div id="canvas-container"></div>
     <div class="grain-overlay"></div>
-    
+
+ 
     <div class="container" id="home-container">
         <div class="hero-section">
-            <h1>
-                <span class="title-gradient">Saturn Proxy</span>
-            </h1>
-            
-            <p class="subtitle">
-              Enjoy Searching The Web Without No Setbacks
-            </p>
+            <h1><span class="title-gradient">Saturn Proxy</span></h1>
+            <p class="subtitle">Enjoy Searching The Web Without No Setbacks</p>
 
             <form id="uv-form" onsubmit="return false;">
-                <input
-                    id="uv-search-engine"
-                    value="https://duckduckgo.com/search?q=%s"
-                    type="hidden"
-                />
-                <input
-                    autocomplete="off"
-                    id="uv-address" 
-                    type="text" 
-                    placeholder="Search or Enter a Url"
-                />
+                <input id="uv-search-engine" type="hidden" value="https://duckduckgo.com/search?q=%s"/>
+                <input id="uv-address" type="text" autocomplete="off" placeholder="Search or Enter a URL"/>
             </form>
 
             <div class="desc">
@@ -47,8 +65,8 @@
         </div>
     </div>
 
+
     <div class="proxy-container" id="proxy-container">
-       
         <div class="tab-bar" id="tab-bar">
             <div class="tabs-container" id="tabs-container"></div>
             <button class="new-tab-btn" id="new-tab-btn" title="New Tab">
@@ -58,7 +76,6 @@
                 </svg>
             </button>
         </div>
-
 
         <div class="top-bar">
             <div class="nav-controls">
@@ -74,7 +91,7 @@
             </div>
 
             <div class="url-bar-container">
-                <input type="text" class="url-bar" id="proxy-url-bar" placeholder="Search or Enter a Url">
+                <input type="text" class="url-bar" id="proxy-url-bar" placeholder="Search or Enter a URL"/>
             </div>
 
             <div class="right-controls">
@@ -85,21 +102,17 @@
                     <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
                 </div>
                 <div class="nav-btn settings-btn" title="Settings">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17H5"/><path d="M19 7h-9"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 17H5"/>
+                        <path d="M19 7h-9"/>
+                        <circle cx="17" cy="17" r="3"/>
+                        <circle cx="7" cy="7" r="3"/>
+                    </svg>
                 </div>
             </div>
         </div>
 
         <div class="iframe-wrapper" id="iframe-wrapper"></div>
     </div>
-
-       
-
-    <script src="../js/canvas.js"></script>
-        <script src="../js/settings.js"></script>
-    <script src="/baremux/index.js"></script>
-    <script src="/libcurl/index.js"></script>
-    <script src="/epoxy/index.js"></script>
-    <script src="../js/tab.js"></script>
 </body>
 </html>
