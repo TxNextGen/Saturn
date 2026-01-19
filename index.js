@@ -1,7 +1,7 @@
 import { createServer } from "http";
 import { join } from "path";
 import express from "express";
-import fetch from "node-fetch"; // make sure node-fetch installed
+import fetch from "node-fetch"; 
 import { routeRequest } from "wisp-server-node";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
