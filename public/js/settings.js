@@ -1,5 +1,4 @@
 function switchTab(tabName, btnElement) {
-  
     document.querySelectorAll('.settings-section').forEach(section => {
         section.classList.remove('active');
     });
@@ -13,24 +12,22 @@ function switchTab(tabName, btnElement) {
 
     if (btnElement) btnElement.classList.add('active');
 
-   
-    const currentTab = sessionStorage.getItem('current-tab');
+    const currentTab = localStorage.getItem('current-tab');
     if (currentTab !== tabName) {
-        sessionStorage.setItem('current-tab', tabName);
+        localStorage.setItem('current-tab', tabName);
     }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.settings-section').forEach(section => section.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    const savedTab = sessionStorage.getItem('current-tab') || 'themes';
+    const savedTab = localStorage.getItem('current-tab') || 'themes';
     const section = document.getElementById(savedTab);
     if (section) section.classList.add('active');
     const btn = Array.from(document.querySelectorAll('.tab-btn'))
         .find(b => b.getAttribute('onclick')?.includes(savedTab));
     if (btn) btn.classList.add('active');
     
-  
     applySavedCloak();
 });
 
@@ -48,7 +45,7 @@ function formatCSS(css) {
 }
 
 function applyTheme() {
-    const savedTheme = sessionStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         const existingStyle = document.getElementById('custom-theme-style');
         if (existingStyle) existingStyle.remove();
@@ -60,24 +57,24 @@ function applyTheme() {
 }
 
 function clearTheme() {
-    sessionStorage.removeItem('theme');
-    sessionStorage.removeItem('custom-img');
-    sessionStorage.setItem('current-tab', 'themes');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('custom-img');
+    localStorage.setItem('current-tab', 'themes');
     window.location.reload();
 }
 
 function setTheme(theme) {
-    sessionStorage.setItem('theme', premadeThemes[theme]);
-    sessionStorage.removeItem('custom-img');
-    sessionStorage.setItem('current-tab', 'themes');
+    localStorage.setItem('theme', premadeThemes[theme]);
+    localStorage.removeItem('custom-img');
+    localStorage.setItem('current-tab', 'themes');
     window.location.reload();
 }
 
 function loadCustomTheme() {
     const themeValue = document.getElementById('themebox').value;
     if (themeValue) {
-        sessionStorage.setItem('theme', themeValue);
-        sessionStorage.setItem('current-tab', 'themes');
+        localStorage.setItem('theme', themeValue);
+        localStorage.setItem('current-tab', 'themes');
         window.location.reload();
     }
 }
@@ -99,15 +96,15 @@ function applyTabCloak(title, favicon) {
 }
 
 function applySavedCloak() {
-    const cloakDisabled = sessionStorage.getItem('cloak-disabled') === 'true';
+    const cloakDisabled = localStorage.getItem('cloak-disabled') === 'true';
     
     if (cloakDisabled) {
         applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
         return;
     }
     
-    const savedTitle = sessionStorage.getItem('custom-title');
-    const savedFavicon = sessionStorage.getItem('custom-favicon');
+    const savedTitle = localStorage.getItem('custom-title');
+    const savedFavicon = localStorage.getItem('custom-favicon');
     
     if (savedTitle || savedFavicon) {
         applyTabCloak(
@@ -120,26 +117,26 @@ function applySavedCloak() {
 }
 
 function clearCloak() {
-    sessionStorage.removeItem('custom-title');
-    sessionStorage.removeItem('custom-favicon');
-    sessionStorage.setItem('cloak-disabled', 'true'); 
-    sessionStorage.setItem('current-tab', 'cloaking');
+    localStorage.removeItem('custom-title');
+    localStorage.removeItem('custom-favicon');
+    localStorage.setItem('cloak-disabled', 'true'); 
+    localStorage.setItem('current-tab', 'cloaking');
     applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
 }
 
 function setCloak(title, favicon) {
-    sessionStorage.removeItem('cloak-disabled'); 
-    sessionStorage.setItem('custom-title', title);
-    sessionStorage.setItem('custom-favicon', favicon);
-    sessionStorage.setItem('current-tab', 'cloaking');
+    localStorage.removeItem('cloak-disabled'); 
+    localStorage.setItem('custom-title', title);
+    localStorage.setItem('custom-favicon', favicon);
+    localStorage.setItem('current-tab', 'cloaking');
     applyTabCloak(title, favicon);
 }
 
 function setCustomTitle() {
     const title = document.getElementById('custom-title').value;
     if (title) {
-        sessionStorage.removeItem('cloak-disabled'); 
-        sessionStorage.setItem('custom-title', title);
+        localStorage.removeItem('cloak-disabled'); 
+        localStorage.setItem('custom-title', title);
         applyTabCloak(title, null);
     }
 }
@@ -147,8 +144,8 @@ function setCustomTitle() {
 function setCustomFavicon() {
     const favicon = document.getElementById('custom-favicon').value;
     if (favicon) {
-        sessionStorage.removeItem('cloak-disabled'); 
-        sessionStorage.setItem('custom-favicon', favicon);
+        localStorage.removeItem('cloak-disabled'); 
+        localStorage.setItem('custom-favicon', favicon);
         applyTabCloak(null, favicon);
     }
 }
@@ -176,19 +173,19 @@ function initProxy() {
 }
 
 function transportDisplay() {
-    const transport = sessionStorage.getItem('proxy-transport') || 'Epoxy';
+    const transport = localStorage.getItem('proxy-transport') || 'Epoxy';
     const transportEl = document.getElementById('proxtrans');
     if (transportEl) transportEl.textContent = transport;
 }
 
 function searchEngineDisplay() {
-    const searchEngine = sessionStorage.getItem('search-engine') || 'DuckDuckGo';
+    const searchEngine = localStorage.getItem('search-engine') || 'DuckDuckGo';
     const searchEngineEl = document.getElementById('search-engine-display');
     if (searchEngineEl) searchEngineEl.textContent = searchEngine;
 }
 
 function tabSystemDisplay() {
-    const tabSystemEnabled = sessionStorage.getItem('tab-system-enabled') !== 'false';
+    const tabSystemEnabled = localStorage.getItem('tab-system-enabled') !== 'false';
     const statusEl = document.getElementById('tab-system-status');
     if (statusEl) {
         statusEl.textContent = tabSystemEnabled ? 'Enabled' : 'Disabled';
@@ -197,12 +194,14 @@ function tabSystemDisplay() {
 }
 
 function proxyBackendDisplay() {
-    const backend = sessionStorage.getItem('proxy-backend') || 'uv';
+    const backend = localStorage.getItem('proxy-backend') || 'uv';
     window.currentProxyBackend = backend;
     const backendEl = document.getElementById('proxy-backend-status');
     if (backendEl) {
         backendEl.textContent = backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet';
+        backendEl.style.color = '#a855f7';
     }
+    console.log(`[settings.js] Displayed backend: ${backend}`);
 }
 
 async function setConnection(arg) {
@@ -212,14 +211,14 @@ async function setConnection(arg) {
         switch (arg) {
             case 1: 
                 await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]); 
-                sessionStorage.setItem('proxy-transport','Epoxy'); 
+                localStorage.setItem('proxy-transport','Epoxy'); 
                 break;
             case 2: 
                 await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]); 
-                sessionStorage.setItem('proxy-transport','Libcurl'); 
+                localStorage.setItem('proxy-transport','Libcurl'); 
                 break;
         }
-        sessionStorage.setItem('current-tab', 'proxy');
+        localStorage.setItem('current-tab', 'proxy');
         transportDisplay();
         alert('Transport changed successfully!');
     } catch (err) { 
@@ -237,39 +236,48 @@ function setSearchEngine(engine) {
     };
     
     if (engines[engine]) {
-        sessionStorage.setItem('search-engine', engines[engine].name);
-        sessionStorage.setItem('search-engine-url', engines[engine].url);
-        sessionStorage.setItem('current-tab', 'proxy');
+        localStorage.setItem('search-engine', engines[engine].name);
+        localStorage.setItem('search-engine-url', engines[engine].url);
+        localStorage.setItem('current-tab', 'proxy');
         searchEngineDisplay();
         alert(`Search engine changed to ${engines[engine].name}!`);
     }
 }
 
 function enableTabSystem() {
-    sessionStorage.setItem('tab-system-enabled', 'true');
-    sessionStorage.setItem('current-tab', 'proxy');
+    localStorage.setItem('tab-system-enabled', 'true');
+    localStorage.setItem('current-tab', 'proxy');
     tabSystemDisplay();
     alert('Tab system enabled! Changes will apply when you use the proxy.');
 }
 
 function disableTabSystem() {
-    sessionStorage.setItem('tab-system-enabled', 'false');
-    sessionStorage.setItem('current-tab', 'proxy');
+    localStorage.setItem('tab-system-enabled', 'false');
+    localStorage.setItem('current-tab', 'proxy');
     tabSystemDisplay();
     alert('Tab system disabled! Changes will apply when you use the proxy.');
 }
 
 function setProxyBackend(backend) {
-    window.currentProxyBackend = backend;
-    sessionStorage.setItem('proxy-backend', backend);
+    console.log(`[settings.js] Setting proxy backend to: ${backend}`);
     
+    
+    localStorage.setItem('proxy-backend', backend);
+    
+    
+    window.currentProxyBackend = backend;
+    
+  
     if (typeof switchProxyBackend === 'function') {
         switchProxyBackend(backend);
     }
     
-    sessionStorage.setItem('current-tab', 'proxy');
+    
+    localStorage.setItem('current-tab', 'proxy');
     proxyBackendDisplay();
-    alert(`Proxy backend changed to ${backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet'}! Create a new tab for changes to take effect.`);
+    
+ 
+    alert(`Proxy backend changed to ${backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet'}! Reload the page or create a new tab for changes to take effect.`);
 }
 
 window.addEventListener('load', () => setTimeout(initProxy, 500));

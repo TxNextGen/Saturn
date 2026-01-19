@@ -1,31 +1,44 @@
 let _connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 
 
+async function registerSW() {
+    if (!('serviceWorker' in navigator)) {
+        throw new Error("Service workers not supported");
+    }
+
+    console.log('[registerSW] Registering correct UV entry worker (/uv/sw.js)...');
+
+    const reg = await navigator.serviceWorker.register('/uv/sw.js', {
+        scope: '/@/'
+    });
+
+    console.log('[registerSW] ✅ UV Service Worker registered:', reg.scope);
+    return reg;
+}
+
 function getProxyBackend() {
     return localStorage.getItem('proxy-backend') || 'uv';
 }
 
-
 window.currentProxyBackend = getProxyBackend();
 console.log(`[tab.js] Initialized with ${window.currentProxyBackend.toUpperCase()} proxy backend`);
-
 
 function switchProxyBackend(backend) {
     window.currentProxyBackend = backend;
     localStorage.setItem('proxy-backend', backend);
-    console.log(`Switched to ${backend.toUpperCase()} proxy backend`);
+    console.log(`[tab.js] Switched to ${backend.toUpperCase()} proxy backend`);
 }
 
 function getEncodedUrl(url) {
     if (!url) return "";
 
-  
     if (!/^https?:\/\//i.test(url)) {
         url = "https://" + url;
     }
 
- 
-    const backend = window.currentProxyBackend || 'uv';
+  
+    const backend = getProxyBackend();
+    window.currentProxyBackend = backend;
     console.log(`[getEncodedUrl] Using backend: ${backend} for URL: ${url}`);
 
     if (backend === "scramjet") {
@@ -33,31 +46,83 @@ function getEncodedUrl(url) {
         console.log(`[getEncodedUrl] Scramjet encoded: ${encoded}`);
         return encoded;
     } else {
-      
+       
+        console.log('[getEncodedUrl] UV config check:', {
+            configExists: typeof __uv$config !== 'undefined',
+            prefix: typeof __uv$config !== 'undefined' ? __uv$config.prefix : 'NOT FOUND',
+            encodeUrl: typeof __uv$config !== 'undefined' ? typeof __uv$config.encodeUrl : 'NOT FOUND'
+        });
+
         if (typeof __uv$config === 'undefined') {
-            console.error('[getEncodedUrl] UV config not found, falling back to basic encoding');
-            return "/uv/service/" + encodeURIComponent(url);
+            console.error('[getEncodedUrl] ❌ UV config not found! Service worker may not be registered.');
+            console.error('[getEncodedUrl] Make sure uv.config.js is loaded before tab.js');
+          
+            const fallbackEncoded = "/uv/service/" + encodeURIComponent(url);
+            console.log('[getEncodedUrl] Using fallback encoding:', fallbackEncoded);
+            return fallbackEncoded;
         }
+
+     
+        if (typeof __uv$config.encodeUrl !== 'function') {
+            console.error('[getEncodedUrl] ❌ UV encodeUrl function not found!');
+            const fallbackEncoded = __uv$config.prefix + encodeURIComponent(url);
+            console.log('[getEncodedUrl] Using simple fallback encoding:', fallbackEncoded);
+            return fallbackEncoded;
+        }
+
         const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
-        console.log(`[getEncodedUrl] UV encoded: ${encoded}`);
+        console.log(`[getEncodedUrl] ✅ UV encoded successfully: ${encoded}`);
         return encoded;
     }
 }
 
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        console.log('=== UV CONFIG DIAGNOSTIC ===');
+        console.log('UV Config exists:', typeof __uv$config !== 'undefined');
+        if (typeof __uv$config !== 'undefined') {
+            console.log('UV Prefix:', __uv$config.prefix);
+            console.log('UV encodeUrl function:', typeof __uv$config.encodeUrl);
+            console.log('UV decodeUrl function:', typeof __uv$config.decodeUrl);
+            console.log('UV handler:', __uv$config.handler);
+            console.log('UV bundle:', __uv$config.bundle);
+            console.log('UV config:', __uv$config.config);
+            console.log('UV sw:', __uv$config.sw);
+        } else {
+            console.error('❌ UV Config not loaded! Check if uv.config.js is included in your HTML');
+            console.error('Add this to your HTML before tab.js:');
+            console.error('<script src="/uv/uv.config.js"></script>');
+        }
+        console.log('Service Worker registration function:', typeof registerSW);
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                console.log('Active Service Workers:', registrations.length);
+                registrations.forEach((reg, i) => {
+                    console.log(`SW ${i + 1}:`, reg.scope);
+                });
+            });
+        }
+        console.log('========================');
+    }, 1000);
+});
+
 async function setConnection(arg) {
     const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+    console.log('[setConnection] WISP URL:', wispUrl);
     switch (arg) {
         case 1:
             await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport', 'Epoxy');
+            console.log('[setConnection] ✅ Set transport to Epoxy');
             break;
         case 2:
             await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport', 'Libcurl');
+            console.log('[setConnection] ✅ Set transport to Libcurl');
             break;
     }
 }
-
 
 if (!localStorage.getItem('proxy-transport')) {
     setConnection(1);
@@ -66,15 +131,19 @@ if (!localStorage.getItem('proxy-transport')) {
     if (localStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
 }
 
-
 if (!localStorage.getItem('search-engine')) {
     localStorage.setItem('search-engine', 'DuckDuckGo');
     localStorage.setItem('search-engine-url', 'https://duckduckgo.com/?q=%s');
 }
 
-
 if (!localStorage.getItem('tab-system-enabled')) {
     localStorage.setItem('tab-system-enabled', 'true');
+}
+
+
+if (!localStorage.getItem('proxy-backend')) {
+    localStorage.setItem('proxy-backend', 'uv');
+    console.log('[tab.js] Initialized default backend: uv');
 }
 
 let tabs = [];
@@ -137,11 +206,12 @@ function createTab(url = null) {
     const iframe = document.createElement('iframe');
     iframe.id = `frame-${tabId}`;
 
-
     if (url) {
-        window.currentProxyBackend = getProxyBackend();
         const encodedUrl = getEncodedUrl(url);
-        console.log(`[createTab] Creating tab with URL: ${url}, Encoded: ${encodedUrl}`);
+        console.log(`[createTab] Creating tab with:
+  - Original URL: ${url}
+  - Backend: ${getProxyBackend()}
+  - Encoded URL: ${encodedUrl}`);
         iframe.src = encodedUrl;
     }
 
@@ -181,6 +251,12 @@ function createTab(url = null) {
             if (isTabSystemEnabled()) renderTabs();
             updateUrlBar();
         }
+    });
+
+   
+    iframe.addEventListener('error', (e) => {
+        console.error('[createTab] Iframe load error:', e);
+        console.error('[createTab] Failed to load:', iframe.src);
     });
 
     return tab;
@@ -285,30 +361,38 @@ function injectDevTools() {
 }
 
 async function goTo(url) {
+    console.log(`[goTo] Starting navigation to: ${url}`);
+    
     try {
-        if (typeof registerSW === 'function') await registerSW();
+        if (typeof registerSW === 'function') {
+            console.log('[goTo] Registering service worker...');
+            await registerSW();
+            console.log('[goTo] ✅ Service worker registered');
+        } else {
+            console.warn('[goTo] ⚠️ registerSW function not found!');
+        }
     } catch (err) {
+        console.error('[goTo] ❌ Service worker registration failed:', err);
         const error = document.getElementById('uv-error');
         const errorCode = document.getElementById('uv-error-code');
         if (error) error.textContent = "Failed to register service worker.";
         if (errorCode) errorCode.textContent = err.toString();
-        console.error(err);
         return;
     }
 
     lastSearchedUrl = url;
     hideHome();
 
-
-    window.currentProxyBackend = getProxyBackend();
-
     if (!isTabSystemEnabled() && tabs.length > 0) {
         const activeTab = tabs[0];
-        activeTab.iframe.src = getEncodedUrl(url);
+        const encodedUrl = getEncodedUrl(url);
+        console.log(`[goTo] Navigating existing tab to: ${encodedUrl}`);
+        activeTab.iframe.src = encodedUrl;
         activeTab.url = url;
         activeTab.title = 'Loading...';
         switchToTab(activeTab.id);
     } else {
+        console.log(`[goTo] Creating new tab for: ${url}`);
         createTab(url);
     }
 }
@@ -352,8 +436,6 @@ window.addEventListener('DOMContentLoaded', () => {
             if (url && activeTabId) {
                 const activeTab = tabs.find(t => t.id === activeTabId);
                 if (activeTab && activeTab.iframe) {
-           
-                    window.currentProxyBackend = getProxyBackend();
                     lastSearchedUrl = url;
                     activeTab.iframe.src = getEncodedUrl(url);
                     activeTab.url = url;

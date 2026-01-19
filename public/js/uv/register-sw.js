@@ -3,7 +3,7 @@
  * Distributed with Ultraviolet and compatible with most configurations.
  * Modified to support both UV and Scramjet backends.
  */
-const stockSW = "/uv/sw.js";
+const stockSW = "/uv/uv.sw.js";  
 const scramjetSW = "/js/scramjet/scramjet.worker.js";
 
 /**
@@ -26,15 +26,20 @@ async function registerSW() {
     throw new Error("Your browser doesn't support service workers.");
   }
 
-  const proxyBackend = window.currentProxyBackend || 'uv';
+  const proxyBackend = window.currentProxyBackend || localStorage.getItem('proxy-backend') || 'uv';
+  
+  console.log(`[registerSW] Registering ${proxyBackend} service worker...`);
 
   if (proxyBackend === 'scramjet') {
     await navigator.serviceWorker.register(scramjetSW, {
       scope: "/scram/",
     });
+    console.log('✅ Scramjet SW registered with scope /scram/');
   } else {
+    // FIXED: Hardcode the scope instead of using __uv$config.prefix
     await navigator.serviceWorker.register(stockSW, {
-      scope: __uv$config.prefix,
+      scope: "/@/",  
     });
+    console.log('✅ UV SW registered with scope /@/');
   }
 }

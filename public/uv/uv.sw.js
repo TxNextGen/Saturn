@@ -26,7 +26,7 @@ const emptyMethods = ["GET", "HEAD"];
 class UVServiceWorker extends Ultraviolet.EventEmitter {
 	constructor(config = __uv$config) {
 		super();
-		if (!config.prefix) config.prefix = "/service/";
+		if (!config.prefix) config.prefix = "/@/";
 		this.config = config;
 		/**
 		 * @type {InstanceType<Ultraviolet['BareClient']>}
