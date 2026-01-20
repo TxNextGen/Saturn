@@ -79,6 +79,14 @@ function loadCustomTheme() {
     }
 }
 
+function setCustomImage() {
+    const imageUrl = prompt('Enter the URL of your custom image:');
+    if (imageUrl) {
+        localStorage.setItem('custom-img', imageUrl);
+        alert('Custom image set! It will appear on other pages with the Saturn logo.');
+    }
+}
+
 const ORIGINAL_FAVICON = "/images/sater1.png";
 
 function applyTabCloak(title, favicon) {
@@ -99,7 +107,12 @@ function applySavedCloak() {
     const cloakDisabled = localStorage.getItem('cloak-disabled') === 'true';
     
     if (cloakDisabled) {
-        applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
+      
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('settings')) {
+            applyTabCloak("Saturn Proxy | Settings", ORIGINAL_FAVICON);
+        }
+    
         return;
     }
     
@@ -108,11 +121,9 @@ function applySavedCloak() {
     
     if (savedTitle || savedFavicon) {
         applyTabCloak(
-            savedTitle || "SaturnProxy | Settings",
-            savedFavicon || ORIGINAL_FAVICON
+            savedTitle || null,
+            savedFavicon || null
         );
-    } else {
-        applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
     }
 }
 
@@ -121,7 +132,12 @@ function clearCloak() {
     localStorage.removeItem('custom-favicon');
     localStorage.setItem('cloak-disabled', 'true'); 
     localStorage.setItem('current-tab', 'cloaking');
-    applyTabCloak("SaturnProxy | Settings", ORIGINAL_FAVICON);
+    
+  
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('settings')) {
+        applyTabCloak("Saturn Proxy | Settings", ORIGINAL_FAVICON);
+    }
 }
 
 function setCloak(title, favicon) {
@@ -261,22 +277,16 @@ function disableTabSystem() {
 function setProxyBackend(backend) {
     console.log(`[settings.js] Setting proxy backend to: ${backend}`);
     
-    
     localStorage.setItem('proxy-backend', backend);
-    
-    
     window.currentProxyBackend = backend;
     
-  
     if (typeof switchProxyBackend === 'function') {
         switchProxyBackend(backend);
     }
     
-    
     localStorage.setItem('current-tab', 'proxy');
     proxyBackendDisplay();
     
- 
     alert(`Proxy backend changed to ${backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet'}! Reload the page or create a new tab for changes to take effect.`);
 }
 
