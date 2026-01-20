@@ -1,102 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturn AI</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  </head>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-
-    html {
-      overflow: hidden;
-      background-color: var(--background-dark);
-    }
-
-    body{
-       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-       color: #ffffff;
-    }
-
-    * {
-      margin: 0;
-      opacity: 1;
-      padding: 0;
-      border: 0;
-      font-family: 'Poppins', var(--font-family);
-      color: var(--font-color);
-    }
-
-    #canvas-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .content {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      pointer-events: none;
-    }
-
-    .content * {
-      animation-fill-mode: forwards;
-      opacity: 1;
-      animation-name: fadein;
-      animation-duration: 0.8s;
-    }
-
-    h1 {
-      z-index: 1483989389348394834978;
-      text-shadow: 0px 0px 25px white;
-      font-size: 48px;
-      font-weight: 700;
-    }
-
-    .gradient {
-      text-shadow: 0px 0px 20px var(--accent-color);
-      background: -webkit-linear-gradient(45deg, var(--primary-light), var(--primary-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .static-text {
-      margin: 15px;
-      min-height: 24px;
-    }
-
-    .cursor {
-      display: inline-block;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-  </style>
-  <body>
+    <link rel="stylesheet" href="../styles/ai.css">
+ 
+</head>
+<body>
     <div id="canvas-container"></div>
     <div class="grain-overlay"></div>
 
-    <div style="animation-delay: 0.5s; position: absolute; height:100vh; width: 100vw; z-index: -6544530;" id="particles-js"></div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <h1>Saturn AI</h1>
+            </div>
+            <div class="model-selector">
+                <select id="model-dropdown" class="model-dropdown">
+                    <option value="llama-3.1-8b">Llama 3.1 8B (Fast)</option>
+                    <option value="llama-3.3-70b">Llama 3.3 70B (Smart)</option>
+                    <option value="gpt-oss-20b">GPT-OSS 20B</option>
+                </select>
+            </div>
+        </div>
 
-    <div class="content" style="z-index: 1000;">
-      <h1>COMING SOON</h1>
+        <div class="chat-messages" id="chat-messages">
+            <div class="welcome-screen" id="welcome-screen">
+                <h2>Welcome to Saturn AI</h2>
+                <p>Your intelligent assistant powered by advanced AI models</p>
+                <div class="suggestion-cards">
+                    <div class="suggestion-card" onclick="useSuggestion('Explain quantum computing in simple terms')">
+                        <div class="suggestion-card-header">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                            <h3>Explain</h3>
+                        </div>
+                        <p>Quantum computing in simple terms</p>
+                    </div>
+                    <div class="suggestion-card" onclick="useSuggestion('Write a Python function to sort an array')">
+                        <div class="suggestion-card-header">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            <h3>Code</h3>
+                        </div>
+                        <p>Python sorting function</p>
+                    </div>
+                    <div class="suggestion-card" onclick="useSuggestion('Give me creative writing prompts')">
+                        <div class="suggestion-card-header">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
+                            <h3>Create</h3>
+                        </div>
+                        <p>Creative writing prompts</p>
+                    </div>
+                    <div class="suggestion-card" onclick="useSuggestion('What are the latest AI trends?')">
+                        <div class="suggestion-card-header">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <h3>Research</h3>
+                        </div>
+                        <p>Latest AI trends</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="message-avatar">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <div class="input-actions">
+                    <button class="action-btn" id="clear-chat-btn" title="Clear chat">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                <textarea id="chat-input" placeholder="Ask me anything..." rows="1"></textarea>
+                <button id="send-btn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                    Send
+                </button>
+            </div>
+        </div>
     </div>
-  
+
+    <!-- IMPORTANT: Load config.js BEFORE ai.js -->
     <script src="../js/canvas.js"></script>
-       <script src="../js/settings.js"></script>
-  </body>
+    <script src="../js/config.js"></script>
+    <script src="../js/ai.js"></script>
+</body>
 </html>
