@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saturn Proxy</title>
-
-
+     <script src="/js/shortcut.js"></script>
+    <script src="/js/theme-loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     
@@ -39,6 +39,7 @@
     <script src="/libcurl/index.js" type="module"></script>
     <script src="/epoxy/index.js" type="module"></script>
     <script src="/js/tab.js" type="module"></script>
+    <script src="/js/shortcuts.js" type="module"></script>
 
 
     <link rel="stylesheet" href="/styles/search.css">
@@ -61,6 +62,20 @@
             <div class="desc">
                 <p id="uv-error"></p>
                 <pre id="uv-error-code"></pre>
+            </div>
+
+          
+            <div class="shortcuts-container">
+                <div class="shortcuts-grid" id="shortcuts-grid">
+                   
+                </div>
+                <button class="add-shortcut-btn" id="add-shortcut-btn" title="Add Shortcut">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Add Shortcut</span>
+                </button>
             </div>
         </div>
     </div>
@@ -91,6 +106,13 @@
             </div>
 
             <div class="url-bar-container">
+               
+                <div class="nav-btn search-engine-btn" title="Change Search Engine" style="width: 20px; height: 20px; margin-right: 8px; padding: 0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
                 <input type="text" class="url-bar" id="proxy-url-bar" placeholder="Search or Enter a URL"/>
             </div>
 
@@ -101,7 +123,9 @@
                 <div class="nav-btn eruda-btn" title="Dev Tools">
                     <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
                 </div>
-                <div class="nav-btn settings-btn" title="Settings">
+                
+            
+                <div class="nav-btn settings-btn" title="Quick Settings">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M14 17H5"/>
                         <path d="M19 7h-9"/>
@@ -113,6 +137,39 @@
         </div>
 
         <div class="iframe-wrapper" id="iframe-wrapper"></div>
+    </div>
+
+
+    <div class="modal" id="add-shortcut-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Shortcut</h3>
+                <button class="modal-close" id="modal-close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="shortcut-name">Name</label>
+                    <input type="text" id="shortcut-name" placeholder="e.g., TikTok" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="shortcut-url">URL</label>
+                    <input type="text" id="shortcut-url" placeholder="e.g., https://tiktok.com" autocomplete="off">
+                </div>
+                <div class="favicon-preview" id="favicon-preview">
+                    <img id="favicon-preview-img" src="" alt="Favicon preview" style="display: none;">
+                    <span id="favicon-preview-text">Enter a URL</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="modal-cancel">Cancel</button>
+                <button class="btn-primary" id="modal-save">Add Shortcut</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -32,10 +32,97 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 const premadeThemes = {
-    "blue": ":root { --font-family: sans-serif; --font-color: rgb(255, 255, 255); --sidebar-size: 50px; --primary-light: rgb(160, 177, 255); --primary-mid: rgb(100, 135, 230); --primary-dark: rgb(70, 82, 190); --accent-color: rgb(71, 70, 130); --accent-color-dark: rgb(55, 54, 100); --background-dark: rgb(5, 5, 14); --background-light: rgb(16, 13, 41); } body { background: rgb(5, 5, 14) !important; } .setting-card { background: rgba(16, 13, 41, 0.5) !important; border-color: rgba(100, 135, 230, 0.3) !important; } button { background: rgba(100, 135, 230, 0.2) !important; border-color: rgba(160, 177, 255, 0.3) !important; } button:hover { background: rgba(100, 135, 230, 0.4) !important; } .tab-btn.active { background: rgba(100, 135, 230, 0.3) !important; border-color: rgb(100, 135, 230) !important; }",
-    "night": ":root { --font-family: sans-serif; --font-color: rgb(255, 255, 255); --sidebar-size: 50px; --primary-light: rgb(179, 179, 179); --primary-mid: rgb(129, 129, 129); --primary-dark: rgb(80, 80, 80); --accent-color: rgb(56, 56, 56); --accent-color-dark: rgb(29, 29, 29); --background-dark: rgb(0, 0, 0); --background-light: rgb(19, 19, 19); } body { background: rgb(0, 0, 0) !important; } .setting-card { background: rgba(19, 19, 19, 0.5) !important; border-color: rgba(129, 129, 129, 0.3) !important; } button { background: rgba(129, 129, 129, 0.2) !important; border-color: rgba(179, 179, 179, 0.3) !important; } button:hover { background: rgba(129, 129, 129, 0.4) !important; } .tab-btn.active { background: rgba(129, 129, 129, 0.3) !important; border-color: rgb(129, 129, 129) !important; }",
-    "red": ":root { --font-family: sans-serif; --font-color: rgb(255, 255, 255); --sidebar-size: 50px; --primary-light: rgb(255, 160, 160); --primary-mid: rgb(151, 70, 70); --primary-dark: rgb(114, 41, 41); --accent-color: rgb(130, 70, 70); --accent-color-dark: rgb(100, 54, 54); --background-dark: rgb(14, 5, 5); --background-light: rgb(41, 13, 13); } body { background: rgb(14, 5, 5) !important; } .setting-card { background: rgba(41, 13, 13, 0.5) !important; border-color: rgba(151, 70, 70, 0.3) !important; } button { background: rgba(151, 70, 70, 0.2) !important; border-color: rgba(255, 160, 160, 0.3) !important; } button:hover { background: rgba(151, 70, 70, 0.4) !important; } .tab-btn.active { background: rgba(151, 70, 70, 0.3) !important; border-color: rgb(151, 70, 70) !important; } h1 { color: rgb(255, 160, 160) !important; }",
-    "green": ":root { --font-family: sans-serif; --font-color: rgb(255, 255, 255); --sidebar-size: 50px; --primary-light: rgb(168, 255, 160); --primary-mid: rgb(137, 230, 100); --primary-dark: rgb(98, 190, 70); --accent-color: rgb(82, 130, 70); --accent-color-dark: rgb(70, 110, 60); --background-dark: rgb(5, 15, 6); --background-light: rgb(22, 41, 13); } body { background: rgb(5, 15, 6) !important; } .setting-card { background: rgba(22, 41, 13, 0.5) !important; border-color: rgba(137, 230, 100, 0.3) !important; } button { background: rgba(137, 230, 100, 0.2) !important; border-color: rgba(168, 255, 160, 0.3) !important; } button:hover { background: rgba(137, 230, 100, 0.4) !important; } .tab-btn.active { background: rgba(137, 230, 100, 0.3) !important; border-color: rgb(137, 230, 100) !important; } h1 { color: rgb(168, 255, 160) !important; }"
+    "blue": `:root { 
+        --font-family: sans-serif; 
+        --font-color: rgb(255, 255, 255); 
+        --sidebar-size: 50px; 
+        --primary-light: rgb(160, 177, 255); 
+        --primary-mid: rgb(100, 135, 230); 
+        --primary-dark: rgb(70, 82, 190); 
+        --accent-color: rgb(71, 70, 130); 
+        --accent-color-dark: rgb(55, 54, 100); 
+        --background-dark: rgb(5, 5, 14); 
+        --background-light: rgb(16, 13, 41);
+        --theme-primary: #6487e6;
+        --theme-secondary: #4776d9;
+        --theme-light: #a0b1ff;
+    } 
+    body { background: rgb(5, 5, 14) !important; } 
+    .setting-card { background: rgba(16, 13, 41, 0.5) !important; border-color: rgba(100, 135, 230, 0.3) !important; } 
+    button { background: rgba(100, 135, 230, 0.2) !important; border-color: rgba(160, 177, 255, 0.3) !important; } 
+    button:hover { background: rgba(100, 135, 230, 0.4) !important; } 
+    .tab-btn.active { background: rgba(100, 135, 230, 0.3) !important; border-color: rgb(100, 135, 230) !important; }
+    h1 { color: #6487e6 !important; }
+    .highlight { color: #a0b1ff !important; }`,
+    
+    "night": `:root { 
+        --font-family: sans-serif; 
+        --font-color: rgb(255, 255, 255); 
+        --sidebar-size: 50px; 
+        --primary-light: rgb(179, 179, 179); 
+        --primary-mid: rgb(129, 129, 129); 
+        --primary-dark: rgb(80, 80, 80); 
+        --accent-color: rgb(56, 56, 56); 
+        --accent-color-dark: rgb(29, 29, 29); 
+        --background-dark: rgb(0, 0, 0); 
+        --background-light: rgb(19, 19, 19);
+        --theme-primary: #818181;
+        --theme-secondary: #505050;
+        --theme-light: #b3b3b3;
+    } 
+    body { background: rgb(0, 0, 0) !important; } 
+    .setting-card { background: rgba(19, 19, 19, 0.5) !important; border-color: rgba(129, 129, 129, 0.3) !important; } 
+    button { background: rgba(129, 129, 129, 0.2) !important; border-color: rgba(179, 179, 179, 0.3) !important; } 
+    button:hover { background: rgba(129, 129, 129, 0.4) !important; } 
+    .tab-btn.active { background: rgba(129, 129, 129, 0.3) !important; border-color: rgb(129, 129, 129) !important; }
+    h1 { color: #b3b3b3 !important; }
+    .highlight { color: #b3b3b3 !important; }`,
+    
+    "red": `:root { 
+        --font-family: sans-serif; 
+        --font-color: rgb(255, 255, 255); 
+        --sidebar-size: 50px; 
+        --primary-light: rgb(255, 160, 160); 
+        --primary-mid: rgb(151, 70, 70); 
+        --primary-dark: rgb(114, 41, 41); 
+        --accent-color: rgb(130, 70, 70); 
+        --accent-color-dark: rgb(100, 54, 54); 
+        --background-dark: rgb(14, 5, 5); 
+        --background-light: rgb(41, 13, 13);
+        --theme-primary: #974646;
+        --theme-secondary: #722929;
+        --theme-light: #ffa0a0;
+    } 
+    body { background: rgb(14, 5, 5) !important; } 
+    .setting-card { background: rgba(41, 13, 13, 0.5) !important; border-color: rgba(151, 70, 70, 0.3) !important; } 
+    button { background: rgba(151, 70, 70, 0.2) !important; border-color: rgba(255, 160, 160, 0.3) !important; } 
+    button:hover { background: rgba(151, 70, 70, 0.4) !important; } 
+    .tab-btn.active { background: rgba(151, 70, 70, 0.3) !important; border-color: rgb(151, 70, 70) !important; } 
+    h1 { color: rgb(255, 160, 160) !important; }
+    .highlight { color: #ffa0a0 !important; }`,
+    
+    "green": `:root { 
+        --font-family: sans-serif; 
+        --font-color: rgb(255, 255, 255); 
+        --sidebar-size: 50px; 
+        --primary-light: rgb(168, 255, 160); 
+        --primary-mid: rgb(137, 230, 100); 
+        --primary-dark: rgb(98, 190, 70); 
+        --accent-color: rgb(82, 130, 70); 
+        --accent-color-dark: rgb(70, 110, 60); 
+        --background-dark: rgb(5, 15, 6); 
+        --background-light: rgb(22, 41, 13);
+        --theme-primary: #89e664;
+        --theme-secondary: #62be46;
+        --theme-light: #a8ffa0;
+    } 
+    body { background: rgb(5, 15, 6) !important; } 
+    .setting-card { background: rgba(22, 41, 13, 0.5) !important; border-color: rgba(137, 230, 100, 0.3) !important; } 
+    button { background: rgba(137, 230, 100, 0.2) !important; border-color: rgba(168, 255, 160, 0.3) !important; } 
+    button:hover { background: rgba(137, 230, 100, 0.4) !important; } 
+    .tab-btn.active { background: rgba(137, 230, 100, 0.3) !important; border-color: rgb(137, 230, 100) !important; } 
+    h1 { color: rgb(168, 255, 160) !important; }
+    .highlight { color: #a8ffa0 !important; }`
 };
 
 function formatCSS(css) { 
@@ -58,16 +145,47 @@ function applyTheme() {
 
 function clearTheme() {
     localStorage.removeItem('theme');
+    localStorage.removeItem('current-theme-name');
     localStorage.removeItem('custom-img');
     localStorage.setItem('current-tab', 'themes');
-    window.location.reload();
+    
+    const existingStyle = document.getElementById('custom-theme-style');
+    if (existingStyle) existingStyle.remove();
+    
+
+    if (typeof window.applyGlobalTheme === 'function') {
+        window.applyGlobalTheme('default');
+    }
+    
+
+    localStorage.setItem('theme-change-trigger', Date.now().toString());
+    
+    alert('Theme cleared! Default theme applied.');
 }
 
 function setTheme(theme) {
     localStorage.setItem('theme', premadeThemes[theme]);
+    localStorage.setItem('current-theme-name', theme);
     localStorage.removeItem('custom-img');
     localStorage.setItem('current-tab', 'themes');
-    window.location.reload();
+    
+   
+    const existingStyle = document.getElementById('custom-theme-style');
+    if (existingStyle) existingStyle.remove();
+    const styleElement = document.createElement('style');
+    styleElement.id = 'custom-theme-style';
+    styleElement.textContent = premadeThemes[theme];
+    document.head.appendChild(styleElement);
+    
+
+    if (typeof window.applyGlobalTheme === 'function') {
+        window.applyGlobalTheme(theme);
+    }
+    
+   
+    localStorage.setItem('theme-change-trigger', Date.now().toString());
+    
+    alert(`${theme.charAt(0).toUpperCase() + theme.slice(1)} theme applied!`);
 }
 
 function loadCustomTheme() {
@@ -107,12 +225,10 @@ function applySavedCloak() {
     const cloakDisabled = localStorage.getItem('cloak-disabled') === 'true';
     
     if (cloakDisabled) {
-      
         const currentPath = window.location.pathname;
         if (currentPath.includes('settings')) {
             applyTabCloak("Saturn Proxy | Settings", ORIGINAL_FAVICON);
         }
-    
         return;
     }
     
@@ -133,7 +249,6 @@ function clearCloak() {
     localStorage.setItem('cloak-disabled', 'true'); 
     localStorage.setItem('current-tab', 'cloaking');
     
-  
     const currentPath = window.location.pathname;
     if (currentPath.includes('settings')) {
         applyTabCloak("Saturn Proxy | Settings", ORIGINAL_FAVICON);
@@ -205,7 +320,6 @@ function tabSystemDisplay() {
     const statusEl = document.getElementById('tab-system-status');
     if (statusEl) {
         statusEl.textContent = tabSystemEnabled ? 'Enabled' : 'Disabled';
-        statusEl.style.color = '#a855f7';
     }
 }
 
@@ -215,7 +329,6 @@ function proxyBackendDisplay() {
     const backendEl = document.getElementById('proxy-backend-status');
     if (backendEl) {
         backendEl.textContent = backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet';
-        backendEl.style.color = '#a855f7';
     }
     console.log(`[settings.js] Displayed backend: ${backend}`);
 }
@@ -290,7 +403,9 @@ function setProxyBackend(backend) {
     alert(`Proxy backend changed to ${backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet'}! Reload the page or create a new tab for changes to take effect.`);
 }
 
-window.addEventListener('load', () => setTimeout(initProxy, 500));
+window.addEventListener('load', () => {
+    setTimeout(initProxy, 500);
+});
 
 window.addEventListener('DOMContentLoaded', () => {
     applyTheme();

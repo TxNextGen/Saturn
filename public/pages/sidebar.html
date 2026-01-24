@@ -4,16 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sidebar</title>
+<script src="/js/theme-loader.js"></script>
 <style>
 
+
 :root {
-  --sidebar-width: 60px;
-  --bg-dark: #0a0a0f;
-  --accent-primary: #a855f7;
-  --accent-secondary: #ec4899;
-  --text-primary: #ffffff;
-  --hover-bg: rgba(168, 85, 247, 0.2);
-  --border-color: #a855f7;
+    --sidebar-width: 60px;
+    --tab-bar-height: 40px;
+    --top-bar-height: 50px;
+    
+    /* Theme colors - will be overridden by JavaScript */
+    --theme-primary: #a855f7;
+    --theme-secondary: #ec4899;
+    --theme-light: #c084fc;
+    
+    /* Derived colors using theme variables */
+    --primary-purple: var(--theme-primary);
+    --primary-purple-dark: var(--theme-primary);
+    --primary-purple-light: var(--theme-light);
+    --bg-dark: #1a1a1a;
+    --bg-darker: #121212;
+    --surface: #2a2a2a;
+    --surface-hover: #353535;
+    --border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
 }
 
 * {
@@ -35,7 +50,7 @@ body {
   width: var(--sidebar-width);
   height: 100vh;
   background: rgba(10, 10, 15, 0.95);
-  border-right: 2px solid var(--border-color);
+  border-right: 2px solid var(--theme-primary);
   box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
   display: flex;
   flex-direction: column;
@@ -121,7 +136,7 @@ body {
 
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.03);
-  border-color: var(--border-color);
+  border-color: var(--theme-primary);
   box-shadow: none;
   transform: none;
 }
@@ -206,7 +221,7 @@ body {
 
 <nav class="sidebar">
 
-  <a href="/" class="logo-container">
+  <a class="logo-container">
     <img src="../images/sat4.png" alt="Logo" />
   </a>
 
@@ -215,55 +230,42 @@ body {
   <div class="nav-group">
     <a href="/" class="nav-item">
       <img class="small" src="../images/oldicons/home.svg" alt="Home" />
-      <span class="tooltip">Home</span>
     </a>
 
     <a href="/g.html" class="nav-item">
       <img class="small" src="../images/oldicons/games.svg" alt="Games" />
-      <span class="tooltip">Games</span>
     </a>
 
     <a href="/a.html" class="nav-item">
       <img class="small" src="../images/oldicons/apps.svg" alt="Apps" />
-      <span class="tooltip">Apps</span>
     </a>
 
     <a href="/t.html" class="nav-item">
       <img class="small" src="../images/oldicons/ai.svg" alt="AI" />
-      <span class="tooltip">AI</span>
     </a>
   </div>
 
-  <div class="nav-divider"></div>
-
-  <div class="nav-group">
-    <a href="/c.html" class="nav-item">
-      <img class="small" src="../images/oldicons/credits.svg" alt="Credits" />
-      <span class="tooltip">Credits</span>
-    </a>
-  </div>
 
   <div class="spacer"></div>
 
   <div class="bottom-group">
     <a href="/pages/github.html" target="_blank" class="nav-item">
       <img class="small" src="../images/oldicons/github.svg" alt="GitHub" />
-      <span class="tooltip">GitHub</span>
     </a>
 
     <a href="/pages/discord.html" target="_blank" class="nav-item">
       <img class="small" src="../images/oldicons/discord.svg" alt="Discord" />
-      <span class="tooltip">Discord</span>
     </a>
 
     <div class="nav-divider"></div>
 
     <a href="/s.html" class="nav-item">
       <img class="small" src="../images/oldicons/settings.svg" alt="Settings" />
-      <span class="tooltip">Settings</span>
     </a>
   </div>
 </nav>
+
+
 
 </body>
 </html>

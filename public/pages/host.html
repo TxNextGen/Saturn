@@ -18,49 +18,45 @@
     <script src="/uv/uv.config.js" defer></script>
     <script src="/js/uv/register-sw.js" defer></script>
     <script src="/js/uv/search.js" defer></script>
+
   </head>
 <body>
-   <div id="canvas-container"></div>
-    <div class="grain-overlay"></div>
-
-  <div id="particles-js"></div>
+   <div id="canvas-container" style="display: none;"></div>
+    <div class="grain-overlay" style="display: none;"></div>
+  <div id="particles-js" style="display: none;"></div>
   
-  <div class="content">
-    <div class="main">
-      <div id="preload">
-        <div class="spinner-container">
-          <div class="spinner">
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-          </div>
-          <div class="loading-text-wrapper">
-            <span class="loading-letter">L</span>
-            <span class="loading-letter">O</span>
-            <span class="loading-letter">A</span>
-            <span class="loading-letter">D</span>
-            <span class="loading-letter">I</span>
-            <span class="loading-letter">N</span>
-            <span class="loading-letter">G</span>
-          </div>
-        </div>
+  <div id="gameContainer">
+    <div class="game-header">
+      <div class="game-title" id="gameTitle">Loading...</div>
+      <div class="button-group">
+        <button class="game-btn" id="openNewTabBtn" title="Open in New Tab">
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </button>
+        <button class="game-btn" id="fullscreenBtn" title="Fullscreen">
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </button>
       </div>
-      
-      <div id="frameHolder"></div>
     </div>
+    <iframe id="gameIframe" allowfullscreen allow="keyboard *"></iframe>
   </div>
 
   <script src="../js/canvas.js"></script>
 </body>
 <script>
-const qs = window.top.location.search;
+const qs = window.location.search;
 const urlParams = new URLSearchParams(qs);
 
 let src = urlParams.get('src');
 let type = urlParams.get('type');
-let title = urlParams.get('title');
+let title = decodeURIComponent(urlParams.get('title') || 'Game');
 
-document.getElementById('preload').remove();
+document.getElementById('gameTitle').textContent = title;
 
 async function registerServiceWorker(url){
   let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
@@ -85,48 +81,6 @@ async function registerServiceWorker(url){
   }
 }
 
-function createAndAppend(){
-  let container = document.createElement('div');
-  container.className = 'iframe-container';
-
-  let o = document.createElement('iframe');
-  o.setAttribute('id','objFrame');
-  o.setAttribute('class','objFrame');
-  o.setAttribute('allow','keyboard *');
-  o.setAttribute('src',loadGame());
-
-  let bottomBar = document.createElement('div');
-  bottomBar.className = 'bottom-bar';
-
-  let titleEl = document.createElement('div');
-  titleEl.className = 'bottom-title';
-  titleEl.textContent = title;
-
-  let buttonGroup = document.createElement('div');
-  buttonGroup.className = 'button-group';
-
-let popoutBtn = document.createElement('button');
-popoutBtn.className = 'frame-action-btn';
-popoutBtn.innerHTML = '<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
-popoutBtn.onclick = function() { window.open(loadGame(),'_blank'); };
-
-let fullscreenBtn = document.createElement('button');
-fullscreenBtn.className = 'frame-action-btn';
-fullscreenBtn.innerHTML = '<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>';
-fullscreenBtn.onclick = function() { document.getElementById('objFrame').requestFullscreen(); };
-
-  buttonGroup.appendChild(popoutBtn);
-  buttonGroup.appendChild(fullscreenBtn);
-
-  bottomBar.appendChild(titleEl);
-  bottomBar.appendChild(buttonGroup);
-
-  container.appendChild(o);
-  container.appendChild(bottomBar);
-
-  document.getElementById('frameHolder').appendChild(container);
-}
-
 const xorEncode = {
     encode(str) {
         if (!str) return str;
@@ -145,8 +99,7 @@ const xorEncode = {
 function loadGame(){
   let returnValue
   if (type == 'iframe'){
-
-    returnValue = src
+    returnValue = decodeURIComponent(src);
   } else if (type == 'html'){
     returnValue = `/files/games${src}`
   } else if (type == 'flash'){
@@ -161,15 +114,30 @@ function loadGame(){
   return returnValue;
 }
 
-function onPageLoad() {
-  createAndAppend();
-  if (type == 'proxy'){registerServiceWorker();}
-}
+const gameUrl = loadGame();
+const iframe = document.getElementById('gameIframe');
+iframe.src = gameUrl;
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', onPageLoad);
-} else {
-  onPageLoad();
+
+document.getElementById('openNewTabBtn').addEventListener('click', function() {
+  window.open(gameUrl, '_blank');
+});
+
+
+document.getElementById('fullscreenBtn').addEventListener('click', function() {
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.webkitRequestFullscreen) {
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.mozRequestFullScreen) {
+    iframe.mozRequestFullScreen();
+  } else if (iframe.msRequestFullscreen) {
+    iframe.msRequestFullscreen();
+  }
+});
+
+if (type == 'proxy'){
+  registerServiceWorker();
 }
 </script>
 </html>

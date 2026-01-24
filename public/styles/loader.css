@@ -1,12 +1,105 @@
-/* Particles Background */
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: hidden;
+        background: #000000;
+        margin: 0;
+        padding: 0;
+      }
+
 
 body::-webkit-scrollbar {
     display: none;
 }
+
+
+
+      #gameContainer {
+        position: fixed;
+        top: 0;
+        left: 75px;
+        width: calc(100vw - 75px);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #000000;
+        z-index: 10000;
+      }
+
+      #gameIframe {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: #000000;
+      }
+
+      .game-header {
+        background: rgba(26, 26, 36, 0.95);
+        backdrop-filter: blur(15px);
+        border-bottom: 2px solid rgba(147, 51, 234, 0.3);
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        min-height: 60px;
+        z-index: 10001;
+        position: relative;
+      }
+
+      .game-title {
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 12px;
+      }
+
+      .game-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        background: rgba(147, 51, 234, 0.2);
+        border: 1px solid rgba(147, 51, 234, 0.4);
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+        outline: none;
+        width: 40px;
+        height: 40px;
+        z-index: 10001;
+        position: relative;
+      }
+
+      .game-btn:hover {
+        border-color: rgba(147, 51, 234, 1);
+      }
+
+      .game-btn:active {
+        border-color: rgba(147, 51, 234, 0.8);
+      }
+
+      .btn-icon {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+      }
 
 #particles-js {
     animation-delay: 0.5s;
@@ -17,7 +110,7 @@ body::-webkit-scrollbar {
     pointer-events: none;
 }
 
-/* Preloader */
+
 #preload {
     position: fixed;
     top: 0;
@@ -37,7 +130,7 @@ body::-webkit-scrollbar {
     gap: 40px;
 }
 
-/* Circular Spinner */
+
 .spinner {
     position: relative;
     width: 60px;
@@ -78,7 +171,7 @@ body::-webkit-scrollbar {
 }
 
 
-/* Animated Letters */
+
 .loading-text-wrapper {
     display: flex;
     gap: 8px;
@@ -126,19 +219,20 @@ body::-webkit-scrollbar {
 :root{
   --bg-card: #1a1a24;
 }
-/* Frame Holder */
+
+
 #frameHolder {
-    height: 120%;
-    width: 90%;
-    z-index: 329821398;
-    border-radius: 20px;
-    margin-top: 60px;
-    margin-left: 57px;
+    position: fixed;
+    top: 0;
+    left: 75px;
+    height: 100vh;
+    width: calc(100vw - 75px);
+    z-index: 100;
     overflow: hidden;
-   border-bottom:  rgba(147, 51, 234, 0.5);
+    box-sizing: border-box;
 }
 
-/* Iframe Container */
+
 .iframe-container {
     display: flex;
     flex-direction: column;
@@ -159,7 +253,7 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/* Bottom Bar */
+
 .bottom-bar {
     display: flex;
     align-items: center;
@@ -170,6 +264,7 @@ body::-webkit-scrollbar {
     border-top: 2px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
     height: 70px;
+    box-sizing: border-box;
 }
 
 .bottom-title {
@@ -191,6 +286,7 @@ body::-webkit-scrollbar {
     gap: 10px;
     padding: 12px 30px;
     background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(147, 51, 234, 0.2);
     border-radius: 10px;
     color: white;
     font-size: 0.9rem;
@@ -202,9 +298,10 @@ body::-webkit-scrollbar {
 }
 
 .frame-action-btn:hover {
-    transform: scale(1.1);
-    border-color: rgba(147, 51, 234, 0.5);
-    box-shadow: 0 20px 60px rgba(147, 51, 234, 0.3), 0 0 0 1px rgba(147, 51, 234, 0.2);
+    transform: scale(1.05);
+    border-color: rgba(147, 51, 234, 0.6);
+    background: rgba(147, 51, 234, 0.15);
+    box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
 }
 
 .frame-action-btn:active {
@@ -223,3 +320,4 @@ body::-webkit-scrollbar {
     z-index: 1;
     position: relative;
 }
+
