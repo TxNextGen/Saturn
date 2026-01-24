@@ -17,7 +17,7 @@ const DEFAULT_SHORTCUTS = [
     {
         id: '9anime',
         name: '9anime',
-        url: 'https://9anime.to',
+        url: 'https://9animetv.to/home',
         favicon: 'https://9anime.to/favicon.ico',
         isDefault: true
     },
