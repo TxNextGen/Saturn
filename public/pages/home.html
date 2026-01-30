@@ -52,13 +52,16 @@
     <div id="canvas-container"></div>
     <div class="grain-overlay"></div>
 
- 
     <div class="container" id="home-container">
         <div class="hero-section">
             <h1><span class="title-gradient">Saturn Proxy</span></h1>
             <p class="subtitle">Enjoy Searching The Web Without No Setbacks</p>
 
             <form id="uv-form" onsubmit="return false;">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--theme-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
                 <input id="uv-search-engine" type="hidden" value="https://duckduckgo.com/search?q=%s"/>
                 <input id="uv-address" type="text" autocomplete="off" placeholder="Search or Enter a URL"/>
             </form>
@@ -67,20 +70,18 @@
                 <p id="uv-error"></p>
                 <pre id="uv-error-code"></pre>
             </div>
+        </div>
 
-          
-            <div class="shortcuts-container">
-                <div class="shortcuts-grid" id="shortcuts-grid">
-                   
-                </div>
-                <button class="add-shortcut-btn" id="add-shortcut-btn" title="Add Shortcut">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-            
-                </button>
+        <div class="shortcuts-container">
+            <div class="shortcuts-grid" id="shortcuts-grid">
+               
             </div>
+            <button class="add-shortcut-btn" id="add-shortcut-btn" title="Add Shortcut">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
         </div>
     </div>
 
@@ -163,10 +164,6 @@
                 <div class="input-group">
                     <label for="shortcut-url">URL</label>
                     <input type="text" id="shortcut-url" placeholder="e.g., https://tiktok.com" autocomplete="off">
-                </div>
-                <div class="favicon-preview" id="favicon-preview">
-                    <img id="favicon-preview-img" src="" alt="Favicon preview" style="display: none;">
-                    <span id="favicon-preview-text">Enter a URL</span>
                 </div>
             </div>
             <div class="modal-footer">

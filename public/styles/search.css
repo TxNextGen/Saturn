@@ -121,6 +121,7 @@ h1 {
     letter-spacing: 0.02em;
 }
 
+
 #uv-form {
     width: 100%;
     display: flex;
@@ -130,11 +131,23 @@ h1 {
     gap: 1rem;
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 10;
 }
 
 #uv-address {
     flex: 1;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.5rem 1rem 56px;
     font-size: 1rem;
     border: 2px solid var(--theme-primary);
     background: rgba(10, 0, 21, 0.7);
@@ -143,6 +156,7 @@ h1 {
     outline: none;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    min-width: 600px;
 }
 
 #uv-address:focus {
@@ -191,20 +205,22 @@ h1 {
     align-items: center;
     gap: 0.75rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 0, 21, 0.7);
+    border: 2px solid var(--theme-primary);
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     user-select: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(147, 51, 234, 0.15);
 }
 
 .shortcut-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 0, 21, 0.85);
     border-color: var(--theme-primary);
     transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--theme-primary);
 }
-
 .shortcut-favicon {
     width: 48px;
     height: 48px;
@@ -245,12 +261,12 @@ h1 {
     max-width: 100%;
 }
 
-/* Context Menu Styles */
+
 .context-menu {
-    background: rgba(30, 30, 35, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    background: rgba(10, 0, 21, 0.95);
+    border: 2px solid var(--theme-primary);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(147, 51, 234, 0.3);
     padding: 6px;
     min-width: 180px;
     z-index: 100002;
@@ -265,14 +281,15 @@ h1 {
     padding: 10px 12px;
     cursor: pointer;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
 }
 
 .context-menu-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    background: rgba(147, 51, 234, 0.2);
+    border-color: var(--theme-primary);
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
 }
 
 .context-menu-item svg {
@@ -335,7 +352,7 @@ h1 {
     z-index: 100001;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease;
 }
 
 .modal.active {
@@ -344,12 +361,13 @@ h1 {
 }
 
 .modal-content {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: rgba(10, 0, 21, 0.95);
+    border: 2px solid var(--theme-primary);
     border-radius: 16px;
     width: 90%;
     max-width: 450px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(147, 51, 234, 0.4);
+    backdrop-filter: blur(10px);
     animation: modalSlideIn 0.3s ease-out;
 }
 
@@ -369,13 +387,13 @@ h1 {
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(147, 51, 234, 0.3);
 }
 
 .modal-header h3 {
     font-size: 18px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #ffffff;
     margin: 0;
 }
 
@@ -389,13 +407,14 @@ h1 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.15s ease;
-    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    color: var(--theme-light);
 }
 
 .modal-close:hover {
-    background: var(--surface-hover);
-    color: var(--text-primary);
+    background: rgba(147, 51, 234, 0.3);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
 }
 
 .modal-close svg {
@@ -512,15 +531,13 @@ h1 {
 }
 
 .btn-primary:hover {
-    background: var(--theme-secondary);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    background: var(--theme-primary);
+    box-shadow: 0 0 20px var(--theme-primary);
 }
 
 .btn-primary:active {
-    transform: translateY(0);
+    transform: none;
 }
-
 
 
 .proxy-container {
@@ -890,6 +907,7 @@ h1 {
     width: 100%;
     height: 100%;
     display: none;
+    position: relative;
 }
 
 .iframe-container.active {
@@ -902,6 +920,47 @@ h1 {
     border: none;
     background: white;
 }
+
+
+/* ===== SIMPLE LOADING ANIMATION ===== */
+.proxy-loading-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-darker);
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(168, 85, 247, 0.2);
+    border-top-color: var(--theme-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+/* ===== END LOADING ANIMATION ===== */
 
 
 .tab.loading::after {
@@ -1087,6 +1146,12 @@ html {
     
     .quick-popup {
         min-width: 200px;
+    }
+    
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
     }
 }
 

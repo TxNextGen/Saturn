@@ -2,27 +2,16 @@
 <html lang="en">
   <head>
     <script src="/js/common.js"></script>
-    <script src="/js/particles.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="/index.css" />
     <link rel="stylesheet" href="/styles/loader.css">
     <link rel="stylesheet" href="/styles/template.css">
-    <meta name="googlebot" content="index, follow, snippet" />
-    <link rel="shortcut icon" content="favicon.ico" />
-    <script src="/baremux/index.js" defer></script>
-    <script src="/epoxy/index.js" defer></script>
-    <script src="/libcurl/index.js" defer></script>
-    <script src="/uv/uv.bundle.js" defer></script>
-    <script src="/uv/uv.config.js" defer></script>
-    <script src="/js/uv/register-sw.js" defer></script>
-    <script src="/js/uv/search.js" defer></script>
-
   </head>
 <body>
-   <div id="canvas-container" style="display: none;"></div>
-    <div class="grain-overlay" style="display: none;"></div>
+  <div id="canvas-container" style="display: none;"></div>
+  <div class="grain-overlay" style="display: none;"></div>
   <div id="particles-js" style="display: none;"></div>
   
   <div id="gameContainer">
@@ -58,59 +47,17 @@ let title = decodeURIComponent(urlParams.get('title') || 'Game');
 
 document.getElementById('gameTitle').textContent = title;
 
-async function registerServiceWorker(url){
-  let connection = new BareMux.BareMuxConnection("/baremux/worker.js")
-
-  try {
-    await registerSW();
-  } catch (err) {
-    console.error(err)
-  }
-
-  let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
-  if (!localStorage.getItem('proxy-transport')){
-    await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-  } else{
-    console.log("Setting transport to " + localStorage.getItem('proxy-transport'))
-    if (localStorage.getItem('proxy-transport') === "Epoxy"){
-      await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
-    }
-    if (localStorage.getItem('proxy-transport') === "Libcurl"){
-      await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-    }
-  }
-}
-
-const xorEncode = {
-    encode(str) {
-        if (!str) return str;
-        return encodeURIComponent(
-            str
-                .toString()
-                .split('')
-                .map((char, ind) =>
-                    ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char
-                 )
-                .join('')
-        );
-    }
-};
-
-function loadGame(){
-  let returnValue
-  if (type == 'iframe'){
+function loadGame() {
+  let returnValue;
+  
+  if (type === 'iframe') {
     returnValue = decodeURIComponent(src);
-  } else if (type == 'html'){
-    returnValue = `/files/games${src}`
-  } else if (type == 'flash'){
-    returnValue = `/files/embeds/ruffle.html?src=${src}`
-  } else if (type == 'proxy'){
-    returnValue = `/@/` + xorEncode.encode(src)
-  } else if (type == 'method'){
-    returnValue = `/files/methods${src}`
+  } else if (type === 'direct') {
+    returnValue = src;
   } else {
-    returnValue = `/files/embeds/emujs/index.html?game=${src}&?core=${type}`
+    returnValue = src;
   }
+  
   return returnValue;
 }
 
@@ -135,9 +82,5 @@ document.getElementById('fullscreenBtn').addEventListener('click', function() {
     iframe.msRequestFullscreen();
   }
 });
-
-if (type == 'proxy'){
-  registerServiceWorker();
-}
 </script>
 </html>
