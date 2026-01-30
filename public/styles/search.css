@@ -169,13 +169,22 @@ h1 {
 }
 
 .shortcuts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+    width: 100%;
+    justify-content: center;
 }
 
 .shortcut-item {
+    flex: 0 0 auto;
+    width: 110px;
+}
+
+.shortcut-item {
+    flex: 0 0 auto;
+    width: 110px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -236,37 +245,49 @@ h1 {
     max-width: 100%;
 }
 
-.shortcut-delete {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    border: none;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: white;
+/* Context Menu Styles */
+.context-menu {
+    background: rgba(30, 30, 35, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    padding: 6px;
+    min-width: 180px;
+    z-index: 100002;
     backdrop-filter: blur(10px);
+    position: fixed;
 }
 
-.shortcut-item:hover .shortcut-delete {
+.context-menu-item {
     display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
 }
 
-.shortcut-delete:hover {
-    background: rgba(239, 68, 68, 0.9);
-    transform: scale(1.1);
+.context-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
-.shortcut-delete svg {
-    width: 12px;
-    height: 12px;
-    stroke: currentColor;
+.context-menu-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.context-menu-item-danger {
+    color: rgba(255, 80, 80, 0.9);
+}
+
+.context-menu-item-danger:hover {
+    background: rgba(255, 80, 80, 0.15);
+    color: #ff5050;
 }
 
 .add-shortcut-btn {
@@ -425,6 +446,11 @@ h1 {
     opacity: 0.5;
 }
 
+.input-group input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .favicon-preview {
     margin-top: 1rem;
     padding: 1rem;
@@ -443,7 +469,8 @@ h1 {
     object-fit: contain;
 }
 
-#favicon-preview-text {
+#favicon-preview-text,
+#edit-favicon-preview-text {
     font-size: 13px;
     color: var(--text-secondary);
     text-align: center;
