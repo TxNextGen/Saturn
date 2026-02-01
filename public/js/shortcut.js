@@ -1,28 +1,28 @@
 const DEFAULT_SHORTCUTS = [
     {
+        id: 'youtube',
+        name: 'Youtube',
+        url: 'https://www.youtube.com',
+        favicon: '/images/yt.png',
+        isDefault: true
+    },
+    {
         id: 'tiktok',
-        name: 'TikTok',
-        url: 'https://www.tiktok.com',
+        name: 'Tiktok',
+        url: 'https://tiktok.com',
         favicon: '/images/tiktok.png',
         isDefault: true
     },
     {
         id: 'soundcloud',
-        name: 'SoundCloud',
+        name: 'Soudcloud',
         url: 'https://soundcloud.com',
         favicon: '/images/cloud.jpg',
         isDefault: true
     },
     {
-        id: '9anime',
-        name: '9anime',
-        url: 'https://9animetv.to/home',
-        favicon: '/images/9.jpg',
-        isDefault: true
-    },
-    {
         id: 'geforce',
-        name: 'GeForce NOW',
+        name: 'GeForce',
         url: 'https://play.geforcenow.com',
         favicon: '/images/now.webp',
         isDefault: true
@@ -99,7 +99,7 @@ function renderShortcuts() {
         name.className = 'shortcut-name';
         name.textContent = shortcut.name;
 
-        // Add right-click context menu for user shortcuts only
+      
         if (!shortcut.isDefault) {
             shortcutEl.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -108,7 +108,7 @@ function renderShortcuts() {
             });
         }
 
-        // Click to navigate
+
         shortcutEl.addEventListener('click', () => {
             if (typeof window.goTo === 'function') {
                 window.goTo(shortcut.url);
@@ -126,13 +126,13 @@ function renderShortcuts() {
 
 
 function showContextMenu(event, shortcut) {
-    // Remove any existing context menu
+
     const existingMenu = document.getElementById('shortcut-context-menu');
     if (existingMenu) {
         existingMenu.remove();
     }
 
-    // Create context menu
+
     const menu = document.createElement('div');
     menu.id = 'shortcut-context-menu';
     menu.className = 'context-menu';
@@ -140,7 +140,7 @@ function showContextMenu(event, shortcut) {
     menu.style.left = event.clientX + 'px';
     menu.style.top = event.clientY + 'px';
 
-    // Rename option
+
     const renameOption = document.createElement('div');
     renameOption.className = 'context-menu-item';
     renameOption.innerHTML = `
@@ -155,7 +155,7 @@ function showContextMenu(event, shortcut) {
         openEditModal(shortcut, 'rename');
     });
 
-    // Change URL option
+
     const changeUrlOption = document.createElement('div');
     changeUrlOption.className = 'context-menu-item';
     changeUrlOption.innerHTML = `
@@ -170,7 +170,7 @@ function showContextMenu(event, shortcut) {
         openEditModal(shortcut, 'url');
     });
 
-    // Delete option
+
     const deleteOption = document.createElement('div');
     deleteOption.className = 'context-menu-item context-menu-item-danger';
     deleteOption.innerHTML = `
@@ -192,7 +192,7 @@ function showContextMenu(event, shortcut) {
     menu.appendChild(deleteOption);
     document.body.appendChild(menu);
 
-    // Close menu when clicking outside
+  
     const closeMenu = (e) => {
         if (!menu.contains(e.target)) {
             menu.remove();
@@ -243,7 +243,7 @@ function openEditModal(shortcut, mode = 'rename') {
         }
     }, 100);
 
-    // Set up save handler
+
     const saveBtn = document.getElementById('edit-modal-save');
     const newSaveBtn = saveBtn.cloneNode(true);
     saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
@@ -305,7 +305,7 @@ function createEditModal() {
     `;
     document.body.appendChild(modal);
 
-    // Set up event listeners
+ 
     document.getElementById('edit-modal-close').addEventListener('click', closeEditModal);
     document.getElementById('edit-modal-cancel').addEventListener('click', closeEditModal);
 
@@ -395,7 +395,7 @@ function updateShortcut(id, newName, newUrl) {
         return;
     }
 
-    // Ensure URL has protocol
+
     if (!/^https?:\/\//i.test(newUrl)) {
         newUrl = 'https://' + newUrl;
     }
@@ -578,7 +578,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             closeModal();
             closeEditModal();
-            // Close context menu
+            
             const contextMenu = document.getElementById('shortcut-context-menu');
             if (contextMenu) {
                 contextMenu.remove();

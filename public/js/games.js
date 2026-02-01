@@ -37,6 +37,9 @@ function readJS() {
 }
 
 function openPage(type, src, title) {
+ 
+
+    console.log(`[openPage] Opening ${type} app: ${title}`);
     window.location.href = `/pages/host.html?type=${type}&src=${encodeURIComponent(src)}&title=${encodeURIComponent(title)}`;
 }
 
@@ -100,7 +103,7 @@ function showNoResultsMessage() {
                 font-weight: 700;
                 margin-bottom: 1rem;
                 font-family: 'Inter', sans-serif;
-            ">Game Not Found</h2>
+            ">App/Game Not Found</h2>
             <p style="
                 color: var(--theme-light);
                 font-size: 18px;
@@ -110,7 +113,7 @@ function showNoResultsMessage() {
                 line-height: 1.6;
                 font-family: 'Inter', sans-serif;
             ">
-                Trying to find the game you're looking for?<br>
+                Trying to find the app or game you're looking for?<br>
                 Join our Discord server to request it!
             </p>
             <a href="https://discord.gg/vAF5AZHwwD" target="_blank" style="
@@ -513,7 +516,7 @@ function createElements() {
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <input id="searchBar" class="searchBar" placeholder="Credits to Alexr Games" type="text">
+                <input id="searchBar" class="searchBar" placeholder="Search for apps and games..." type="text">
             </div>
             <select id="categorySelect" class="categorySelect">
                 ${categories.map(cat => `<option value="${cat}" ${cat === _currentCategory ? 'selected' : ''}>${cat}</option>`).join('')}
@@ -548,7 +551,8 @@ function createElements() {
         let description = obj.description || "No description";
         let source = String(obj.path).replace(`'`, ``);
       
-        if (source && !source.startsWith('/')) {
+      
+        if (loadType === 'iframe' && source && !source.startsWith('/') && !source.startsWith('http')) {
             source = '/' + source;
         }
 

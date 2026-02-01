@@ -1,6 +1,5 @@
-
 [
- {
+  {
     "title": "30 Dollar Website",
     "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/moal.jpg",
     "description": "A simple website that looks like it was made for 30 dollars (a soundboard).",
@@ -9,17 +8,7 @@
     "iframe": true
   },
 
-
   {
-    "title": "AI Chatbot",
-    "img": "https://cdn.jsdelivr.net/gh/dskjfoisjfsjio/Standalone-games@main/assets/ai.jpg",
-    "description": "AI chatbot app which can answer any question to your needs. App made by EDUrocks",
-    "path": "Apps/ai.html",
-    "category": "Apps",
-    "iframe": true
-  },
-
-    {
     "title": "Emulator JS",
     "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/emulatorjs.png",
     "description": "Emulator JS is a web-based emulator that allows you to play classic console games directly in your browser.",
@@ -27,24 +16,84 @@
     "category": "Apps",
     "iframe": true
   },
-
-    {
-    "title": "Ruffle",
-    "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/ruffle.jpg",
-    "description": "Ruffle is an open-source Flash Player emulator that allows you to play Flash content directly in your web browser without the need for the original Flash Player plugin.",
-    "path": "Apps/ruffle.html",
-    "category": "Apps",
-    "iframe": true
-  },
   
-    {
+  {
     "title": "Soundboard",
     "img": "https://raw.githubusercontent.com/dskjfoisjfsjio/dskjfoisjfsjio.github.io/main/assets/game%20images/soundboard.png",
     "description": "A soundboard with various sound effects and music clips.",
     "path": "Apps/soundboard.html",
     "category": "Apps",
     "iframe": true
+  },
+  {
+    "title": "YouTube",
+    "img": "/images/yt.png",
+    "description": "Watch videos, music, and live streams on YouTube.",
+    "path": "https://www.youtube.com",
+    "category": "Social",
+    "iframe": false
+  },
+  {
+    "title": "TikTok",
+    "img": "/images/tiktok.png",
+    "description": "Watch short-form videos and trending content on TikTok.",
+    "path": "https://www.tiktok.com",
+    "category": "Social",
+    "iframe": false
+  },
+  {
+    "title": "Discord",
+    "img": "/images/discord.png",
+    "description": "Chat with friends, join communities, and voice call on Discord.",
+    "path": "https://discord.com/app",
+    "category": "Social",
+    "iframe": false
+  },
+
+  {
+    "title": "SoundCloud",
+    "img": "/images/cloud.jpg",
+    "description": "Discover and stream music from independent artists on SoundCloud.",
+    "path": "https://soundcloud.com",
+    "category": "Music",
+    "iframe": false
+  },
+
+
+  {
+    "title": "GeForce NOW",
+    "img": "/images/now.webp",
+    "description": "Stream PC games from the cloud with NVIDIA GeForce NOW.",
+    "path": "https://play.geforcenow.com",
+    "category": "Gaming",
+    "iframe": false
+  },
+
+  {
+    "title": "CoolMathGames",
+    "img": "/images/cool.jpg",
+    "description": "Play fun math and logic games on Cool Math Games.",
+    "path": "https://www.coolmathgames.com",
+    "category": "Gaming",
+    "iframe": false
+  },
+
+
+  {
+    "title": "9anime",
+    "img": "/images/9.jpg",
+    "description": "Watch anime series and movies for free.",
+    "path": "https://9animetv.to/home",
+    "category": "Entertainment",
+    "iframe": false
+  },
+
+  {
+    "title": "GitHub",
+    "img": "/images/github.png",
+    "description": "Host and review code, manage projects on GitHub.",
+    "path": "https://github.com",
+    "category": "Productivity",
+    "iframe": false
   }
-
-
 ]

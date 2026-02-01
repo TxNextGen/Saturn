@@ -5,6 +5,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- ULTRAVIOLET -->
+    <script src="/uv/uv.bundle.js" type="module"></script>
+    <script src="/uv/uv.config.js" type="module"></script>
+
+    <!-- SCRAMJET -->
+    <script src="/js/scramjet/scramjet.all.js" type="module"></script>
+
+    <!-- BareMux -->
+    <script src="/baremux/index.js" type="module"></script>
+    <script src="/libcurl/index.js" type="module"></script>
+    <script src="/epoxy/index.js" type="module"></script>
+    
     <link rel="stylesheet" href="/index.css" />
     <link rel="stylesheet" href="/styles/loader.css">
     <link rel="stylesheet" href="/styles/template.css">
@@ -37,23 +50,211 @@
 
   <script src="../js/canvas.js"></script>
 </body>
-<script>
+<script type="module">
+
+let _connection = new BareMux.BareMuxConnection("/baremux/worker.js");
+let scramjetController = null;
+
+
+async function initScramjet() {
+    if (scramjetController) return scramjetController;
+    
+    try {
+        console.log('[Scramjet] Initializing controller...');
+        
+        if (typeof $scramjetLoadController === 'undefined') {
+            await new Promise(resolve => setTimeout(resolve, 300));
+        }
+        
+        if (typeof $scramjetLoadController === 'function') {
+            const { ScramjetController } = $scramjetLoadController();
+            
+            scramjetController = new ScramjetController({
+                prefix: "/scramjet/",
+                files: {
+                    wasm: "/js/scramjet/scramjet.wasm.wasm",
+                    all: "/js/scramjet/scramjet.all.js",
+                    sync: "/js/scramjet/scramjet.sync.js"
+                }
+            });
+            
+            await scramjetController.init();
+            console.log('[Scramjet] ✅ Controller initialized');
+            return scramjetController;
+        } else {
+            throw new Error('$scramjetLoadController is not available');
+        }
+    } catch (err) {
+        console.error('[Scramjet] ❌ Failed to initialize:', err);
+        throw err;
+    }
+}
+
+
+async function registerSW() {
+    if (!('serviceWorker' in navigator)) {
+        throw new Error("Service workers not supported");
+    }
+
+    const backend = getProxyBackend();
+    console.log(`[registerSW] Registering ${backend.toUpperCase()} service worker...`);
+
+    if (backend === "scramjet") {
+        await initScramjet();
+        
+        const reg = await navigator.serviceWorker.register('/sw.js', {
+            scope: '/'
+        });
+        
+        if (reg.installing) {
+            console.log('[registerSW] Service worker is installing...');
+            await new Promise((resolve) => {
+                reg.installing.addEventListener('statechange', (e) => {
+                    if (e.target.state === 'activated') {
+                        console.log('[registerSW] Service worker activated');
+                        resolve();
+                    }
+                });
+            });
+        } else if (reg.waiting) {
+            console.log('[registerSW] Service worker is waiting, activating...');
+            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            await new Promise((resolve) => {
+                navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true });
+            });
+        } else if (reg.active) {
+            console.log('[registerSW] Service worker already active');
+        }
+        
+        await navigator.serviceWorker.ready;
+        
+ 
+        if (!navigator.serviceWorker.controller) {
+            console.log('[registerSW] ⚠️ Page not controlled by service worker, reloading...');
+            window.location.reload();
+            await new Promise(() => {}); 
+            return;
+        }
+        
+        console.log('[registerSW] ✅ SCRAMJET Service Worker registered and controlling page');
+        return reg;
+    } else {
+        const reg = await navigator.serviceWorker.register('/uv/sw.js', {
+            scope: '/@/'
+        });
+        
+        await navigator.serviceWorker.ready;
+        
+        if (!navigator.serviceWorker.controller) {
+            console.log('[registerSW] ⚠️ Page not controlled by service worker, reloading...');
+            window.location.reload();
+            await new Promise(() => {});
+            return;
+        }
+        
+        console.log('[registerSW] ✅ UV Service Worker registered and controlling page');
+        return reg;
+    }
+}
+
+function getProxyBackend() {
+    return localStorage.getItem('proxy-backend') || 'scramjet';
+}
+
+function getEncodedUrl(url) {
+    if (!url) return "";
+
+    if (!/^https?:\/\//i.test(url)) {
+        url = "https://" + url;
+    }
+
+    const backend = getProxyBackend();
+    console.log(`[getEncodedUrl] Using backend: ${backend} for URL: ${url}`);
+
+    if (backend === "scramjet") {
+        if (!scramjetController) {
+            console.error('[getEncodedUrl] ❌ Scramjet controller not initialized!');
+            return url;
+        }
+        const encoded = scramjetController.encodeUrl(url);
+        console.log(`[getEncodedUrl] Scramjet encoded: ${encoded}`);
+        return encoded;
+    } else {
+        if (typeof __uv$config === 'undefined') {
+            console.error('[getEncodedUrl] ❌ UV config not found!');
+            return "/uv/service/" + encodeURIComponent(url);
+        }
+
+        if (typeof __uv$config.encodeUrl !== 'function') {
+            console.error('[getEncodedUrl] ❌ UV encodeUrl function not found!');
+            return __uv$config.prefix + encodeURIComponent(url);
+        }
+
+        const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
+        console.log(`[getEncodedUrl] ✅ UV encoded successfully: ${encoded}`);
+        return encoded;
+    }
+}
+
+async function setConnection(arg) {
+    const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+    
+    switch (arg) {
+        case 1:
+            await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+            localStorage.setItem('proxy-transport', 'Epoxy');
+            console.log('[setConnection] ✅ Set transport to Epoxy');
+            break;
+        case 2:
+            await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
+            localStorage.setItem('proxy-transport', 'Libcurl');
+            console.log('[setConnection] ✅ Set transport to Libcurl');
+            break;
+    }
+}
+
+
+if (!localStorage.getItem('proxy-transport')) {
+    setConnection(1);
+} else {
+    if (localStorage.getItem('proxy-transport') === "Epoxy") setConnection(1);
+    if (localStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
+}
+
+
 const qs = window.location.search;
 const urlParams = new URLSearchParams(qs);
 
 let src = urlParams.get('src');
 let type = urlParams.get('type');
-let title = decodeURIComponent(urlParams.get('title') || 'Game');
+let title = decodeURIComponent(urlParams.get('title') || 'Loading...');
 
 document.getElementById('gameTitle').textContent = title;
+document.title = title;
 
-function loadGame() {
+async function loadGame() {
   let returnValue;
   
   if (type === 'iframe') {
+ 
     returnValue = decodeURIComponent(src);
+    console.log('[host.html] Loading local app:', returnValue);
   } else if (type === 'direct') {
-    returnValue = src;
+ 
+    console.log('[host.html] Loading external URL through proxy:', src);
+    
+    try {
+ 
+      await registerSW();
+      
+   
+      returnValue = getEncodedUrl(src);
+      console.log('[host.html] ✅ Encoded URL:', returnValue);
+    } catch (err) {
+      console.error('[host.html] ❌ Proxy initialization failed:', err);
+
+      returnValue = src;
+    }
   } else {
     returnValue = src;
   }
@@ -61,17 +262,37 @@ function loadGame() {
   return returnValue;
 }
 
-const gameUrl = loadGame();
-const iframe = document.getElementById('gameIframe');
-iframe.src = gameUrl;
+
+async function initAndLoad() {
+  const gameUrl = await loadGame();
+  
+  if (gameUrl) {
+    const iframe = document.getElementById('gameIframe');
+    
+
+    if (type === 'direct') {
+      console.log('[host.html] External URL detected, waiting for proxy to be fully ready...');
+  
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+    
+    iframe.src = gameUrl;
+    console.log('[host.html] Iframe src set to:', gameUrl);
+  }
+}
 
 
-document.getElementById('openNewTabBtn').addEventListener('click', function() {
+initAndLoad();
+
+
+document.getElementById('openNewTabBtn').addEventListener('click', async function() {
+  const gameUrl = await loadGame();
   window.open(gameUrl, '_blank');
 });
 
 
 document.getElementById('fullscreenBtn').addEventListener('click', function() {
+  const iframe = document.getElementById('gameIframe');
   if (iframe.requestFullscreen) {
     iframe.requestFullscreen();
   } else if (iframe.webkitRequestFullscreen) {

@@ -924,7 +924,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 't' && isTabSystemEnabled()) {
             e.preventDefault();
             hideHome();
@@ -966,5 +966,20 @@ window.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             switchToTab(tabs[tabs.length - 1].id);
         }
-    });
-});
+    }); 
+
+  
+
+   
+
+    const pendingUrl = sessionStorage.getItem('openExternalUrl');
+    if (pendingUrl) {
+        console.log('[tab.js] Found pending URL from games page:', pendingUrl);
+        sessionStorage.removeItem('openExternalUrl');
+       
+        setTimeout(() => {
+            goTo(pendingUrl);
+        }, 1000);
+    }
+}); 
+
