@@ -369,7 +369,7 @@ function setSearchEngine(engine) {
         localStorage.setItem('search-engine-url', engines[engine].url);
         localStorage.setItem('current-tab', 'proxy');
         searchEngineDisplay();
-        alert(`Search engine changed to ${engines[engine].name}!`);
+        alert(`Search engine changed to ${engines[engine].name}!`); //sure
     }
 }
 
