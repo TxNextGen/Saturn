@@ -37,8 +37,6 @@ function readJS() {
 }
 
 function openPage(type, src, title) {
- 
-
     console.log(`[openPage] Opening ${type} app: ${title}`);
     window.location.href = `/pages/host.html?type=${type}&src=${encodeURIComponent(src)}&title=${encodeURIComponent(title)}`;
 }
@@ -74,14 +72,13 @@ function getUniqueCategories(jsonData) {
 function showNoResultsMessage() {
     const gameCardsGrid = document.getElementById('gameCardsGrid');
     
-   
     if (document.getElementById('noResultsMessage')) {
         return;
     }
     
-   
     const noResultsDiv = document.createElement('div');
     noResultsDiv.id = 'noResultsMessage';
+    noResultsDiv.style.opacity = '0';
     noResultsDiv.innerHTML = `
         <div style="
             display: flex;
@@ -141,6 +138,12 @@ function showNoResultsMessage() {
     `;
     
     gameCardsGrid.appendChild(noResultsDiv);
+    
+
+    setTimeout(() => {
+        noResultsDiv.style.transition = 'opacity 0.5s ease';
+        noResultsDiv.style.opacity = '1';
+    }, 10);
 }
 
 function hideNoResultsMessage() {
@@ -177,16 +180,13 @@ function filterGames() {
     });
 
     if (results.success.length === 0) {
-       
         results.failed.forEach((e) => {
             let elem = document.getElementById(e);
             if (elem) elem.style.display = 'none';
         });
         
-  
         showNoResultsMessage();
     } else {
-   
         hideNoResultsMessage();
         
         if (searchText) {
@@ -207,7 +207,43 @@ function filterGames() {
                 void elem.offsetHeight;
             }
         });
+
+     
+        observeGameCards();
     }
+}
+
+
+let observerInstance = null;
+
+function observeGameCards() {
+
+    if (observerInstance) {
+        observerInstance.disconnect();
+    }
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.1
+    };
+
+    observerInstance = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-visible');
+                observerInstance.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+  
+    const gameCards = document.querySelectorAll('.objHolder');
+    gameCards.forEach((card) => {
+        if (card.style.display !== 'none') {
+            observerInstance.observe(card);
+        }
+    });
 }
 
 function createElements() {
@@ -224,11 +260,32 @@ function createElements() {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
+    /* Page fade-in animation */
+    @keyframes pageLoad {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Scroll-triggered fade-in animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
     .mainWrapper {
         margin-left: 75px;
         width: calc(100% - 75px);
         padding: 2rem 0;
         box-sizing: border-box;
+        animation: pageLoad 0.6s ease-out;
     }
 
     .searchContainer {
@@ -239,6 +296,8 @@ function createElements() {
         gap: 1rem;
         margin-bottom: 3rem;
         padding: 0 2rem;
+        opacity: 0;
+        animation: fadeIn 0.6s ease-out 0.2s forwards;
     }
 
     .searchBarWrapper {
@@ -263,83 +322,82 @@ function createElements() {
         z-index: 10;
     }
 
-  .searchBar {
-    background: rgba(10, 0, 21, 0.7);
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--theme-primary);
-    box-shadow: 0 8px 32px rgba(147, 51, 234, 0.15);
-    height: 60px;
-    width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 24px 0 56px;
-    border-radius: 15px;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    outline: none;
-    color: var(--theme-light);
-}
+    .searchBar {
+        background: rgba(10, 0, 21, 0.7);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--theme-primary);
+        box-shadow: 0 8px 32px rgba(147, 51, 234, 0.15);
+        height: 60px;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 24px 0 56px;
+        border-radius: 15px;
+        font-size: 16px;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        outline: none;
+        color: var(--theme-light);
+    }
 
-.searchBar::placeholder {
-    color: var(--theme-light);
-    opacity: 0.5;
-}
+    .searchBar::placeholder {
+        color: var(--theme-light);
+        opacity: 0.5;
+    }
 
-.searchBar:focus {
-    border-color: var(--theme-primary);
-    box-shadow: 0 0 20px var(--theme-primary);
-    outline: none;
-    color: var(--theme-light);
-}
+    .searchBar:focus {
+        border-color: var(--theme-primary);
+        box-shadow: 0 0 20px var(--theme-primary);
+        outline: none;
+        color: var(--theme-light);
+    }
 
-.searchBar:focus-visible {
-    outline: none;
-}
+    .searchBar:focus-visible {
+        outline: none;
+    }
 
+    .categorySelect {
+        background: rgba(10, 0, 21, 0.7);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--theme-primary);
+        box-shadow: 0 8px 32px rgba(147, 51, 234, 0.15);
+        height: 60px;
+        padding: 0 24px;
+        border-radius: 15px;
+        font-size: 16px;
+        color: var(--theme-light);
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 200px;
+        outline: none;
+    }
 
-  .categorySelect {
-    background: rgba(10, 0, 21, 0.7);
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--theme-primary);
-    box-shadow: 0 8px 32px rgba(147, 51, 234, 0.15);
-    height: 60px;
-    padding: 0 24px;
-    border-radius: 15px;
-    font-size: 16px;
-    color: var(--theme-light);
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    outline: none;
-}
+    .categorySelect:hover {
+        border-color: var(--theme-primary);
+    }
 
-.categorySelect:hover {
-    border-color: var(--theme-primary);
-}
+    .categorySelect:focus {
+        outline: none;
+        border-color: var(--theme-primary);
+        box-shadow: 0 0 20px var(--theme-primary);
+    }
 
-.categorySelect:focus {
-    outline: none;
-    border-color: var(--theme-primary);
-    box-shadow: 0 0 20px var(--theme-primary);
-}
+    .categorySelect:focus-visible {
+        outline: none;
+    }
 
-.categorySelect:focus-visible {
-    outline: none;
-}
+    .categorySelect option {
+        background: rgba(10, 0, 21, 0.95);
+        color: var(--theme-light);
+        padding: 10px;
+    }
 
-.categorySelect option {
-    background: rgba(10, 0, 21, 0.95);
-    color: var(--theme-light);
-    padding: 10px;
-}
-
-.categorySelect option:checked {
-    background: var(--theme-primary);
-    color: #ffffff;
-}
+    .categorySelect option:checked {
+        background: var(--theme-primary);
+        color: #ffffff;
+    }
 
     .gameCardsGrid {
         display: flex;
@@ -359,9 +417,6 @@ function createElements() {
         border-radius: 15px;
         overflow: hidden;
         cursor: pointer;
-        transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1), 
-                    box-shadow 0.5s cubic-bezier(0.34, 1.45, 0.64, 1),
-                    border-color 0.3s ease;
         width: 160px;
         height: 160px;
         flex-shrink: 0;
@@ -369,6 +424,15 @@ function createElements() {
         align-items: flex-end;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         margin-top: 60px;
+        opacity: 0;
+        will-change: transform;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                    box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                    border-color 0.6s ease;
+    }
+
+    .objHolder.fade-in-visible {
+        animation: fadeIn 0.8s ease-out forwards;
     }
 
     .objHolder::before {
@@ -380,15 +444,15 @@ function createElements() {
         bottom: 0;
         background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(236, 72, 153, 0.15));
         opacity: 0;
-        transition: opacity 0.5s ease;
+        transition: opacity 0.6s ease;
         z-index: 1;
     }
 
     .objHolder:hover {
-        transform: translateY(-25px);
+        transform: scale(1.12);
         border-color: rgba(147, 51, 234, 0.9);
-        box-shadow: 0 35px 80px rgba(147, 51, 234, 0.45), 
-                    0 20px 40px rgba(0, 0, 0, 0.6),
+        box-shadow: 0 20px 60px rgba(147, 51, 234, 0.5), 
+                    0 10px 30px rgba(0, 0, 0, 0.6),
                     0 0 0 1px rgba(147, 51, 234, 0.4);
     }
 
@@ -403,11 +467,6 @@ function createElements() {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1);
-    }
-
-    .objHolder:hover .objImg {
-        transform: scale(1.08);
     }
 
     .titleHolder {
@@ -508,6 +567,20 @@ function createElements() {
             height: 120px;
         }
     }
+
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+        .mainWrapper,
+        .searchContainer,
+        .objHolder {
+            animation: none;
+        }
+        
+        .objHolder {
+            opacity: 1;
+            transform: none;
+        }
+    }
     </style>
     <div class="mainWrapper">
         <div class="searchContainer">
@@ -532,7 +605,6 @@ function createElements() {
     const searchBar = document.getElementById('searchBar');
     const categorySelect = document.getElementById('categorySelect');
 
- 
     searchBar.addEventListener('keyup', filterGames);
 
     categorySelect.addEventListener('change', (e) => {
@@ -550,7 +622,6 @@ function createElements() {
         let img = obj.img;
         let description = obj.description || "No description";
         let source = String(obj.path).replace(`'`, ``);
-      
       
         if (loadType === 'iframe' && source && !source.startsWith('/') && !source.startsWith('http')) {
             source = '/' + source;
@@ -589,4 +660,7 @@ function createElements() {
 
         id++;
     });
+
+ 
+    observeGameCards();
 }

@@ -6,19 +6,26 @@
 <title>Sidebar</title>
 <script src="/js/theme-loader.js"></script>
 <style>
-
-
 :root {
     --sidebar-width: 60px;
     --tab-bar-height: 40px;
     --top-bar-height: 50px;
     
-    /* Theme colors - will be overridden by JavaScript */
+   
     --theme-primary: #a855f7;
     --theme-secondary: #ec4899;
     --theme-light: #c084fc;
     
-    /* Derived colors using theme variables */
+   
+    --theme-primary-10: rgba(168, 85, 247, 0.1);
+    --theme-primary-20: rgba(168, 85, 247, 0.2);
+    --theme-primary-30: rgba(168, 85, 247, 0.3);
+    --theme-primary-40: rgba(168, 85, 247, 0.4);
+    --theme-primary-50: rgba(168, 85, 247, 0.5);
+    --theme-primary-60: rgba(168, 85, 247, 0.6);
+    --theme-primary-95: rgba(168, 85, 247, 0.95);
+    
+   
     --primary-purple: var(--theme-primary);
     --primary-purple-dark: var(--theme-primary);
     --primary-purple-light: var(--theme-light);
@@ -42,7 +49,6 @@ body {
   background: var(--bg-dark);
 }
 
-
 .sidebar {
   position: fixed;
   left: 0;
@@ -50,15 +56,14 @@ body {
   width: var(--sidebar-width);
   height: 100vh;
   background: rgba(10, 10, 15, 0.95);
-  border-right: 2px solid var(--theme-primary);
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+  border-right: 2px solid var(--theme-primary) !important;
+  box-shadow: 0 0 40px var(--theme-primary-40) !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
   z-index: 1000;
 }
-
 
 .logo-container {
   width: 45px;
@@ -70,8 +75,8 @@ body {
   cursor: pointer;
   text-decoration: none;
   border-radius: 14px;
-  background: rgba(168, 85, 247, 0.1);
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: var(--theme-primary-10) !important;
+  border: 1px solid var(--theme-primary-30) !important;
   transition: all 0.3s ease;
 }
 
@@ -79,25 +84,25 @@ body {
   width: 32px;
   height: 32px;
   object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6));
+  filter: drop-shadow(0 0 8px var(--theme-primary-60)) !important;
   transition: all 0.4s ease;
 }
 
 .logo-container:hover {
-  background: rgba(168, 85, 247, 0.2);
-  border-color: rgba(168, 85, 247, 0.6);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  background: var(--theme-primary-20) !important;
+  border-color: var(--theme-primary-60) !important;
+  box-shadow: 0 0 20px var(--theme-primary-50) !important;
 }
 
 .logo-container:hover img {
-  filter: drop-shadow(0 0 15px rgba(168, 85, 247, 1));
+  filter: drop-shadow(0 0 15px var(--theme-primary)) !important;
   transform: rotate(360deg);
 }
 
 .nav-divider {
   width: 45px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.6), transparent);
+  background: linear-gradient(90deg, transparent, var(--theme-primary-60), transparent) !important;
   margin: 18px 0;
   border-radius: 2px;
 }
@@ -123,7 +128,7 @@ body {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid var(--theme-primary-20) !important;
 }
 
 .nav-item img {
@@ -136,7 +141,7 @@ body {
 
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.03);
-  border-color: var(--theme-primary);
+  border-color: var(--theme-primary) !important;
   box-shadow: none;
   transform: none;
 }
@@ -154,7 +159,7 @@ body {
   left: calc(100% + 18px);
   top: 50%;
   transform: translateY(-50%) translateX(-10px);
-  background: rgba(168, 85, 247, 0.95);
+  background: var(--theme-primary-95) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   color: white;
@@ -166,7 +171,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.5);
+  box-shadow: 0 8px 32px var(--theme-primary-50) !important;
   z-index: 1001;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -178,7 +183,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   border: 7px solid transparent;
-  border-right-color: rgba(168, 85, 247, 0.95);
+  border-right-color: var(--theme-primary-95) !important;
 }
 
 .nav-item:hover .tooltip {
@@ -201,26 +206,23 @@ body {
   padding: 0 10px;
 }
 
-/* Add subtle animation */
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 40px var(--theme-primary-40) !important;
   }
   50% {
-    box-shadow: 0 0 50px rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 50px var(--theme-primary-60) !important;
   }
 }
 
 .sidebar {
   animation: pulse 4s ease-in-out infinite;
 }
-
 </style>
 </head>
 <body>
 
 <nav class="sidebar">
-
   <a class="logo-container">
     <img src="../images/sat4.png" alt="Logo" />
   </a>
@@ -245,7 +247,6 @@ body {
     </a>
   </div>
 
-
   <div class="spacer"></div>
 
   <div class="bottom-group">
@@ -264,8 +265,6 @@ body {
     </a>
   </div>
 </nav>
-
-
 
 </body>
 </html>

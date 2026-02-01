@@ -1,14 +1,12 @@
 let _connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 let scramjetController = null;
 
-// Initialize Scramjet Controller
 async function initScramjet() {
     if (scramjetController) return scramjetController;
     
     try {
         console.log('[Scramjet] Initializing controller...');
         
-        // Load scramjet.all.js if not already loaded
         if (typeof $scramjetLoadController === 'undefined') {
             const script = document.createElement('script');
             script.src = '/js/scramjet/scramjet.all.js';
@@ -17,13 +15,10 @@ async function initScramjet() {
                 script.onerror = reject;
                 document.head.appendChild(script);
             });
-            console.log('[Scramjet] All.js script loaded');
         }
         
-        // Wait for the function to be available
         await new Promise(resolve => setTimeout(resolve, 200));
         
-        // Use the correct loading method
         if (typeof $scramjetLoadController === 'function') {
             const { ScramjetController } = $scramjetLoadController();
             
@@ -48,7 +43,6 @@ async function initScramjet() {
     }
 }
 
-// Register Service Workers
 async function registerSW() {
     if (!('serviceWorker' in navigator)) {
         throw new Error("Service workers not supported");
@@ -58,53 +52,36 @@ async function registerSW() {
     console.log(`[registerSW] Registering ${backend.toUpperCase()} service worker...`);
 
     if (backend === "scramjet") {
-        // Initialize Scramjet controller first
         await initScramjet();
         
-        // Register Scramjet service worker
-        const reg = await navigator.serviceWorker.register('/sw.js', {
-            scope: '/'
-        });
+        const reg = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
         
-        // ✅ CRITICAL FIX: Wait for service worker to be active
         if (reg.installing) {
-            console.log('[registerSW] Waiting for service worker to install...');
             await new Promise((resolve) => {
                 reg.installing.addEventListener('statechange', (e) => {
-                    if (e.target.state === 'activated') {
-                        resolve();
-                    }
+                    if (e.target.state === 'activated') resolve();
                 });
             });
         } else if (reg.waiting) {
-            console.log('[registerSW] Service worker is waiting, activating...');
             reg.waiting.postMessage({ type: 'SKIP_WAITING' });
             await new Promise((resolve) => {
                 navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true });
             });
-        } else if (reg.active) {
-            console.log('[registerSW] Service worker already active');
         }
         
         await navigator.serviceWorker.ready;
         
-        // ✅ Ensure the page is controlled
         if (!navigator.serviceWorker.controller) {
-            console.log('[registerSW] Reloading to activate service worker...');
             window.location.reload();
             return;
         }
         
-        console.log('[registerSW] ✅ SCRAMJET Service Worker registered and active:', reg.scope);
+        console.log('[registerSW] ✅ SCRAMJET Service Worker registered');
         return reg;
     } else {
-        // UV registration
-        const reg = await navigator.serviceWorker.register('/uv/sw.js', {
-            scope: '/@/'
-        });
-        
+        const reg = await navigator.serviceWorker.register('/uv/sw.js', { scope: '/@/' });
         await navigator.serviceWorker.ready;
-        console.log('[registerSW] ✅ UV Service Worker registered:', reg.scope);
+        console.log('[registerSW] ✅ UV Service Worker registered');
         return reg;
     }
 }
@@ -114,69 +91,44 @@ function getProxyBackend() {
 }
 
 window.currentProxyBackend = getProxyBackend();
-console.log(`[tab.js] Initialized with ${window.currentProxyBackend.toUpperCase()} proxy backend`);
 
 function switchProxyBackend(backend) {
     window.currentProxyBackend = backend;
     localStorage.setItem('proxy-backend', backend);
-    console.log(`[tab.js] Switched to ${backend.toUpperCase()} proxy backend`);
 }
 
 function getEncodedUrl(url) {
     if (!url) return "";
-
-    if (!/^https?:\/\//i.test(url)) {
-        url = "https://" + url;
-    }
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
 
     const backend = getProxyBackend();
-    console.log(`[getEncodedUrl] Using backend: ${backend} for URL: ${url}`);
 
     if (backend === "scramjet") {
-        if (!scramjetController) {
-            console.error('[getEncodedUrl] ❌ Scramjet controller not initialized!');
-            return url;
-        }
-        const encoded = scramjetController.encodeUrl(url);
-        console.log(`[getEncodedUrl] Scramjet encoded: ${encoded}`);
-        return encoded;
+        if (!scramjetController) return url;
+        return scramjetController.encodeUrl(url);
     } else {
-        // UV encoding
-        if (typeof __uv$config === 'undefined') {
-            console.error('[getEncodedUrl] ❌ UV config not found!');
-            return "/uv/service/" + encodeURIComponent(url);
-        }
-
-        if (typeof __uv$config.encodeUrl !== 'function') {
-            console.error('[getEncodedUrl] ❌ UV encodeUrl function not found!');
+        if (typeof __uv$config === 'undefined' || typeof __uv$config.encodeUrl !== 'function') {
             return __uv$config.prefix + encodeURIComponent(url);
         }
-
-        const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
-        console.log(`[getEncodedUrl] ✅ UV encoded successfully: ${encoded}`);
-        return encoded;
+        return __uv$config.prefix + __uv$config.encodeUrl(url);
     }
 }
 
 async function setConnection(arg) {
     const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
-    console.log('[setConnection] WISP URL:', wispUrl);
     
     switch (arg) {
         case 1:
             await _connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport', 'Epoxy');
-            console.log('[setConnection] ✅ Set transport to Epoxy');
             break;
         case 2:
             await _connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
             localStorage.setItem('proxy-transport', 'Libcurl');
-            console.log('[setConnection] ✅ Set transport to Libcurl');
             break;
     }
 }
 
-// Initialize defaults
 if (!localStorage.getItem('proxy-transport')) {
     setConnection(1);
 } else {
@@ -189,293 +141,102 @@ if (!localStorage.getItem('search-engine')) {
     localStorage.setItem('search-engine-url', 'https://duckduckgo.com/?q=%s');
 }
 
-if (!localStorage.getItem('tab-system-enabled')) {
-    localStorage.setItem('tab-system-enabled', 'true');
-}
-
 if (!localStorage.getItem('proxy-backend')) {
     localStorage.setItem('proxy-backend', 'scramjet');
 }
 
-// Tab system variables
-let tabs = [];
-let activeTabId = null;
-let tabIdCounter = 0;
+let currentIframe = null;
+let currentUrl = '';
 let erudaLoaded = false;
-let lastSearchedUrl = null;
 let navigationInProgress = false;
-
-function isTabSystemEnabled() {
-    return localStorage.getItem('tab-system-enabled') !== 'false';
-}
-
-function updateProxyUIVisibility() {
-    const tabSystemEnabled = isTabSystemEnabled();
-    const proxyContainer = document.getElementById('proxy-container');
-    if (!proxyContainer) return;
-
-    const tabBar = document.getElementById('tab-bar');
-    const topBar = document.querySelector('.top-bar');
-    const iframeWrapper = document.getElementById('iframe-wrapper');
-
-    if (tabSystemEnabled) {
-        if (tabBar) tabBar.style.display = 'flex';
-        if (topBar) topBar.style.display = 'flex';
-        proxyContainer.style.paddingTop = '';
-        if (iframeWrapper) {
-            iframeWrapper.style.position = '';
-            iframeWrapper.style.top = '';
-            iframeWrapper.style.left = '';
-            iframeWrapper.style.width = '';
-            iframeWrapper.style.height = '';
-        }
-    } else {
-        if (tabBar) tabBar.style.display = 'none';
-        if (topBar) topBar.style.display = 'none';
-        proxyContainer.style.paddingTop = '0';
-        if (iframeWrapper) {
-            iframeWrapper.style.position = 'fixed';
-            iframeWrapper.style.top = '0';
-            iframeWrapper.style.left = '60px';
-            iframeWrapper.style.width = 'calc(100vw - 60px)';
-            iframeWrapper.style.height = '100vh';
-        }
-    }
-}
 
 function updateLockIcon(url) {
     const lockIcon = document.querySelector('.lock-icon-container');
     if (!lockIcon) return;
 
-    try {
-        if (url && url.startsWith('https://')) {
-            lockIcon.classList.remove('insecure');
-            lockIcon.classList.add('secure');
-            lockIcon.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-            `;
-        } else {
-            lockIcon.classList.remove('secure');
-            lockIcon.classList.add('insecure');
-            lockIcon.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
-                </svg>
-            `;
-        }
-    } catch (e) {
+    if (url && url.startsWith('https://')) {
+        lockIcon.classList.remove('insecure');
+        lockIcon.classList.add('secure');
+        lockIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`;
+    } else {
         lockIcon.classList.remove('secure');
         lockIcon.classList.add('insecure');
+        lockIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>`;
     }
 }
 
-function createTab(url = null, title = 'New Tab') {
-    const tabId = `tab-${tabIdCounter++}`;
+function createLoadingOverlay(container) {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'proxy-loading-animation';
+    loadingDiv.innerHTML = `<div class="loading-bar-container"><div class="loading-bar indeterminate"></div></div><div class="loading-content"><div class="loading-spinner"></div><div class="loading-text">Loading your page...</div></div>`;
+    container.appendChild(loadingDiv);
+    return loadingDiv;
+}
+
+function removeLoadingOverlay(container) {
+    const loading = container.querySelector('.proxy-loading-animation');
+    if (loading) {
+        loading.style.opacity = '0';
+        setTimeout(() => loading.remove(), 300);
+    }
+}
+
+function createBrowser(url) {
+    const iframeWrapper = document.getElementById('iframe-wrapper');
+    iframeWrapper.innerHTML = '';
     
     const iframeContainer = document.createElement('div');
-    iframeContainer.className = 'iframe-container';
-    iframeContainer.id = `container-${tabId}`;
+    iframeContainer.className = 'iframe-container active';
+    iframeContainer.id = 'main-browser-container';
 
     const iframe = document.createElement('iframe');
-    iframe.id = `frame-${tabId}`;
+    iframe.id = 'main-browser-frame';
     iframe.setAttribute('allowfullscreen', 'true');
     iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-read; clipboard-write');
 
     if (url) {
-        const encodedUrl = getEncodedUrl(url);
-        console.log(`[createTab] Creating tab ${tabId}:`, {
-            originalUrl: url,
-            encodedUrl: encodedUrl,
-            backend: getProxyBackend()
-        });
-        iframe.src = encodedUrl;
-        title = 'Loading...';
+        createLoadingOverlay(iframeContainer);
+        iframe.src = getEncodedUrl(url);
+        currentUrl = url;
     }
 
     iframeContainer.appendChild(iframe);
-    document.getElementById('iframe-wrapper').appendChild(iframeContainer);
+    iframeWrapper.appendChild(iframeContainer);
+    currentIframe = iframe;
 
-    const tab = {
-        id: tabId,
-        url: url || '',
-        title: title,
-        iframe: iframe,
-        container: iframeContainer,
-        loading: !!url,
-        favicon: '/images/sat4.png'
-    };
-
-    tabs.push(tab);
-
-    let titleUpdateTimeout;
     iframe.addEventListener('load', () => {
-        tab.loading = false;
-        
-        if (titleUpdateTimeout) clearTimeout(titleUpdateTimeout);
-        
-        titleUpdateTimeout = setTimeout(() => {
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc && iframeDoc.title) {
-                    tab.title = iframeDoc.title;
-                } else if (url) {
-                    try {
-                        const hostname = new URL(url).hostname.replace('www.', '');
-                        tab.title = hostname;
-                    } catch {
-                        tab.title = 'Page Loaded';
-                    }
-                }
-            } catch (e) {
-                if (url) {
-                    try {
-                        const hostname = new URL(url).hostname.replace('www.', '');
-                        tab.title = hostname;
-                    } catch {
-                        tab.title = 'Page Loaded';
-                    }
-                }
-            }
-            
-            if (isTabSystemEnabled()) renderTabs();
-            updateUrlBar();
-        }, 300);
+        removeLoadingOverlay(iframeContainer);
+        updateUrlBar();
     });
 
-    iframe.addEventListener('error', (e) => {
-        console.error('[createTab] Iframe error:', e);
-        tab.loading = false;
-        tab.title = 'Failed to load';
-        if (isTabSystemEnabled()) renderTabs();
+    iframe.addEventListener('error', () => {
+        removeLoadingOverlay(iframeContainer);
     });
 
-    if (isTabSystemEnabled()) renderTabs();
-    switchToTab(tabId);
-
-    return tab;
-}
-
-function closeTab(tabId, event) {
-    if (event) {
-        event.stopPropagation();
-    }
-
-    const index = tabs.findIndex(t => t.id === tabId);
-    if (index === -1) return;
-
-    const tab = tabs[index];
-    tab.container.remove();
-    tabs.splice(index, 1);
-
-    if (tabs.length === 0) {
-        showHome();
-    } else if (activeTabId === tabId) {
-        const newIndex = Math.min(index, tabs.length - 1);
-        switchToTab(tabs[newIndex].id);
-    }
-
-    if (isTabSystemEnabled()) renderTabs();
-}
-
-function switchToTab(tabId) {
-    if (activeTabId === tabId) return;
-    
-    activeTabId = tabId;
-    
-    tabs.forEach(tab => {
-        if (tab.id === tabId) {
-            tab.container.classList.add('active');
-        } else {
-            tab.container.classList.remove('active');
-        }
-    });
-    
-    if (isTabSystemEnabled()) renderTabs();
     updateUrlBar();
-    
-    setTimeout(() => {
-        const activeTabElement = document.querySelector('.tab.active');
-        if (activeTabElement) {
-            activeTabElement.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'nearest', 
-                inline: 'center' 
-            });
-        }
-    }, 50);
+}
+
+function navigateTo(url) {
+    if (!currentIframe) {
+        createBrowser(url);
+        return;
+    }
+
+    const container = document.getElementById('main-browser-container');
+    if (container) createLoadingOverlay(container);
+
+    currentIframe.src = getEncodedUrl(url);
+    currentUrl = url;
+    updateUrlBar();
+    updateLockIcon(url);
 }
 
 function updateUrlBar() {
-    const activeTab = tabs.find(t => t.id === activeTabId);
     const urlBar = document.getElementById('proxy-url-bar');
-    if (activeTab && urlBar) {
-        urlBar.value = activeTab.url || '';
-        updateLockIcon(activeTab.url);
+    if (urlBar) {
+        urlBar.value = currentUrl || '';
+        updateLockIcon(currentUrl);
     }
-}
-
-function renderTabs() {
-    const container = document.getElementById('tabs-container');
-    if (!container) return;
-    
-    if (!isTabSystemEnabled()) {
-        container.style.display = 'none';
-        return;
-    }
-    
-    container.style.display = 'flex';
-    container.innerHTML = '';
-
-    tabs.forEach((tab, index) => {
-        const tabEl = document.createElement('div');
-        tabEl.className = 'tab';
-        tabEl.setAttribute('data-tab-id', tab.id);
-        
-        if (tab.id === activeTabId) {
-            tabEl.classList.add('active');
-        }
-        
-        if (tab.loading) {
-            tabEl.classList.add('loading');
-        }
-
-        const favicon = document.createElement('img');
-        favicon.className = 'tab-favicon';
-        favicon.src = tab.favicon || '/images/sat4.png';
-        favicon.onerror = () => {
-            favicon.src = '/images/sat4.png';
-        };
-
-        const title = document.createElement('span');
-        title.className = 'tab-title';
-        title.textContent = tab.title || 'New Tab';
-        title.title = tab.title || 'New Tab';
-
-        const closeBtn = document.createElement('div');
-        closeBtn.className = 'tab-close';
-        closeBtn.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        `;
-        
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeTab(tab.id, e);
-        });
-
-        tabEl.addEventListener('click', () => switchToTab(tab.id));
-
-        tabEl.appendChild(favicon);
-        tabEl.appendChild(title);
-        tabEl.appendChild(closeBtn);
-        container.appendChild(tabEl);
-    });
 }
 
 function showHome() {
@@ -486,21 +247,17 @@ function showHome() {
 function hideHome() {
     document.getElementById('home-container').classList.add('hidden');
     document.getElementById('proxy-container').classList.add('active');
-    updateProxyUIVisibility();
-}
-
-function getActiveIframe() {
-    const activeTab = tabs.find(t => t.id === activeTabId);
-    return activeTab ? activeTab.iframe : null;
+    
+    const tabBar = document.getElementById('tab-bar');
+    const topBar = document.querySelector('.top-bar');
+    
+    if (tabBar) tabBar.style.display = 'none';
+    if (topBar) topBar.style.display = 'flex';
 }
 
 function injectDevTools() {
     if (erudaLoaded) {
-        if (window.eruda._isInit) {
-            window.eruda.destroy();
-        } else {
-            window.eruda.init();
-        }
+        window.eruda._isInit ? window.eruda.destroy() : window.eruda.init();
         return;
     }
     
@@ -510,51 +267,23 @@ function injectDevTools() {
         window.eruda.init();
         erudaLoaded = true;
     };
-    script.onerror = () => alert('Failed to load dev tools');
     document.head.appendChild(script);
 }
 
 async function goTo(url) {
-    if (navigationInProgress) {
-        console.log('[goTo] Navigation already in progress, ignoring...');
-        return;
-    }
-
-    console.log(`[goTo] Starting navigation to: ${url}`);
+    if (navigationInProgress) return;
     navigationInProgress = true;
 
     try {
-        console.log('[goTo] Registering service worker...');
         await registerSW();
-        console.log('[goTo] ✅ Service worker registered');
     } catch (err) {
-        console.error('[goTo] ❌ Service worker registration failed:', err);
-        const error = document.getElementById('uv-error');
-        const errorCode = document.getElementById('uv-error-code');
-        if (error) error.textContent = "Failed to register service worker.";
-        if (errorCode) errorCode.textContent = err.toString();
+        console.error('Service worker registration failed:', err);
         navigationInProgress = false;
         return;
     }
 
-    lastSearchedUrl = url;
     hideHome();
-
-    if (!isTabSystemEnabled() && tabs.length > 0) {
-        const activeTab = tabs[0];
-        const encodedUrl = getEncodedUrl(url);
-        console.log(`[goTo] Navigating existing tab to: ${encodedUrl}`);
-        activeTab.iframe.src = encodedUrl;
-        activeTab.url = url;
-        activeTab.title = 'Loading...';
-        activeTab.loading = true;
-        switchToTab(activeTab.id);
-        if (isTabSystemEnabled()) renderTabs();
-    } else {
-        console.log(`[goTo] Creating new tab for: ${url}`);
-        createTab(url);
-    }
-
+    currentIframe ? navigateTo(url) : createBrowser(url);
     navigationInProgress = false;
 }
 
@@ -566,20 +295,12 @@ function buildUrl(query) {
     query = (query || '').trim();
     if (!query) return null;
 
-    const hasProtocol = /^https?:\/\//i.test(query);
-    const hasSpaces = query.includes(' ');
-
-    if (hasProtocol) return query;
-
-    if (hasSpaces) {
+    if (/^https?:\/\//i.test(query)) return query;
+    if (query.includes(' ')) {
         const searchEngine = localStorage.getItem('search-engine-url') || 'https://duckduckgo.com/?q=%s';
         return searchEngine.replace('%s', encodeURIComponent(query));
     }
-
-    const isProbablyUrl = /^[\w-]+(\.[\w-]+)+(:\d+)?(\/.*)?$/i.test(query) || 
-                         /^localhost(:\d+)?(\/.*)?$/i.test(query);
-    
-    if (isProbablyUrl) {
+    if (/^[\w-]+(\.[\w-]+)+(:\d+)?(\/.*)?$/i.test(query) || /^localhost(:\d+)?(\/.*)?$/i.test(query)) {
         return 'https://' + query;
     }
     
@@ -589,7 +310,6 @@ function buildUrl(query) {
 
 function toggleSearchEnginePopup() {
     let popup = document.getElementById('search-engine-popup');
-    
     if (popup) {
         popup.remove();
         return;
@@ -640,8 +360,17 @@ function toggleSearchEnginePopup() {
     
     popup.querySelectorAll('.popup-option').forEach(option => {
         option.addEventListener('click', () => {
+            const engines = {
+                'duckduckgo': { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=%s' },
+                'google': { name: 'Google', url: 'https://www.google.com/search?q=%s' },
+                'brave': { name: 'Brave', url: 'https://search.brave.com/search?q=%s' },
+                'bing': { name: 'Bing', url: 'https://www.bing.com/search?q=%s' }
+            };
             const engine = option.getAttribute('data-engine');
-            quickSetSearchEngine(engine);
+            if (engines[engine]) {
+                localStorage.setItem('search-engine', engines[engine].name);
+                localStorage.setItem('search-engine-url', engines[engine].url);
+            }
             popup.remove();
         });
     });
@@ -656,24 +385,8 @@ function toggleSearchEnginePopup() {
     }, 100);
 }
 
-function quickSetSearchEngine(engine) {
-    const engines = {
-        'duckduckgo': { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=%s' },
-        'google': { name: 'Google', url: 'https://www.google.com/search?q=%s' },
-        'brave': { name: 'Brave', url: 'https://search.brave.com/search?q=%s' },
-        'bing': { name: 'Bing', url: 'https://www.bing.com/search?q=%s' }
-    };
-    
-    if (engines[engine]) {
-        localStorage.setItem('search-engine', engines[engine].name);
-        localStorage.setItem('search-engine-url', engines[engine].url);
-        console.log(`Search engine changed to ${engines[engine].name}`);
-    }
-}
-
 function toggleQuickSettings() {
     let popup = document.getElementById('quick-settings-popup');
-    
     if (popup) {
         popup.remove();
         return;
@@ -685,56 +398,29 @@ function toggleQuickSettings() {
     
     const currentTransport = localStorage.getItem('proxy-transport') || 'Epoxy';
     const currentBackend = localStorage.getItem('proxy-backend') || 'scramjet';
-    const tabSystemEnabled = localStorage.getItem('tab-system-enabled') !== 'false';
     
     popup.innerHTML = `
         <div class="popup-header">Quick Settings</div>
-        
         <div class="popup-section">
             <div class="popup-section-title">Proxy Transport</div>
             <div class="popup-option ${currentTransport === 'Epoxy' ? 'active' : ''}" data-action="transport-epoxy">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${currentTransport === 'Epoxy' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${currentTransport === 'Epoxy' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}</svg>
                 <span>Epoxy</span>
             </div>
             <div class="popup-option ${currentTransport === 'Libcurl' ? 'active' : ''}" data-action="transport-libcurl">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${currentTransport === 'Libcurl' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${currentTransport === 'Libcurl' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}</svg>
                 <span>Libcurl</span>
             </div>
         </div>
-        
         <div class="popup-section">
             <div class="popup-section-title">Proxy Backend</div>
             <div class="popup-option ${currentBackend === 'uv' ? 'active' : ''}" data-action="backend-uv">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${currentBackend === 'uv' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${currentBackend === 'uv' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}</svg>
                 <span>Ultraviolet</span>
             </div>
             <div class="popup-option ${currentBackend === 'scramjet' ? 'active' : ''}" data-action="backend-scramjet">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${currentBackend === 'scramjet' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${currentBackend === 'scramjet' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}</svg>
                 <span>Scramjet</span>
-            </div>
-        </div>
-        
-        <div class="popup-section">
-            <div class="popup-section-title">Tab System</div>
-            <div class="popup-option ${tabSystemEnabled ? 'active' : ''}" data-action="tabs-enable">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${tabSystemEnabled ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
-                </svg>
-                <span>Enabled</span>
-            </div>
-            <div class="popup-option ${!tabSystemEnabled ? 'active' : ''}" data-action="tabs-disable">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${!tabSystemEnabled ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
-                </svg>
-                <span>Disabled</span>
             </div>
         </div>
     `;
@@ -752,7 +438,22 @@ function toggleQuickSettings() {
     popup.querySelectorAll('.popup-option').forEach(option => {
         option.addEventListener('click', async () => {
             const action = option.getAttribute('data-action');
-            await handleQuickSettingAction(action);
+            switch(action) {
+                case 'transport-epoxy':
+                    await setConnection(1);
+                    break;
+                case 'transport-libcurl':
+                    await setConnection(2);
+                    break;
+                case 'backend-uv':
+                    localStorage.setItem('proxy-backend', 'uv');
+                    switchProxyBackend('uv');
+                    break;
+                case 'backend-scramjet':
+                    localStorage.setItem('proxy-backend', 'scramjet');
+                    switchProxyBackend('scramjet');
+                    break;
+            }
             popup.remove();
             setTimeout(() => toggleQuickSettings(), 100);
         });
@@ -768,47 +469,14 @@ function toggleQuickSettings() {
     }, 100);
 }
 
-async function handleQuickSettingAction(action) {
-    switch(action) {
-        case 'transport-epoxy':
-            await setConnection(1);
-            console.log('Transport set to Epoxy');
-            break;
-        case 'transport-libcurl':
-            await setConnection(2);
-            console.log('Transport set to Libcurl');
-            break;
-        case 'backend-uv':
-            localStorage.setItem('proxy-backend', 'uv');
-            switchProxyBackend('uv');
-            console.log('Backend set to Ultraviolet');
-            break;
-        case 'backend-scramjet':
-            localStorage.setItem('proxy-backend', 'scramjet');
-            switchProxyBackend('scramjet');
-            console.log('Backend set to Scramjet');
-            break;
-        case 'tabs-enable':
-            localStorage.setItem('tab-system-enabled', 'true');
-            updateProxyUIVisibility();
-            console.log('Tab system enabled');
-            break;
-        case 'tabs-disable':
-            localStorage.setItem('tab-system-enabled', 'false');
-            updateProxyUIVisibility();
-            console.log('Tab system disabled');
-            break;
-    }
-}
-
 window.goTo = goTo;
 
 window.addEventListener('DOMContentLoaded', () => {
     const uvAddress = document.getElementById('uv-address');
     const proxyUrlBar = document.getElementById('proxy-url-bar');
-    const newTabBtn = document.getElementById('new-tab-btn');
-
-    updateProxyUIVisibility();
+    const tabBar = document.getElementById('tab-bar');
+    
+    if (tabBar) tabBar.style.display = 'none';
 
     if (uvAddress) {
         uvAddress.addEventListener('keydown', (e) => {
@@ -828,32 +496,11 @@ window.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 const url = buildUrl(proxyUrlBar.value);
-                if (url && activeTabId) {
-                    const activeTab = tabs.find(t => t.id === activeTabId);
-                    if (activeTab && activeTab.iframe) {
-                        lastSearchedUrl = url;
-                        activeTab.iframe.src = getEncodedUrl(url);
-                        activeTab.url = url;
-                        activeTab.title = 'Loading...';
-                        activeTab.loading = true;
-                        if (isTabSystemEnabled()) renderTabs();
-                        updateLockIcon(url);
-                    }
-                }
+                if (url) navigateTo(url);
             }
         });
 
-        proxyUrlBar.addEventListener('focus', () => {
-            proxyUrlBar.select();
-        });
-    }
-
-    if (newTabBtn) {
-        newTabBtn.addEventListener('click', () => {
-            if (!isTabSystemEnabled()) return;
-            hideHome();
-            createTab();
-        });
+        proxyUrlBar.addEventListener('focus', () => proxyUrlBar.select());
     }
 
     const searchEngineBtn = document.querySelector('.search-engine-btn');
@@ -867,13 +514,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const backBtn = document.querySelector('.back-btn');
     if (backBtn) {
         backBtn.addEventListener('click', () => {
-            const iframe = getActiveIframe();
-            if (iframe) {
+            if (currentIframe) {
                 try {
-                    iframe.contentWindow.history.back();
-                } catch (e) {
-                    console.log('[Navigation] Cannot go back:', e);
-                }
+                    currentIframe.contentWindow.history.back();
+                } catch (e) {}
             }
         });
     }
@@ -881,13 +525,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const forwardBtn = document.querySelector('.forward-btn');
     if (forwardBtn) {
         forwardBtn.addEventListener('click', () => {
-            const iframe = getActiveIframe();
-            if (iframe) {
+            if (currentIframe) {
                 try {
-                    iframe.contentWindow.history.forward();
-                } catch (e) {
-                    console.log('[Navigation] Cannot go forward:', e);
-                }
+                    currentIframe.contentWindow.history.forward();
+                } catch (e) {}
             }
         });
     }
@@ -895,26 +536,21 @@ window.addEventListener('DOMContentLoaded', () => {
     const refreshBtn = document.querySelector('.refresh-btn');
     if (refreshBtn) {
         refreshBtn.addEventListener('click', () => {
-            const iframe = getActiveIframe();
-            if (iframe) {
+            if (currentIframe) {
                 try {
-                    iframe.contentWindow.location.reload();
+                    currentIframe.contentWindow.location.reload();
                 } catch {
-                    iframe.src = iframe.src;
+                    currentIframe.src = currentIframe.src;
                 }
             }
         });
     }
 
     const homeBtn = document.querySelector('.home-btn-proxy');
-    if (homeBtn) {
-        homeBtn.addEventListener('click', showHome);
-    }
+    if (homeBtn) homeBtn.addEventListener('click', showHome);
 
     const erudaBtn = document.querySelector('.eruda-btn');
-    if (erudaBtn) {
-        erudaBtn.addEventListener('click', injectDevTools);
-    }
+    if (erudaBtn) erudaBtn.addEventListener('click', injectDevTools);
 
     const settingsBtn = document.querySelector('.settings-btn');
     if (settingsBtn) {
@@ -924,62 +560,9 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 't' && isTabSystemEnabled()) {
-            e.preventDefault();
-            hideHome();
-            createTab();
-        }
-
-        if ((e.ctrlKey || e.metaKey) && e.key === 'w' && activeTabId && isTabSystemEnabled()) {
-            e.preventDefault();
-            closeTab(activeTabId);
-        }
-        
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Tab' && !e.shiftKey && isTabSystemEnabled()) {
-            e.preventDefault();
-            const currentIndex = tabs.findIndex(t => t.id === activeTabId);
-            const nextIndex = (currentIndex + 1) % tabs.length;
-            if (tabs[nextIndex]) {
-                switchToTab(tabs[nextIndex].id);
-            }
-        }
-        
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Tab' && e.shiftKey && isTabSystemEnabled()) {
-            e.preventDefault();
-            const currentIndex = tabs.findIndex(t => t.id === activeTabId);
-            const prevIndex = currentIndex - 1 < 0 ? tabs.length - 1 : currentIndex - 1;
-            if (tabs[prevIndex]) {
-                switchToTab(tabs[prevIndex].id);
-            }
-        }
-
-        if ((e.ctrlKey || e.metaKey) && !e.shiftKey && isTabSystemEnabled()) {
-            const num = parseInt(e.key);
-            if (num >= 1 && num <= 8 && tabs[num - 1]) {
-                e.preventDefault();
-                switchToTab(tabs[num - 1].id);
-            }
-        }
-
-        if ((e.ctrlKey || e.metaKey) && e.key === '9' && isTabSystemEnabled() && tabs.length > 0) {
-            e.preventDefault();
-            switchToTab(tabs[tabs.length - 1].id);
-        }
-    }); 
-
-  
-
-   
-
     const pendingUrl = sessionStorage.getItem('openExternalUrl');
     if (pendingUrl) {
-        console.log('[tab.js] Found pending URL from games page:', pendingUrl);
         sessionStorage.removeItem('openExternalUrl');
-       
-        setTimeout(() => {
-            goTo(pendingUrl);
-        }, 1000);
+        setTimeout(() => goTo(pendingUrl), 1000);
     }
-}); 
-
+});

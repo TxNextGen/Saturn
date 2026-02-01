@@ -152,24 +152,25 @@ function clearTheme() {
     const existingStyle = document.getElementById('custom-theme-style');
     if (existingStyle) existingStyle.remove();
     
-
+    // Call global theme function if it exists
     if (typeof window.applyGlobalTheme === 'function') {
         window.applyGlobalTheme('default');
     }
     
-
+    // Trigger storage event for other tabs/windows
     localStorage.setItem('theme-change-trigger', Date.now().toString());
     
     alert('Theme cleared! Default theme applied.');
 }
 
 function setTheme(theme) {
+    // Save theme CSS and name
     localStorage.setItem('theme', premadeThemes[theme]);
     localStorage.setItem('current-theme-name', theme);
     localStorage.removeItem('custom-img');
     localStorage.setItem('current-tab', 'themes');
     
-   
+    // Apply the theme CSS to current page
     const existingStyle = document.getElementById('custom-theme-style');
     if (existingStyle) existingStyle.remove();
     const styleElement = document.createElement('style');
@@ -177,12 +178,12 @@ function setTheme(theme) {
     styleElement.textContent = premadeThemes[theme];
     document.head.appendChild(styleElement);
     
-
+    // Call global theme function if it exists (updates CSS variables for sidebar)
     if (typeof window.applyGlobalTheme === 'function') {
         window.applyGlobalTheme(theme);
     }
     
-   
+    // Trigger storage event for other tabs/windows
     localStorage.setItem('theme-change-trigger', Date.now().toString());
     
     alert(`${theme.charAt(0).toUpperCase() + theme.slice(1)} theme applied!`);
@@ -298,7 +299,6 @@ function initProxy() {
         connection = new BareMux.BareMuxConnection("/baremux/worker.js");
         transportDisplay();
         searchEngineDisplay();
-        tabSystemDisplay();
         proxyBackendDisplay();
     }
 }
@@ -313,14 +313,6 @@ function searchEngineDisplay() {
     const searchEngine = localStorage.getItem('search-engine') || 'DuckDuckGo';
     const searchEngineEl = document.getElementById('search-engine-display');
     if (searchEngineEl) searchEngineEl.textContent = searchEngine;
-}
-
-function tabSystemDisplay() {
-    const tabSystemEnabled = localStorage.getItem('tab-system-enabled') !== 'false';
-    const statusEl = document.getElementById('tab-system-status');
-    if (statusEl) {
-        statusEl.textContent = tabSystemEnabled ? 'Enabled' : 'Disabled';
-    }
 }
 
 function proxyBackendDisplay() {
@@ -371,20 +363,6 @@ function setSearchEngine(engine) {
         searchEngineDisplay();
         alert(`Search engine changed to ${engines[engine].name}!`);
     }
-}
-
-function enableTabSystem() {
-    localStorage.setItem('tab-system-enabled', 'true');
-    localStorage.setItem('current-tab', 'proxy');
-    tabSystemDisplay();
-    alert('Tab system enabled! Changes will apply when you use the proxy.');
-}
-
-function disableTabSystem() {
-    localStorage.setItem('tab-system-enabled', 'false');
-    localStorage.setItem('current-tab', 'proxy');
-    tabSystemDisplay();
-    alert('Tab system disabled! Changes will apply when you use the proxy.');
 }
 
 function setProxyBackend(backend) {

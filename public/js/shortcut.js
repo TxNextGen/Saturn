@@ -3,7 +3,7 @@ const DEFAULT_SHORTCUTS = [
         id: 'youtube',
         name: 'Youtube',
         url: 'https://www.youtube.com',
-        favicon: '/images/yt.png',
+        favicon: '/images/yt1.png',
         isDefault: true
     },
     {
