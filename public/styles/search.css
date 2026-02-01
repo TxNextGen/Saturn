@@ -165,8 +165,8 @@ h1 {
 }
 
 #uv-address::placeholder {
-    color: var(--theme-light);
-    opacity: 0.5;
+    color: var(--theme-primary);
+    opacity: 0.7;
 }
 
 .desc {
@@ -461,8 +461,8 @@ h1 {
 }
 
 .input-group input::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.5;
+    color: var(--theme-primary);
+    opacity: 0.6;
 }
 
 .input-group input:disabled {
@@ -560,8 +560,8 @@ h1 {
 .tab-bar {
     display: flex;
     align-items: center;
-    background: var(--bg-dark);
-    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 15, 0.95);
+    border-bottom: 1px solid var(--theme-primary);
     height: var(--tab-bar-height);
     padding: 0;
     order: 1;
@@ -709,12 +709,12 @@ h1 {
     transition: all 0.15s ease;
     flex-shrink: 0;
     margin-left: 8px;
-    color: var(--text-secondary);
+    color: var(--theme-primary);
 }
 
 .new-tab-btn:hover {
     background: var(--surface);
-    color: var(--text-primary);
+    color: var(--theme-light);
 }
 
 .new-tab-btn:active {
@@ -732,8 +732,8 @@ h1 {
 .top-bar {
     display: flex;
     align-items: center;
-    background: var(--bg-darker);
-    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 15, 0.95);
+    border-bottom: 1px solid var(--theme-primary);
     height: var(--top-bar-height);
     padding: 0 12px;
     gap: 8px;
@@ -748,7 +748,7 @@ h1 {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    color: #ffffff;
+    color: var(--theme-primary);
     margin-right: 8px;
 }
 
@@ -761,11 +761,11 @@ h1 {
 }
 
 .lock-icon-container.secure {
-    color: #ffffff;
+    color: var(--theme-primary);
 }
 
 .lock-icon-container.insecure {
-    color: #ffffff;
+    color: var(--theme-primary);
 }
 
 .nav-controls {
@@ -786,12 +786,12 @@ h1 {
     justify-content: center;
     cursor: pointer;
     transition: all 0.15s ease;
-    color: var(--text-secondary);
+    color: var(--theme-primary);
 }
 
 .nav-btn:hover {
     background: var(--surface);
-    color: var(--text-primary);
+    color: var(--theme-light);
 }
 
 .nav-btn:active {
@@ -824,13 +824,13 @@ h1 {
     justify-content: center;
     cursor: pointer;
     transition: all 0.15s ease;
-    color: var(--text-secondary);
+    color: var(--theme-primary);
     position: relative;
 }
 
 .search-engine-btn:hover {
     background: var(--surface);
-    color: var(--text-primary);
+    color: var(--theme-light);
 }
 
 .search-engine-btn:active {
@@ -882,7 +882,8 @@ h1 {
 }
 
 .url-bar::placeholder {
-    color: var(--text-secondary);
+    color: var(--theme-primary);
+    opacity: 0.7;
 }
 
 .url-bar::selection {
