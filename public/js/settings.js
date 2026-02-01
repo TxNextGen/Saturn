@@ -324,7 +324,7 @@ function tabSystemDisplay() {
 }
 
 function proxyBackendDisplay() {
-    const backend = localStorage.getItem('proxy-backend') || 'uv';
+    const backend = localStorage.getItem('proxy-backend') || 'scramjet';
     window.currentProxyBackend = backend;
     const backendEl = document.getElementById('proxy-backend-status');
     if (backendEl) {
@@ -369,7 +369,7 @@ function setSearchEngine(engine) {
         localStorage.setItem('search-engine-url', engines[engine].url);
         localStorage.setItem('current-tab', 'proxy');
         searchEngineDisplay();
-        alert(`Search engine changed to ${engines[engine].name}!`); //sure
+        alert(`Search engine changed to ${engines[engine].name}!`);
     }
 }
 

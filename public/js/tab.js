@@ -1,22 +1,116 @@
 let _connection = new BareMux.BareMuxConnection("/baremux/worker.js");
+let scramjetController = null;
 
+// Initialize Scramjet Controller
+async function initScramjet() {
+    if (scramjetController) return scramjetController;
+    
+    try {
+        console.log('[Scramjet] Initializing controller...');
+        
+        // Load scramjet.all.js if not already loaded
+        if (typeof $scramjetLoadController === 'undefined') {
+            const script = document.createElement('script');
+            script.src = '/js/scramjet/scramjet.all.js';
+            await new Promise((resolve, reject) => {
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+            console.log('[Scramjet] All.js script loaded');
+        }
+        
+        // Wait for the function to be available
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        // Use the correct loading method
+        if (typeof $scramjetLoadController === 'function') {
+            const { ScramjetController } = $scramjetLoadController();
+            
+            scramjetController = new ScramjetController({
+                prefix: "/scramjet/",
+                files: {
+                    wasm: "/js/scramjet/scramjet.wasm.wasm",
+                    all: "/js/scramjet/scramjet.all.js",
+                    sync: "/js/scramjet/scramjet.sync.js"
+                }
+            });
+            
+            await scramjetController.init();
+            console.log('[Scramjet] ✅ Controller initialized');
+            return scramjetController;
+        } else {
+            throw new Error('$scramjetLoadController is not available');
+        }
+    } catch (err) {
+        console.error('[Scramjet] ❌ Failed to initialize:', err);
+        throw err;
+    }
+}
+
+// Register Service Workers
 async function registerSW() {
     if (!('serviceWorker' in navigator)) {
         throw new Error("Service workers not supported");
     }
 
-    console.log('[registerSW] Registering UV service worker...');
+    const backend = getProxyBackend();
+    console.log(`[registerSW] Registering ${backend.toUpperCase()} service worker...`);
 
-    const reg = await navigator.serviceWorker.register('/uv/sw.js', {
-        scope: '/@/'
-    });
-
-    console.log('[registerSW] ✅ UV Service Worker registered:', reg.scope);
-    return reg;
+    if (backend === "scramjet") {
+        // Initialize Scramjet controller first
+        await initScramjet();
+        
+        // Register Scramjet service worker
+        const reg = await navigator.serviceWorker.register('/sw.js', {
+            scope: '/'
+        });
+        
+        // ✅ CRITICAL FIX: Wait for service worker to be active
+        if (reg.installing) {
+            console.log('[registerSW] Waiting for service worker to install...');
+            await new Promise((resolve) => {
+                reg.installing.addEventListener('statechange', (e) => {
+                    if (e.target.state === 'activated') {
+                        resolve();
+                    }
+                });
+            });
+        } else if (reg.waiting) {
+            console.log('[registerSW] Service worker is waiting, activating...');
+            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            await new Promise((resolve) => {
+                navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true });
+            });
+        } else if (reg.active) {
+            console.log('[registerSW] Service worker already active');
+        }
+        
+        await navigator.serviceWorker.ready;
+        
+        // ✅ Ensure the page is controlled
+        if (!navigator.serviceWorker.controller) {
+            console.log('[registerSW] Reloading to activate service worker...');
+            window.location.reload();
+            return;
+        }
+        
+        console.log('[registerSW] ✅ SCRAMJET Service Worker registered and active:', reg.scope);
+        return reg;
+    } else {
+        // UV registration
+        const reg = await navigator.serviceWorker.register('/uv/sw.js', {
+            scope: '/@/'
+        });
+        
+        await navigator.serviceWorker.ready;
+        console.log('[registerSW] ✅ UV Service Worker registered:', reg.scope);
+        return reg;
+    }
 }
 
 function getProxyBackend() {
-    return localStorage.getItem('proxy-backend') || 'uv';
+    return localStorage.getItem('proxy-backend') || 'scramjet';
 }
 
 window.currentProxyBackend = getProxyBackend();
@@ -36,14 +130,18 @@ function getEncodedUrl(url) {
     }
 
     const backend = getProxyBackend();
-    window.currentProxyBackend = backend;
     console.log(`[getEncodedUrl] Using backend: ${backend} for URL: ${url}`);
 
     if (backend === "scramjet") {
-        const encoded = "/scram/?url=" + encodeURIComponent(url);
+        if (!scramjetController) {
+            console.error('[getEncodedUrl] ❌ Scramjet controller not initialized!');
+            return url;
+        }
+        const encoded = scramjetController.encodeUrl(url);
         console.log(`[getEncodedUrl] Scramjet encoded: ${encoded}`);
         return encoded;
     } else {
+        // UV encoding
         if (typeof __uv$config === 'undefined') {
             console.error('[getEncodedUrl] ❌ UV config not found!');
             return "/uv/service/" + encodeURIComponent(url);
@@ -59,19 +157,6 @@ function getEncodedUrl(url) {
         return encoded;
     }
 }
-
-
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        console.log('=== UV CONFIG DIAGNOSTIC ===');
-        console.log('UV Config exists:', typeof __uv$config !== 'undefined');
-        if (typeof __uv$config !== 'undefined') {
-            console.log('UV Prefix:', __uv$config.prefix);
-            console.log('UV encodeUrl:', typeof __uv$config.encodeUrl);
-        }
-        console.log('========================');
-    }, 1000);
-});
 
 async function setConnection(arg) {
     const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
@@ -91,14 +176,13 @@ async function setConnection(arg) {
     }
 }
 
-
+// Initialize defaults
 if (!localStorage.getItem('proxy-transport')) {
     setConnection(1);
 } else {
     if (localStorage.getItem('proxy-transport') === "Epoxy") setConnection(1);
     if (localStorage.getItem('proxy-transport') === "Libcurl") setConnection(2);
 }
-
 
 if (!localStorage.getItem('search-engine')) {
     localStorage.setItem('search-engine', 'DuckDuckGo');
@@ -110,17 +194,16 @@ if (!localStorage.getItem('tab-system-enabled')) {
 }
 
 if (!localStorage.getItem('proxy-backend')) {
-    localStorage.setItem('proxy-backend', 'uv');
+    localStorage.setItem('proxy-backend', 'scramjet');
 }
 
-
+// Tab system variables
 let tabs = [];
 let activeTabId = null;
 let tabIdCounter = 0;
 let erudaLoaded = false;
 let lastSearchedUrl = null;
 let navigationInProgress = false;
-
 
 function isTabSystemEnabled() {
     return localStorage.getItem('tab-system-enabled') !== 'false';
@@ -160,7 +243,6 @@ function updateProxyUIVisibility() {
     }
 }
 
-
 function updateLockIcon(url) {
     const lockIcon = document.querySelector('.lock-icon-container');
     if (!lockIcon) return;
@@ -191,11 +273,9 @@ function updateLockIcon(url) {
     }
 }
 
-
 function createTab(url = null, title = 'New Tab') {
     const tabId = `tab-${tabIdCounter++}`;
     
-  
     const iframeContainer = document.createElement('div');
     iframeContainer.className = 'iframe-container';
     iframeContainer.id = `container-${tabId}`;
@@ -205,7 +285,6 @@ function createTab(url = null, title = 'New Tab') {
     iframe.setAttribute('allowfullscreen', 'true');
     iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-read; clipboard-write');
 
-   
     if (url) {
         const encodedUrl = getEncodedUrl(url);
         console.log(`[createTab] Creating tab ${tabId}:`, {
@@ -220,7 +299,6 @@ function createTab(url = null, title = 'New Tab') {
     iframeContainer.appendChild(iframe);
     document.getElementById('iframe-wrapper').appendChild(iframeContainer);
 
-
     const tab = {
         id: tabId,
         url: url || '',
@@ -233,22 +311,18 @@ function createTab(url = null, title = 'New Tab') {
 
     tabs.push(tab);
 
-
     let titleUpdateTimeout;
     iframe.addEventListener('load', () => {
         tab.loading = false;
         
-     
         if (titleUpdateTimeout) clearTimeout(titleUpdateTimeout);
         
-     
         titleUpdateTimeout = setTimeout(() => {
             try {
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                 if (iframeDoc && iframeDoc.title) {
                     tab.title = iframeDoc.title;
                 } else if (url) {
-                    
                     try {
                         const hostname = new URL(url).hostname.replace('www.', '');
                         tab.title = hostname;
@@ -257,7 +331,6 @@ function createTab(url = null, title = 'New Tab') {
                     }
                 }
             } catch (e) {
-           
                 if (url) {
                     try {
                         const hostname = new URL(url).hostname.replace('www.', '');
@@ -273,7 +346,6 @@ function createTab(url = null, title = 'New Tab') {
         }, 300);
     });
 
-
     iframe.addEventListener('error', (e) => {
         console.error('[createTab] Iframe error:', e);
         tab.loading = false;
@@ -287,7 +359,6 @@ function createTab(url = null, title = 'New Tab') {
     return tab;
 }
 
-
 function closeTab(tabId, event) {
     if (event) {
         event.stopPropagation();
@@ -297,22 +368,18 @@ function closeTab(tabId, event) {
     if (index === -1) return;
 
     const tab = tabs[index];
-    
-
     tab.container.remove();
     tabs.splice(index, 1);
 
     if (tabs.length === 0) {
         showHome();
     } else if (activeTabId === tabId) {
-    
         const newIndex = Math.min(index, tabs.length - 1);
         switchToTab(tabs[newIndex].id);
     }
 
     if (isTabSystemEnabled()) renderTabs();
 }
-
 
 function switchToTab(tabId) {
     if (activeTabId === tabId) return;
@@ -330,7 +397,6 @@ function switchToTab(tabId) {
     if (isTabSystemEnabled()) renderTabs();
     updateUrlBar();
     
-
     setTimeout(() => {
         const activeTabElement = document.querySelector('.tab.active');
         if (activeTabElement) {
@@ -343,7 +409,6 @@ function switchToTab(tabId) {
     }, 50);
 }
 
-
 function updateUrlBar() {
     const activeTab = tabs.find(t => t.id === activeTabId);
     const urlBar = document.getElementById('proxy-url-bar');
@@ -352,7 +417,6 @@ function updateUrlBar() {
         updateLockIcon(activeTab.url);
     }
 }
-
 
 function renderTabs() {
     const container = document.getElementById('tabs-container');
@@ -379,7 +443,6 @@ function renderTabs() {
             tabEl.classList.add('loading');
         }
 
-   
         const favicon = document.createElement('img');
         favicon.className = 'tab-favicon';
         favicon.src = tab.favicon || '/images/sat4.png';
@@ -387,13 +450,11 @@ function renderTabs() {
             favicon.src = '/images/sat4.png';
         };
 
-   
         const title = document.createElement('span');
         title.className = 'tab-title';
         title.textContent = tab.title || 'New Tab';
-        title.title = tab.title || 'New Tab'; 
+        title.title = tab.title || 'New Tab';
 
-       
         const closeBtn = document.createElement('div');
         closeBtn.className = 'tab-close';
         closeBtn.innerHTML = `
@@ -408,7 +469,6 @@ function renderTabs() {
             closeTab(tab.id, e);
         });
 
-       
         tabEl.addEventListener('click', () => switchToTab(tab.id));
 
         tabEl.appendChild(favicon);
@@ -417,7 +477,6 @@ function renderTabs() {
         container.appendChild(tabEl);
     });
 }
-
 
 function showHome() {
     document.getElementById('home-container').classList.remove('hidden');
@@ -430,12 +489,10 @@ function hideHome() {
     updateProxyUIVisibility();
 }
 
-
 function getActiveIframe() {
     const activeTab = tabs.find(t => t.id === activeTabId);
     return activeTab ? activeTab.iframe : null;
 }
-
 
 function injectDevTools() {
     if (erudaLoaded) {
@@ -457,7 +514,6 @@ function injectDevTools() {
     document.head.appendChild(script);
 }
 
-
 async function goTo(url) {
     if (navigationInProgress) {
         console.log('[goTo] Navigation already in progress, ignoring...');
@@ -468,14 +524,9 @@ async function goTo(url) {
     navigationInProgress = true;
 
     try {
-     
-        if (typeof registerSW === 'function') {
-            console.log('[goTo] Registering service worker...');
-            await registerSW();
-            console.log('[goTo] ✅ Service worker registered');
-        } else {
-            console.warn('[goTo] ⚠️ registerSW function not found');
-        }
+        console.log('[goTo] Registering service worker...');
+        await registerSW();
+        console.log('[goTo] ✅ Service worker registered');
     } catch (err) {
         console.error('[goTo] ❌ Service worker registration failed:', err);
         const error = document.getElementById('uv-error');
@@ -488,7 +539,6 @@ async function goTo(url) {
 
     lastSearchedUrl = url;
     hideHome();
-
 
     if (!isTabSystemEnabled() && tabs.length > 0) {
         const activeTab = tabs[0];
@@ -508,11 +558,9 @@ async function goTo(url) {
     navigationInProgress = false;
 }
 
-
 function quickGo(url) {
     goTo(url);
 }
-
 
 function buildUrl(query) {
     query = (query || '').trim();
@@ -520,16 +568,13 @@ function buildUrl(query) {
 
     const hasProtocol = /^https?:\/\//i.test(query);
     const hasSpaces = query.includes(' ');
-    
 
     if (hasProtocol) return query;
-    
 
     if (hasSpaces) {
         const searchEngine = localStorage.getItem('search-engine-url') || 'https://duckduckgo.com/?q=%s';
         return searchEngine.replace('%s', encodeURIComponent(query));
     }
-    
 
     const isProbablyUrl = /^[\w-]+(\.[\w-]+)+(:\d+)?(\/.*)?$/i.test(query) || 
                          /^localhost(:\d+)?(\/.*)?$/i.test(query);
@@ -538,12 +583,9 @@ function buildUrl(query) {
         return 'https://' + query;
     }
     
-  
     const searchEngine = localStorage.getItem('search-engine-url') || 'https://duckduckgo.com/?q=%s';
     return searchEngine.replace('%s', encodeURIComponent(query));
 }
-
-
 
 function toggleSearchEnginePopup() {
     let popup = document.getElementById('search-engine-popup');
@@ -553,7 +595,6 @@ function toggleSearchEnginePopup() {
         return;
     }
     
- 
     popup = document.createElement('div');
     popup.id = 'search-engine-popup';
     popup.className = 'quick-popup';
@@ -589,7 +630,6 @@ function toggleSearchEnginePopup() {
     `;
     
     document.body.appendChild(popup);
-    
 
     const searchBtn = document.querySelector('.search-engine-btn');
     if (searchBtn) {
@@ -598,7 +638,6 @@ function toggleSearchEnginePopup() {
         popup.style.left = `${rect.left}px`;
     }
     
-  
     popup.querySelectorAll('.popup-option').forEach(option => {
         option.addEventListener('click', () => {
             const engine = option.getAttribute('data-engine');
@@ -606,7 +645,6 @@ function toggleSearchEnginePopup() {
             popup.remove();
         });
     });
-    
 
     setTimeout(() => {
         document.addEventListener('click', function closePopup(e) {
@@ -641,13 +679,12 @@ function toggleQuickSettings() {
         return;
     }
     
-   
     popup = document.createElement('div');
     popup.id = 'quick-settings-popup';
     popup.className = 'quick-popup quick-settings';
     
     const currentTransport = localStorage.getItem('proxy-transport') || 'Epoxy';
-    const currentBackend = localStorage.getItem('proxy-backend') || 'uv';
+    const currentBackend = localStorage.getItem('proxy-backend') || 'scramjet';
     const tabSystemEnabled = localStorage.getItem('tab-system-enabled') !== 'false';
     
     popup.innerHTML = `
@@ -704,7 +741,6 @@ function toggleQuickSettings() {
     
     document.body.appendChild(popup);
     
- 
     const settingsBtn = document.querySelector('.settings-btn');
     if (settingsBtn) {
         const rect = settingsBtn.getBoundingClientRect();
@@ -712,18 +748,15 @@ function toggleQuickSettings() {
         popup.style.right = `${window.innerWidth - rect.right}px`;
         popup.style.left = 'auto';
     }
-    
 
     popup.querySelectorAll('.popup-option').forEach(option => {
         option.addEventListener('click', async () => {
             const action = option.getAttribute('data-action');
             await handleQuickSettingAction(action);
             popup.remove();
-     
             setTimeout(() => toggleQuickSettings(), 100);
         });
     });
-    
 
     setTimeout(() => {
         document.addEventListener('click', function closePopup(e) {
@@ -768,9 +801,7 @@ async function handleQuickSettingAction(action) {
     }
 }
 
-
 window.goTo = goTo;
-
 
 window.addEventListener('DOMContentLoaded', () => {
     const uvAddress = document.getElementById('uv-address');
@@ -779,7 +810,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     updateProxyUIVisibility();
 
-   
     if (uvAddress) {
         uvAddress.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -792,7 +822,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 
     if (proxyUrlBar) {
         proxyUrlBar.addEventListener('keydown', (e) => {
@@ -814,22 +843,19 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-     
         proxyUrlBar.addEventListener('focus', () => {
             proxyUrlBar.select();
         });
     }
 
-  
     if (newTabBtn) {
         newTabBtn.addEventListener('click', () => {
             if (!isTabSystemEnabled()) return;
             hideHome();
-            createTab(); 
+            createTab();
         });
     }
 
-    
     const searchEngineBtn = document.querySelector('.search-engine-btn');
     if (searchEngineBtn) {
         searchEngineBtn.addEventListener('click', (e) => {
@@ -838,7 +864,6 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   
     const backBtn = document.querySelector('.back-btn');
     if (backBtn) {
         backBtn.addEventListener('click', () => {
@@ -891,7 +916,6 @@ window.addEventListener('DOMContentLoaded', () => {
         erudaBtn.addEventListener('click', injectDevTools);
     }
 
- 
     const settingsBtn = document.querySelector('.settings-btn');
     if (settingsBtn) {
         settingsBtn.addEventListener('click', (e) => {
@@ -900,21 +924,18 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 't' && isTabSystemEnabled()) {
             e.preventDefault();
             hideHome();
             createTab();
         }
-        
 
         if ((e.ctrlKey || e.metaKey) && e.key === 'w' && activeTabId && isTabSystemEnabled()) {
             e.preventDefault();
             closeTab(activeTabId);
         }
         
-     
         if ((e.ctrlKey || e.metaKey) && e.key === 'Tab' && !e.shiftKey && isTabSystemEnabled()) {
             e.preventDefault();
             const currentIndex = tabs.findIndex(t => t.id === activeTabId);
@@ -924,7 +945,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-    
         if ((e.ctrlKey || e.metaKey) && e.key === 'Tab' && e.shiftKey && isTabSystemEnabled()) {
             e.preventDefault();
             const currentIndex = tabs.findIndex(t => t.id === activeTabId);
@@ -934,7 +954,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-   
         if ((e.ctrlKey || e.metaKey) && !e.shiftKey && isTabSystemEnabled()) {
             const num = parseInt(e.key);
             if (num >= 1 && num <= 8 && tabs[num - 1]) {
@@ -943,7 +962,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-      
         if ((e.ctrlKey || e.metaKey) && e.key === '9' && isTabSystemEnabled() && tabs.length > 0) {
             e.preventDefault();
             switchToTab(tabs[tabs.length - 1].id);

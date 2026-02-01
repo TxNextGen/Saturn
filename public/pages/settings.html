@@ -277,6 +277,17 @@
         </div>
 
        <div id="proxy" class="settings-section">
+        
+    <div class="setting-card">
+        <h2>Proxy Backend</h2>
+        <p>Scramjet is faster Than Uv More But Sites can break Uv is slower But stable : <span class="highlight" id="proxy-backend-status">[Loading...]</span></p>
+        <div class="button-grid">
+              <button onclick="setProxyBackend('scramjet')">Scramjet</button>
+            <button onclick="setProxyBackend('uv')">Ultraviolet</button>
+        </div>
+    </div>
+
+
     <div class="setting-card">
         <h2>Proxy Transport</h2>
         <p>Configure the proxy transport layer. Current transport: <span class="highlight" id="proxtrans">[Loading...]</span></p>
@@ -303,16 +314,6 @@
         <div class="button-grid">
             <button onclick="enableTabSystem()">Enable Tab System</button>
             <button onclick="disableTabSystem()">Disable Tab System</button>
-        </div>
-    </div>
-
- 
-    <div class="setting-card">
-        <h2>Proxy Backend</h2>
-        <p>Uv is the Default But Scramjet is faster Than Uv But its Newer And Has more Bugs. Current backend: <span class="highlight" id="proxy-backend-status">[Loading...]</span></p>
-        <div class="button-grid">
-            <button onclick="setProxyBackend('uv')">Ultraviolet</button>
-            <button onclick="setProxyBackend('scramjet')">Scramjet</button>
         </div>
     </div>
 </div>
